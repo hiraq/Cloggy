@@ -107,4 +107,18 @@ class ClogNodeRelTest extends CakeTestCase {
 		
 	}
 	
+	public function testRemoveAll() {
+		
+		$save = $this->_ClogRel->saveRelation(1,4,'test relation');						
+		$this->_ClogRel->deleteAllRelations(4,'test relation');	
+		
+		$data = $this->_ClogRel->find('count',array(
+			'contain' => false,
+			'conditions' => array('ClogNodeRel.node_object_id' => 4)
+		));
+		
+		$this->assertEqual($data,0);
+		
+	}
+	
 }

@@ -8,7 +8,7 @@ Configure::write('Clog.theme_used','default');
 
 //setup registered modules
 Configure::write('Clog.modules',array(
-	'ClogBlog','Users'
+	'ClogBlog','Users','ModuleTest'
 ));
 
 //setup clog module path

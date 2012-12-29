@@ -94,6 +94,16 @@ class ClogModuleInfoComponentTest extends CakeTestCase {
 		$this->assertTrue($checkModuleExists);
 		
 	}
+	
+	public function testGetModules() {
+		
+		$this->_ClogModuleInfo->modules();
+		$modules = $this->_ClogModuleInfo->getModules();
+		
+		$this->assertInternalType('array',$modules);
+		$this->assertFalse(empty($modules));
+		
+	}
 
 	private function _configure() {
 		

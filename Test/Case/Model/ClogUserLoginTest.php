@@ -89,4 +89,14 @@ class ClogUserLoginTest extends CakeTestCase {
 		
 	}
 	
+	public function testRemoveLogin() {
+		
+		$this->_ClogUserLogin->setLogin(1);
+		$this->_ClogUserLogin->removeLogin(1);
+		
+		$data = $this->_ClogUserLogin->find('count');		
+		$this->assertEqual($data,0);
+		
+	}
+	
 }

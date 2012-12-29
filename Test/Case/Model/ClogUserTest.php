@@ -159,4 +159,60 @@ class ClogUserTest extends CakeTestCase {
 		
 	}
 	
+	public function testSetUserLastLogin() {
+		
+		$this->_ClogUser->create();
+		$this->_ClogUser->save(array(
+			'ClogUser' => array(
+				'user_name' => 'test user 2',
+				'user_password' => 'testing 2',
+				'user_email' => 'test2@email.com',
+				'user_role' => 'super administrator',
+				'user_status' => '1',
+				'user_last_login' => date('c'),
+				'user_created' => date('c'),
+				'user_updated' => time()
+			)
+		));
+		
+		$insertId = $this->_ClogUser->id;
+		$this->_ClogUser->setUserLastLogin($insertId);
+		
+		$data = $this->_ClogUser->find('first',array(
+			'contain' => false,
+			'fields' => array('ClogUser.user_last_login'),
+			'conditions' => array('ClogUser.id' => $insertId)
+		));
+		
+		$this->assertInternalType('array',$data);
+		$this->assertFalse(empty($data));
+		
+		$check = $data['ClogUser']['user_last_login'] < date('c');		
+		$this->assertTrue($check);		
+		
+	}
+	
+	public function testGetUserDetail() {
+		
+		$this->_ClogUser->create();
+		$this->_ClogUser->save(array(
+			'ClogUser' => array(
+				'user_name' => 'test user 2',
+				'user_password' => 'testing 2',
+				'user_email' => 'test2@email.com',
+				'user_role' => 'super administrator',
+				'user_status' => '1',
+				'user_last_login' => date('c'),
+				'user_created' => date('c'),
+				'user_updated' => time()
+			)
+		));
+		
+		$data = $this->_ClogUser->getUserDetail(1);
+		
+		$this->assertInternalType('array',$data);
+		$this->assertFalse(empty($data));
+		
+	}
+	
 }
