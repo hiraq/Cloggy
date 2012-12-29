@@ -1,4 +1,4 @@
-Cloggy
+Cloggy ![Cake Power](https://raw.github.com/cakephp/cakephp/master/lib/Cake/Console/Templates/skel/webroot/img/cake.power.gif)
 ====
 
 CakePHP Modular Admin And Structured Content
@@ -15,7 +15,3 @@ About
 ====
 
 [Cloggy](http://hiraq.github.com/Cloggy/)
-
-
-
-![Cake Power](https://raw.github.com/cakephp/cakephp/master/lib/Cake/Console/Templates/skel/webroot/img/cake.power.gif)
