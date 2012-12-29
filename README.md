@@ -3,7 +3,13 @@ Cloggy
 
 CakePHP Modular Admin And Structured Content
 
-Wikis
+How To
 ====
 
-[wikis](https://github.com/hiraq/Cloggy/wiki/_pages)
+[Installation](https://github.com/hiraq/Cloggy/wiki/Installations)
+[Module](https://github.com/hiraq/Cloggy/wiki/Module)
+
+About
+====
+
+[Cloggy](http://hiraq.github.com/Cloggy/)
