@@ -15,7 +15,7 @@ class ModuleRoute extends CakeRoute {
 		/*
 		 * get registred modules
 		 */
-		$registeredModules = Configure::read('Clog.modules');					
+		$registeredModules = Configure::read('Cloggy.modules');					
 		if(empty($registeredModules)) {
 			return false;
 		}else{
@@ -33,7 +33,7 @@ class ModuleRoute extends CakeRoute {
 						$params['controller'] = $params['name'].'_home';
 					}
 					
-					$params['isClogModule'] = 1;
+					$params['isCloggyModule'] = 1;
 					return $params;
 				}
 					

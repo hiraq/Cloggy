@@ -1,22 +1,22 @@
 <?php echo $this->element('noscript'); ?>
 
 <!-- login form -->
-<div id="clog-form" style="display: none">
+<div id="cloggy-form" style="display: none">
 
 	<div class="container">
 		<div class="row">
 			<div class="span3"></div>
 			<div class="span4">
 
-				<?php echo $this->Form->create('ClogUser',array(
+				<?php echo $this->Form->create('CloggyUser',array(
 						'class' => 'form-horizontal',
-						'url' => '/'.Configure::read('Clog.url_prefix').'/login')); ?>
+						'url' => '/'.Configure::read('Cloggy.url_prefix').'/login')); ?>
 						
 					<fieldset>
 						<div class="control-group">
 							<div class="controls">
 								<legend>
-									<strong>Clog Administrator</strong>
+									<strong>Cloggy Administrator</strong>
 								</legend>
 								<span>
 									<?php echo $this->Session->flash('install_success'); ?>
@@ -54,20 +54,20 @@
 </div>
 <!-- !login form -->
 
-<?php echo $this->start('clog_js_main'); ?>
+<?php echo $this->start('cloggy_js_main'); ?>
 <script type="text/javascript">
-	var clog = new ClogYepNope();  
+	var cloggygy = new CloggyYepNope();  
 	
-	clog.setHost({
-		bootstrap: '<?php echo $this->ClogAsset->getVendorUrl('bootstrap/css/bootstrap.min.css'); ?>',
-		bootstrapJs: '<?php echo $this->ClogAsset->getVendorUrl('bootstrap/js/bootstrap.min.js'); ?>',
-		jquery: '<?php echo $this->ClogAsset->getVendorUrl('jquery-1.8.3.js'); ?>',	
+	cloggygy.setHost({
+		bootstrap: '<?php echo $this->CloggyAsset->getVendorUrl('bootstrap/css/bootstrap.min.css'); ?>',
+		bootstrapJs: '<?php echo $this->CloggyAsset->getVendorUrl('bootstrap/js/bootstrap.min.js'); ?>',
+		jquery: '<?php echo $this->CloggyAsset->getVendorUrl('jquery-1.8.3.js'); ?>',	
 	});
 	
-	clog.main(function() {
+	cloggygy.main(function() {
 		
 		//set host
-		var host = '<?php echo Router::url('/'.Configure::read('Clog.url_prefix').'/'.Configure::read('Clog.theme_used').'/',true); ?>';
+		var host = '<?php echo Router::url('/'.Configure::read('Cloggy.url_prefix').'/'.Configure::read('Cloggy.theme_used').'/',true); ?>';
 		
 		/*
 		inject global + login css
@@ -76,7 +76,7 @@
 		
 		//manipulate dom
 		jQuery(document).ready(function() {
-			jQuery('#clog-form').delay(200).fadeIn(1000).css('margin-top','150px');
+			jQuery('#cloggy-form').delay(200).fadeIn(1000).css('margin-top','150px');
 
 			<?php if(isset($errors) && !empty($errors)) :?>
 				var errors = '<?php echo json_encode($errors); ?>';

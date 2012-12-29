@@ -1,6 +1,6 @@
 <?php
 
-class DashboardController extends ClogAppController {
+class DashboardController extends CloggyAppController {
 	
 	public function beforeFilter() {
 		parent::beforeFilter();
@@ -8,7 +8,7 @@ class DashboardController extends ClogAppController {
 	}
 	
 	public function index() {						
-		$this->set('title_for_layout','Clog - Administration Dashboard');				
+		$this->set('title_for_layout','Cloggy - Administration Dashboard');				
 	}
 	
 }

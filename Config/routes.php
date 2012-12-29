@@ -5,10 +5,10 @@
  * for modules
  */
 App::uses('ModuleRoute','CustomRouter');
-$base = '/'.Configure::read('Clog.url_prefix');
+$base = '/'.Configure::read('Cloggy.url_prefix');
 
 /*
- * main /clog
+ * main /cloggy
  */
 Router::redirect($base.'/',$base,array('status' => '302'));
 Router::connect(
@@ -16,7 +16,7 @@ Router::connect(
 	array(
 		'controller' => 'home',
 		'action' => 'index',
-		'plugin' => 'clog'
+		'plugin' => 'cloggy'
 	)
 );
 
@@ -26,7 +26,7 @@ Router::connect(
 	array(
 		'controller' => 'home',
 		'action' => 'login',
-		'plugin' => 'clog'
+		'plugin' => 'cloggy'
 	)
 );
 
@@ -36,7 +36,7 @@ Router::connect(
 	array(
 		'controller' => 'home',
 		'action' => 'logout',
-		'plugin' => 'clog'
+		'plugin' => 'cloggy'
 	)
 );
 

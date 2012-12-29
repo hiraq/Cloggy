@@ -2,9 +2,9 @@
 
 App::uses('Sanitize', 'Utility');
 
-class InstallController extends ClogAppController {
+class InstallController extends CloggygyAppController {
 	
-	public $uses = array('Clog.ClogUser','Clog.ClogValidation');
+	public $uses = array('Cloggy.CloggyUser','Cloggy.CloggyValidation');
 	public $helpers = array('Form');
 	
 	public function beforeFilter() {
@@ -14,7 +14,7 @@ class InstallController extends ClogAppController {
 	
 	public function index() {
 	
-		$users =  $this->ClogUser->find('count',array(
+		$users =  $this->CloggyUser->find('count',array(
 			'contain' => false
 		));
 		
@@ -33,13 +33,13 @@ class InstallController extends ClogAppController {
 					'remove_html' => true
 				));				
 				
-				$dataValidate = $this->request->data['ClogUser'];
+				$dataValidate = $this->request->data['CloggyUser'];
 				
 				/*
 				 * validation rules
 				 */
-				$this->ClogValidation->set($dataValidate);
-				$this->ClogValidation->validate = array(
+				$this->CloggyValidation->set($dataValidate);
+				$this->CloggyValidation->validate = array(
 					'user_name' => array(
 						'rule' => 'notEmpty',
 						'required' => true,
@@ -60,13 +60,13 @@ class InstallController extends ClogAppController {
 					)
 				);
 				
-				if($this->ClogValidation->validates()) {
+				if($this->CloggyValidation->validates()) {
 					
 					/*
 					 * setup user data
 					 */
-					$this->request->data['ClogUser']['user_password'] = AuthComponent::password($this->request->data['ClogUser']['user_password']);					
-					$this->request->data['ClogUser'] = array_merge($this->request->data['ClogUser'],array(
+					$this->request->data['CloggyUser']['user_password'] = AuthComponent::password($this->request->data['CloggyUser']['user_password']);					
+					$this->request->data['CloggyUser'] = array_merge($this->request->data['CloggyUser'],array(
 						'user_last_login' => date('c'),
 						'user_role' => 'super administrator',
 						'user_created' => date('c'),
@@ -76,8 +76,8 @@ class InstallController extends ClogAppController {
 					/*
 					 * save new user
 					 */
-					$this->ClogUser->create();
-					$this->ClogUser->save($this->request->data);
+					$this->CloggyUser->create();
+					$this->CloggyUser->save($this->request->data);
 					
 					/*
 					 * install success
@@ -86,13 +86,13 @@ class InstallController extends ClogAppController {
 					$this->redirect($this->_base.'/login');
 					
 				}else{
-					$this->set('errors',$this->ClogValidation->validationErrors);					
+					$this->set('errors',$this->CloggyValidation->validationErrors);					
 				}
 				
 			}//end processing form
 			
 			//page title
-			$this->set('title_for_layout','Clog - Setup User');
+			$this->set('title_for_layout','Cloggy - Setup User');
 			
 		}
 		

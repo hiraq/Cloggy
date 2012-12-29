@@ -3,7 +3,7 @@
 /*
  * get all registered modules
  */
-$registeredModules = Configure::read('Clog.modules');
+$registeredModules = Configure::read('Cloggy.modules');
 
 /*
  * setup custom mvc path
@@ -25,7 +25,7 @@ if(!empty($registeredModules)) {
 	$buildModuleBehaviorPaths = array();
 	$buildModuleDatasourcePaths = array();
 	
-	$mainPath = APP.'Plugin'.DS.'Clog'.DS.'Module'.DS;	
+	$mainPath = APP.'Plugin'.DS.'Cloggy'.DS.'Module'.DS;	
 	
 	foreach($registeredModules as $module) {
 				

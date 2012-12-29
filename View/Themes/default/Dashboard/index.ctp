@@ -1,4 +1,4 @@
-<div id="clog-dashboard">
+<div id="cloggy-dashboard">
 
 	<div class="container">
 
@@ -7,7 +7,7 @@
 				<form class="form-search" id="form-search">
 					<div class="input-append">
 						<input class="span3" id="module_q" type="text">
-						<button class="btn" type="submit" id="clog-search">Search Modules</button>
+						<button class="btn" type="submit" id="cloggy-search">Search Modules</button>
 					</div>
 				</form>
 			</div>
@@ -16,11 +16,11 @@
 		<div class="row">
 			<div class="span2">
 				<ul class="nav nav-tabs nav-stacked">					
-					<?php $menus = $this->ClogMenus->menu('clog'); ?>
+					<?php $menus = $this->CloggyMenus->menu('cloggy'); ?>
 					<?php if(!empty($menus)) : ?>
-						<li class="nav-header">Clog</li>
+						<li class="nav-header">Cloggy</li>
 						<?php foreach($menus as $menu => $link) :?>
-						<li><?php echo $this->ClogMenus->getLink($menu,$link); ?></li>
+						<li><?php echo $this->CloggyMenus->getLink($menu,$link); ?></li>
 						<?php endforeach; ?>
 					<?php endif; ?>
 				</ul>
@@ -40,7 +40,7 @@
 							<?php foreach($modules as $module) :?>
 							<tr>
 								<td>
-									<a href="<?php echo Router::url('/'.Configure::read('Clog.url_prefix').'/module/'.Inflector::underscore($module['name'])); ?>">
+									<a href="<?php echo Router::url('/'.Configure::read('Cloggy.url_prefix').'/module/'.Inflector::underscore($module['name'])); ?>">
 										<?php echo $module['name']; ?>
 									</a>
 								</td>
@@ -62,20 +62,20 @@
 
 </div>
 
-<?php echo $this->start('clog_js_main'); ?>
+<?php echo $this->start('cloggy_js_main'); ?>
 <script type="text/javascript">
-	var clog = new ClogYepNope();  
+	var cloggy = new CloggyYepNope();  
 	
-	clog.setHost({
-		bootstrap: '<?php echo $this->ClogAsset->getVendorUrl('bootstrap/css/bootstrap.min.css'); ?>',
-		bootstrapJs: '<?php echo $this->ClogAsset->getVendorUrl('bootstrap/js/bootstrap.min.js'); ?>',
-		jquery: '<?php echo $this->ClogAsset->getVendorUrl('jquery-1.8.3.js'); ?>',	
+	cloggy.setHost({
+		bootstrap: '<?php echo $this->CloggyAsset->getVendorUrl('bootstrap/css/bootstrap.min.css'); ?>',
+		bootstrapJs: '<?php echo $this->CloggyAsset->getVendorUrl('bootstrap/js/bootstrap.min.js'); ?>',
+		jquery: '<?php echo $this->CloggyAsset->getVendorUrl('jquery-1.8.3.js'); ?>',	
 	});
 	
-	clog.main(function() {
+	cloggy.main(function() {
 		
 		//set host
-		var host = '<?php echo Router::url('/'.Configure::read('Clog.url_prefix').'/'.Configure::read('Clog.theme_used').'/',true); ?>';
+		var host = '<?php echo Router::url('/'.Configure::read('Cloggy.url_prefix').'/'.Configure::read('Cloggy.theme_used').'/',true); ?>';
 		
 		/*
 		inject global + login css
@@ -84,7 +84,7 @@
 		
 		//manipulate dom
 		jQuery(document).ready(function() {
-			jQuery('#clog-dashboard').css('margin-top','60px');
+			jQuery('#cloggy-dashboard').css('margin-top','60px');
 			
 			/*
 			search on page

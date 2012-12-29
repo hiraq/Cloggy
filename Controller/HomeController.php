@@ -1,8 +1,8 @@
 <?php
 
-class HomeController extends ClogAppController {	
+class HomeController extends CloggyAppController {	
 
-	public $uses = array('Clog.ClogUser','Clog.ClogValidation','Clog.ClogUserLogin');
+	public $uses = array('Cloggy.CloggyUser','Cloggy.CloggyValidation','Cloggy.CloggyUserLogin');
 	public $helpers = array('Form');
 	private $_userCount;
 	private $_userId;
@@ -17,7 +17,7 @@ class HomeController extends ClogAppController {
 		/*
 		 * check if has users
 		*/
-		$this->_userCount = $this->ClogUser->find('count',array('contain' => false));
+		$this->_userCount = $this->CloggyUser->find('count',array('contain' => false));
 		$this->_userId = $this->Auth->user('id');			
 				
 	}		
@@ -49,8 +49,8 @@ class HomeController extends ClogAppController {
 			if($this->Auth->login()) {								
 				
 				$this->_userId = $this->Auth->user('id');
-				$this->ClogUser->setUserLastLogin($this->_userId);
-				$this->ClogUserLogin->setLogin($this->_userId);
+				$this->CloggyUser->setUserLastLogin($this->_userId);
+				$this->CloggyUserLogin->setLogin($this->_userId);
 				$this->redirect($this->Auth->loginRedirect);
 				
 			}else{
@@ -60,14 +60,14 @@ class HomeController extends ClogAppController {
 			
 		}
 		
-		$this->set('title_for_layout','Clog - Administrator Login');
+		$this->set('title_for_layout','Cloggy - Administrator Login');
 		
 	}
 	
 	public function logout() {
 		
-		$this->ClogUser->setUserLastLogin($this->_userId);
-		$this->ClogUserLogin->removeLogin($this->_userId);
+		$this->CloggyUser->setUserLastLogin($this->_userId);
+		$this->CloggyUserLogin->removeLogin($this->_userId);
 		$this->redirect($this->Auth->logout());
 		
 	}
