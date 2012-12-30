@@ -2,13 +2,48 @@
 
 App::uses('Component', 'Controller');
 
+/**
+ * 
+ * Cloggy Module Menu Component, setup cloggy menus
+ * from Controller using component
+ * 
+ * @author hiraq
+ * @name CloggyModuleMenuComponent
+ * @package Cloggy
+ * @subpackage Component
+ */
 class CloggyModuleMenuComponent extends Component {
 	
+	/**
+	 * 
+	 * Setup requested Controller
+	 * 
+	 * @access private
+	 * @var object
+	 */
 	private $_Controller;
+	
+	/**
+	 * Store all menus
+	 * 
+	 * @access private
+	 * @var array
+	 */
 	private $_menus = array();
 	
 	/**
+	 * 
+	 * Grouping menus
+	 * 
+	 * @access private
+	 * @var array
+	 */
+	private $_groups = array();	
+	
+	/**
 	 * CakePHP Component Callback
+	 * 
+	 * @access public
 	 * @see Component::startup()
 	 */
 	public function startup(Controller $controller) {
@@ -18,6 +53,8 @@ class CloggyModuleMenuComponent extends Component {
 	
 	/**
 	 * Get Controller viewVars variable
+	 * 
+	 * @access public
 	 * @return array
 	 */
 	public function getViewVars() {
@@ -26,6 +63,8 @@ class CloggyModuleMenuComponent extends Component {
 	
 	/**
 	 * Get requested controller name
+	 * 
+	 * @access public
 	 * @return string
 	 */
 	public function getRequestedControllerName() {
@@ -43,6 +82,7 @@ class CloggyModuleMenuComponent extends Component {
 	/**
 	 * Create and merging menus viewVars
 	 * 
+	 * @access public
 	 * @param string $key
 	 * @param array $menus
 	 * @return void
@@ -64,6 +104,8 @@ class CloggyModuleMenuComponent extends Component {
 	
 	/**
 	 * Add new menus
+	 * 
+	 * @access public
 	 * @param string $key
 	 * @param array $newMenus
 	 * @return void
@@ -101,6 +143,8 @@ class CloggyModuleMenuComponent extends Component {
 	
 	/**
 	 * Remove key menus from requested controller
+	 * 
+	 * @access public
 	 * @param string $key
 	 */
 	public function remove($key) {
@@ -119,7 +163,43 @@ class CloggyModuleMenuComponent extends Component {
 	}
 	
 	/**
+	 * 
+	 * Grouping key menus
+	 * 
+	 * @access public
+	 * @param string $groupName
+	 * @param array $keys
+	 */
+	public function setGroup($groupName,$menus) {
+		
+		$controllerName = $this->getRequestedControllerName();
+		$this->_groups[$controllerName][$groupName] = $menus;
+		
+	}
+	
+	/**
+	 * Get group menus
+	 * 
+	 * @access public
+	 * @param string $groupName
+	 * @return null|array
+	 */
+	public function getGroup($groupName) {
+		
+		$controllerName = $this->getRequestedControllerName();
+		if(isset($this->_groups[$controllerName]) 
+				&& array_key_exists($groupName,$this->_groups[$controllerName])) {
+			return $this->_groups[$controllerName][$groupName];
+		}else{
+			return null;
+		}				
+		
+	}
+	
+	/**
 	 * Manipulate Controller viewVars
+	 * 
+	 * @access private
 	 * @param string $controllerName
 	 */
 	private function _mergingControllerViewVars($controllerName) {
@@ -143,6 +223,7 @@ class CloggyModuleMenuComponent extends Component {
 	/**
 	 * Register into $_menus
 	 * 
+	 * @access private
 	 * @param string $name
 	 * @param string $key
 	 * @param array $menus

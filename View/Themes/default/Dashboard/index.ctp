@@ -2,23 +2,29 @@
 
 	<div class="container">
 
-		<div class="row">
-			<div class="pull-right">
-				<form class="form-search" id="form-search">
-					<div class="input-append">
-						<input class="span3" id="module_q" type="text">
-						<button class="btn" type="submit" id="cloggy-search">Search Modules</button>
-					</div>
+		<div class="navbar">
+			<div class="navbar-inner">
+				<a class="brand" href="<?php echo $this->request->here; ?>">Cloggy</a>
+				<ul class="nav">					
+					<?php $menus = $this->CloggyMenus->menu('cloggy'); ?>
+					<?php if(!empty($menus)) : ?>						
+						<?php foreach($menus as $menu => $link) :?>
+						<li><?php echo $this->CloggyMenus->getLink($menu,$link); ?></li>
+						<?php endforeach; ?>
+					<?php endif; ?>
+				</ul>			
+				<form class="navbar-search pull-right" id="form-search">
+					<input type="text" id="module_q" class="search-query" placeholder="Search">
 				</form>
-			</div>
-		</div>
+			</div>			
+		</div>	
 
 		<div class="row">
 			<div class="span2">
 				<ul class="nav nav-tabs nav-stacked">					
-					<?php $menus = $this->CloggyMenus->menu('cloggy'); ?>
+					<?php $menus = $this->CloggyMenus->menu('cloggy_sidebar'); ?>
 					<?php if(!empty($menus)) : ?>
-						<li class="nav-header">Cloggy</li>
+						<li class="nav-header"><?php echo $cloggy_sidebar_title;?></li>
 						<?php foreach($menus as $menu => $link) :?>
 						<li><?php echo $this->CloggyMenus->getLink($menu,$link); ?></li>
 						<?php endforeach; ?>
@@ -84,7 +90,7 @@
 		
 		//manipulate dom
 		jQuery(document).ready(function() {
-			jQuery('#cloggy-dashboard').css('margin-top','60px');
+			jQuery('body').css('margin-top','40px');			
 			
 			/*
 			search on page
