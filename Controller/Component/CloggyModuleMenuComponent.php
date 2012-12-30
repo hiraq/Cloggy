@@ -94,7 +94,7 @@ class CloggyModuleMenuComponent extends Component {
 		$this->__create($controllerName, $key, $menus);
 		
 		/*
-		 * merging or create new viewVars for cloggy__menus
+		 * merging or create new viewVars for cloggy_menus
 		 */
 		$this->__mergingControllerViewVars($controllerName);
 	}
@@ -125,11 +125,11 @@ class CloggyModuleMenuComponent extends Component {
 			/*
 			 * reset
 			*/
-			if (array_key_exists('cloggy__menus',$controllerVars)
-					&& array_key_exists($key,$controllerVars['cloggy__menus'])) {
-				unset($this->__Controller->viewVars['cloggy__menus'][$key]);
+			if (array_key_exists('cloggy_menus',$controllerVars)
+					&& array_key_exists($key,$controllerVars['cloggy_menus'])) {
+				unset($this->__Controller->viewVars['cloggy_menus'][$key]);
 			}
-			$this->__Controller->viewVars['cloggy__menus'][$key] = $this->__menus[$controllerName][$key];			
+			$this->__Controller->viewVars['cloggy_menus'][$key] = $this->__menus[$controllerName][$key];			
 		}
 	}
 	
@@ -148,9 +148,9 @@ class CloggyModuleMenuComponent extends Component {
 			unset($this->__menus[$controllerName][$key]);
 		}
 		
-		if (array_key_exists('cloggy__menus',$controllerVars)
-				&& array_key_exists($key,$controllerVars['cloggy__menus'])) {
-			unset($this->__Controller->viewVars['cloggy__menus'][$key]);
+		if (array_key_exists('cloggy_menus',$controllerVars)
+				&& array_key_exists($key,$controllerVars['cloggy_menus'])) {
+			unset($this->__Controller->viewVars['cloggy_menus'][$key]);
 		}
 	}
 	
@@ -194,16 +194,16 @@ class CloggyModuleMenuComponent extends Component {
 		$controllerVars = $this->getViewVars();
 		
 		/*
-		 * merge with Controller view vars inside cloggy__menus
+		 * merge with Controller view vars inside cloggy_menus
 		 */
 		if (!empty($controllerVars)
-				&& array_key_exists('cloggy__menus',$controllerVars)) {
+				&& array_key_exists('cloggy_menus',$controllerVars)) {
 			
-			$this->__Controller->viewVars['cloggy__menus'] = array_merge(
-					$this->__Controller->viewVars['cloggy__menus'],$this->__menus[$controllerName]);
+			$this->__Controller->viewVars['cloggy_menus'] = array_merge(
+					$this->__Controller->viewVars['cloggy_menus'],$this->__menus[$controllerName]);
 			
 		} else {
-			$this->__Controller->set('cloggy__menus',$this->__menus[$controllerName]);
+			$this->__Controller->set('cloggy_menus',$this->__menus[$controllerName]);
 		}
 	}
 	
