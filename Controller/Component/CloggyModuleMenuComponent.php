@@ -1,5 +1,4 @@
 <?php
-
 App::uses('Component', 'Controller');
 
 /**
@@ -14,225 +13,212 @@ App::uses('Component', 'Controller');
  */
 class CloggyModuleMenuComponent extends Component {
 	
-	/**
-	 * 
-	 * Setup requested Controller
-	 * 
-	 * @access private
-	 * @var object
-	 */
-	private $_Controller;
+/**
+ * 
+ * Setup requested Controller
+ * 
+ * @access private
+ * @var object
+ */
+	private $__Controller;
 	
-	/**
-	 * Store all menus
-	 * 
-	 * @access private
-	 * @var array
-	 */
-	private $_menus = array();
+/**
+ * Store all menus
+ * 
+ * @access private
+ * @var array
+ */
+	private $__menus = array();
 	
-	/**
-	 * 
-	 * Grouping menus
-	 * 
-	 * @access private
-	 * @var array
-	 */
-	private $_groups = array();	
+/**
+ * 
+ * Grouping menus
+ * 
+ * @access private
+ * @var array
+ */
+	private $__groups = array();
 	
-	/**
-	 * CakePHP Component Callback
-	 * 
-	 * @access public
-	 * @see Component::startup()
-	 */
+/**
+ * CakePHP Component Callback
+ * 
+ * @access public
+ * @see Component::startup()
+ */
 	public function startup(Controller $controller) {
 		parent::startup($controller);
-		$this->_Controller = $controller;		
+		$this->__Controller = $controller;
 	}
 	
-	/**
-	 * Get Controller viewVars variable
-	 * 
-	 * @access public
-	 * @return array
-	 */
+/**
+ * Get Controller viewVars variable
+ * 
+ * @access public
+ * @return array
+ */
 	public function getViewVars() {
-		return $this->_Controller->viewVars;
-	}		
+		return $this->__Controller->viewVars;
+	}
 	
-	/**
-	 * Get requested controller name
-	 * 
-	 * @access public
-	 * @return string
-	 */
+/**
+ * Get requested controller name
+ * 
+ * @access public
+ * @return string
+ */
 	public function getRequestedControllerName() {
-		return $this->_Controller->name;
+		return $this->__Controller->name;
 	}
 	
-	/**
-	 * Get menus
-	 * @return array
-	 */
+/**
+ * Get menus
+ * @return array
+ */
 	public function getMenus() {
-		return $this->_menus;
+		return $this->__menus;
 	}
 	
-	/**
-	 * Create and merging menus viewVars
-	 * 
-	 * @access public
-	 * @param string $key
-	 * @param array $menus
-	 * @return void
-	 */
-	public function menus($key,$menus) {
-		
+/**
+ * Create and merging menus viewVars
+ * 
+ * @access public
+ * @param string $key
+ * @param array $menus
+ * @return void
+ */
+	public function menus($key,$menus) {		
 		/*
 		 * create new menus for requested controller
 		 */
 		$controllerName = $this->getRequestedControllerName();
-		$this->_create($controllerName, $key, $menus);
+		$this->__create($controllerName, $key, $menus);
 		
 		/*
-		 * merging or create new viewVars for cloggy_menus
+		 * merging or create new viewVars for cloggy__menus
 		 */
-		$this->_mergingControllerViewVars($controllerName);
-		
+		$this->__mergingControllerViewVars($controllerName);
 	}
 	
-	/**
-	 * Add new menus
-	 * 
-	 * @access public
-	 * @param string $key
-	 * @param array $newMenus
-	 * @return void
-	 */
+/**
+ * Add new menus
+ * 
+ * @access public
+ * @param string $key
+ * @param array $newMenus
+ * @return void
+ */
 	public function add($key,$newMenus) {
-		
 		$controllerName = $this->getRequestedControllerName();
 		$controllerVars = $this->getViewVars();
 		
-		if(!array_key_exists($controllerName,$this->_menus)) {
+		if (!array_key_exists($controllerName,$this->__menus)) {
 			$this->menus($key, $newMenus);
-		}else{
+		} else {
 			
-			$menus = $this->_menus[$controllerName];
-			
-			if(array_key_exists($key,$menus) && is_array($menus[$key])) {								
-				$this->_menus[$controllerName][$key] = array_merge($menus[$key],$newMenus);												
-			}else{				
-				$this->_menus[$controllerName][$key] = $newMenus;				
+			$menus = $this->__menus[$controllerName];			
+			if (array_key_exists($key,$menus) && is_array($menus[$key])) {			
+				$this->__menus[$controllerName][$key] = array_merge($menus[$key],$newMenus);												
+			} else {
+				$this->__menus[$controllerName][$key] = $newMenus;	
 			}
 			
 			/*
 			 * reset
 			*/
-			if(array_key_exists('cloggy_menus',$controllerVars)
-					&& array_key_exists($key,$controllerVars['cloggy_menus'])) {
-				unset($this->_Controller->viewVars['cloggy_menus'][$key]);
+			if (array_key_exists('cloggy__menus',$controllerVars)
+					&& array_key_exists($key,$controllerVars['cloggy__menus'])) {
+				unset($this->__Controller->viewVars['cloggy__menus'][$key]);
 			}
-			
-			$this->_Controller->viewVars['cloggy_menus'][$key] = $this->_menus[$controllerName][$key];
-			
+			$this->__Controller->viewVars['cloggy__menus'][$key] = $this->__menus[$controllerName][$key];			
 		}
-		
 	}
 	
-	/**
-	 * Remove key menus from requested controller
-	 * 
-	 * @access public
-	 * @param string $key
-	 */
-	public function remove($key) {
-		
+/**
+ * Remove key menus from requested controller
+ * 
+ * @access public
+ * @param string $key
+ */
+	public function remove($key) {		
 		$controllerName = $this->getRequestedControllerName();
 		$controllerVars = $this->getViewVars();
 		
-		if(array_key_exists($controllerName,$this->_menus) && array_key_exists($key,$this->_menus[$controllerName])) {						
-			unset($this->_menus[$controllerName][$key]);
+		if (array_key_exists($controllerName,$this->__menus)
+				&& array_key_exists($key,$this->__menus[$controllerName])) {						
+			unset($this->__menus[$controllerName][$key]);
 		}
 		
-		if(array_key_exists('cloggy_menus',$controllerVars) && array_key_exists($key,$controllerVars['cloggy_menus'])) {
-			unset($this->_Controller->viewVars['cloggy_menus'][$key]);
+		if (array_key_exists('cloggy__menus',$controllerVars)
+				&& array_key_exists($key,$controllerVars['cloggy__menus'])) {
+			unset($this->__Controller->viewVars['cloggy__menus'][$key]);
 		}
-		
 	}
 	
-	/**
-	 * 
-	 * Grouping key menus
-	 * 
-	 * @access public
-	 * @param string $groupName
-	 * @param array $keys
-	 */
+/**
+ * 
+ * Grouping key menus
+ * 
+ * @access public
+ * @param string $groupName
+ * @param array $keys
+ */
 	public function setGroup($groupName,$menus) {
-		
 		$controllerName = $this->getRequestedControllerName();
-		$this->_groups[$controllerName][$groupName] = $menus;
-		
+		$this->__groups[$controllerName][$groupName] = $menus;
 	}
 	
-	/**
-	 * Get group menus
-	 * 
-	 * @access public
-	 * @param string $groupName
-	 * @return null|array
-	 */
+/**
+ * Get group menus
+ * 
+ * @access public
+ * @param string $groupName
+ * @return null|array
+ */
 	public function getGroup($groupName) {
-		
 		$controllerName = $this->getRequestedControllerName();
-		if(isset($this->_groups[$controllerName]) 
-				&& array_key_exists($groupName,$this->_groups[$controllerName])) {
-			return $this->_groups[$controllerName][$groupName];
-		}else{
+		if (isset($this->__groups[$controllerName])
+				&& array_key_exists($groupName,$this->__groups[$controllerName])) {
+			return $this->__groups[$controllerName][$groupName];
+		} else {
 			return null;
-		}				
-		
+		}
 	}
 	
-	/**
-	 * Manipulate Controller viewVars
-	 * 
-	 * @access private
-	 * @param string $controllerName
-	 */
-	private function _mergingControllerViewVars($controllerName) {
-		
+/**
+ * Manipulate Controller viewVars
+ * 
+ * @access private
+ * @param string $controllerName
+ */
+	private function __mergingControllerViewVars($controllerName) {
 		$controllerVars = $this->getViewVars();
 		
 		/*
-		 * merge with Controller view vars inside cloggy_menus
+		 * merge with Controller view vars inside cloggy__menus
 		 */
-		if(!empty($controllerVars) && array_key_exists('cloggy_menus',$controllerVars)) {
+		if (!empty($controllerVars)
+				&& array_key_exists('cloggy__menus',$controllerVars)) {
 			
-			$this->_Controller->viewVars['cloggy_menus'] = array_merge(
-					$this->_Controller->viewVars['cloggy_menus'],$this->_menus[$controllerName]);
+			$this->__Controller->viewVars['cloggy__menus'] = array_merge(
+					$this->__Controller->viewVars['cloggy__menus'],$this->__menus[$controllerName]);
 			
-		}else{
-			$this->_Controller->set('cloggy_menus',$this->_menus[$controllerName]);
-		}
-		
-	}
-	
-	/**
-	 * Register into $_menus
-	 * 
-	 * @access private
-	 * @param string $name
-	 * @param string $key
-	 * @param array $menus
-	 * @return void
-	 */
-	private function _create($name,$key,$menus) {
-		if(!array_key_exists($name,$this->_menus)) {
-			$this->_menus[$name] = array($key => $menus);
+		} else {
+			$this->__Controller->set('cloggy__menus',$this->__menus[$controllerName]);
 		}
 	}
 	
+/**
+ * Register into $__menus
+ * 
+ * @access private
+ * @param string $name
+ * @param string $key
+ * @param array $menus
+ * @return void
+ */
+	private function __create($name,$key,$menus) {
+		if (!array_key_exists($name,$this->__menus)) {
+			$this->__menus[$name] = array($key => $menus);
+		}
+	}
 }
