@@ -7,11 +7,11 @@ class DashboardController extends CloggyAppController {
 		$this->Auth->deny('*');
 	}
 	
-	public function index() {	
-
+	public function index() {			
+		
 		$this->CloggyModuleMenu->add('cloggy_sidebar',array(
-			'Add New User' => $this->_base.'/module/cloggy_users/cloggy_users_home/add',
-			'Edit My Profile' => $this->_base.'/module/cloggy_users/cloggy_users_home/edit/'.$this->Auth->user('id'),
+			'Add New User' => $this->CloggyModuleMenu->urlModule('cloggy_users','cloggy_users_home/add'),
+			'Edit My Profile' => $this->CloggyModuleMenu->urlModule('cloggy_users','cloggy_users_home/edit/'.$this->Auth->user('id')),
 		));
 		
 		$this->set('cloggy_sidebar_title','Shortcuts');

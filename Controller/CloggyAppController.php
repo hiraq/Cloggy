@@ -32,15 +32,15 @@ class CloggyAppController extends AppController {
 		$this->_base = '/'.Configure::read('Cloggy.url_prefix');			
 		
 		//load auth
-		$this->_authSettings();
+		$this->__authSettings();
 		
 		/*
 		 * set default cloggy menus
 		 */
 		$this->set('cloggy_menus',array(
 			'cloggy' => array(
-				'dashboard' => '/'.Configure::read('Cloggy.url_prefix').'/dashboard',				
-				'logout' => '/'.Configure::read('Cloggy.url_prefix').'/logout',
+				'dashboard' => $this->CloggyModuleMenu->url('dashboard'),				
+				'logout' => $this->CloggyModuleMenu->url('logout'),
 			)
 		));
 		
@@ -55,20 +55,16 @@ class CloggyAppController extends AppController {
 		 * check if requested params is module request
 		 * > change layout
 		 */
-		if(isset($this->request->params['isCloggyModule']) 
+		if (isset($this->request->params['isCloggyModule']) 
 				&& $this->request->params['isCloggyModule'] == 1) {
 			$this->layout = 'cloggy_module_layout';
 			$this->_requestedModule = $this->request->params['name'];
 			$this->set('moduleName',$this->request->params['name']);			
 		}
 		
-	}				
+	}						
 	
-	public function beforeRender() {
-		$this->response->disableCache();
-	}
-	
-	private function _authSettings() {
+	private function __authSettings() {
 		
 		$this->Auth->authenticate = array(
 			'Form' => array(

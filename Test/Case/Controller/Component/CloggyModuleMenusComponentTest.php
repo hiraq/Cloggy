@@ -8,7 +8,7 @@ App::uses('CloggyModuleMenuComponent', 'Cloggy.Controller/Component');
 
 class CloggyModuleMenusComponentTest extends CakeTestCase {
 	
-	private $_CloggyModuleMenu;
+	private $__CloggyModuleMenu;
 	private $_Controller;
 	
 	public function setUp() {
@@ -17,19 +17,19 @@ class CloggyModuleMenusComponentTest extends CakeTestCase {
 		
 		// Setup our component and fake test controller
 		$Collection = new ComponentCollection();
-		$this->_CloggyModuleMenu = new CloggyModuleMenuComponent($Collection);
+		$this->__CloggyModuleMenu = new CloggyModuleMenuComponent($Collection);
 		
 		$CakeRequest = new CakeRequest();
 		$CakeResponse = new CakeResponse();
 		
 		$this->_Controller = new Controller($CakeRequest, $CakeResponse);
-		$this->_CloggyModuleMenu->startup($this->_Controller);
+		$this->__CloggyModuleMenu->startup($this->_Controller);
 		
 	}
 	
 	public function testViewVars() {
 		
-		$data = $this->_CloggyModuleMenu->getViewVars();
+		$data = $this->__CloggyModuleMenu->getViewVars();
 		$this->assertTrue(empty($data));
 		
 	}
@@ -37,7 +37,7 @@ class CloggyModuleMenusComponentTest extends CakeTestCase {
 	public function testControllername() {
 		
 		$this->_Controller->name = 'TestController';
-		$name = $this->_CloggyModuleMenu->getRequestedControllerName();
+		$name = $this->__CloggyModuleMenu->getRequestedControllerName();
 		
 		$this->assertEqual($name,'TestController');
 		
@@ -45,7 +45,7 @@ class CloggyModuleMenusComponentTest extends CakeTestCase {
 	
 	public function testEmpty() {
 				
-		$data = $this->_CloggyModuleMenu->getMenus();		
+		$data = $this->__CloggyModuleMenu->getMenus();		
 		$this->assertTrue(empty($data));
 		
 	}
@@ -53,11 +53,11 @@ class CloggyModuleMenusComponentTest extends CakeTestCase {
 	public function testMenus() {
 		
 		$this->_Controller->name = 'TestController';
-		$this->_CloggyModuleMenu->menus('test', array(
+		$this->__CloggyModuleMenu->menus('test', array(
 			'test 1' => 'test2'
 		));
 		
-		$menus = $this->_CloggyModuleMenu->getMenus();
+		$menus = $this->__CloggyModuleMenu->getMenus();
 		
 		$this->assertFalse(empty($menus));
 		$this->assertEqual(1,count($menus['TestController']));
@@ -69,29 +69,29 @@ class CloggyModuleMenusComponentTest extends CakeTestCase {
 	public function testAddMenus() {
 		
 		$this->_Controller->name = 'TestController';
-		$this->_CloggyModuleMenu->menus('test', array(
+		$this->__CloggyModuleMenu->menus('test', array(
 			'test 1' => 'test2'
 		));
 		
-		$this->_CloggyModuleMenu->add('test2',array(
+		$this->__CloggyModuleMenu->add('test2',array(
 			'test 2' => 'test3'
 		));
 		
-		$menus = $this->_CloggyModuleMenu->getMenus();
+		$menus = $this->__CloggyModuleMenu->getMenus();
 		
 		$this->assertFalse(empty($menus));
 		$this->assertEqual(2,count($menus['TestController']));
 		
 		$this->_Controller->name = 'Test2Controller';
-		$this->_CloggyModuleMenu->menus('test', array(
+		$this->__CloggyModuleMenu->menus('test', array(
 			'test 1' => 'test2'
 		));
 		
-		$this->_CloggyModuleMenu->add('test',array(
+		$this->__CloggyModuleMenu->add('test',array(
 			'test 2' => 'test3'
 		));
 		
-		$menus = $this->_CloggyModuleMenu->getMenus();
+		$menus = $this->__CloggyModuleMenu->getMenus();
 		
 		$this->assertFalse(empty($menus));
 		$this->assertEqual(2,count($menus));
@@ -99,11 +99,11 @@ class CloggyModuleMenusComponentTest extends CakeTestCase {
 		$this->assertArrayHasKey('test',$menus['Test2Controller']);		
 		
 		$this->_Controller->name = 'Test3Controller';
-		$this->_CloggyModuleMenu->add('test3',array(
+		$this->__CloggyModuleMenu->add('test3',array(
 			'test 3' => 'test4'
 		));
 		
-		$menus = $this->_CloggyModuleMenu->getMenus();
+		$menus = $this->__CloggyModuleMenu->getMenus();
 		$this->assertFalse(empty($menus));
 		$this->assertEqual(3,count($menus));
 		
@@ -112,22 +112,22 @@ class CloggyModuleMenusComponentTest extends CakeTestCase {
 	public function testRemove() {
 		
 		$this->_Controller->name = 'TestController';
-		$this->_CloggyModuleMenu->menus('test', array(
+		$this->__CloggyModuleMenu->menus('test', array(
 			'test 1' => 'test2'
 		));
 		
-		$this->_CloggyModuleMenu->add('test2',array(
+		$this->__CloggyModuleMenu->add('test2',array(
 			'test 2' => 'test3'
 		));
 		
-		$menus = $this->_CloggyModuleMenu->getMenus();
+		$menus = $this->__CloggyModuleMenu->getMenus();
 		
 		$this->assertFalse(empty($menus));
 		$this->assertEqual(2,count($menus['TestController']));
 		
-		$this->_CloggyModuleMenu->remove('test2');
+		$this->__CloggyModuleMenu->remove('test2');
 		
-		$menus = $this->_CloggyModuleMenu->getMenus();		
+		$menus = $this->__CloggyModuleMenu->getMenus();		
 		$this->assertEqual(1,count($menus['TestController']));
 		
 	}
@@ -135,16 +135,59 @@ class CloggyModuleMenusComponentTest extends CakeTestCase {
 	public function testSetGroup() {
 		
 		$this->_Controller->name = 'TestController';
-		$this->_CloggyModuleMenu->setGroup('test', array(
+		$this->__CloggyModuleMenu->setGroup('test', array(
 			'test1' => 'test1'
 		));
 		
-		$groups = $this->_CloggyModuleMenu->getGroup('test');
-		$groupFake = $this->_CloggyModuleMenu->getGroup('testFake');
+		$groups = $this->__CloggyModuleMenu->getGroup('test');
+		$groupFake = $this->__CloggyModuleMenu->getGroup('testFake');
+		$viewVars = $this->__CloggyModuleMenu->getViewVars();
 				
 		$this->assertFalse(empty($groups));
 		$this->assertInternalType('null',$groupFake);
+		$this->assertInternalType('array',$viewVars);
+		$this->assertArrayHasKey('cloggy_menus_group',$viewVars);
 		
+		$this->__CloggyModuleMenu->setGroup('test', array(
+			'test2' => 'test2'
+		));
+		
+		$groups = $this->__CloggyModuleMenu->getGroup('test');
+		$viewVars = $this->__CloggyModuleMenu->getViewVars();
+		
+		$this->assertFalse(empty($groups));
+		$this->assertInternalType('array',$groups);
+		$this->assertArrayHasKey('test2',$groups);
+		$this->assertCount(1,$groups);
+		
+		$this->__CloggyModuleMenu->setGroup('test2', array(
+			'test3' => 'test3'
+		));
+		
+		$groups = $this->__CloggyModuleMenu->getGroup('test2');
+		$viewVars = $this->__CloggyModuleMenu->getViewVars();
+		
+		$this->assertFalse(empty($groups));
+		$this->assertInternalType('array',$groups);
+		$this->assertArrayHasKey('test3',$groups);
+		$this->assertCount(1,$groups);
+		$this->assertArrayHasKey('cloggy_menus_group',$viewVars);
+		$this->assertArrayHasKey('test2',$viewVars['cloggy_menus_group']);
+		$this->assertInternalType('array',$viewVars['cloggy_menus_group']['test2']);
+		$this->assertArrayHasKey('test3',$viewVars['cloggy_menus_group']['test2']);
+		
+	}
+	
+	public function testUrlModule() {
+		
+		$url = $this->__CloggyModuleMenu->urlModule('test','test_home/index');
+		$this->assertEqual($url,'/'.Configure::read('Cloggy.url_prefix').'/module/test/test_home/index');
+		
+	}
+	
+	public function testUrl() {
+		$url = $this->__CloggyModuleMenu->url('dashboard');
+		$this->assertEqual($url,'/'.Configure::read('Cloggy.url_prefix').'/dashboard');
 	}
 	
 }

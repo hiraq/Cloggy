@@ -162,9 +162,26 @@ class CloggyModuleMenuComponent extends Component {
  * @param string $groupName
  * @param array $keys
  */
-	public function setGroup($groupName,$menus) {
+	public function setGroup($groupName,$menus) {		
+		
 		$controllerName = $this->getRequestedControllerName();
+		$controllerVars = $this->getViewVars();
+				
 		$this->__groups[$controllerName][$groupName] = $menus;
+		
+		if (array_key_exists('cloggy_menus_group',$controllerVars)) {
+			
+			if (array_key_exists($groupName,$controllerVars['cloggy_menus_group'])) {
+				$this->__Controller->viewVars['cloggy_menus_group'][$groupName] = array_merge(
+						$this->__Controller->viewVars['cloggy_menus_group'][$groupName], $this->__groups[$controllerName][$groupName]);
+			} else {								
+				$this->__Controller->viewVars['cloggy_menus_group'][$groupName] = $menus;
+			}
+			
+		} else {
+			$this->__Controller->viewVars['cloggy_menus_group'][$groupName] = $menus;
+		}
+		
 	}
 	
 /**
@@ -182,6 +199,32 @@ class CloggyModuleMenuComponent extends Component {
 		} else {
 			return null;
 		}
+	}
+	
+/**
+ * 
+ * Create url for module
+ * 
+ * @access public
+ * @param string $moduleName
+ * @param string $path
+ * @return string
+ */	
+	public function urlModule($moduleName,$path) {
+		$base = '/'.Configure::read('Cloggy.url_prefix').'/module/'.$moduleName.'/';
+		return $base.$path;
+	}
+	
+/**
+ * Genereate url inside Cloggy admin
+ * 
+ * @access public
+ * @param string $path
+ * @return string
+ */	
+	public function url($path) {
+		$base = '/'.Configure::read('Cloggy.url_prefix').'/';
+		return $base.$path;
 	}
 	
 /**
