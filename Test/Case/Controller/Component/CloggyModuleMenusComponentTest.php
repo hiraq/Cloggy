@@ -9,7 +9,7 @@ App::uses('CloggyModuleMenuComponent', 'Cloggy.Controller/Component');
 class CloggyModuleMenusComponentTest extends CakeTestCase {
 	
 	private $__CloggyModuleMenu;
-	private $_Controller;
+	private $__Controller;
 	
 	public function setUp() {
 		
@@ -22,8 +22,8 @@ class CloggyModuleMenusComponentTest extends CakeTestCase {
 		$CakeRequest = new CakeRequest();
 		$CakeResponse = new CakeResponse();
 		
-		$this->_Controller = new Controller($CakeRequest, $CakeResponse);
-		$this->__CloggyModuleMenu->startup($this->_Controller);
+		$this->__Controller = new Controller($CakeRequest, $CakeResponse);
+		$this->__CloggyModuleMenu->startup($this->__Controller);
 		
 	}
 	
@@ -36,7 +36,7 @@ class CloggyModuleMenusComponentTest extends CakeTestCase {
 	
 	public function testControllername() {
 		
-		$this->_Controller->name = 'TestController';
+		$this->__Controller->name = 'TestController';
 		$name = $this->__CloggyModuleMenu->getRequestedControllerName();
 		
 		$this->assertEqual($name,'TestController');
@@ -52,7 +52,7 @@ class CloggyModuleMenusComponentTest extends CakeTestCase {
 	
 	public function testMenus() {
 		
-		$this->_Controller->name = 'TestController';
+		$this->__Controller->name = 'TestController';
 		$this->__CloggyModuleMenu->menus('test', array(
 			'test 1' => 'test2'
 		));
@@ -68,7 +68,7 @@ class CloggyModuleMenusComponentTest extends CakeTestCase {
 	
 	public function testAddMenus() {
 		
-		$this->_Controller->name = 'TestController';
+		$this->__Controller->name = 'TestController';
 		$this->__CloggyModuleMenu->menus('test', array(
 			'test 1' => 'test2'
 		));
@@ -82,7 +82,7 @@ class CloggyModuleMenusComponentTest extends CakeTestCase {
 		$this->assertFalse(empty($menus));
 		$this->assertEqual(2,count($menus['TestController']));
 		
-		$this->_Controller->name = 'Test2Controller';
+		$this->__Controller->name = 'Test2Controller';
 		$this->__CloggyModuleMenu->menus('test', array(
 			'test 1' => 'test2'
 		));
@@ -98,7 +98,7 @@ class CloggyModuleMenusComponentTest extends CakeTestCase {
 		$this->assertArrayHasKey('Test2Controller',$menus);
 		$this->assertArrayHasKey('test',$menus['Test2Controller']);		
 		
-		$this->_Controller->name = 'Test3Controller';
+		$this->__Controller->name = 'Test3Controller';
 		$this->__CloggyModuleMenu->add('test3',array(
 			'test 3' => 'test4'
 		));
@@ -111,7 +111,7 @@ class CloggyModuleMenusComponentTest extends CakeTestCase {
 	
 	public function testRemove() {
 		
-		$this->_Controller->name = 'TestController';
+		$this->__Controller->name = 'TestController';
 		$this->__CloggyModuleMenu->menus('test', array(
 			'test 1' => 'test2'
 		));
@@ -134,7 +134,7 @@ class CloggyModuleMenusComponentTest extends CakeTestCase {
 	
 	public function testSetGroup() {
 		
-		$this->_Controller->name = 'TestController';
+		$this->__Controller->name = 'TestController';
 		$this->__CloggyModuleMenu->setGroup('test', array(
 			'test1' => 'test1'
 		));
