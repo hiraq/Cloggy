@@ -16,11 +16,25 @@ class CloggyBlogHomeController extends CloggyAppController {
 		parent::beforeFilter();
 		$this->Auth->deny('*');
 		
-		$this->CloggyModuleMenu->startup($this);
-		$this->CloggyModuleMenu->add('cloggy_blog',array(			
-			'posts' => $this->_base.'/module/cloggy_blog/cloggy_blog_posts',
-			'categories' => $this->_base.'/module/cloggy_blog/cloggy_blog_categories',
-			'tags' => $this->_base.'/module/cloggy_blog/cloggy_blog_tags',
+		$this->CloggyModuleMenu->add('module',array(			
+			'Posts' => array(
+				'Manage' => $this->_base.'/module/cloggy_blog/cloggy_blog_posts',
+				'Add' => $this->_base.'/module/cloggy_blog/cloggy_blog_posts/add',
+			),
+			'Categories' => array(
+				'Manage' => $this->_base.'/module/cloggy_blog/cloggy_blog_categories',
+				'Add' => $this->_base.'/module/cloggy_blog/cloggy_blog_categories/add',
+			),
+			'Tags' => array(
+				'Manage' => $this->_base.'/module/cloggy_blog/cloggy_blog_tags',
+				'Add' => $this->_base.'/module/cloggy_blog/cloggy_blog_tags/add',
+			)
+		));	
+
+		$this->CloggyModuleMenu->setGroup('Create New',array(
+			'Add Post' => $this->CloggyModuleMenu->urlModule('cloggy_blog','cloggy_blog_posts/add'),
+			'Add Category' => $this->CloggyModuleMenu->urlModule('cloggy_blog','cloggy_blog_categories/add'),
+			'Add Tags' => $this->CloggyModuleMenu->urlModule('cloggy_blog','cloggy_blog_tags/add')
 		));
 		
 		$this->set('moduleKeyMenus','cloggy_blog');

@@ -1,10 +1,6 @@
 <?php echo $this->Form->create('#',array('id' => 'users_index')); ?>
 <table class="table table-hover table-bordered">
-	<thead>	
-		<tr>
-			<th colspan="9">Categories - <?php echo $this->Html->link('Manage',
-								'/'.Configure::read('Cloggy.url_prefix').'/module/cloggy_blog/cloggy_blog_categories'); ?></th>
-		</tr>	
+	<thead>			
 		<tr>						
 			<th width="2%"><input type="checkbox" name="checker" id="checker" /></th>
 			<th>Category Name</th>			

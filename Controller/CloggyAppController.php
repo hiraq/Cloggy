@@ -29,21 +29,20 @@ class CloggyAppController extends AppController {
 		parent::beforeFilter();		
 
 		//base url for plugin
-		$this->_base = '/'.Configure::read('Cloggy.url_prefix');			
+		$this->_base = '/'.Configure::read('Cloggy.url_prefix');	
+
+		/*
+		 * setup menus
+		 */
+		$this->CloggyModuleMenu->startup($this);
+		$this->CloggyModuleMenu->menus('cloggy',array(
+			'dashboard' => $this->CloggyModuleMenu->url('dashboard'),
+			'logout' => $this->CloggyModuleMenu->url('logout'),
+		));
 		
 		//load auth
 		$this->__authSettings();
-		
-		/*
-		 * set default cloggy menus
-		 */
-		$this->set('cloggy_menus',array(
-			'cloggy' => array(
-				'dashboard' => $this->CloggyModuleMenu->url('dashboard'),				
-				'logout' => $this->CloggyModuleMenu->url('logout'),
-			)
-		));
-		
+					
 		//generate modules
 		$this->CloggyModuleInfo->modules();
 		$modules = $this->CloggyModuleInfo->getModules();				
@@ -57,9 +56,27 @@ class CloggyAppController extends AppController {
 		 */
 		if (isset($this->request->params['isCloggyModule']) 
 				&& $this->request->params['isCloggyModule'] == 1) {
+			
 			$this->layout = 'cloggy_module_layout';
 			$this->_requestedModule = $this->request->params['name'];
-			$this->set('moduleName',$this->request->params['name']);			
+			$this->set('moduleName',$this->request->params['name']);
+			
+			$modulesMenus = array();
+			if (!empty($modules)) {
+				
+				foreach($modules as $module => $info) {
+					$link = Inflector::singularize(Inflector::tableize($module));
+					$modulesMenus[$module] = $this->CloggyModuleMenu->urlModule($link);
+				}
+				
+				/*
+				 * switch modules menu
+				 */
+				$this->CloggyModuleMenu->add('cloggy',array(
+					'Modules' => $modulesMenus
+				));				
+				
+			}
 		}
 		
 	}						

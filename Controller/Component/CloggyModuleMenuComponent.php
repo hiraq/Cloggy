@@ -210,9 +210,9 @@ class CloggyModuleMenuComponent extends Component {
  * @param string $path
  * @return string
  */	
-	public function urlModule($moduleName,$path) {
-		$base = '/'.Configure::read('Cloggy.url_prefix').'/module/'.$moduleName.'/';
-		return $base.$path;
+	public function urlModule($moduleName,$path=null) {
+		$base = '/'.Configure::read('Cloggy.url_prefix').'/module/'.$moduleName;
+		return is_null($path) ? $base : $base.'/'.$path;
 	}
 	
 /**

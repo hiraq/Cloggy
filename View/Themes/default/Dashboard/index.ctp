@@ -21,15 +21,20 @@
 
 		<div class="row">
 			<div class="span2">
-				<ul class="nav nav-tabs nav-stacked">					
-					<?php $menus = $this->CloggyMenus->menu('cloggy_sidebar'); ?>
+									
+					<?php $menus = $this->CloggyMenus->groups(); ?>
 					<?php if(!empty($menus)) : ?>
-						<li class="nav-header"><?php echo $cloggy_sidebar_title;?></li>
-						<?php foreach($menus as $menu => $link) :?>
-						<li><?php echo $this->CloggyMenus->getLink($menu,$link); ?></li>
+						
+						<?php foreach($menus as $name => $data) :?>
+						<ul class="nav nav-tabs nav-stacked">
+						<li class="nav-header"><?php echo $name;?></li>
+							<?php foreach($data as $anchor => $link) :?>
+							<li><?php echo $this->CloggyMenus->getLink($anchor,$link); ?></li>
+							<?php endforeach; ?>
+						</ul>
 						<?php endforeach; ?>
-					<?php endif; ?>
-				</ul>
+					<?php endif; ?>	
+								
 			</div>
 			<div class="span10">
 
