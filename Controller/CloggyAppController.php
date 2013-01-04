@@ -33,8 +33,8 @@ class CloggyAppController extends AppController {
 
 		/*
 		 * setup menus
-		 */
-		$this->CloggyModuleMenu->startup($this);
+		 */		
+		
 		$this->CloggyModuleMenu->menus('cloggy',array(
 			'dashboard' => $this->CloggyModuleMenu->url('dashboard'),
 			'logout' => $this->CloggyModuleMenu->url('logout'),
