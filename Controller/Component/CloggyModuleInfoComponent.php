@@ -32,7 +32,9 @@ class CloggyModuleInfoComponent extends Component {
 					$this->_configureModuleInfo($module);
 					$this->__modules[$module]['name'] = $this->getModuleName();
 					$this->__modules[$module]['desc'] = $this->getModuleDesc();
-					$this->__modules[$module]['author'] = $this->getModuleAuthor();					
+					$this->__modules[$module]['author'] = $this->getModuleAuthor();
+					$this->__modules[$module]['url'] = $this->getModuleUrl();
+					$this->__modules[$module]['dep'] = $this->getModuleDependency();					
 				}
 			}			
 		}		
@@ -76,7 +78,7 @@ class CloggyModuleInfoComponent extends Component {
  * @return string
  */	
 	public function getModuleName() {
-		$name = Configure::read('basic.name');
+		$name = Configure::read('info.name');
 		return $name;
 	}		
 	
@@ -86,7 +88,7 @@ class CloggyModuleInfoComponent extends Component {
  * @return string
  */	
 	public function getModuleDesc() {
-		$desc = Configure::read('basic.desc');
+		$desc = Configure::read('info.desc');
 		return $desc;
 	}
 	
@@ -96,8 +98,28 @@ class CloggyModuleInfoComponent extends Component {
  * @return string
  */	
 	public function getModuleAuthor() {
-		$author = Configure::read('basic.author');
+		$author = Configure::read('info.author');
 		return $author;
+	}
+	
+/**
+ * Get module url
+ * @access public
+ * @return string
+ */
+	public function getModuleUrl() {
+		$url = Configure::read('info.url');
+		return $url;
+	}
+	
+/**
+ * Get module dependency
+ * @access public
+ * @return string 
+ */	
+	public function getModuleDependency() {
+		$dep = Configure::read('info.dependency');
+		return $dep;
 	}
 	
 /**

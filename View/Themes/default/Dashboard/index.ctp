@@ -43,7 +43,8 @@
 						<tr>
 							<th>Module Name</th>
 							<th>Description</th>
-							<th>Author</th>
+							<th>Author</th>							
+							<th>Dependency</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -55,8 +56,15 @@
 										<?php echo $module['name']; ?>
 									</a>
 								</td>
-								<td><?php echo $module['desc']; ?></td>
-								<td><?php echo $module['author'];?></td>
+								<td><?php echo $module['desc']; ?></td>								
+								<td>
+									<?php if (filter_var($module['url'],FILTER_VALIDATE_URL)) : ?>
+										<?php echo $this->Html->link($module['author'],$module['url'],array('target' => '__blank'));?>
+									<?php else: ?>
+										<?php echo $module['author'];?>
+									<?php endif; ?>
+								</td>
+								<td><?php echo $module['dep'];?></td>
 							</tr>						
 							<?php endforeach; ?>
 						<?php else: ?>

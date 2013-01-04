@@ -53,6 +53,10 @@ class CloggyModuleInfoComponentTest extends CakeTestCase {
 		$this->assertInternalType('array',$data);
 		$this->assertFalse(empty($data));
 		$this->assertArrayHasKey('name',$data);
+		$this->assertArrayHasKey('desc',$data);
+		$this->assertArrayHasKey('author',$data);
+		$this->assertArrayHasKey('url',$data);
+		$this->assertArrayHasKey('dep',$data);
 		
 		$data = $this->__CloggyModuleInfo->getModuleInfo('ModuleTestFake');
 		$this->assertInternalType('null',$data);
