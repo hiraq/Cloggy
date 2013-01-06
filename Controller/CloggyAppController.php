@@ -65,7 +65,7 @@ class CloggyAppController extends AppController {
 			if (!empty($modules)) {
 				
 				foreach($modules as $module => $info) {
-					$link = Inflector::singularize(Inflector::tableize($module));
+					$link = Inflector::underscore($module);
 					$modulesMenus[$module] = $this->CloggyModuleMenu->urlModule($link);
 				}
 				

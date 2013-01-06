@@ -2,7 +2,7 @@
 
 App::uses('Sanitize', 'Utility');
 
-class InstallController extends CloggygyAppController {
+class InstallController extends CloggyAppController {
 	
 	public $uses = array('Cloggy.CloggyUser','Cloggy.CloggyValidation');
 	public $helpers = array('Form');
