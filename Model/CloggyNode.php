@@ -63,7 +63,7 @@ class CloggyNode extends CloggyAppModel {
 	
 	public function isSubjectExistsByTypeId($typeId,$subject) {
 		
-		$check = $this->CloggySubject->find('count',array(
+		$check = $this->CloggySubject->find('first',array(
 			'contain' => array(
 				'CloggyNode' => array(
 					'conditions' => array('CloggyNode.node_type_id' => $typeId)
@@ -72,7 +72,7 @@ class CloggyNode extends CloggyAppModel {
 			'conditions' => array('CloggySubject.subject' => $subject)
 		));
 		
-		return $check < 1 ? false : true;
+		return empty($check['CloggyNode']['id']) ? false : true;
 		
 	}
 	
