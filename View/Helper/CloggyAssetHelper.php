@@ -22,7 +22,7 @@ class CloggyAssetHelper extends AppHelper {
 	public $helpers = array('Html');			
 	
 /**
- * Get webroot/<theme_used>/vendors url
+ * Get webroot/<theme_used>/vendor url
  * 
  * @access public
  * @param string $file
@@ -31,7 +31,7 @@ class CloggyAssetHelper extends AppHelper {
 	public function getVendorUrl($file) {
 		
 		$base = Router::url('/',true).$this->__getBaseUrl();
-		$url = $base.'/vendors/';
+		$url = $base.'/vendor/';
 		return $url.$file;	
 		
 	}
@@ -51,7 +51,7 @@ class CloggyAssetHelper extends AppHelper {
 	public function getVendorHtmlTag($file,$type) {
 		
 		$base = '/'.$this->__getBaseUrl();
-		$url = $base.'/vendors/';
+		$url = $base.'/vendor/';
 		
 		switch($type) {
 			
