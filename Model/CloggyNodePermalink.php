@@ -13,13 +13,16 @@ class CloggyNodePermalink extends CloggyAppModel {
 	);
 	
 	public function createPermalink($nodeId,$subject,$separator='_') {
+		
 		$this->create();
 		$this->save(array(
 			'CloggyNodePermalink' => array(
 				'node_id' => $nodeId,
-				'permalink_url' => Inflector::slug($subject,$separator)
+				'permalink_url' => Inflector::slug(trim($subject),$separator)
 			)
 		));
+		
+		return $this->id;
 	}
 	
 }
