@@ -13,6 +13,7 @@ class CloggyNodeSubject extends CloggyAppModel {
 	);
 	
 	public function createSubject($nodeId,$subject) {
+		
 		$this->create();
 		$this->save(array(
 			'CloggyNodeSubject' => array(
@@ -20,6 +21,8 @@ class CloggyNodeSubject extends CloggyAppModel {
 				'subject' => $subject
 			)
 		));
+		
+		return $this->id;
 	}
 	
 }
