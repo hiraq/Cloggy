@@ -53,7 +53,7 @@
 	var host = '<?php echo Router::url('/'.Configure::read('Cloggy.url_prefix').'/'.Configure::read('Cloggy.theme_used').'/',true); ?>';
 
 	yepnope({
-		load: [host+'vendors/ckeditor/ckeditor.js'],
+		load: [host+'vendor/ckeditor/ckeditor.js'],
 		complete: function() {
 			
 			CKEDITOR.replace('editor',{				

@@ -16,6 +16,7 @@ class CloggyAppController extends AppController {
 		'Auth',
 		'Cloggy.CloggyModuleInfo',
 		'Cloggy.CloggyModuleMenu',
+		'Cloggy.CloggyAcl',
 		'Paginator'
 	);
 	

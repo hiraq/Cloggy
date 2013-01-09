@@ -29,13 +29,13 @@ class CloggyAssetHelperTest extends CakeTestCase {
 	public function testVendor() {
 		
 		$vendorUrl = $this->__CloggyAsset->getVendorUrl('test');
-		$this->assertEqual($vendorUrl,$this->__base.'/vendors/test');
+		$this->assertEqual($vendorUrl,$this->__base.'/vendor/test');
 		
 		$vendorCssLink = $this->__CloggyAsset->getVendorHtmlTag('test', 'css');
-		$this->assertEqual(htmlentities($vendorCssLink),htmlentities('<link rel="stylesheet" type="text/css" href="/cloggy/default/vendors/test.css" />'));
+		$this->assertEqual(htmlentities($vendorCssLink),htmlentities('<link rel="stylesheet" type="text/css" href="/cloggy/default/vendor/test.css" />'));
 		
 		$vendorJsLink = $this->__CloggyAsset->getVendorHtmlTag('test', 'js');
-		$this->assertEqual(htmlentities($vendorJsLink),htmlentities('<script type="text/javascript" src="/cloggy/default/vendors/test.js"></script>'));
+		$this->assertEqual(htmlentities($vendorJsLink),htmlentities('<script type="text/javascript" src="/cloggy/default/vendor/test.js"></script>'));
 		
 		$vendorUnknownType = $this->__CloggyAsset->getVendorHtmlTag('test', 'tst');
 		$this->assertFalse($vendorUnknownType);

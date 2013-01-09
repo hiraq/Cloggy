@@ -47,7 +47,7 @@ class CloggyModuleMenuComponent extends Component {
  */
 	public function initialize(Controller $controller) {
 		parent::initialize($controller);
-		$this->__Controller = $controller;
+		$this->__Controller = $controller;		
 	}
 	
 /**
