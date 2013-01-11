@@ -1,5 +1,7 @@
-v0.2
-====
+CHANGELOG
+========
+
+### V0.2
 
 1. User Access Management (CloggyUsers) (v0.2.2)
 2. Improve info.ini (link,dependency) (v0.2.1)
