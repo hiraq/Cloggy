@@ -9,7 +9,7 @@ class CloggyBlogHomeController extends CloggyAppController {
 		'CloggyBlogPost',
 		'CloggyBlogCategory',
 		'CloggyBlogTag'		
-	);
+	);		
 	
 	public function beforeFilter() {
 		
@@ -37,8 +37,8 @@ class CloggyBlogHomeController extends CloggyAppController {
 			'Add Tags' => $this->CloggyModuleMenu->urlModule('cloggy_blog','cloggy_blog_tags/add')
 		));
 		
-		$this->set('moduleKeyMenus','cloggy_blog');
-		
+		$this->set('moduleKeyMenus','cloggy_blog');				
+			
 	}
 	
 	public function index() {
@@ -50,6 +50,6 @@ class CloggyBlogHomeController extends CloggyAppController {
 		$this->set('title_for_layout','Cloggy - CloggyBlog Dashboard');
 		$this->set(compact('posts','categories','tags'));
 		
-	}
+	}	
 	
 }
