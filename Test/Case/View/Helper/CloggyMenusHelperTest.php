@@ -25,7 +25,7 @@ class CloggyMenusHelperTest extends CakeTestCase {
 		$CakeResponse = new CakeResponse();
 		
 		$this->__Controller = new Controller($CakeRequest, $CakeResponse);						
-		$this->__CloggyModuleMenu->startup($this->__Controller);
+		$this->__CloggyModuleMenu->initialize($this->__Controller);
 		
 	}
 	
