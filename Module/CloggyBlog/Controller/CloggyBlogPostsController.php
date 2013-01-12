@@ -10,9 +10,7 @@ class CloggyBlogPostsController extends CloggyAppController {
 		'CloggyBlogCategory',
 		'CloggyBlogTag',
 		'Cloggy.CloggyValidation'
-	);		
-	
-	private $_user;
+	);				
 	
 	public function beforeFilter() {
 	
@@ -40,9 +38,7 @@ class CloggyBlogPostsController extends CloggyAppController {
 			'Add Tags' => $this->CloggyModuleMenu->urlModule('cloggy_blog','cloggy_blog_tags/add')
 		));
 	
-		$this->set('moduleKeyMenus','cloggy_blog');
-		
-		$this->_user = $this->Auth->user();						
+		$this->set('moduleKeyMenus','cloggy_blog');						
 	
 	}
 	
