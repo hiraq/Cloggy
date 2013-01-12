@@ -12,6 +12,7 @@ Wiki
 ====
 
 [Contributions](https://github.com/hiraq/Cloggy/wiki/Contributions)
+
 [Versions](https://github.com/hiraq/Cloggy/wiki/Versions)
 
 How To
