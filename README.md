@@ -3,6 +3,11 @@ Cloggy ![Cake Power](https://raw.github.com/cakephp/cakephp/master/lib/Cake/Cons
 
 CakePHP Modular Admin And Structured Content.
 
+Requirements
+============
+
+PHP 5 (recommendation is using at least 5.3) & CakePHP ver2.2.x
+
 How To
 ====
 
