@@ -16,6 +16,13 @@ Test
 3. Tested at PHP 5.3
 4. Tested at Ubuntu 12.10
 
+Status
+======
+
+Current Development : [v0.3](https://github.com/hiraq/Cloggy/tree/v0.3) ([v0.3.1](https://github.com/hiraq/Cloggy/tree/v0.3.1))
+
+Current Version : [v0.2](https://github.com/hiraq/Cloggy/tree/v0.2)
+
 Wiki
 ====
 
