@@ -6,9 +6,9 @@ CakePHP Modular Admin And Structured Content.
 How To
 ====
 
-[Installation](https://github.com/hiraq/Cloggy/wiki/Installations)
+[Installation](https://gist.github.com/4515725)
 
-[Module](https://github.com/hiraq/Cloggy/wiki/Module)
+[Module Activation](https://gist.github.com/4515735)
 
 
 About
