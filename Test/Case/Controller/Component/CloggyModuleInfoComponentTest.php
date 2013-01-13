@@ -8,55 +8,55 @@ App::uses('CloggyModuleInfoComponent', 'Cloggy.Controller/Component');
 
 class CloggyModuleInfoComponentTest extends CakeTestCase {
 
-    private $__CloggyModuleInfo;
-    private $__Controller;
+  private $__CloggyModuleInfo;
+  private $__Controller;
 
-    public function setUp() {
+  public function setUp() {
 
-        parent::setUp();
+    parent::setUp();
 
-        // Setup our component and fake test controller
-        $Collection = new ComponentCollection();
-        $this->__CloggyModuleInfo = new CloggyModuleInfoComponent($Collection);
+    // Setup our component and fake test controller
+    $Collection = new ComponentCollection();
+    $this->__CloggyModuleInfo = new CloggyModuleInfoComponent($Collection);
 
-        $CakeRequest = new CakeRequest();
-        $CakeResponse = new CakeResponse();
+    $CakeRequest = new CakeRequest();
+    $CakeResponse = new CakeResponse();
 
-        $this->__Controller = new Controller($CakeRequest, $CakeResponse);
-        $this->__CloggyModuleInfo->startup($this->__Controller);
-    }
+    $this->__Controller = new Controller($CakeRequest, $CakeResponse);
+    $this->__CloggyModuleInfo->startup($this->__Controller);
+  }
 
-    public function testRegisteredModules() {
+  public function testRegisteredModules() {
 
-        $this->__CloggyModuleInfo->modules();
-        $modules = $this->__CloggyModuleInfo->getModules();
+    $this->__CloggyModuleInfo->modules();
+    $modules = $this->__CloggyModuleInfo->getModules();
 
-        $this->assertFalse(empty($modules));
-    }
+    $this->assertFalse(empty($modules));
+  }
 
-    public function testModuleExists() {
+  public function testModuleExists() {
 
-        $this->__CloggyModuleInfo->modules();
-        $check = $this->__CloggyModuleInfo->isModuleExists('ModuleTest');
+    $this->__CloggyModuleInfo->modules();
+    $check = $this->__CloggyModuleInfo->isModuleExists('ModuleTest');
 
-        $this->assertTrue($check);
-    }
+    $this->assertTrue($check);
+  }
 
-    public function testGetModuleInfo() {
+  public function testGetModuleInfo() {
 
-        $this->__CloggyModuleInfo->modules();
-        $data = $this->__CloggyModuleInfo->getModuleInfo('ModuleTest');
+    $this->__CloggyModuleInfo->modules();
+    $data = $this->__CloggyModuleInfo->getModuleInfo('ModuleTest');
 
-        $this->assertInternalType('array', $data);
-        $this->assertFalse(empty($data));
-        $this->assertArrayHasKey('name', $data);
-        $this->assertArrayHasKey('desc', $data);
-        $this->assertArrayHasKey('author', $data);
-        $this->assertArrayHasKey('url', $data);
-        $this->assertArrayHasKey('dep', $data);
+    $this->assertInternalType('array', $data);
+    $this->assertFalse(empty($data));
+    $this->assertArrayHasKey('name', $data);
+    $this->assertArrayHasKey('desc', $data);
+    $this->assertArrayHasKey('author', $data);
+    $this->assertArrayHasKey('url', $data);
+    $this->assertArrayHasKey('dep', $data);
 
-        $data = $this->__CloggyModuleInfo->getModuleInfo('ModuleTestFake');
-        $this->assertInternalType('null', $data);
-    }
+    $data = $this->__CloggyModuleInfo->getModuleInfo('ModuleTestFake');
+    $this->assertInternalType('null', $data);
+  }
 
 }

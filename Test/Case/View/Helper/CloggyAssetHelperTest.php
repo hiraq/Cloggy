@@ -8,54 +8,54 @@ App::uses('CloggyAssetHelper', 'Cloggy.View/Helper');
 
 class CloggyAssetHelperTest extends CakeTestCase {
 
-    private $__CloggyAsset;
-    private $__base;
+  private $__CloggyAsset;
+  private $__base;
 
-    public function setUp() {
+  public function setUp() {
 
-        parent::setUp();
+    parent::setUp();
 
-        $CakeRequest = new CakeRequest();
-        $CakeResponse = new CakeResponse();
+    $CakeRequest = new CakeRequest();
+    $CakeResponse = new CakeResponse();
 
-        $Controller = new Controller($CakeRequest, $CakeResponse);
-        $View = new View($Controller);
+    $Controller = new Controller($CakeRequest, $CakeResponse);
+    $View = new View($Controller);
 
-        $this->__CloggyAsset = new CloggyAssetHelper($View);
-        $this->__base = Router::url('/', true) . Configure::read('Cloggy.url_prefix') . '/' . Configure::read('Cloggy.theme_used');
-    }
+    $this->__CloggyAsset = new CloggyAssetHelper($View);
+    $this->__base = Router::url('/', true) . Configure::read('Cloggy.url_prefix') . '/' . Configure::read('Cloggy.theme_used');
+  }
 
-    public function testVendor() {
+  public function testVendor() {
 
-        $vendorUrl = $this->__CloggyAsset->getVendorUrl('test');
-        $this->assertEqual($vendorUrl, $this->__base . '/vendor/test');
+    $vendorUrl = $this->__CloggyAsset->getVendorUrl('test');
+    $this->assertEqual($vendorUrl, $this->__base . '/vendor/test');
 
-        $vendorCssLink = $this->__CloggyAsset->getVendorHtmlTag('test', 'css');
-        $this->assertEqual(htmlentities($vendorCssLink), htmlentities('<link rel="stylesheet" type="text/css" href="/cloggy/default/vendor/test.css" />'));
+    $vendorCssLink = $this->__CloggyAsset->getVendorHtmlTag('test', 'css');
+    $this->assertEqual(htmlentities($vendorCssLink), htmlentities('<link rel="stylesheet" type="text/css" href="/cloggy/default/vendor/test.css" />'));
 
-        $vendorJsLink = $this->__CloggyAsset->getVendorHtmlTag('test', 'js');
-        $this->assertEqual(htmlentities($vendorJsLink), htmlentities('<script type="text/javascript" src="/cloggy/default/vendor/test.js"></script>'));
+    $vendorJsLink = $this->__CloggyAsset->getVendorHtmlTag('test', 'js');
+    $this->assertEqual(htmlentities($vendorJsLink), htmlentities('<script type="text/javascript" src="/cloggy/default/vendor/test.js"></script>'));
 
-        $vendorUnknownType = $this->__CloggyAsset->getVendorHtmlTag('test', 'tst');
-        $this->assertFalse($vendorUnknownType);
-    }
+    $vendorUnknownType = $this->__CloggyAsset->getVendorHtmlTag('test', 'tst');
+    $this->assertFalse($vendorUnknownType);
+  }
 
-    public function testJs() {
+  public function testJs() {
 
-        $jsUrl = $this->__CloggyAsset->getJsUrl('test');
-        $this->assertEqual($jsUrl, $this->__base . '/app/js/test.js');
+    $jsUrl = $this->__CloggyAsset->getJsUrl('test');
+    $this->assertEqual($jsUrl, $this->__base . '/app/js/test.js');
 
-        $jsTag = $this->__CloggyAsset->getJsHtmlTag('test');
-        $this->assertEqual($jsTag, '<script type="text/javascript" src="/cloggy/default/app/js/test.js"></script>');
-    }
+    $jsTag = $this->__CloggyAsset->getJsHtmlTag('test');
+    $this->assertEqual($jsTag, '<script type="text/javascript" src="/cloggy/default/app/js/test.js"></script>');
+  }
 
-    public function testCss() {
+  public function testCss() {
 
-        $cssUrl = $this->__CloggyAsset->getCssUrl('test');
-        $this->assertEqual($cssUrl, $this->__base . '/app/css/test.css');
+    $cssUrl = $this->__CloggyAsset->getCssUrl('test');
+    $this->assertEqual($cssUrl, $this->__base . '/app/css/test.css');
 
-        $cssTag = $this->__CloggyAsset->getCssHtmlTag('test');
-        $this->assertEqual(htmlentities($cssTag), htmlentities('<link rel="stylesheet" type="text/css" href="/cloggy/default/app/css/test.css" />'));
-    }
+    $cssTag = $this->__CloggyAsset->getCssHtmlTag('test');
+    $this->assertEqual(htmlentities($cssTag), htmlentities('<link rel="stylesheet" type="text/css" href="/cloggy/default/app/css/test.css" />'));
+  }
 
 }

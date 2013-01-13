@@ -4,60 +4,60 @@ App::uses('CloggyAppController', 'Cloggy.Controller');
 
 class CloggyUsersAjaxController extends CloggyAppController {
 
-    public $uses = array('Cloggy.CloggyUser');
+  public $uses = array('Cloggy.CloggyUser');
 
-    public function beforeFilter() {
+  public function beforeFilter() {
 
-        parent::beforeFilter();
-        $this->Auth->deny('*');
+    parent::beforeFilter();
+    $this->Auth->deny('*');
 
-        if (!$this->request->is('ajax')) {
-            $this->redirect('/');
-        }
-
-        $this->autoRender = false;
+    if (!$this->request->is('ajax')) {
+      $this->redirect('/');
     }
 
-    public function delete_all() {
+    $this->autoRender = false;
+  }
 
-        $users = $this->request->data['user'];
-        foreach ($users as $user) {
-            $this->CloggyUser->delete($user, false);
-        }
+  public function delete_all() {
 
-        echo json_encode(array('msg' => 'success'));
+    $users = $this->request->data['user'];
+    foreach ($users as $user) {
+      $this->CloggyUser->delete($user, false);
     }
 
-    public function disable_all() {
+    echo json_encode(array('msg' => 'success'));
+  }
 
-        $users = $this->request->data['user'];
-        foreach ($users as $user) {
+  public function disable_all() {
 
-            $this->CloggyUser->id = $user;
-            $this->CloggyUser->save(array(
-                'CloggyUser' => array(
-                    'user_status' => 0
-                )
-            ));
-        }
+    $users = $this->request->data['user'];
+    foreach ($users as $user) {
 
-        echo json_encode(array('msg' => 'success'));
+      $this->CloggyUser->id = $user;
+      $this->CloggyUser->save(array(
+          'CloggyUser' => array(
+              'user_status' => 0
+          )
+      ));
     }
 
-    public function enable_all() {
+    echo json_encode(array('msg' => 'success'));
+  }
 
-        $users = $this->request->data['user'];
-        foreach ($users as $user) {
+  public function enable_all() {
 
-            $this->CloggyUser->id = $user;
-            $this->CloggyUser->save(array(
-                'CloggyUser' => array(
-                    'user_status' => 1
-                )
-            ));
-        }
+    $users = $this->request->data['user'];
+    foreach ($users as $user) {
 
-        echo json_encode(array('msg' => 'success'));
+      $this->CloggyUser->id = $user;
+      $this->CloggyUser->save(array(
+          'CloggyUser' => array(
+              'user_status' => 1
+          )
+      ));
     }
+
+    echo json_encode(array('msg' => 'success'));
+  }
 
 }

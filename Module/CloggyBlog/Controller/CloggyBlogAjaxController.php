@@ -4,74 +4,74 @@ App::uses('CloggyAppController', 'Cloggy.Controller');
 
 class CloggyBlogAjaxController extends CloggyAppController {
 
-    public $uses = array(
-        'CloggyBlogPost',
-        'CloggyBlogCategory',
-        'CloggyBlogTag'
-    );
-    private $_user;
+  public $uses = array(
+      'CloggyBlogPost',
+      'CloggyBlogCategory',
+      'CloggyBlogTag'
+  );
+  private $_user;
 
-    public function beforeFilter() {
+  public function beforeFilter() {
 
-        parent::beforeFilter();
-        $this->Auth->deny('*');
-        $this->_user = $this->Auth->user();
+    parent::beforeFilter();
+    $this->Auth->deny('*');
+    $this->_user = $this->Auth->user();
 
-        if (!$this->request->is('ajax')) {
-            $this->redirect('/');
-        }
-
-        $this->autoRender = false;
+    if (!$this->request->is('ajax')) {
+      $this->redirect('/');
     }
 
-    public function delete_all_posts() {
+    $this->autoRender = false;
+  }
 
-        $posts = $this->request->data['post'];
-        foreach ($posts as $post) {
-            $this->CloggyBlogPost->deletePost($post, false);
-        }
+  public function delete_all_posts() {
 
-        echo json_encode(array('msg' => 'success'));
+    $posts = $this->request->data['post'];
+    foreach ($posts as $post) {
+      $this->CloggyBlogPost->deletePost($post, false);
     }
 
-    public function draft_all_posts() {
+    echo json_encode(array('msg' => 'success'));
+  }
 
-        $posts = $this->request->data['post'];
-        foreach ($posts as $post) {
-            $this->CloggyBlogPost->updatePostStat($post, 0);
-        }
+  public function draft_all_posts() {
 
-        echo json_encode(array('msg' => 'success'));
+    $posts = $this->request->data['post'];
+    foreach ($posts as $post) {
+      $this->CloggyBlogPost->updatePostStat($post, 0);
     }
 
-    public function publish_all_posts() {
+    echo json_encode(array('msg' => 'success'));
+  }
 
-        $posts = $this->request->data['post'];
-        foreach ($posts as $post) {
-            $this->CloggyBlogPost->updatePostStat($post, 1);
-        }
+  public function publish_all_posts() {
 
-        echo json_encode(array('msg' => 'success'));
+    $posts = $this->request->data['post'];
+    foreach ($posts as $post) {
+      $this->CloggyBlogPost->updatePostStat($post, 1);
     }
 
-    public function delete_all_categories() {
+    echo json_encode(array('msg' => 'success'));
+  }
 
-        $categories = $this->request->data['category'];
-        foreach ($categories as $category) {
-            $this->CloggyBlogCategory->deleteCategory($category);
-        }
+  public function delete_all_categories() {
 
-        echo json_encode(array('msg' => 'success'));
+    $categories = $this->request->data['category'];
+    foreach ($categories as $category) {
+      $this->CloggyBlogCategory->deleteCategory($category);
     }
 
-    public function delete_all_tags() {
+    echo json_encode(array('msg' => 'success'));
+  }
 
-        $tags = $this->request->data['tag'];
-        foreach ($tags as $tag) {
-            $this->CloggyBlogTag->deleteTag($tag);
-        }
+  public function delete_all_tags() {
 
-        echo json_encode(array('msg' => 'success'));
+    $tags = $this->request->data['tag'];
+    foreach ($tags as $tag) {
+      $this->CloggyBlogTag->deleteTag($tag);
     }
+
+    echo json_encode(array('msg' => 'success'));
+  }
 
 }
