@@ -168,17 +168,38 @@ class CloggyModuleMenusComponentTest extends CakeTestCase {
     $this->assertArrayHasKey('test2', $viewVars['cloggy_menus_group']);
     $this->assertInternalType('array', $viewVars['cloggy_menus_group']['test2']);
     $this->assertArrayHasKey('test3', $viewVars['cloggy_menus_group']['test2']);
-  }
-
-  public function testUrlModule() {
-
-    $url = $this->__CloggyModuleMenu->urlModule('test', 'test_home/index');
-    $this->assertEqual($url, '/' . Configure::read('Cloggy.url_prefix') . '/module/test/test_home/index');
-  }
-
-  public function testUrl() {
-    $url = $this->__CloggyModuleMenu->url('dashboard');
-    $this->assertEqual($url, '/' . Configure::read('Cloggy.url_prefix') . '/dashboard');
+  }  
+  
+  public function testParseModuleMenus() {
+    
+    $isModuleHasConfigMenus = $this->__CloggyModuleMenu->isModuleHasMenus('ModuleTest');
+    $isModuleHasConfigMenusFake = $this->__CloggyModuleMenu->isModuleHasMenus('Test');
+    
+    $this->assertTrue($isModuleHasConfigMenus);
+    $this->assertFalse($isModuleHasConfigMenusFake);
+    
+    $loadFakeConfig = $this->__CloggyModuleMenu->loadConfigModuleMenus('Test','testing');
+    $this->assertInternalType('null',$loadFakeConfig);            
+    
+    $this->__Controller->name = 'Test';
+    $this->__Controller->request->params['name'] = 'ModuleTest';
+    $this->__CloggyModuleMenu->startup($this->__Controller);
+    
+    $groups = $this->__CloggyModuleMenu->getGroup('test_sidebar');
+    
+    $this->assertFalse(empty($groups));
+    $this->assertInternalType('array', $groups);
+    $this->assertArrayHasKey('Test1', $groups);
+    $this->assertArrayHasKey('Test2', $groups);
+    $this->assertCount(2, $groups);
+    
+    $menus = $this->__CloggyModuleMenu->getMenus();
+    
+    $this->assertFalse(empty($menus[$this->__Controller->name]));
+    $this->assertArrayHasKey('module',$menus[$this->__Controller->name]);
+    $this->assertEqual(2, count($menus[$this->__Controller->name]['module']));
+    
+    
   }
 
 }

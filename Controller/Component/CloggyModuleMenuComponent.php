@@ -50,6 +50,30 @@ class CloggyModuleMenuComponent extends Component {
     parent::initialize($controller);
     $this->__Controller = $controller;
   }
+  
+  /**
+   * 
+   * Setup menus at startup
+   * @param Controller $controller
+   */
+  public function startup(Controller $controller) {
+    parent::startup($controller);
+    
+    /*
+     * only at module page
+     */
+    if(isset($controller->request->params['name'])) {
+     
+      $moduleName = Inflector::camelize($controller->request->params['name']);
+      $checkMenus = $this->isModuleHasMenus($moduleName);
+
+      if($checkMenus) {
+        $this->parseModuleMenus($moduleName);
+      }
+      
+    }    
+    
+  }
 
   /**
    * Get Controller viewVars variable
@@ -133,6 +157,75 @@ class CloggyModuleMenuComponent extends Component {
       $this->__Controller->viewVars['cloggy_menus'][$key] = $this->__menus[$controllerName][$key];
     }
   }
+  
+  /**
+   * Check if module has menus configuration
+   * @param string $moduleName
+   * @return boolean
+   */
+  public function isModuleHasMenus($moduleName) {        
+    
+    $load = $this->loadConfigModuleMenus($moduleName,'menus');   
+    
+    if(!is_null($load)) {      
+      return true;      
+    }
+    
+    return false;
+    
+  }
+  
+  /**
+   * Load and setup module menus
+   * @param string $moduleName
+   */
+  public function parseModuleMenus($moduleName) {
+    
+    $checkMenus = $this->isModuleHasMenus($moduleName);
+    if ($checkMenus) {
+      
+      $menus = $this->loadConfigModuleMenus($moduleName, 'menus');
+      if (!empty($menus)) {
+        
+        if (isset($menus['module'])) {
+          $this->add('module',$menus['module']);
+        }
+        
+        if(isset($menus['sidebar']) && !empty($menus['sidebar'])) {
+          
+          foreach($menus['sidebar'] as $keys => $values) {
+            $this->setGroup($keys, $values);
+          }
+          
+        }
+        
+      }
+      
+    }
+    
+  }
+  
+  /**
+   * Load module config menus
+   * @param string $moduleName
+   * @param string $key
+   * @return null|array
+   */
+  public function loadConfigModuleMenus($moduleName,$key) {
+    
+    App::uses('CloggyModuleConfigReader','CustomConfigure');
+    Configure::config('cloggy',new CloggyModuleConfigReader($moduleName));
+    
+    Configure::load($key,'cloggy');      
+    $configs = Configure::read('Cloggy');
+    
+    if (array_key_exists($moduleName,$configs) && array_key_exists($key,$configs[$moduleName])) {      
+      return $configs[$moduleName][$key];      
+    }else{
+      return null;
+    }                
+    
+  }
 
   /**
    * Remove key menus from requested controller
@@ -198,33 +291,7 @@ class CloggyModuleMenuComponent extends Component {
     } else {
       return null;
     }
-  }
-
-  /**
-   * 
-   * Create url for module
-   * 
-   * @access public
-   * @param string $moduleName
-   * @param string $path
-   * @return string
-   */
-  public function urlModule($moduleName, $path = null) {
-    $base = '/' . Configure::read('Cloggy.url_prefix') . '/module/' . $moduleName;
-    return is_null($path) ? $base : $base . '/' . $path;
-  }
-
-  /**
-   * Genereate url inside Cloggy admin
-   * 
-   * @access public
-   * @param string $path
-   * @return string
-   */
-  public function url($path) {
-    $base = '/' . Configure::read('Cloggy.url_prefix') . '/';
-    return $base . $path;
-  }
+  }  
 
   /**
    * Manipulate Controller viewVars

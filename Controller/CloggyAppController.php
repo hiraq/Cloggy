@@ -11,6 +11,7 @@ class CloggyAppController extends AppController {
           'className' => 'Cloggy.CloggyPaginator'
       )
   );
+  
   public $components = array(
       'Session',
       'Auth',
@@ -19,6 +20,7 @@ class CloggyAppController extends AppController {
       'Cloggy.CloggyAcl',
       'Paginator'
   );
+  
   public $layout = 'Cloggy.cloggy_layout';
   protected $_user;
   protected $_base;
@@ -46,7 +48,8 @@ class CloggyAppController extends AppController {
     $user = $this->Auth->user();
     if ($user) {
       $this->_user = $user;
-    }
+    }        
+    
   }
 
   private function __cloggyMenus() {
@@ -56,8 +59,8 @@ class CloggyAppController extends AppController {
      */
 
     $this->CloggyModuleMenu->menus('cloggy', array(
-        'dashboard' => $this->CloggyModuleMenu->url('dashboard'),
-        'logout' => $this->CloggyModuleMenu->url('logout'),
+        'dashboard' => cloggyUrlPath('dashboard'),
+        'logout' => cloggyUrlPath('logout'),
     ));
   }
 
@@ -86,7 +89,7 @@ class CloggyAppController extends AppController {
 
         foreach ($modules as $module => $info) {
           $link = Inflector::underscore($module);
-          $modulesMenus[$module] = $this->CloggyModuleMenu->urlModule($link);
+          $modulesMenus[$module] = cloggyUrlModule($link);
         }
 
         /*

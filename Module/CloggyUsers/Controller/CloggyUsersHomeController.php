@@ -10,12 +10,7 @@ class CloggyUsersHomeController extends CloggyAppController {
   public function beforeFilter() {
 
     parent::beforeFilter();
-    $this->Auth->deny('*');
-
-    $this->CloggyModuleMenu->setGroup('Create New', array(
-        'Manage' => $this->CloggyModuleMenu->urlModule('cloggy_users'),
-        'Add User' => $this->CloggyModuleMenu->urlModule('cloggy_users', 'cloggy_users_home/add'),
-    ));
+    $this->Auth->deny('*');    
 
     //load additional helpers
     $this->helpers[] = 'Time';

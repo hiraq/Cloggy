@@ -10,26 +10,23 @@ $cloggyThemedViewPath = APP . 'Plugin' . DS . 'Cloggy' . DS . 'View' . DS . 'The
  */
 $cloggyLibPath = APP . 'Plugin' . DS . 'Cloggy' . DS . 'Lib' . DS;
 $cloggyLibRouterPath = APP . 'Plugin' . DS . 'Cloggy' . DS . 'Lib' . DS . 'Router' . DS;
-
-/*
- * custom acl component
- */
-$cloggyAclPath = APP . 'Plugin' . DS . 'Cloggy' . DS . 'Controller' . DS . 'Components' . DS . 'Acl' . DS;
+$cloggyLibReaderPath = APP . 'Plugin' . DS . 'Cloggy' . DS . 'Lib' . DS . 'Configure' . DS;
 
 /*
  * setup cake custom path
  */
 App::build(array(
-    'View' => array($cloggyThemedViewPath),
-    'Lib' => array($cloggyLibPath)
-        ), APP::APPEND);
+  'View' => array($cloggyThemedViewPath),
+  'Lib' => array($cloggyLibPath)
+), APP::APPEND);
 
 /*
  * register new custom packages
  */
 App::build(array(
-    'CustomRouter' => array($cloggyLibRouterPath)
-        ), APP::REGISTER);
+  'CustomRouter' => array($cloggyLibRouterPath),
+  'CustomConfigure' => array($cloggyLibReaderPath)
+), APP::REGISTER);
 
 /*
  * delete variables
