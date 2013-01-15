@@ -8,7 +8,7 @@ Configure::write('Cloggy.theme_used', 'default');
 
 //setup registered modules
 Configure::write('Cloggy.modules', array(
-    'CloggyBlog', 'CloggyUsers', 'ModuleTest'
+    'CloggyBlog', 'CloggyUsers', 'CloggyDocs','ModuleTest'
 ));
 
 //setup clog module path
