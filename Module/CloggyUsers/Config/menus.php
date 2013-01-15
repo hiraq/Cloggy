@@ -1,6 +1,6 @@
 <?php
 
-Configure::write('Cloggy.CloggyUsers.menus',array(
+Configure::write('Cloggy.CloggyUsers.menus', array(
     'sidebar' => array(
         'Create New' => array(
             'Manage' => cloggyUrlModule('cloggy_users'),

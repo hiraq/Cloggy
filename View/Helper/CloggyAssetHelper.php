@@ -13,125 +13,125 @@ App::uses('AppHelper', 'View/Helper');
  */
 class CloggyAssetHelper extends AppHelper {
 
-  /**
-   * Helper dependencies
-   * 
-   * @access public
-   * @var array
-   */
-  public $helpers = array('Html');
+    /**
+     * Helper dependencies
+     * 
+     * @access public
+     * @var array
+     */
+    public $helpers = array('Html');
 
-  /**
-   * Get webroot/<theme_used>/vendor url
-   * 
-   * @access public
-   * @param string $file
-   * @return string
-   */
-  public function getVendorUrl($file) {
+    /**
+     * Get webroot/<theme_used>/vendor url
+     * 
+     * @access public
+     * @param string $file
+     * @return string
+     */
+    public function getVendorUrl($file) {
 
-    $base = Router::url('/', true) . $this->__getBaseUrl();
-    $url = $base . '/vendor/';
-    return $url . $file;
-  }
-
-  /**
-   * Generate html tag by type:
-   * > css : <link>
-   * > js : <script>
-   * 
-   * Get file from webroot/<theme_used>/app
-   * 
-   * @access public
-   * @param string $file
-   * @param string $type
-   * @return boolean|string
-   */
-  public function getVendorHtmlTag($file, $type) {
-
-    $base = '/' . $this->__getBaseUrl();
-    $url = $base . '/vendor/';
-
-    switch ($type) {
-
-      case 'js':
-        return $this->Html->script($url . $file);
-        break;
-
-      case 'css':
-        return $this->Html->css($url . $file);
-        break;
+        $base = Router::url('/', true) . $this->__getBaseUrl();
+        $url = $base . '/vendor/';
+        return $url . $file;
     }
 
-    return false;
-  }
+    /**
+     * Generate html tag by type:
+     * > css : <link>
+     * > js : <script>
+     * 
+     * Get file from webroot/<theme_used>/app
+     * 
+     * @access public
+     * @param string $file
+     * @param string $type
+     * @return boolean|string
+     */
+    public function getVendorHtmlTag($file, $type) {
 
-  /**
-   * Generate js url from webroot/<theme_used>/app/js
-   * 
-   * @access public
-   * @param string $file
-   * @return string
-   */
-  public function getJsUrl($file) {
+        $base = '/' . $this->__getBaseUrl();
+        $url = $base . '/vendor/';
 
-    $base = Router::url('/', true) . $this->__getBaseUrl();
-    $url = $base . '/app/js/';
-    return $url . $file . '.js';
-  }
+        switch ($type) {
 
-  /**
-   * Generate html js tag <script> from webroot/<theme_used>/app/js
-   * 
-   * @access public
-   * @param string $file
-   * @return string
-   */
-  public function getJsHtmlTag($file) {
+            case 'js':
+                return $this->Html->script($url . $file);
+                break;
 
-    $base = '/' . $this->__getBaseUrl();
-    $url = $base . '/app/js/';
-    return $this->Html->script($url . $file);
-  }
+            case 'css':
+                return $this->Html->css($url . $file);
+                break;
+        }
 
-  /**
-   * 
-   * Generate css url from webroot/<theme_used>/app/css
-   * 
-   * @access public
-   * @param string $file
-   * @return string
-   */
-  public function getCssUrl($file) {
+        return false;
+    }
 
-    $base = Router::url('/', true) . $this->__getBaseUrl();
-    $url = $base . '/app/css/';
-    return $url . $file . '.css';
-  }
+    /**
+     * Generate js url from webroot/<theme_used>/app/js
+     * 
+     * @access public
+     * @param string $file
+     * @return string
+     */
+    public function getJsUrl($file) {
 
-  /**
-   * 
-   * Generate html <link> for css from webroot/<theme_used>/app/css
-   * 
-   * @access public
-   * @param string $file
-   * @return string
-   */
-  public function getCssHtmlTag($file) {
+        $base = Router::url('/', true) . $this->__getBaseUrl();
+        $url = $base . '/app/js/';
+        return $url . $file . '.js';
+    }
 
-    $base = '/' . $this->__getBaseUrl();
-    $url = $base . '/app/css/';
-    return $this->Html->css($url . $file);
-  }
+    /**
+     * Generate html js tag <script> from webroot/<theme_used>/app/js
+     * 
+     * @access public
+     * @param string $file
+     * @return string
+     */
+    public function getJsHtmlTag($file) {
 
-  /**
-   * Get base url based by used theme and url prefix
-   * 
-   * @access private
-   * @return string
-   */
-  private function __getBaseUrl() {
-    return Configure::read('Cloggy.url_prefix') . '/' . Configure::read('Cloggy.theme_used');
-  }
+        $base = '/' . $this->__getBaseUrl();
+        $url = $base . '/app/js/';
+        return $this->Html->script($url . $file);
+    }
+
+    /**
+     * 
+     * Generate css url from webroot/<theme_used>/app/css
+     * 
+     * @access public
+     * @param string $file
+     * @return string
+     */
+    public function getCssUrl($file) {
+
+        $base = Router::url('/', true) . $this->__getBaseUrl();
+        $url = $base . '/app/css/';
+        return $url . $file . '.css';
+    }
+
+    /**
+     * 
+     * Generate html <link> for css from webroot/<theme_used>/app/css
+     * 
+     * @access public
+     * @param string $file
+     * @return string
+     */
+    public function getCssHtmlTag($file) {
+
+        $base = '/' . $this->__getBaseUrl();
+        $url = $base . '/app/css/';
+        return $this->Html->css($url . $file);
+    }
+
+    /**
+     * Get base url based by used theme and url prefix
+     * 
+     * @access private
+     * @return string
+     */
+    private function __getBaseUrl() {
+        return Configure::read('Cloggy.url_prefix') . '/' . Configure::read('Cloggy.theme_used');
+    }
 
 }

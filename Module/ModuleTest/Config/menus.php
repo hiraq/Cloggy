@@ -1,6 +1,6 @@
 <?php
 
-Configure::write('Cloggy.ModuleTest.menus',array(
+Configure::write('Cloggy.ModuleTest.menus', array(
     'module' => array(
         'test' => '/test',
         'test2' => '/test2'

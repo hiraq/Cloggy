@@ -16,17 +16,17 @@ $cloggyLibReaderPath = APP . 'Plugin' . DS . 'Cloggy' . DS . 'Lib' . DS . 'Confi
  * setup cake custom path
  */
 App::build(array(
-  'View' => array($cloggyThemedViewPath),
-  'Lib' => array($cloggyLibPath)
-), APP::APPEND);
+    'View' => array($cloggyThemedViewPath),
+    'Lib' => array($cloggyLibPath)
+        ), APP::APPEND);
 
 /*
  * register new custom packages
  */
 App::build(array(
-  'CustomRouter' => array($cloggyLibRouterPath),
-  'CustomConfigure' => array($cloggyLibReaderPath)
-), APP::REGISTER);
+    'CustomRouter' => array($cloggyLibRouterPath),
+    'CustomConfigure' => array($cloggyLibReaderPath)
+        ), APP::REGISTER);
 
 /*
  * delete variables

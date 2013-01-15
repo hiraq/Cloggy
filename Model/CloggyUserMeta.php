@@ -2,89 +2,89 @@
 
 class CloggyUserMeta extends CloggyAppModel {
 
-  public $name = 'CloggyUserMeta';
-  public $useTable = 'user_meta';
-  public $belongsTo = array(
-      'CloggyUser' => array(
-          'className' => 'Cloggy.CloggyUser',
-          'foreignKey' => 'user_id'
-      )
-  );
-
-  public function isMetaExists($userId, $key) {
-
-    $check = $this->find('count', array(
-        'contain' => false,
-        'conditions' => array(
-            'CloggyUserMeta.user_id' => $userId,
-            'CloggyUserMeta.meta_key' => $key
+    public $name = 'CloggyUserMeta';
+    public $useTable = 'user_meta';
+    public $belongsTo = array(
+        'CloggyUser' => array(
+            'className' => 'Cloggy.CloggyUser',
+            'foreignKey' => 'user_id'
         )
-            ));
+    );
 
-    return $check < 1 ? false : true;
-  }
+    public function isMetaExists($userId, $key) {
 
-  public function getUserMeta($userId) {
+        $check = $this->find('count', array(
+            'contain' => false,
+            'conditions' => array(
+                'CloggyUserMeta.user_id' => $userId,
+                'CloggyUserMeta.meta_key' => $key
+            )
+                ));
 
-    $data = $this->find('all', array(
-        'contain' => false,
-        'conditions' => array('CloggyUserMeta.user_id' => $userId)
-            ));
-
-    return $data;
-  }
-
-  public function updateMeta($userId, $key, $value) {
-
-    $check = $this->isMetaExists($userId, $key);
-    if ($check) {
-
-      $data = $this->find('first', array(
-          'contain' => false,
-          'conditions' => array(
-              'CloggyUserMeta.user_id' => $userId,
-              'CloggyUserMeta.meta_key' => $key
-          ),
-          'fields' => array('CloggyUserMeta.id')
-              ));
-
-      $this->id = $data['CloggyUserMeta']['id'];
-      $update = $this->saveField('meta_value', $value);
-
-      return !empty($update) ? true : false;
+        return $check < 1 ? false : true;
     }
 
-    return false;
-  }
+    public function getUserMeta($userId) {
 
-  public function saveMeta($userId, $data) {
+        $data = $this->find('all', array(
+            'contain' => false,
+            'conditions' => array('CloggyUserMeta.user_id' => $userId)
+                ));
 
-    $returnIds = array();
+        return $data;
+    }
 
-    if (is_array($data) && !empty($data)) {
-
-      foreach ($data as $key => $value) {
+    public function updateMeta($userId, $key, $value) {
 
         $check = $this->isMetaExists($userId, $key);
-        if (!$check) {
+        if ($check) {
 
-          $this->create();
-          $this->save(array(
-              'CloggyUserMeta' => array(
-                  'user_id' => $userId,
-                  'meta_key' => $key,
-                  'meta_value' => $value
-              )
-          ));
+            $data = $this->find('first', array(
+                'contain' => false,
+                'conditions' => array(
+                    'CloggyUserMeta.user_id' => $userId,
+                    'CloggyUserMeta.meta_key' => $key
+                ),
+                'fields' => array('CloggyUserMeta.id')
+                    ));
 
-          $returnIds[$key] = $this->id;
+            $this->id = $data['CloggyUserMeta']['id'];
+            $update = $this->saveField('meta_value', $value);
+
+            return !empty($update) ? true : false;
         }
-      }
 
-      return $returnIds;
+        return false;
     }
 
-    return false;
-  }
+    public function saveMeta($userId, $data) {
+
+        $returnIds = array();
+
+        if (is_array($data) && !empty($data)) {
+
+            foreach ($data as $key => $value) {
+
+                $check = $this->isMetaExists($userId, $key);
+                if (!$check) {
+
+                    $this->create();
+                    $this->save(array(
+                        'CloggyUserMeta' => array(
+                            'user_id' => $userId,
+                            'meta_key' => $key,
+                            'meta_value' => $value
+                        )
+                    ));
+
+                    $returnIds[$key] = $this->id;
+                }
+            }
+
+            return $returnIds;
+        }
+
+        return false;
+    }
 
 }

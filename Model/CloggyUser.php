@@ -2,103 +2,103 @@
 
 class CloggyUser extends CloggyAppModel {
 
-  public $name = 'CloggyUser';
-  public $useTable = 'users';
-  public $hasOne = array(
-      'CloggyUserLogin' => array(
-          'className' => 'Cloggy.CloggyUserLogin',
-          'foreignKey' => 'user_id',
-          'dependent' => false
-      )
-  );
-  public $hasMany = array(
-      'CloggyNode' => array(
-          'className' => 'Cloggy.CloggyNode',
-          'foreignKey' => 'user_id',
-          'dependent' => false
-      ),
-      'CloggyUserMeta' => array(
-          'className' => 'Cloggy.CloggyUserMeta',
-          'foreignKey' => 'user_id',
-          'dependent' => false
-      ),
-      'CloggyNodeType' => array(
-          'className' => 'Cloggy.CloggyNodeType',
-          'foreignKey' => 'user_id',
-          'dependent' => false
-      )
-  );
-
-  public function isUserNameExists($name) {
-
-    $check = $this->find('count', array(
-        'contain' => false,
-        'conditions' => array('CloggyUser.user_name' => $name)
-            ));
-
-    return $check < 1 ? false : true;
-  }
-
-  public function isUserEmailExists($email) {
-
-    $check = $this->find('count', array(
-        'contain' => false,
-        'conditions' => array('CloggyUser.user_email' => $email)
-            ));
-
-    return $check < 1 ? false : true;
-  }
-
-  public function setUserLastLogin($id) {
-
-    $this->id = $id;
-    $this->save(array(
-        'CloggyUser' => array(
-            'user_last_login' => date('c')
+    public $name = 'CloggyUser';
+    public $useTable = 'users';
+    public $hasOne = array(
+        'CloggyUserLogin' => array(
+            'className' => 'Cloggy.CloggyUserLogin',
+            'foreignKey' => 'user_id',
+            'dependent' => false
         )
-    ));
-  }
+    );
+    public $hasMany = array(
+        'CloggyNode' => array(
+            'className' => 'Cloggy.CloggyNode',
+            'foreignKey' => 'user_id',
+            'dependent' => false
+        ),
+        'CloggyUserMeta' => array(
+            'className' => 'Cloggy.CloggyUserMeta',
+            'foreignKey' => 'user_id',
+            'dependent' => false
+        ),
+        'CloggyNodeType' => array(
+            'className' => 'Cloggy.CloggyNodeType',
+            'foreignKey' => 'user_id',
+            'dependent' => false
+        )
+    );
 
-  public function getUserDetail($id) {
-    return $this->find('first', array(
-                'contain' => false,
-                'conditions' => array(
-                    'CloggyUser.id' => $id
-                )
-            ));
-  }
+    public function isUserNameExists($name) {
 
-  public function getUserStatus($id) {
+        $check = $this->find('count', array(
+            'contain' => false,
+            'conditions' => array('CloggyUser.user_name' => $name)
+                ));
 
-    $data = $this->find('first', array(
-        'contain' => false,
-        'conditions' => array('CloggyUser.id' => $id),
-        'fields' => array('CloggyUser.user_status')
-            ));
+        return $check < 1 ? false : true;
+    }
 
-    return $data;
-  }
+    public function isUserEmailExists($email) {
 
-  public function getUserLastLogin($id) {
+        $check = $this->find('count', array(
+            'contain' => false,
+            'conditions' => array('CloggyUser.user_email' => $email)
+                ));
 
-    $data = $this->find('first', array(
-        'contain' => false,
-        'conditions' => array('CloggyUser.id' => $id),
-        'fields' => array('CloggyUser.user_last_login')
-            ));
+        return $check < 1 ? false : true;
+    }
 
-    return $data;
-  }
+    public function setUserLastLogin($id) {
 
-  public function getUserRole($id) {
+        $this->id = $id;
+        $this->save(array(
+            'CloggyUser' => array(
+                'user_last_login' => date('c')
+            )
+        ));
+    }
 
-    $data = $this->find('first', array(
-        'contain' => false,
-        'conditions' => array('CloggyUser.id' => $id),
-        'fields' => array('CloggyUser.user_role')
-            ));
+    public function getUserDetail($id) {
+        return $this->find('first', array(
+                    'contain' => false,
+                    'conditions' => array(
+                        'CloggyUser.id' => $id
+                    )
+                ));
+    }
 
-    return $data;
-  }
+    public function getUserStatus($id) {
+
+        $data = $this->find('first', array(
+            'contain' => false,
+            'conditions' => array('CloggyUser.id' => $id),
+            'fields' => array('CloggyUser.user_status')
+                ));
+
+        return $data;
+    }
+
+    public function getUserLastLogin($id) {
+
+        $data = $this->find('first', array(
+            'contain' => false,
+            'conditions' => array('CloggyUser.id' => $id),
+            'fields' => array('CloggyUser.user_last_login')
+                ));
+
+        return $data;
+    }
+
+    public function getUserRole($id) {
+
+        $data = $this->find('first', array(
+            'contain' => false,
+            'conditions' => array('CloggyUser.id' => $id),
+            'fields' => array('CloggyUser.user_role')
+                ));
+
+        return $data;
+    }
 
 }
