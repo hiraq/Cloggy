@@ -14,7 +14,7 @@ class CloggyDocsHomeController extends CloggyAppController {
     }
     
     public function install() {
-        
+        $this->set('title_for_layout','CloggyDocs - Installation');
     }
     
     public function version() {
@@ -22,7 +22,11 @@ class CloggyDocsHomeController extends CloggyAppController {
     }
     
     public function license() {
-        
+        $this->set('title_for_layout','CloggyDocs - License');
+    }
+    
+    public function contribute() {
+        $this->set('title_for_layout','CloggyDocs - Contribute');
     }
     
 }

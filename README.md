@@ -19,7 +19,7 @@ Test
 Status
 ======
 
-Current Development : [v0.3](https://github.com/hiraq/Cloggy/tree/v0.3) ([v0.3.1](https://github.com/hiraq/Cloggy/tree/v0.3.1))
+Current Development : [v0.3](https://github.com/hiraq/Cloggy/tree/v0.3)
 
 Current Version : [v0.2](https://github.com/hiraq/Cloggy/tree/v0.2)
 
