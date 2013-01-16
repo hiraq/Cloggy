@@ -17,4 +17,12 @@ class CloggyDocsHomeController extends CloggyAppController {
         
     }
     
+    public function version() {
+        $this->set('title_for_layout','CloggyDocs - Versioning');
+    }
+    
+    public function license() {
+        
+    }
+    
 }

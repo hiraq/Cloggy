@@ -27,19 +27,19 @@
 
                                     <li <?php echo $liClass; ?>>
                                         <?php if (!is_array($link)) : ?>
-            <?php echo $this->CloggyMenus->getLink($menu, $link); ?>
-                                            <?php else: ?>
+                                            <?php echo $this->CloggyMenus->getLink($menu, $link); ?>
+                                        <?php else: ?>
                                             <a data-toggle="dropdown" class="dropdown-toggle" href="#"><?php echo $menu; ?><b class="caret"></b></a>
                                             <ul class="dropdown-menu">
                                                 <?php foreach ($link as $key => $value) : ?>
                                                     <li><?php echo $this->CloggyMenus->getLink($key, $value); ?></li>
-                                            <?php endforeach; ?>
+                                                <?php endforeach; ?>
                                             </ul>
-                                    <?php endif; ?>
+                                        <?php endif; ?>
                                     </li>
 
-    <?php endforeach; ?>
-<?php endif; ?>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
 
                             <li class="divider-vertical"></li>
 
@@ -53,20 +53,20 @@
                                     ?>
 
                                     <li <?php echo $liClass; ?>>
-                                            <?php if (!is_array($link)) : ?>
-                                                <?php echo $this->CloggyMenus->getLink($menu, $link); ?>
-                                            <?php else: ?>
+                                        <?php if (!is_array($link)) : ?>
+                                            <?php echo $this->CloggyMenus->getLink($menu, $link); ?>
+                                        <?php else: ?>
                                             <a data-toggle="dropdown" class="dropdown-toggle" href="#"><?php echo $menu; ?><b class="caret"></b></a>
                                             <ul class="dropdown-menu">
-                                            <?php foreach ($link as $key => $value) : ?>
+                                                <?php foreach ($link as $key => $value) : ?>
                                                     <li><?php echo $this->CloggyMenus->getLink($key, $value); ?></li>
-                                        <?php endforeach; ?>
+                                                <?php endforeach; ?>
                                             </ul>
-                                    <?php endif; ?>
+                                        <?php endif; ?>
                                     </li>
 
-    <?php endforeach; ?>
-<?php endif; ?>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
 
                         </ul>									
                     </div>			
@@ -76,23 +76,23 @@
 
                     <div class="span2">
 
-<?php $menus = $this->CloggyMenus->groups(); ?>
-                            <?php if (!empty($menus)) : ?>
+                        <?php $menus = $this->CloggyMenus->groups(); ?>
+                        <?php if (!empty($menus)) : ?>
 
-                                <?php foreach ($menus as $name => $data) : ?>
+                            <?php foreach ($menus as $name => $data) : ?>
                                 <ul class="nav nav-tabs nav-stacked">
                                     <li class="nav-header"><?php echo $name; ?></li>
-                                <?php foreach ($data as $anchor => $link) : ?>
+                                    <?php foreach ($data as $anchor => $link) : ?>
                                         <li><?php echo $this->CloggyMenus->getLink($anchor, $link); ?></li>
-        <?php endforeach; ?>
+                                    <?php endforeach; ?>
                                 </ul>
-    <?php endforeach; ?>
+                            <?php endforeach; ?>
                         <?php endif; ?>
 
                     </div>
 
                     <div class="span10">						
-<?php echo $this->fetch('content'); ?>											
+                        <?php echo $this->fetch('content'); ?>											
                     </div>
 
                 </div>
@@ -107,10 +107,10 @@
         <?php echo $this->element('cloggy_module_main'); ?>
         <?php $this->end(); ?>
 
-<?php echo $this->CloggyAsset->getVendorHtmlTag('yepnope/yepnope.1.5.4-min.js', 'js'); ?>
-<?php echo $this->CloggyAsset->getJsHtmlTag('cloggy.global.js'); ?>			
-<?php echo $this->fetch('cloggy_js_module_main'); ?>				
-<?php echo $this->fetch('cloggy_js_module_page'); ?>
+        <?php echo $this->CloggyAsset->getVendorHtmlTag('yepnope/yepnope.1.5.4-min.js', 'js'); ?>
+        <?php echo $this->CloggyAsset->getJsHtmlTag('cloggy.global.js'); ?>			
+        <?php echo $this->fetch('cloggy_js_module_main'); ?>				
+        <?php echo $this->fetch('cloggy_js_module_page'); ?>
         <!-- !js -->
 
     </body>
