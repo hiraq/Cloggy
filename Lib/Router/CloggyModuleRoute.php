@@ -17,7 +17,7 @@ class CloggyModuleRoute extends CakeRoute {
 
             $moduleName = Inflector::variable($params['name']);
             $moduleName = ucfirst($moduleName);
-
+            
             if (!in_array($moduleName, $registeredModules)) {
                 return false;
             } else {
@@ -25,7 +25,7 @@ class CloggyModuleRoute extends CakeRoute {
                 if (!isset($params['controller']) || empty($params['controller'])) {
                     $params['controller'] = $params['name'] . '_home';
                 }
-
+                
                 $params['isCloggyModule'] = 1;                
             }
         }

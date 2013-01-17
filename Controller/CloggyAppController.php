@@ -61,7 +61,7 @@ class CloggyAppController extends AppController {
         ));
     }
 
-    private function __cloggyModuleRequested() {
+    private function __cloggyModuleRequested() {                
 
         //generate modules
         $this->CloggyModuleInfo->modules();

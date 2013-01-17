@@ -12,10 +12,10 @@ Configure::write('Cloggy.CloggyDocs.menus', array(
             'License' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_home/license'),
             'Version' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_home/version'),
         ),
-        'Module' => array(
-            'Installation' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_module'),
+        'Module' => array(            
+            'Module MVC' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_module'),
             'Create' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_module/create'),
-            'Module MVC' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_module/mvc'),
+            'Activation' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_module/activation'),
         ),
         'Database' => array(
             'Nodes' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_db')            
