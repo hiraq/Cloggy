@@ -1,9 +1,9 @@
 <?php
 
-class ModuleRoute extends CakeRoute {
+class CloggyModuleRoute extends CakeRoute {
 
     public function parse($url) {
-
+        
         /*
          * parse url
          */

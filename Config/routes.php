@@ -4,7 +4,7 @@
  * custom router class
  * for modules
  */
-App::uses('ModuleRoute', 'CustomRouter');
+App::uses('CloggyModuleRoute', 'CustomRouter');
 $base = '/' . Configure::read('Cloggy.url_prefix');
 
 /*
@@ -44,7 +44,7 @@ Router::redirect($base . '/module/:name/', $base . '/module/:name', array('statu
 Router::connect(
         $base . '/module/:name', array(
         /* pass */
-        ), array('routeClass' => 'ModuleRoute')
+        ), array('routeClass' => 'CloggyModuleRoute')
 );
 
 Router::redirect(
@@ -53,7 +53,7 @@ Router::redirect(
 Router::connect(
         $base . '/module/:name/:controller/:action/*', array(
         /* pass */
-        ), array('routeClass' => 'ModuleRoute')
+        ), array('routeClass' => 'CloggyModuleRoute')
 );
 
 Router::redirect(
@@ -62,14 +62,14 @@ Router::redirect(
 Router::connect(
         $base . '/module/:name/:controller/:action', array(
         /* pass */
-        ), array('routeClass' => 'ModuleRoute')
+        ), array('routeClass' => 'CloggyModuleRoute')
 );
 
 
 Router::connect(
         $base . '/module/:name/:controller', array(
         /* pass */
-        ), array('routeClass' => 'ModuleRoute')
+        ), array('routeClass' => 'CloggyModuleRoute')
 );
 Router::redirect(
         $base . '/module/:name/:controller/', $base . '/module/:name/:controller', array('status' => '302'

@@ -56,8 +56,8 @@ class CloggyAppController extends AppController {
          */
 
         $this->CloggyModuleMenu->menus('cloggy', array(
-            'dashboard' => cloggyUrlPath('dashboard'),
-            'logout' => cloggyUrlPath('logout'),
+            'dashboard' => CloggyCommon::urlPath('dashboard'),
+            'logout' => CloggyCommon::urlPath('logout'),
         ));
     }
 
@@ -86,7 +86,7 @@ class CloggyAppController extends AppController {
 
                 foreach ($modules as $module => $info) {
                     $link = Inflector::underscore($module);
-                    $modulesMenus[$module] = cloggyUrlModule($link);
+                    $modulesMenus[$module] = CloggyCommon::urlModule($link);
                 }
 
                 /*
