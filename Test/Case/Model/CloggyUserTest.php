@@ -64,15 +64,7 @@ class CloggyUserTest extends CakeTestCase {
 
         $this->assertFalse(empty($data));
         $this->assertEqual($data['CloggyUser']['user_status'], 1);
-    }
-
-    public function testUserRole() {
-
-        $data = $this->__CloggyUser->getUserRole(1);
-
-        $this->assertFalse(empty($data));
-        $this->assertEqual($data['CloggyUser']['user_role'], 'test role');
-    }
+    }    
 
     public function testRemoveUser() {
 

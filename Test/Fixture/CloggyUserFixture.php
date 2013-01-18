@@ -10,10 +10,10 @@ class CloggyUserFixture extends CakeTestFixture {
         $this->records = array(
             array(
                 'id' => 1,
+                'users_roles_id' => 1,
                 'user_name' => 'test user',
                 'user_password' => 'test',
-                'user_email' => 'test@test.com',
-                'user_role' => 'test role',
+                'user_email' => 'test@test.com',                
                 'user_status' => 1,
                 'user_last_login' => date('c'),
                 'user_created' => date('c')

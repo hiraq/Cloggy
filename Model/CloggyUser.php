@@ -4,6 +4,12 @@ class CloggyUser extends CloggyAppModel {
 
     public $name = 'CloggyUser';
     public $useTable = 'users';
+    public $belongsTo = array(
+        'CloggyUserRole' => array(
+            'className' => 'Cloggy.CloggyUserRole',
+            'foreignKey' => 'users_roles_id'
+        )
+    );
     public $hasOne = array(
         'CloggyUserLogin' => array(
             'className' => 'Cloggy.CloggyUserLogin',
@@ -25,6 +31,11 @@ class CloggyUser extends CloggyAppModel {
         'CloggyNodeType' => array(
             'className' => 'Cloggy.CloggyNodeType',
             'foreignKey' => 'user_id',
+            'dependent' => false
+        ),
+        'CloggyUserPermAro' => array(
+            'className' => 'Cloggy.CloggyUserPerm',
+            'foreignKey' => 'aro_object_id',
             'dependent' => false
         )
     );
@@ -88,17 +99,15 @@ class CloggyUser extends CloggyAppModel {
                 ));
 
         return $data;
-    }
-
+    }  
+    
     public function getUserRole($id) {
-
-        $data = $this->find('first', array(
-            'contain' => false,
-            'conditions' => array('CloggyUser.id' => $id),
-            'fields' => array('CloggyUser.user_role')
-                ));
-
-        return $data;
+        
+        $data = $this->find('first',array(
+            'contain' => array('CloggyUserRole'),
+            'conditions' => array('CloggyUser.id' => $id)
+        ));
+        
     }
 
 }

@@ -59,7 +59,7 @@
                         ?>
                     </td>
                     <td><?php echo $user['CloggyUser']['user_email']; ?></td>
-                    <td><?php echo $user['CloggyUser']['user_role']; ?></td>
+                    <td><?php echo $user['CloggyUserRole']['role_name']; ?></td>
                     <td>
                         <?php if ($user['CloggyUser']['user_status'] == 1) : ?>
                             <span class="label label-success">Activated</span>

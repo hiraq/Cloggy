@@ -54,7 +54,6 @@ class CloggyAppController extends AppController {
         /*
          * setup menus
          */
-
         $this->CloggyModuleMenu->menus('cloggy', array(
             'dashboard' => CloggyCommon::urlPath('dashboard'),
             'logout' => CloggyCommon::urlPath('logout'),

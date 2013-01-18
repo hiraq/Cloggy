@@ -20,7 +20,7 @@ class CloggyUsersHomeController extends CloggyAppController {
         $this->paginate = array(
             'CloggyUser' => array(
                 'limit' => 10,
-                'contain' => false,
+                'contain' => array('CloggyUserRole'),
                 'order' => array('user_created' => 'desc')
             )
         );
@@ -31,7 +31,7 @@ class CloggyUsersHomeController extends CloggyAppController {
     public function index() {
 
         $users = $this->paginate('CloggyUser');
-
+        
         $this->set('title_for_layout', 'Cloggy - Users Management');
         $this->set(compact('users'));
     }
