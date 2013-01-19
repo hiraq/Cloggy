@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 30, 2012 at 03:38 AM
+-- Generation Time: Jan 19, 2013 at 08:06 AM
 -- Server version: 5.5.28
 -- PHP Version: 5.4.6-1ubuntu1.1
 
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `cloggy_nodes` (
   PRIMARY KEY (`id`),
   KEY `node_type_id` (`node_type_id`),
   KEY `node_parent` (`node_parent`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='main data' AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='main data' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `cloggy_node_contents` (
   `content` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `node_id` (`node_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='content data' AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='content data' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `cloggy_node_permalinks` (
   `permalink_url` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `node_id` (`node_id`,`permalink_url`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='permalink based on title(subject)' AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='permalink based on title(subject)' AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `cloggy_node_rels` (
   PRIMARY KEY (`id`),
   KEY `node_id` (`node_id`,`node_object_id`),
   KEY `relation_name` (`relation_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='relation between nodes(many to many)' AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='relation between nodes(many to many)' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -133,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `cloggy_node_subjects` (
   PRIMARY KEY (`id`),
   KEY `node_id` (`node_id`),
   KEY `subject` (`subject`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='subject data(title)' AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='subject data(title)' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -164,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `cloggy_users` (
   `user_name` varchar(255) NOT NULL,
   `user_password` varchar(255) NOT NULL,
   `user_email` varchar(255) NOT NULL,
-  `user_role` varchar(255) NOT NULL,
+  `users_roles_id` int(11) unsigned NOT NULL,
   `user_status` tinyint(2) NOT NULL DEFAULT '0',
   `user_last_login` datetime NOT NULL,
   `user_created` datetime NOT NULL,
@@ -172,7 +172,40 @@ CREATE TABLE IF NOT EXISTS `cloggy_users` (
   PRIMARY KEY (`id`),
   KEY `user_name` (`user_name`),
   KEY `user_email` (`user_email`,`user_status`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='users management' AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='users management' AUTO_INCREMENT=2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cloggy_users_perms`
+--
+
+CREATE TABLE IF NOT EXISTS `cloggy_users_perms` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `aro_object_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `aro_object` varchar(255) NOT NULL,
+  `aco_object` varchar(255) NOT NULL,
+  `aco_adapter` varchar(255) NOT NULL,
+  `allow` int(2) NOT NULL DEFAULT '0',
+  `deny` int(2) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `aco_adapter` (`aco_adapter`),
+  KEY `aro_object` (`aro_object`),
+  KEY `aro_object_id` (`aro_object_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='user permissions list' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cloggy_users_roles`
+--
+
+CREATE TABLE IF NOT EXISTS `cloggy_users_roles` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `role_name` (`role_name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='user roles' AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -186,7 +219,7 @@ CREATE TABLE IF NOT EXISTS `cloggy_user_login` (
   `login_datetime` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='a group of user login' AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='a group of user login' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 

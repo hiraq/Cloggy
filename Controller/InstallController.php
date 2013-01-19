@@ -4,7 +4,11 @@ App::uses('Sanitize', 'Utility');
 
 class InstallController extends CloggyAppController {
 
-    public $uses = array('Cloggy.CloggyUser', 'Cloggy.CloggyValidation');
+    public $uses = array(
+        'Cloggy.CloggyUser', 
+        'Cloggy.CloggyUserRole',
+        'Cloggy.CloggyValidation'
+    );
     public $helpers = array('Form');
 
     public function beforeFilter() {
@@ -61,6 +65,9 @@ class InstallController extends CloggyAppController {
                 );
 
                 if ($this->CloggyValidation->validates()) {
+                    
+                    //setup roles
+                    $roleId = $this->CloggyUserRole->createRole('super administrator');
 
                     /*
                      * setup user data
@@ -68,7 +75,7 @@ class InstallController extends CloggyAppController {
                     $this->request->data['CloggyUser']['user_password'] = AuthComponent::password($this->request->data['CloggyUser']['user_password']);
                     $this->request->data['CloggyUser'] = array_merge($this->request->data['CloggyUser'], array(
                         'user_last_login' => date('c'),
-                        'user_role' => 'super administrator',
+                        'users_roles_id' => $roleId,
                         'user_created' => date('c'),
                         'user_status' => 1
                             ));
