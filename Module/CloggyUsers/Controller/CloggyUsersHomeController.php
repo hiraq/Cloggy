@@ -5,7 +5,11 @@ App::uses('Sanitize', 'Utility');
 
 class CloggyUsersHomeController extends CloggyAppController {
 
-    public $uses = array('Cloggy.CloggyUser', 'Cloggy.CloggyValidation');
+    public $uses = array(
+        'Cloggy.CloggyUser', 
+        'Cloggy.CloggyUserRole',
+        'Cloggy.CloggyValidation'
+    );
 
     public function beforeFilter() {
 
@@ -140,9 +144,9 @@ class CloggyUsersHomeController extends CloggyAppController {
         if (is_null($id) || !ctype_digit($id)) {
             $this->redirect($this->referer());
             exit();
-        }
-
-        $user = $this->CloggyUser->getUserDetail($id);
+        }        
+        
+        $user = $this->CloggyUser->getUserDetail($id);        
 
         /*
          * unknown user
@@ -151,7 +155,12 @@ class CloggyUsersHomeController extends CloggyAppController {
             $this->redirect($this->referer());
             exit();
         }
-
+        
+        $roles = $this->CloggyUserRole->find('list',array(
+            'contain' => false,            
+            'fields' => array('CloggyUserRole.id','CloggyUserRole.role_name')
+        ));
+        
         /*
          * form submitted
          */
@@ -225,15 +234,27 @@ class CloggyUsersHomeController extends CloggyAppController {
                 );
             }
 
-            if (!empty($role) && $role != $user['CloggyUser']['user_role']) {
+            if (!empty($role) && $role != $user['CloggyUserRole']['id']) {
 
-                $dataValidate['user_role'] = $role;
-                $dataValidateRules['user_role'] = array(
+                $dataValidate['users_roles_id'] = $role;
+                $dataValidateRules['users_roles_id'] = array(
                     'empty' => array(
                         'rule' => 'notEmpty',
                         'required' => true,
                         'allowEmpty' => false,
-                        'message' => 'Email field required'
+                        'message' => 'User role field required'
+                    )
+                );
+            }
+            
+            if ($stat != $user['CloggyUser']['user_status']) {
+                $dataValidate['user_status'] = $stat;
+                $dataValidateRules['user_status'] = array(
+                    'empty' => array(
+                        'rule' => 'notEmpty',
+                        'required' => true,
+                        'allowEmpty' => false,
+                        'message' => 'User status field required'
                     )
                 );
             }
@@ -246,11 +267,7 @@ class CloggyUsersHomeController extends CloggyAppController {
                 /*
                  * form submit
                  */
-                if ($this->CloggyValidation->validates()) {
-
-                    if ($stat != $user['CloggyUser']['user_status']) {
-                        $dataValidate = array_merge($dataValidate, array('user_status' => $stat));
-                    }
+                if ($this->CloggyValidation->validates()) {                                                         
 
                     $this->CloggyUser->id = $id;
                     $this->CloggyUser->save(array('CloggyUser' => $dataValidate));
@@ -258,30 +275,16 @@ class CloggyUsersHomeController extends CloggyAppController {
                     /* $this->set('success','<strong>'.$username.'</strong> data has been updated.'); */
                     $this->Session->setFlash('<strong>' . $username . '</strong> data has been updated.', 'default', array(), 'success');
                     $this->redirect($this->referer());
+                    
                 } else {
                     $this->set('errors', $this->CloggyValidation->validationErrors);
-                }
-            } else {
-
-                if ($stat != $user['CloggyUser']['user_status']) {
-
-                    $this->CloggyUser->id = $id;
-                    $this->CloggyUser->save(array(
-                        'CloggyUser' => array(
-                            'user_status' => $stat
-                        )
-                    ));
-
-                    /* $this->set('success','<strong>'.$username.'</strong> data has been updated.'); */
-                    $this->Session->setFlash('<strong>' . $username . '</strong> data has been updated.', 'default', array(), 'success');
-                    $this->redirect($this->referer());
                 }
             }
         }
 
-        $user = $this->CloggyUser->getUserDetail($id);
+        $user = $this->CloggyUser->getUserDetail($id);        
         $this->set('title_for_layout', 'Cloggy - Users Management - Edit User');
-        $this->set(compact('user', 'id'));
+        $this->set(compact('user', 'id','roles'));
     }
 
     public function remove($id = null) {

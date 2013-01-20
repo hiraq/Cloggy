@@ -72,11 +72,11 @@ class CloggyUser extends CloggyAppModel {
 
     public function getUserDetail($id) {
         return $this->find('first', array(
-                    'contain' => false,
-                    'conditions' => array(
-                        'CloggyUser.id' => $id
-                    )
-                ));
+            'contain' => array('CloggyUserRole'),
+            'conditions' => array(
+                'CloggyUser.id' => $id
+            )
+        ));
     }
 
     public function getUserStatus($id) {
@@ -85,7 +85,7 @@ class CloggyUser extends CloggyAppModel {
             'contain' => false,
             'conditions' => array('CloggyUser.id' => $id),
             'fields' => array('CloggyUser.user_status')
-                ));
+        ));
 
         return $data;
     }
@@ -96,18 +96,17 @@ class CloggyUser extends CloggyAppModel {
             'contain' => false,
             'conditions' => array('CloggyUser.id' => $id),
             'fields' => array('CloggyUser.user_last_login')
-                ));
+        ));
 
         return $data;
-    }  
-    
+    }
+
     public function getUserRole($id) {
-        
-        $data = $this->find('first',array(
+
+        $data = $this->find('first', array(
             'contain' => array('CloggyUserRole'),
             'conditions' => array('CloggyUser.id' => $id)
         ));
-        
     }
 
 }

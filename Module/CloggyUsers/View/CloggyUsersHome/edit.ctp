@@ -89,15 +89,14 @@ endif;
     ?>">
         <label class="control-label">Role</label>
         <div class="controls">
-                <?php
-                echo $this->Form->input('user_role', array(
-                    'label' => false,
-                    'placeholder' => 'role access name',
-                    'type' => 'text',
-                    'value' => $user['CloggyUser']['user_role'],
-                    'div' => false)
-                );
-                ?>
+            <select name="data[CloggyUser][user_role]">
+                <?php foreach($roles as $roleId => $roleName) : ?>
+                <option value="<?php echo $roleId; ?>" 
+                    <?php if($user['CloggyUserRole']['id'] == $roleId) echo 'selected="selected"'; ?>>
+                        <?php echo $roleName; ?>
+                </option>                
+                <?php endforeach; ?>
+            </select>
             <span class="help-inline"><?php
                 if (isset($errors['user_role'])) : echo $errors['user_role'][0];
                 endif;
@@ -127,10 +126,9 @@ endif;
 <script type="text/javascript">
     clog.captureJQuery(function() {
         jQuery('.help-inline').hide();
-
-<?php if (isset($errors) && !empty($errors)) : ?>
+        <?php if (isset($errors) && !empty($errors)) : ?>
             jQuery('.help-inline').delay(800).fadeIn();			
-<?php endif; ?>
+        <?php endif; ?>
     });
 </script>
 <?php $this->end(); ?>
