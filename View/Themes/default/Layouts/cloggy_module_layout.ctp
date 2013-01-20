@@ -43,7 +43,7 @@
 
                             <li class="divider-vertical"></li>
 
-                            <?php $moduleMenus = $this->CloggyMenus->menu('module'); ?>
+                            <?php $moduleMenus = $this->CloggyMenus->menu('module');  ?>
                             <?php if (!empty($moduleMenus)) : ?>						
                                 <?php foreach ($moduleMenus as $menu => $link) : ?>
                                     <?php
