@@ -23,7 +23,7 @@ class CloggyUsersRoleController extends CloggyAppController {
         $this->paginate = array(
             'CloggyUserRole' => array(
                 'limit' => 10,
-                'contain' => false,
+                'contain' => array('CloggyUser'),
                 'order' => array('role_name' => 'asc')
             )
         );
@@ -31,6 +31,11 @@ class CloggyUsersRoleController extends CloggyAppController {
     }
     
     public function index() {
+        
+        $roles = $this->paginate('CloggyUserRole');
+        
+        $this->set('title_for_layout', 'Cloggy - Users Role Management');
+        $this->set(compact('roles'));
         
     }
     
