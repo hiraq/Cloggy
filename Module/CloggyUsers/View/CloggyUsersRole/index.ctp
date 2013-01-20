@@ -24,7 +24,11 @@
                         <?php echo $this->Html->link('Edit', CloggyCommon::urlModule('cloggy_users', 'cloggy_users_role/edit/'.$role['CloggyUserRole']['id']));
                         ?>
                         |
-                        <?php echo $this->Html->link('Remove', CloggyCommon::urlModule('cloggy_users', 'cloggy_users_role/remove/'.$role['CloggyUserRole']['id']));
+                        <?php echo $this->Html->link('Remove', 
+                                CloggyCommon::urlModule('cloggy_users', 'cloggy_users_role/remove/'.$role['CloggyUserRole']['id']),
+                                array(
+                                    'class' => 'role_remove'
+                                ));
                         ?>                                                
                     </td>
                 </tr>
@@ -106,7 +110,7 @@
                 }		
 		
             });
-            jQuery('.users_remove').on('click',function(e) {
+            jQuery('.role_remove').on('click',function(e) {
                 e.preventDefault();
                 var href = jQuery(this).attr('href');
                 if(confirm('Are you sure to remove this role?')) {
