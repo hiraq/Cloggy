@@ -44,10 +44,13 @@ class CloggyUsersHomeController extends CloggyAppController {
 
         if ($this->request->is('post')) {
 
+            /*
+             * sanitize data
+             */
             $this->request->data = Sanitize::clean($this->request->data, array(
-                        'encode' => true,
-                        'remove_html' => true
-                    ));
+                'encode' => true,
+                'remove_html' => true
+            ));
 
             $dataValidate = $this->request->data['CloggyUser'];
 
@@ -117,15 +120,20 @@ class CloggyUsersHomeController extends CloggyAppController {
 
                 //delete confirm password
                 unset($this->request->data['CloggyUser']['user_password2']);
-
+                
+                //delete user role
+                $roleId = $this->request->data['CloggyUser']['user_role'];
+                unset($this->request->data['CloggyUser']['user_role']);
+                
                 /*
                  * setup data
                  */
                 $data = $this->request->data['CloggyUser'];
                 $data['user_password'] = AuthComponent::password($data['user_password']);
+                $data['users_roles_id'] = $roleId;                
                 $data = array_merge($data, array(
                     'user_created' => date('c')
-                        ));
+                ));
 
                 $this->CloggyUser->create();
                 $this->CloggyUser->save($data);
@@ -136,7 +144,17 @@ class CloggyUsersHomeController extends CloggyAppController {
             }
         }
 
+        /*
+         * list of roles
+         */
+        $roles = $this->CloggyUserRole->find('list',array(
+            'contain' => false,            
+            'fields' => array('CloggyUserRole.id','CloggyUserRole.role_name')
+        ));
+        
         $this->set('title_for_layout', 'Cloggy - Users Management - Add New User');
+        $this->set(compact('roles'));
+        
     }
 
     public function edit($id = null) {
