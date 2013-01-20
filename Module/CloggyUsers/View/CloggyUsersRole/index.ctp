@@ -12,7 +12,7 @@
         <?php if (!empty($roles)) : ?>
             <?php foreach ($roles as $role) : ?>
                 <tr>
-                    <td><input type="checkbox" name="user[]" value="<?php echo $role['CloggyUserRole']['id']; ?>" /></td>
+                    <td><input type="checkbox" name="role[]" value="<?php echo $role['CloggyUserRole']['id']; ?>" /></td>
                     <td>
                         <?php echo $this->Html->link(
                                 $role['CloggyUserRole']['role_name'], 

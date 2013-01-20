@@ -4,7 +4,10 @@ App::uses('CloggyAppController', 'Cloggy.Controller');
 
 class CloggyUsersAjaxController extends CloggyAppController {
 
-    public $uses = array('Cloggy.CloggyUser');
+    public $uses = array(
+        'Cloggy.CloggyUser',
+        'Cloggy.CloggyUserRole'
+    );
 
     public function beforeFilter() {
 
@@ -58,6 +61,17 @@ class CloggyUsersAjaxController extends CloggyAppController {
         }
 
         echo json_encode(array('msg' => 'success'));
+    }
+    
+    public function delete_all_roles() {
+        
+        $roles = $this->request->data['role'];
+        foreach ($roles as $role) {
+            $this->CloggyUserRole->delete($role, false);
+        }
+        
+        echo json_encode(array('msg' => 'success'));
+        
     }
 
 }
