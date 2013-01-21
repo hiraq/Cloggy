@@ -183,6 +183,122 @@ class CloggyUsersPermController extends CloggyAppController {
          */
         if ($this->request->is('post')) {
             
+            $dataValidate = array();
+            $dataValidateRules = array();                        
+            
+            /*
+             * single data
+             */
+            $aroId = $this->request->data['CloggyUserPerm']['role_id'];            
+            $aroObject = ($this->request->data['CloggyUserPerm']['role_id'] == 0) ? '*' : 'roles';
+            $acoObject = $this->request->data['CloggyUserPerm']['aco_object'];
+            $acoAdapter = $this->request->data['CloggyUserPerm']['aco_adapter'];
+            
+            /*
+             * check if aro has permission to aco
+             */
+            $checkPermExists = $this->CloggyUserPerm->isAroHasPermAco(
+                $aroId,
+                $aroObject,
+                $acoObject,
+                $acoAdapter
+            );
+            
+            /*
+             * aro id > role_id
+             */
+            if ($aroId != $perm['CloggyUserPerm']['aro_object_id']) {
+                $dataValidate['aro_object_id'] = $aroId;
+                $dataValidateRules['aro_object_id'] = array(
+                    'rule' => array('isValueEqual', $checkPermExists, false),
+                    'required' => true,
+                    'allowEmpty' => false,
+                    'message' => 'This role and permission has been exists.'
+                );
+            }
+            
+            /*
+             * requested new aco object
+             */
+            if ($acoObject != $perm['CloggyUserPerm']['aco_object']) {
+                $dataValidate['aco_object'] = $acoObject;
+                $dataValidateRules['aco_object'] = array(
+                    'rule' => 'notEmpty',
+                    'required' => true,
+                    'allowEmpty' => false,
+                    'message' => 'Object field required'
+                );
+            }
+            
+            /*
+             * aco adapter
+             */
+            if ($acoAdapter != $perm['CloggyUserPerm']['aco_adapter']) {
+                $dataValidate['aco_adapter'] = $acoAdapter;
+                $dataValidateRules['aco_adapter'] = array(
+                    'rule' => array('inList',array('module','model','url')),
+                    'required' => true,
+                    'allowEmpty' => false,
+                    'message' => 'You must choose adapter.'
+                );
+            }
+            
+            /*
+             * perm access
+             */
+            switch($this->request->data['CloggyUserPerm']['perm']) {
+                
+                case 0:
+                    $dataValidate['allow'] = 0;
+                    $dataValidate['deny'] = 1;                        
+                    break;
+
+                default:
+                    $dataValidate['allow'] = 1;
+                    $dataValidate['deny'] = 0;
+                    break;
+
+            }
+            
+            $dataValidate['perm'] = $this->request->data['CloggyUserPerm']['perm'];
+            
+            /*
+             * setup data perm access
+             */
+            $dataValidateRules['perm'] = array(
+                'rule' => 'notEmpty',
+                'required' => true,
+                'allowEmpty' => false,
+                'message' => 'Permission field required'
+            );
+            
+            if (!empty($dataValidate)) {
+                
+                $this->CloggyValidation->set($dataValidate);
+                $this->CloggyValidation->validate = $dataValidateRules;
+                
+                if ($this->CloggyValidation->validates()) {                                       
+                    
+                    $dataValidate['aro_object'] = $aroObject;
+                    
+                    /*
+                     * update data
+                     */
+                    $this->CloggyUserPerm->id = $id;
+                    $this->CloggyUserPerm->save(array(
+                        'CloggyUserPerm' => $dataValidate
+                    ));
+                    
+                     /*
+                      * set notification and redirect
+                      */
+                    $this->Session->setFlash('Permission data has been updated.', 'default', array(), 'success');
+                    $this->redirect($this->referer());                          
+                    
+                }
+                
+            }
+            
         }
         
         /*

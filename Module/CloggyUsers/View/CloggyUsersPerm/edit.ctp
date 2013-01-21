@@ -1,6 +1,6 @@
 <?php
 echo $this->Form->create('CloggyUserPerm', array(
-    'url' => CloggyCommon::urlModule('cloggy_users', 'cloggy_users_perm/edit'.$id),
+    'url' => CloggyCommon::urlModule('cloggy_users', 'cloggy_users_perm/edit/'.$id),
     'class' => 'form-horizontal'
 ));
 ?>
@@ -62,7 +62,7 @@ echo $this->Form->create('CloggyUserPerm', array(
             <div id="aco_object_form" style="display:inline">
                 
                 <?php if ($perm['CloggyUserPerm']['aco_adapter'] == 'model') : ?>
-                    <select name="aco_object">
+                    <select name="data[CloggyUserPerm][aco_object]">
                         <option <?php if($perm['CloggyUserPerm']['aco_object'] == 'find') echo 'selected="selected"'; ?>>find</option>
                         <option <?php if($perm['CloggyUserPerm']['aco_object'] == 'save') echo 'selected="selected"'; ?>>save</option>
                         <option <?php if($perm['CloggyUserPerm']['aco_object'] == 'delete') echo 'selected="selected"'; ?>>delete</option>
@@ -106,11 +106,12 @@ echo $this->Form->create('CloggyUserPerm', array(
 <script type="text/javascript">
     cloggy.captureJQuery(function() {	
         
+        var formString = '<input type="text" name="data[CloggyUserPerm][aco_object]" id="aco_object" />';
         var formModel = '<select name=data[CloggyUserPerm][aco_object]><option>find</option><option>save</option><option>delete</option></select>';
-        var formString = jQuery('#aco_object_form').html();
         
         jQuery('#adapter').on('change',function(e) {
             var value = jQuery(this).val();
+            
             if(value != 0) {
                 
                 switch(value) {
