@@ -10,7 +10,7 @@ class CloggyUserPerm extends CloggyAppModel {
             'foreignKey' => 'aro_object_id'
         ),
         'CloggyUser' => array(
-            'className' => 'Cloggy.CloggyUserRole',
+            'className' => 'Cloggy.CloggyUser',
             'foreignKey' => 'aro_object_id'
         )
     );
