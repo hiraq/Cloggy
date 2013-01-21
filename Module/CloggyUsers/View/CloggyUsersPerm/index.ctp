@@ -14,7 +14,7 @@
         <?php if (!empty($perms)) : ?>
             <?php foreach ($perms as $perm) : ?>
                 <tr>
-                    <td><input type="checkbox" name="role[]" value="<?php echo $perm['CloggyUserPerm']['id']; ?>" /></td>
+                    <td><input type="checkbox" name="perm[]" value="<?php echo $perm['CloggyUserPerm']['id']; ?>" /></td>
                     <td>
                         <?php
                         

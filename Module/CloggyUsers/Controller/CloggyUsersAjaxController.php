@@ -6,7 +6,8 @@ class CloggyUsersAjaxController extends CloggyAppController {
 
     public $uses = array(
         'Cloggy.CloggyUser',
-        'Cloggy.CloggyUserRole'
+        'Cloggy.CloggyUserRole',
+        'Cloggy.CloggyUserPerm'
     );
 
     public function beforeFilter() {
@@ -68,6 +69,17 @@ class CloggyUsersAjaxController extends CloggyAppController {
         $roles = $this->request->data['role'];
         foreach ($roles as $role) {
             $this->CloggyUserRole->delete($role, false);
+        }
+        
+        echo json_encode(array('msg' => 'success'));
+        
+    }
+    
+    public function delete_all_perms() {
+        
+        $perms = $this->request->data['perm'];
+        foreach ($perms as $perm) {
+            $this->CloggyUserPerm->delete($perm, false);
         }
         
         echo json_encode(array('msg' => 'success'));

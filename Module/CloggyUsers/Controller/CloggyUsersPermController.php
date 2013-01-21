@@ -315,4 +315,13 @@ class CloggyUsersPermController extends CloggyAppController {
         
     }
     
+    public function remove($id = null) {
+
+        if (!is_null($id) && ctype_digit($id)) {
+            $this->CloggyUserPerm->delete($id, false);
+        }
+
+        $this->redirect($this->referer());
+    }
+    
 }
