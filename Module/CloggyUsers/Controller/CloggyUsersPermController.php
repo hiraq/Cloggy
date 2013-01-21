@@ -155,4 +155,48 @@ class CloggyUsersPermController extends CloggyAppController {
         
     }
     
+    public function edit($id=null) {
+        
+        if (is_null($id) || !ctype_digit($id)) {
+            $this->redirect($this->referer());
+            exit();
+        }
+        
+        /*
+         * get detail permission
+         */
+        $perm = $this->CloggyUserPerm->find('first',array(
+            'contain' => array('CloggyUserRole'),
+            'conditions' => array('CloggyUserPerm.id' => $id)
+        ));
+        
+        /*
+         * unknown permission
+         */
+        if (empty($perm)) {
+            $this->redirect($this->referer());
+            exit();
+        }
+        
+        /*
+         * form submitted
+         */
+        if ($this->request->is('post')) {
+            
+        }
+        
+        /*
+         * get roles
+         */
+        $roles = $this->CloggyUserRole->find('list',array(
+            'contain' => false,
+            'fields' => array('CloggyUserRole.id','CloggyUserRole.role_name'),
+            'order' => array('CloggyUserRole.role_name' => 'asc')
+        ));
+        
+        $this->set('title_for_layout', 'Cloggy - Users Permission Management - Edit Permission');
+        $this->set(compact('roles','id','perm'));
+        
+    }
+    
 }
