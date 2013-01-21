@@ -3,31 +3,52 @@
     <thead>        
         <tr>
             <th width="5%"><input type="checkbox" name="checker" id="checker" /></th>
-            <th>Role Name</th>  
-            <th>Users</th>
+            <th>Aro</th>  
+            <th>Object</th>
+            <th>Adapter</th>
+            <th>Permission</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        <?php if (!empty($roles)) : ?>
-            <?php foreach ($roles as $role) : ?>
+        <?php if (!empty($perms)) : ?>
+            <?php foreach ($perms as $perm) : ?>
                 <tr>
-                    <td><input type="checkbox" name="role[]" value="<?php echo $role['CloggyUserRole']['id']; ?>" /></td>
+                    <td><input type="checkbox" name="role[]" value="<?php echo $perm['CloggyUserPerm']['id']; ?>" /></td>
                     <td>
-                        <?php echo $this->Html->link(
-                                $role['CloggyUserRole']['role_name'], 
-                                CloggyCommon::urlModule('cloggy_users', 'cloggy_users_role/edit/'.$role['CloggyUserRole']['id']));
+                        <?php
+                        
+                        if ($perm['CloggyUserPerm']['aro_object'] == '*') {
+                            $aro = 'All';
+                        }else{
+                            $aro = $perm['CloggyUserRole']['role_name'];
+                        }
+                        
+                        echo $this->Html->link(
+                                $aro, 
+                                CloggyCommon::urlModule('cloggy_users', 'cloggy_users_perm/edit/'.$perm['CloggyUserPerm']['id']));
                         ?>
                     </td>
-                    <td><?php echo count($role['CloggyUser']); ?></td>                    
                     <td>
-                        <?php echo $this->Html->link('Edit', CloggyCommon::urlModule('cloggy_users', 'cloggy_users_role/edit/'.$role['CloggyUserRole']['id']));
+                        <?php echo $perm['CloggyUserPerm']['aco_object']; ?>
+                    </td>
+                    <td>
+                        <?php echo $perm['CloggyUserPerm']['aco_adapter']; ?>
+                    </td>
+                    <td>
+                        <?php
+                        if($perm['CloggyUserPerm']['allow'] == 1) echo '<span class="label label-success">Allow</span>';
+                        if($perm['CloggyUserPerm']['allow'] == 0) echo '<span class="label label-important">Deny</span>';
+                        ?>
+                    </td>                    
+                    <td>
+                        <?php echo $this->Html->link('Edit', CloggyCommon::urlModule('cloggy_users', 'cloggy_users_perm/edit/'.$perm['CloggyUserPerm']['id']));
                         ?>
                         |
                         <?php echo $this->Html->link('Remove', 
-                                CloggyCommon::urlModule('cloggy_users', 'cloggy_users_role/remove/'.$role['CloggyUserRole']['id']),
+                                CloggyCommon::urlModule('cloggy_users', 'cloggy_users_perm/remove/'.$perm['CloggyUserPerm']['id']),
                                 array(
-                                    'class' => 'role_remove'
+                                    'class' => 'perm_remove'
                                 ));
                         ?>                                                
                     </td>
@@ -85,8 +106,8 @@
             switch(id) {
 
                 case 'action_delete_all':
-                    urlAjax = '<?php echo Router::url(CloggyCommon::urlModule('cloggy_users', 'cloggy_users_ajax/delete_all_roles')); ?>';
-                    confirmAction = confirm('Are you sure want to delete all these roles?');		
+                    urlAjax = '<?php echo Router::url(CloggyCommon::urlModule('cloggy_users', 'cloggy_users_ajax/delete_all_perms')); ?>';
+                    confirmAction = confirm('Are you sure want to delete all these permissions?');		
                     break;                		
                 }			
 
@@ -110,10 +131,10 @@
                 }		
 		
             });
-            jQuery('.role_remove').on('click',function(e) {
+            jQuery('.perm_remove').on('click',function(e) {
                 e.preventDefault();
                 var href = jQuery(this).attr('href');
-                if(confirm('Are you sure to remove this role?')) {
+                if(confirm('Are you sure to remove this perm?')) {
                     window.location = href;
                 }	
             });            
