@@ -18,13 +18,7 @@ class CloggyAclComponent extends Component {
      * AuthComponent object
      * @var AuthComponent
      */
-    public $components = array('Auth');
-    
-    /**
-     * CloggyUser model object
-     * @var CloggyUser  
-     */
-    private $__CloggyUser;
+    public $components = array('Auth');       
     
     /**
      * Requested Controller
