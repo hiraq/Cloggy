@@ -1,12 +1,18 @@
 <?php
 
-class CloggyRulesAcl {
+class CloggyRulesAcl {        
     
     /**
      * Requested controller object
      * @var null|Controller
      */
     private $__Controller;
+    
+    /**
+     * CloggyUserPerm model
+     * @var CloggyUserPerm 
+     */
+    private $__CloggyUserPerm;
     
     /**
      * Requested controller name
@@ -30,15 +36,7 @@ class CloggyRulesAcl {
      * Get ACO based on requested properties (controller/action/url)
      * @var null|string 
      */
-    private $__aco;
-    
-    /**
-     * Setup controller object
-     * @param Controller $controller
-     */
-    public function setUpController(Controller $controller) {
-        $this->__Controller = $controller;
-    }        
+    private $__aco;           
     
     /**
      * Initiate process
@@ -52,7 +50,38 @@ class CloggyRulesAcl {
              */
             $this->__requestedController = $this->__Controller->request->params['controller'];            
             $this->__requestedAction = $this->__Controller->request->params['action'];            
-            $this->__requesterUrl = $this->__Controller->request->url;
+            $this->__requesterUrl = $this->__Controller->request->url;  
+            
+            //generate user perm model
+            $this->__CloggyUserPerm = ClassRegistry::init('CloggyUserPerm');
+            
+        }
+        
+    }       
+    
+    /**
+     * Setup controller object
+     * @param Controller $controller
+     */
+    public function setUpController(Controller $controller) {
+        $this->__Controller = $controller;
+    }
+    
+    /**
+     * Setup ACO
+     * @param string $adapter [optional]
+     */
+    public function setUpAco($adapter='module') {
+        
+        switch($adapter) {
+            
+            case 'url':
+                $this->__aco = $this->__requesterUrl;                
+                break;
+            
+            default:
+                $this->__aco = $this->__requestedController.'/'.$this->__requestedAction;
+                break;
             
         }
         
@@ -62,9 +91,50 @@ class CloggyRulesAcl {
      * Reset requested properties
      */
     public function reset() {
+        $this->__aco = null;
         $this->__requestedAction = null;
         $this->__requestedController = null;
-        $this->__requesterUrl = null;
+        $this->__requesterUrl = null;        
+        $this->__CloggyUserPerm = null;
+    }
+    
+    /**
+     * Get rules by requested aco object and adapter
+     * @param string $aco
+     * @param string $adapter
+     * @return boolean|array
+     */
+    public function getRulesByAcoAdapter($aco,$adapter) {
+        
+        if (is_a($this->__CloggyUserPerm,'CloggyUserPerm')) {
+            
+            return $this->__CloggyUserPerm->find('all',array(
+                'contain' => array('CloggyUserRole'),
+                'conditions' => array(
+                    'CloggyUserPerm.aco_object' => $aco,
+                    'CloggyUserPerm.aco_adapter' => $adapter,
+                )
+            ));
+            
+        }
+        
+        return false;
+    }
+    
+    /**
+     * Get aco object
+     * @return string
+     */
+    public function getAco() {
+        return $this->__aco;
+    }
+    
+    /**
+     * Get model
+     * @return CloggyUserPerm
+     */
+    public function getCloggyUserPermModel() {
+        return $this->__CloggyUserPerm;
     }
     
     /**

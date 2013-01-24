@@ -45,6 +45,10 @@ class CloggyAclComponentTest extends CakeTestCase {
         $this->assertFalse(empty($this->__Controller));
         $this->assertFalse(empty($this->__CloggyAcl));
         $this->assertTrue(is_a($this->__CloggyUser, 'CloggyUser'));
+    }         
+       
+    public function testUserLogout() {
+        $this->markTestSkipped('CloggyAclComponent::logoutUser, require HTTP redirect at real conditons');
     }
     
     public function testUserData() {
@@ -139,6 +143,57 @@ class CloggyAclComponentTest extends CakeTestCase {
         $this->assertTrue(is_null($ruleActionName));
         $this->assertTrue(is_null($ruleUrl));
         
+    }
+    
+    public function testRuleAdapter() {
+        
+        $user = $this->__getUser();
+        
+        $this->__Controller->request->url = 'url/controller/action';         
+        $this->__Controller->request->params['plugin'] = 'cloggy';
+        $this->__Controller->request->params['controller'] = 'controller';
+        $this->__Controller->request->params['action'] = 'action';
+        $this->__Controller->request->query['url'] = 'url/controller/action';
+        
+        $this->__CloggyAcl->setUserData($user);
+        $this->__CloggyAcl->initialize($this->__Controller);
+        
+        $Rule = $this->__CloggyAcl->getRuleObject();                
+        $Rule->init();
+        $Rule->setUpAco();
+        
+        $aco = $Rule->getAco();        
+        $this->assertEqual($aco,'controller/action');
+                        
+        $Rule->setUpAco('url');
+        $aco = $Rule->getAco();        
+        $this->assertEqual($aco,'url/controller/action');
+        
+    }
+    
+    public function testModel() {
+        
+        $user = $this->__getUser();
+        
+        $this->__CloggyAcl->setUserData($user);
+        $this->__CloggyAcl->initialize($this->__Controller);        
+        
+        $Rule = $this->__CloggyAcl->getRuleObject();                
+        $Rule->init();
+        $Rule->setUpAco();
+        
+        $Model = $Rule->getCloggyUserPermModel();
+        $this->assertTrue(is_a($Model,'CloggyUserPerm'));                
+        
+        $data = $Rule->getRulesByAcoAdapter('controller/action','module');
+        
+        $this->assertFalse(empty($data));
+        $this->assertCount(3,$data);
+        
+        $Rule->reset();
+        
+        $data = $Rule->getRulesByAcoAdapter('controller/action','module');
+        $this->assertFalse($data);
     }
     
     private function __getUser() {

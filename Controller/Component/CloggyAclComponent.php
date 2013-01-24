@@ -52,7 +52,14 @@ class CloggyAclComponent extends Component {
      * @param array $settings
      */
     public function __construct(ComponentCollection $collection, $settings = array()) {        
-        parent::__construct($collection, $settings);                        
+        parent::__construct($collection, $settings);  
+        
+        /*
+         * setup user data
+         */
+        if (empty($this->__user)) {
+            $this->__user = $this->Auth->user();            
+        }
     } 
     
     /**
@@ -71,15 +78,39 @@ class CloggyAclComponent extends Component {
         parent::initialize($controller);
         
         App::uses('CloggyRulesAcl', 'Cloggy.Controller/Component/Acl');        
-        $this->__Controller = $controller;
+        $this->__Controller = $controller;                             
         
-        /*
-         * setup Rule
-         */
+        //setup rules
+        $this->setRules();        
+        
+    }
+    
+    /**
+     * Check user access
+     * @param Controller $controller
+     */
+    public function startup(Controller $controller) {
+        
+        parent::startup($controller);        
+        
+    }
+    
+    /**
+     * Logout user if not loggedIn     
+     */
+    public function logoutUser() {        
+        if (empty($this->__user)) {
+            $this->__Controller->redirect($this->Auth->logout());
+        }        
+    }
+    
+    /**
+     * Setup rules
+     */
+    public function setRules() {                
         $this->__Rule = new CloggyRulesAcl();   
         $this->__Rule->setUpController($this->__Controller);
-        $this->__Rule->init();
-        
+        $this->__Rule->init();           
     }
     
     /**
