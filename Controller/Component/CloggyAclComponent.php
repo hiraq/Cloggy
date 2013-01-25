@@ -63,6 +63,12 @@ class CloggyAclComponent extends Component {
      * @var string 
      */
     private $__aroType;
+    
+    /**
+     * Flag if aro has permission or not
+     * @var boolean 
+     */
+    private $__allowed = true;
 
     /**
      * Setup adapter
@@ -112,10 +118,23 @@ class CloggyAclComponent extends Component {
      */
     public function startup(Controller $controller) {
         
-        parent::startup($controller);                
+        parent::startup($controller);     
+        
+        //setup aro data
+        $this->generateAro();
                 
         //run acl for module
         $this->proceedAcl();
+        
+        //get flag
+        $isAllowed = $this->isAroAllowed();
+        
+        /*
+         * if not allowed proceed callback
+         */
+        if (!$isAllowed) {
+            $this->proceedCallback();
+        }
         
     } 
     
@@ -124,9 +143,20 @@ class CloggyAclComponent extends Component {
      * @param string $adapter
      */
     public function proceedAcl($adapter='module') {
+                
+        $adapterObject = $this->__generateAdapter($adapter);        
+        $aco = $this->getAco($adapter);
         
-        $aco = $this->__generateAco($adapter);
-        $adapterObject = $this->__generateAdapter($adapter);
+        /*
+         * checking access
+         */
+        $check = $adapterObject->check(array(
+                    'id' => $this->__aroId,
+                    'type' => $this->__aroType
+                ),$aco);               
+        
+        //set flag
+        $this->__allowed = $check;        
         
     }
     
@@ -149,6 +179,14 @@ class CloggyAclComponent extends Component {
 
         }
         
+    }
+    
+    /**
+     * Get flag allowed or not
+     * @return boolean
+     */
+    public function isAroAllowed() {
+        return $this->__allowed;
     }
     
     /**
@@ -222,7 +260,12 @@ class CloggyAclComponent extends Component {
                          * based on user loggedIn 
                          */
                         $userId = $this->__user['id'];
-                        $CloggyUser = ClassRegistry::init('CloggyUser');                        
+                        
+                        /*
+                         * generate cloggy user model
+                         */
+                        $CloggyUser = ClassRegistry::init('Cloggy.CloggyUser');
+                                                
                         $user = $CloggyUser->find('first',array(
                             'contain' => array('CloggyUserRole'),
                             'conditions' => array(

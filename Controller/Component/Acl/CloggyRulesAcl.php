@@ -52,8 +52,11 @@ class CloggyRulesAcl {
             $this->__requestedAction = $this->__Controller->request->params['action'];            
             $this->__requesterUrl = $this->__Controller->request->url;  
             
-            //generate user perm model
-            $this->__CloggyUserPerm = ClassRegistry::init('CloggyUserPerm');
+            /*
+             * generate user perm model
+             */                        
+            $this->__CloggyUserPerm = ClassRegistry::init('Cloggy.CloggyUserPerm');
+            
             
         }
         

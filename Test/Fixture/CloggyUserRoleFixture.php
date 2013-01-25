@@ -11,6 +11,10 @@ class CloggyUserRoleFixture extends CakeTestFixture {
             array(
                 'id' => 1,
                 'role_name' => 'admin'
+            ),
+            array(
+                'id' => 2,
+                'role_name' => 'test'
             )
         );
 

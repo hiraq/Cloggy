@@ -17,6 +17,16 @@ class CloggyUserFixture extends CakeTestFixture {
                 'user_status' => 1,
                 'user_last_login' => date('c'),
                 'user_created' => date('c')
+            ),
+            array(
+                'id' => 2,
+                'users_roles_id' => 2,
+                'user_name' => 'test user 2',
+                'user_password' => 'test2',
+                'user_email' => 'test2@test.com',                
+                'user_status' => 0,
+                'user_last_login' => date('c'),
+                'user_created' => date('c')
             )
         );
         parent::init();

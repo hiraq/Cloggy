@@ -47,6 +47,12 @@ class CloggyAppController extends AppController {
         if ($user) {
             $this->_user = $user;
         }
+        
+        $this->CloggyAcl->setFailedCallBack('callbackAcl');
+    }
+    
+    public function callbackAcl() {
+        echo 'test';exit();
     }
 
     private function __cloggyMenus() {
