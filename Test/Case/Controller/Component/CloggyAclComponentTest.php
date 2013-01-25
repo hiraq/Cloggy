@@ -45,11 +45,7 @@ class CloggyAclComponentTest extends CakeTestCase {
         $this->assertFalse(empty($this->__Controller));
         $this->assertFalse(empty($this->__CloggyAcl));
         $this->assertTrue(is_a($this->__CloggyUser, 'CloggyUser'));
-    }         
-       
-    public function testUserLogout() {
-        $this->markTestSkipped('CloggyAclComponent::logoutUser, require HTTP redirect at real conditons');
-    }
+    }                    
     
     public function testUserData() {
         
@@ -194,6 +190,30 @@ class CloggyAclComponentTest extends CakeTestCase {
         
         $data = $Rule->getRulesByAcoAdapter('controller/action','module');
         $this->assertFalse($data);
+    }
+    
+    public function testAclAcoAdapter() {
+        
+        $user = $this->__getUser();
+        
+        $this->__Controller->request->url = 'url/controller/action';         
+        $this->__Controller->request->params['plugin'] = 'cloggy';
+        $this->__Controller->request->params['controller'] = 'controller';
+        $this->__Controller->request->params['action'] = 'action';
+        $this->__Controller->request->query['url'] = 'url/controller/action';
+        
+        $this->__CloggyAcl->setUserData($user);
+        $this->__CloggyAcl->initialize($this->__Controller);
+        
+        $aco = $this->__CloggyAcl->getAco('module');
+        $this->assertEqual($aco,'controller/action');
+        
+        $adapter = $this->__CloggyAcl->getAdapterObject('module');        
+        $this->assertTrue(is_a($adapter,'CloggyModuleAcl'));
+        
+        $wrongAdapter = $this->__CloggyAcl->getAdapterObject('test');        
+        $this->assertFalse($wrongAdapter);
+        
     }
     
     private function __getUser() {

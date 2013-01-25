@@ -18,19 +18,19 @@ class CloggyAclComponent extends Component {
      * AuthComponent object
      * @var AuthComponent
      */
-    public $components = array('Auth');       
+    public $components = array('Auth');   
+    
+    /**
+     * List of available adapters
+     * @var array 
+     */
+    private $__adapters = array('module','model','url');
     
     /**
      * Requested Controller
      * @var Controller 
      */
-    private $__Controller;
-    
-    /**
-     * List of adapters
-     * @var array 
-     */
-    private $__adapter = array('Module','Model','Url');
+    private $__Controller;        
     
     /**
      * Rule object
@@ -39,10 +39,34 @@ class CloggyAclComponent extends Component {
     private $__Rule;
     
     /**
+     * Module acl object
+     * @var CloggyModuleAcl 
+     */
+    private $__ModuleAcl;
+    
+    /**
+     * Url acl object
+     * @var CloggyUrlAcl 
+     */
+    private $__UrlAcl;
+    
+    /**
+     * Model acl object
+     * @var CloggyModelAcl 
+     */
+    private $__ModelAcl;
+    
+    /**
      * User data
      * @var array 
      */
     private $__user;
+    
+    /**
+     * Controller callback if failed
+     * @var string 
+     */
+    private $__actionFailedCallback;
 
     /**
      * Setup adapter
@@ -86,22 +110,24 @@ class CloggyAclComponent extends Component {
     }
     
     /**
-     * Check user access
+     * Check module user access
+     * Only for checking module 
      * @param Controller $controller
      */
     public function startup(Controller $controller) {
         
-        parent::startup($controller);        
+        parent::startup($controller);                
+                
+        //run acl for module
+        $this->proceedAcl();
         
-    }
+    } 
     
-    /**
-     * Logout user if not loggedIn     
-     */
-    public function logoutUser() {        
-        if (empty($this->__user)) {
-            $this->__Controller->redirect($this->Auth->logout());
-        }        
+    public function proceedAcl($adapter='module') {
+        
+        $aco = $this->__generateAco($adapter);
+        $adapterObject = $this->__generateAdapter($adapter);
+        
     }
     
     /**
@@ -122,10 +148,36 @@ class CloggyAclComponent extends Component {
     }
     
     /**
+     * Setup controller callback if acl failed
+     * @param string $action
+     */
+    public function setFailedCallBack($action) {        
+        $this->__actionFailedCallback = $action;        
+    }
+    
+    /**
      * Reset user data
      */
     public function clearUserData() {
         $this->__user = array();
+    }
+    
+    /**
+     * Get adapter object
+     * @param string $adapter
+     * @return object
+     */
+    public function getAdapterObject($adapter) {
+        return $this->__generateAdapter($adapter);
+    }
+    
+    /**
+     * Get aco object
+     * @param string $adapter
+     * @return string
+     */
+    public function getAco($adapter) {
+        return $this->__generateAco($adapter);
     }
     
     /**
@@ -150,6 +202,47 @@ class CloggyAclComponent extends Component {
      */
     public function getRuleObject() {
         return $this->__Rule;
-    }              
+    }    
+    
+    /**
+     * Get requested aco object
+     * @param string $adapter [optional]
+     * @return string
+     */
+    private function __generateAco($adapter='module') {
+        
+        //setup requested  aco
+        $this->__Rule->setUpAco($adapter);
+        
+        $aco = $this->__Rule->getAco();
+        return $aco;
+        
+    }
+    
+    /**
+     * Generate adapter object
+     * @param string $adapter
+     * @return boolean|object
+     */
+    private function __generateAdapter($adapter) {
+        
+        if (in_array($adapter,$this->__adapters)) {
+            
+            $className = 'Cloggy'.ucfirst(strtolower($adapter)).'Acl';
+            
+            /*
+             * initialize acl module
+             */
+           App::uses($className, 'Cloggy.Controller/Component/Acl');
+           $Adapter = new $className();
+           $Adapter->initialize($this);
+           
+           return $Adapter;
+            
+        }
+        
+        return false;
+        
+    }
 
 }
