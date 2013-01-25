@@ -36,25 +36,7 @@ class CloggyAclComponent extends Component {
      * Rule object
      * @var CloggyRulesAcl 
      */
-    private $__Rule;
-    
-    /**
-     * Module acl object
-     * @var CloggyModuleAcl 
-     */
-    private $__ModuleAcl;
-    
-    /**
-     * Url acl object
-     * @var CloggyUrlAcl 
-     */
-    private $__UrlAcl;
-    
-    /**
-     * Model acl object
-     * @var CloggyModelAcl 
-     */
-    private $__ModelAcl;
+    private $__Rule;        
     
     /**
      * User data
@@ -67,6 +49,20 @@ class CloggyAclComponent extends Component {
      * @var string 
      */
     private $__actionFailedCallback;
+    
+    /**
+     * User or role id
+     * @var int 
+     */
+    private $__aroId;
+    
+    /**
+     * available values:
+     * > users
+     * > roles
+     * @var string 
+     */
+    private $__aroType;
 
     /**
      * Setup adapter
@@ -123,10 +119,35 @@ class CloggyAclComponent extends Component {
         
     } 
     
+    /**
+     * Acl process
+     * @param string $adapter
+     */
     public function proceedAcl($adapter='module') {
         
         $aco = $this->__generateAco($adapter);
         $adapterObject = $this->__generateAdapter($adapter);
+        
+    }
+    
+    /**
+     * Run callback if failed
+     */
+    public function proceedCallback() {
+        
+        /*
+         * check for callback
+         * if isset then run it
+         */
+        if (!empty($this->__actionFailedCallback) 
+                && !is_null($this->__actionFailedCallback)) {
+
+            $callback = $this->__actionFailedCallback;
+            if (method_exists($this->__Controller,$callback)) {
+                $this->__Controller->$callback();
+            }
+
+        }
         
     }
     
@@ -163,6 +184,73 @@ class CloggyAclComponent extends Component {
     }
     
     /**
+     * Generate aro request
+     * @param string $type [optional]
+     * @return type
+     */
+    public function generateAro($type='roles') {
+        
+        $user = $this->getUserData();
+        
+        /*
+         * if user not loggedIn
+         */
+        if (empty($user)) {            
+            $this->proceedCallback();            
+        } else {
+            
+            //set aro type
+            $this->__aroType = $type;
+            
+            /*
+             * get aro id by type users or roles
+             */
+            switch($type) {
+                
+                case 'users':
+                    $this->__aroId = $this->__user['id'];
+                    break;
+                
+                default:
+                    
+                    if (isset($this->__user['CloggyUserRole'])) {
+                        $this->__aroId = $this->__user['CloggyUserRole']['id'];
+                    } else {
+                        
+                        /*
+                         * get manually user role data
+                         * based on user loggedIn 
+                         */
+                        $userId = $this->__user['id'];
+                        $CloggyUser = ClassRegistry::init('CloggyUser');                        
+                        $user = $CloggyUser->find('first',array(
+                            'contain' => array('CloggyUserRole'),
+                            'conditions' => array(
+                                'CloggyUser.id' => $userId
+                            )
+                        ));
+                        
+                        $this->__aroId = $user['CloggyUserRole']['id'];
+                        
+                    }
+                    
+                    break;
+                
+            }
+            
+        }
+        
+    }
+    
+    public function getAroId() {
+        return $this->__aroId;
+    }
+    
+    public function getAroType() {
+        return $this->__aroType;
+    }
+    
+    /**
      * Get adapter object
      * @param string $adapter
      * @return object
@@ -178,7 +266,7 @@ class CloggyAclComponent extends Component {
      */
     public function getAco($adapter) {
         return $this->__generateAco($adapter);
-    }
+    }        
     
     /**
      * Get controller object

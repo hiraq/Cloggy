@@ -15,6 +15,18 @@ App::uses('CloggyAclComponent', 'Cloggy.Controller/Component');
 App::uses('CloggyAppModel', 'Cloggy.Model');
 App::uses('CloggyUser', 'Cloggy.Model');
 
+class TestCallbackController extends Controller {        
+    
+    public function beforeFilter() {
+        parent::beforeFilter();        
+    }
+    
+    public function test() {
+        echo 'failed!';
+    }
+    
+}
+
 class CloggyAclComponentTest extends CakeTestCase {
 
     public $fixtures = array(
@@ -26,6 +38,7 @@ class CloggyAclComponentTest extends CakeTestCase {
     private $__CloggyAcl;
     private $__CloggyUser;
     private $__Controller;
+    private $__TestController;
 
     public function setUp() {
 
@@ -38,7 +51,18 @@ class CloggyAclComponentTest extends CakeTestCase {
 
         $this->__CloggyUser = ClassRegistry::init('CloggyUser');
         $this->__CloggyAcl = new CloggyAclComponent($Collection);
+        
+        /*
+         * main controller
+         */
         $this->__Controller = new Controller($CakeRequest, $CakeResponse);
+        $this->__Controller->constructClasses();
+        
+        /*
+         * contstruct class for TestController
+         */
+        $this->__TestController = new TestCallbackController($CakeRequest,$CakeResponse);
+        $this->__TestController->constructClasses();
     }
 
     public function testObjects() {        
@@ -213,6 +237,73 @@ class CloggyAclComponentTest extends CakeTestCase {
         
         $wrongAdapter = $this->__CloggyAcl->getAdapterObject('test');        
         $this->assertFalse($wrongAdapter);
+        
+    }
+    
+    public function testCallback() {
+        
+        $user = $this->__getUser();
+        
+        $this->__TestController->request->url = 'url/controller/action';         
+        $this->__TestController->request->params['plugin'] = 'cloggy';
+        $this->__TestController->request->params['controller'] = 'controller';
+        $this->__TestController->request->params['action'] = 'action';
+        $this->__TestController->request->query['url'] = 'url/controller/action';
+        
+        $this->__CloggyAcl->setUserData($user);
+        $this->__CloggyAcl->initialize($this->__TestController);
+        $this->__CloggyAcl->setFailedCallBack('test');
+        
+        $this->__CloggyAcl->clearUserData();
+        $this->expectOutputString('failed!');                                
+        $this->__CloggyAcl->generateAro();
+        
+    }
+    
+    public function testAro() {
+        
+        $user = $this->__getUser();
+        
+        $this->__Controller->request->url = 'url/controller/action';         
+        $this->__Controller->request->params['plugin'] = 'cloggy';
+        $this->__Controller->request->params['controller'] = 'controller';
+        $this->__Controller->request->params['action'] = 'action';
+        $this->__Controller->request->query['url'] = 'url/controller/action';
+        
+        $this->__CloggyAcl->setUserData($user);
+        $this->__CloggyAcl->initialize($this->__Controller);
+        $this->__CloggyAcl->generateAro();
+                
+        $aroId = $this->__CloggyAcl->getAroId();
+        $aroType = $this->__CloggyAcl->getAroType();
+        
+        $this->assertEqual($aroId,1);
+        $this->assertEqual($aroType,'roles');
+        
+        /*
+         * delete role and perm
+         * test manual get data from database
+         */
+        unset($user['CloggyUserRole']);
+        unset($user['CloggyUserPermAro']);
+        
+        $this->__CloggyAcl->setUserData($user['CloggyUser']);
+        $this->__CloggyAcl->generateAro();
+        
+        $aroId = $this->__CloggyAcl->getAroId();
+        $aroType = $this->__CloggyAcl->getAroType();
+        
+        $this->assertEqual($aroId,1);
+        $this->assertEqual($aroType,'roles');
+        
+        $this->__CloggyAcl->setUserData($user['CloggyUser']);
+        $this->__CloggyAcl->generateAro('users');
+        
+        $aroId = $this->__CloggyAcl->getAroId();
+        $aroType = $this->__CloggyAcl->getAroType();
+        
+        $this->assertEqual($aroId,1);
+        $this->assertEqual($aroType,'users');
         
     }
     
