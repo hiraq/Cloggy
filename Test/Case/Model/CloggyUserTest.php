@@ -8,7 +8,9 @@ class CloggyUserTest extends CakeTestCase {
     public $fixtures = array(
         'plugin.cloggy.cloggy_user',
         'plugin.cloggy.cloggy_user_login',
-        'plugin.cloggy.cloggy_user_meta'
+        'plugin.cloggy.cloggy_user_meta',
+        'plugin.cloggy.cloggy_user_role',
+        'plugin.cloggy.cloggy_user_perm'
     );
     private $__CloggyUser;
 
@@ -35,7 +37,7 @@ class CloggyUserTest extends CakeTestCase {
     public function testEmailExists() {
 
         $check = $this->__CloggyUser->isUserEmailExists('test@test.com');
-        $checkFake = $this->__CloggyUser->isUserEmailExists('test2@test.com');
+        $checkFake = $this->__CloggyUser->isUserEmailExists('test2s@test.com');
 
         $this->assertTrue($check);
         $this->assertFalse($checkFake);
@@ -65,6 +67,16 @@ class CloggyUserTest extends CakeTestCase {
         $this->assertFalse(empty($data));
         $this->assertEqual($data['CloggyUser']['user_status'], 1);
     }    
+    
+    public function testUserRole() {
+        
+        $role = $this->__CloggyUser->getUserRole(1);
+        $this->assertEqual($role,'admin');
+        
+        $roleFake = $this->__CloggyUser->getUserRole(3);
+        $this->assertFalse($roleFake);
+        
+    }
 
     public function testRemoveUser() {
 

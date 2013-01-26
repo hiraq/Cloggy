@@ -41,8 +41,8 @@ class CloggyUserRoleTest extends CakeTestCase {
          * test not exits
          * should return id
          */
-        $roleId = $this->__CloggyUserRole->createRole('test');        
-        $this->assertEqual($roleId,2);
+        $roleId = $this->__CloggyUserRole->createRole('test2');        
+        $this->assertEqual($roleId,3);
         
         /*
          * test if exists
@@ -62,7 +62,7 @@ class CloggyUserRoleTest extends CakeTestCase {
         $this->assertFalse(empty($data));
         $this->assertArrayHasKey('CloggyUserRole',$data);
         $this->assertArrayHasKey('role_name',$data['CloggyUserRole']);
-        $this->assertEqual($data['CloggyUserRole']['role_name'],'test');    
+        $this->assertEqual($data['CloggyUserRole']['role_name'],'test2');    
         
     }
     
@@ -108,7 +108,7 @@ class CloggyUserRoleTest extends CakeTestCase {
             'contain' => false
         ));
 
-        $this->assertTrue(empty($data));
+        $this->assertCount(1,$data);
     }
 
 }

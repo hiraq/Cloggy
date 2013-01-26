@@ -107,6 +107,12 @@ class CloggyUser extends CloggyAppModel {
             'contain' => array('CloggyUserRole'),
             'conditions' => array('CloggyUser.id' => $id)
         ));
+        
+        if (!empty($data)) {
+            return $data['CloggyUserRole']['role_name'];
+        }
+        
+        return false;
     }
 
 }
