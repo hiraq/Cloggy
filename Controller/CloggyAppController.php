@@ -54,6 +54,9 @@ class CloggyAppController extends AppController {
             //load acl for requested url
             $this->__cloggyAclUrl();
             
+            //load acl for requested module
+            $this->__cloggyAclModule();
+            
         }                
                 
     }
@@ -63,10 +66,18 @@ class CloggyAppController extends AppController {
         $this->redirect($this->_base);
     }
     
-    private function __cloggyAclUrl() {
+    private function __cloggyAclUrl() {        
+        $this->__cloggyAcl('url');        
+    }
+    
+    private function __cloggyAclModule() {        
+        $this->__cloggyAcl('module');        
+    }
+    
+    private function __cloggyAcl($adapter) {
         
         $this->CloggyAcl->generateAro();
-        $this->CloggyAcl->proceedAcl('url');
+        $this->CloggyAcl->proceedAcl($adapter);
         
         $isAllowed = $this->CloggyAcl->isAroAllowed();
         
@@ -106,7 +117,7 @@ class CloggyAppController extends AppController {
             $this->layout = 'cloggy_module_layout';
             $this->_requestedModule = $this->request->params['name'];
             $this->set('moduleName', $this->request->params['name']);
-
+            
             $modulesMenus = array();
             if (!empty($modules)) {
 

@@ -13,7 +13,7 @@ class CloggyUserPermFixture extends CakeTestFixture {
                 'aro_object_id' => 1,
                 'aro_object' => 'roles',
                 'aco_object' => 'controller/action',
-                'aco_adapter' => 'module',
+                'aco_adapter' => 'controller',
                 'allow' => 1,
                 'deny' => 0
             ),
@@ -22,7 +22,7 @@ class CloggyUserPermFixture extends CakeTestFixture {
                 'aro_object_id' => 1,
                 'aro_object' => 'users',
                 'aco_object' => 'controller/action',
-                'aco_adapter' => 'module',
+                'aco_adapter' => 'controller',
                 'allow' => 0,
                 'deny' => 1
             ),
@@ -31,7 +31,7 @@ class CloggyUserPermFixture extends CakeTestFixture {
                 'aro_object_id' => 0,
                 'aro_object' => '*',
                 'aco_object' => 'controller/action',
-                'aco_adapter' => 'module',
+                'aco_adapter' => 'controller',
                 'allow' => 1,
                 'deny' => 0
             ),
@@ -40,7 +40,7 @@ class CloggyUserPermFixture extends CakeTestFixture {
                 'aro_object_id' => 0,
                 'aro_object' => '*',
                 'aco_object' => 'controller3/action3',
-                'aco_adapter' => 'module',
+                'aco_adapter' => 'controller',
                 'allow' => 0,
                 'deny' => 1
             ),
@@ -49,7 +49,7 @@ class CloggyUserPermFixture extends CakeTestFixture {
                 'aro_object_id' => 1,
                 'aro_object' => 'users',
                 'aco_object' => 'controller3/action3',
-                'aco_adapter' => 'module',
+                'aco_adapter' => 'controller',
                 'allow' => 1,
                 'deny' => 0
             )

@@ -30,7 +30,13 @@ class CloggyRulesAcl {
      * Requested url string
      * @var null|string 
      */
-    private $__requesterUrl;
+    private $__requestedUrl;
+    
+    /**
+     * Requested module name
+     * @var null|string 
+     */
+    private $__requestedModule;
     
     /**
      * Get ACO based on requested properties (controller/action/url)
@@ -50,7 +56,11 @@ class CloggyRulesAcl {
              */
             $this->__requestedController = $this->__Controller->request->params['controller'];            
             $this->__requestedAction = $this->__Controller->request->params['action'];            
-            $this->__requesterUrl = $this->__Controller->request->url;  
+            $this->__requestedUrl = $this->__Controller->request->url; 
+            
+            $this->__requestedModule = isset($this->__Controller->request->params['name']) ?
+                                        $this->__Controller->request->params['name'] :
+                                        '';
             
             /*
              * generate user perm model
@@ -79,11 +89,15 @@ class CloggyRulesAcl {
         switch($adapter) {
             
             case 'url':
-                $this->__aco = $this->__requesterUrl;                
+                $this->__aco = $this->__requestedUrl;                
+                break;
+            
+            case 'controller':
+                $this->__aco = $this->__requestedController.'/'.$this->__requestedAction;
                 break;
             
             default:
-                $this->__aco = $this->__requestedController.'/'.$this->__requestedAction;
+                $this->__aco = Inflector::camelize($this->__requestedModule);
                 break;
             
         }
@@ -97,7 +111,7 @@ class CloggyRulesAcl {
         $this->__aco = null;
         $this->__requestedAction = null;
         $this->__requestedController = null;
-        $this->__requesterUrl = null;        
+        $this->__requestedUrl = null;        
         $this->__CloggyUserPerm = null;
     }
     
@@ -169,7 +183,7 @@ class CloggyRulesAcl {
      * @return string
      */
     public function getRequestedUrl() {
-        return $this->__requesterUrl;
+        return $this->__requestedUrl;
     }
     
 }

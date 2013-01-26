@@ -44,6 +44,7 @@ echo $this->Form->create('CloggyUserPerm', array(
             <select name="data[CloggyUserPerm][aco_adapter]" id="adapter">
                 <option value="0">Select Types</option>
                 <option value="module" <?php if($perm['CloggyUserPerm']['aco_adapter'] == 'module') echo 'selected="selected"'; ?>>Module</option>                
+                <option value="module" <?php if($perm['CloggyUserPerm']['aco_adapter'] == 'controller') echo 'selected="selected"'; ?>>Controller</option>                
                 <option value="url" <?php if($perm['CloggyUserPerm']['aco_adapter'] == 'url') echo 'selected="selected"'; ?>>Url</option>
             </select>
             <span class="help-inline"><?php
@@ -107,6 +108,11 @@ echo $this->Form->create('CloggyUserPerm', array(
                 switch(value) {
                     
                     case 'module':
+                        jQuery('#aco_object_form').html(formString);
+                        jQuery('#aco_object').attr('placeholder','ex: ModuleName');
+                        break;   
+                        
+                    case 'controller':
                         jQuery('#aco_object_form').html(formString);
                         jQuery('#aco_object').attr('placeholder','ex: controller_name/action');
                         break;                                            

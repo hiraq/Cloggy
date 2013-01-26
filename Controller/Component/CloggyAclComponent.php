@@ -24,7 +24,7 @@ class CloggyAclComponent extends Component {
      * List of available adapters
      * @var array 
      */
-    private $__adapters = array('module','model','url');
+    private $__adapters = array('module','controller','url');
     
     /**
      * Requested Controller
@@ -130,7 +130,7 @@ class CloggyAclComponent extends Component {
             $this->generateAro();
 
             //run acl for module
-            $this->proceedAcl();
+            $this->proceedAcl('controller');
 
             //get flag
             $isAllowed = $this->isAroAllowed();
@@ -151,7 +151,7 @@ class CloggyAclComponent extends Component {
      * @param string $adapter
      */
     public function proceedAcl($adapter='module') {
-                
+        
         $adapterObject = $this->__generateAdapter($adapter);        
         $aco = $this->getAco($adapter);
         

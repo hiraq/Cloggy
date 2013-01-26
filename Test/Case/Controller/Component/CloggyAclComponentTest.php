@@ -183,7 +183,7 @@ class CloggyAclComponentTest extends CakeTestCase {
         
         $Rule = $this->__CloggyAcl->getRuleObject();                
         $Rule->init();
-        $Rule->setUpAco();
+        $Rule->setUpAco('controller');
         
         $aco = $Rule->getAco();        
         $this->assertEqual($aco,'controller/action');
@@ -203,19 +203,19 @@ class CloggyAclComponentTest extends CakeTestCase {
         
         $Rule = $this->__CloggyAcl->getRuleObject();                
         $Rule->init();
-        $Rule->setUpAco();
+        $Rule->setUpAco('controller');
         
         $Model = $Rule->getCloggyUserPermModel();
         $this->assertTrue(is_a($Model,'CloggyUserPerm'));                
         
-        $data = $Rule->getRulesByAcoAdapter('controller/action','module');
+        $data = $Rule->getRulesByAcoAdapter('controller/action','controller');
         
         $this->assertFalse(empty($data));
         $this->assertCount(3,$data);
         
         $Rule->reset();
         
-        $data = $Rule->getRulesByAcoAdapter('controller/action','module');
+        $data = $Rule->getRulesByAcoAdapter('controller/action','controller');
         $this->assertFalse($data);
     }
     
@@ -232,7 +232,7 @@ class CloggyAclComponentTest extends CakeTestCase {
         $this->__CloggyAcl->setUserData($user);
         $this->__CloggyAcl->initialize($this->__Controller);
         
-        $aco = $this->__CloggyAcl->getAco('module');
+        $aco = $this->__CloggyAcl->getAco('controller');
         $this->assertEqual($aco,'controller/action');
         
         $adapter = $this->__CloggyAcl->getAdapterObject('module');        

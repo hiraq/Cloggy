@@ -43,6 +43,7 @@ echo $this->Form->create('CloggyUserPerm', array(
             <select name="data[CloggyUserPerm][aco_adapter]" id="adapter">
                 <option value="0">Select Types</option>
                 <option value="module">Module</option>                
+                <option value="controller">Controller</option>
                 <option value="url">Url</option>
             </select>
             <span class="help-inline"><?php
@@ -100,8 +101,13 @@ echo $this->Form->create('CloggyUserPerm', array(
                     
                     case 'module':
                         jQuery('#aco_object_form').html(formString);
+                        jQuery('#aco_object').attr('placeholder','ex: ModuleName');
+                        break;   
+                        
+                    case 'controller':
+                        jQuery('#aco_object_form').html(formString);
                         jQuery('#aco_object').attr('placeholder','ex: controller_name/action');
-                        break;                                            
+                        break;
                         
                     case 'url':
                         jQuery('#aco_object_form').html(formString);
