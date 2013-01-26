@@ -293,10 +293,18 @@ class CloggyAclComponent extends Component {
         
     }
     
+    /**
+     * Get aro id
+     * @return int
+     */
     public function getAroId() {
         return $this->__aroId;
     }
     
+    /**
+     * Get aro type
+     * @return string
+     */
     public function getAroType() {
         return $this->__aroType;
     }
