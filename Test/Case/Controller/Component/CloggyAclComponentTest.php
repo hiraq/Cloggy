@@ -317,6 +317,7 @@ class CloggyAclComponentTest extends CakeTestCase {
         $this->__TestController->request->params['plugin'] = 'cloggy';
         $this->__TestController->request->params['controller'] = 'controller';
         $this->__TestController->request->params['action'] = 'action';
+        $this->__TestController->request->params['isCloggyModule'] = 1;
         $this->__TestController->request->query['url'] = 'url/controller/action';        
         
         $this->__CloggyAcl->setUserData($user);

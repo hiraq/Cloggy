@@ -118,23 +118,31 @@ class CloggyAclComponent extends Component {
      */
     public function startup(Controller $controller) {
         
-        parent::startup($controller);     
-        
-        //setup aro data
-        $this->generateAro();
-                
-        //run acl for module
-        $this->proceedAcl();
-        
-        //get flag
-        $isAllowed = $this->isAroAllowed();
+        parent::startup($controller);   
         
         /*
-         * if not allowed proceed callback
+         * only at requested module
          */
-        if (!$isAllowed) {
-            $this->proceedCallback();
-        }
+        if (isset($this->__Controller->request->params['isCloggyModule'])
+                && $this->__Controller->request->params['isCloggyModule'] == 1) {
+         
+            //setup aro data
+            $this->generateAro();
+
+            //run acl for module
+            $this->proceedAcl();
+
+            //get flag
+            $isAllowed = $this->isAroAllowed();
+
+            /*
+             * if not allowed proceed callback
+             */
+            if (!$isAllowed) {
+                $this->proceedCallback();
+            }
+            
+        }                
         
     } 
     
