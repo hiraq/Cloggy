@@ -42,8 +42,7 @@ echo $this->Form->create('CloggyUserPerm', array(
         <div class="controls">
             <select name="data[CloggyUserPerm][aco_adapter]" id="adapter">
                 <option value="0">Select Types</option>
-                <option value="module">Module</option>
-                <option value="model">Model</option>
+                <option value="module">Module</option>                
                 <option value="url">Url</option>
             </select>
             <span class="help-inline"><?php
@@ -90,8 +89,7 @@ echo $this->Form->create('CloggyUserPerm', array(
 <?php $this->append('cloggy_js_module_page'); ?>
 <script type="text/javascript">
     cloggy.captureJQuery(function() {	
-        
-        var formModel = '<select name=data[CloggyUserPerm][aco_object]><option>find</option><option>save</option><option>delete</option></select>';
+                
         var formString = jQuery('#aco_object_form').html();
         
         jQuery('#adapter').on('change',function(e) {
@@ -103,12 +101,7 @@ echo $this->Form->create('CloggyUserPerm', array(
                     case 'module':
                         jQuery('#aco_object_form').html(formString);
                         jQuery('#aco_object').attr('placeholder','ex: controller_name/action');
-                        break;
-                        
-                    case 'model':                        
-                        jQuery('#aco_object_form').html('');                        
-                        jQuery('#aco_object_form').html(formModel);
-                        break;
+                        break;                                            
                         
                     case 'url':
                         jQuery('#aco_object_form').html(formString);

@@ -43,8 +43,7 @@ echo $this->Form->create('CloggyUserPerm', array(
         <div class="controls">
             <select name="data[CloggyUserPerm][aco_adapter]" id="adapter">
                 <option value="0">Select Types</option>
-                <option value="module" <?php if($perm['CloggyUserPerm']['aco_adapter'] == 'module') echo 'selected="selected"'; ?>>Module</option>
-                <option value="model" <?php if($perm['CloggyUserPerm']['aco_adapter'] == 'model') echo 'selected="selected"'; ?>>Model</option>
+                <option value="module" <?php if($perm['CloggyUserPerm']['aco_adapter'] == 'module') echo 'selected="selected"'; ?>>Module</option>                
                 <option value="url" <?php if($perm['CloggyUserPerm']['aco_adapter'] == 'url') echo 'selected="selected"'; ?>>Url</option>
             </select>
             <span class="help-inline"><?php
@@ -61,21 +60,13 @@ echo $this->Form->create('CloggyUserPerm', array(
         <div class="controls">
             <div id="aco_object_form" style="display:inline">
                 
-                <?php if ($perm['CloggyUserPerm']['aco_adapter'] == 'model') : ?>
-                    <select name="data[CloggyUserPerm][aco_object]">
-                        <option <?php if($perm['CloggyUserPerm']['aco_object'] == 'find') echo 'selected="selected"'; ?>>find</option>
-                        <option <?php if($perm['CloggyUserPerm']['aco_object'] == 'save') echo 'selected="selected"'; ?>>save</option>
-                        <option <?php if($perm['CloggyUserPerm']['aco_object'] == 'delete') echo 'selected="selected"'; ?>>delete</option>
-                    </select>
-                <?php else: ?>
-                    <?php echo $this->Form->input('aco_object', array(
+                <?php echo $this->Form->input('aco_object', array(
                         'label' => false, 
                         'placeholder' => 'ex: controller_name/action', 
                         'type' => 'text', 
                         'div' => false,
                         'value' => $perm['CloggyUserPerm']['aco_object'],
                         'id' => 'aco_object')); ?>
-                <?php endif; ?>
             </div>            
             <span class="help-inline"><?php
             if (isset($errors['aco_object'])) : echo $errors['aco_object'][0];
@@ -106,8 +97,7 @@ echo $this->Form->create('CloggyUserPerm', array(
 <script type="text/javascript">
     cloggy.captureJQuery(function() {	
         
-        var formString = '<input type="text" name="data[CloggyUserPerm][aco_object]" id="aco_object" />';
-        var formModel = '<select name=data[CloggyUserPerm][aco_object]><option>find</option><option>save</option><option>delete</option></select>';
+        var formString = '<input type="text" name="data[CloggyUserPerm][aco_object]" id="aco_object" />';        
         
         jQuery('#adapter').on('change',function(e) {
             var value = jQuery(this).val();
@@ -119,12 +109,7 @@ echo $this->Form->create('CloggyUserPerm', array(
                     case 'module':
                         jQuery('#aco_object_form').html(formString);
                         jQuery('#aco_object').attr('placeholder','ex: controller_name/action');
-                        break;
-                        
-                    case 'model':                        
-                        jQuery('#aco_object_form').html('');                        
-                        jQuery('#aco_object_form').html(formModel);
-                        break;
+                        break;                                            
                         
                     case 'url':
                         jQuery('#aco_object_form').html(formString);
