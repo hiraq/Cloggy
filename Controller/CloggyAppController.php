@@ -48,11 +48,30 @@ class CloggyAppController extends AppController {
             $this->_user = $user;
         }
         
+        //set acl callback if failed
         $this->CloggyAcl->setFailedCallBack('callbackAcl');
+        
+        //load acl for requested url
+        $this->__cloggyAclUrl();
+                
     }
     
     public function callbackAcl() {
-        echo 'test';exit();
+        $this->Session->setFlash('You do not have permission to access that page.','default',array(),'aclNotifSuccess');
+        $this->redirect($this->_base);
+    }
+    
+    private function __cloggyAclUrl() {
+        
+        $this->CloggyAcl->generateAro();
+        $this->CloggyAcl->proceedAcl('url');
+        
+        $isAllowed = $this->CloggyAcl->isAroAllowed();
+        
+        if (!$isAllowed) {
+            $this->CloggyAcl->proceedCallback();
+        }
+        
     }
 
     private function __cloggyMenus() {

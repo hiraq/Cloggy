@@ -38,6 +38,13 @@
             </div>
             <div class="span10">
 
+                <?php $flashAcl = $this->Session->flash('aclNotifSuccess'); if (!empty($flashAcl)) : ?>
+                <div class="alert">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <?php echo $flashAcl; ?>
+                </div>
+                <?php endif; ?>
+                
                 <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
