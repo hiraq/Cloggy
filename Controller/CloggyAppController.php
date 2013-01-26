@@ -44,15 +44,17 @@ class CloggyAppController extends AppController {
          * check if user has loggedIn
          */
         $user = $this->Auth->user();
-        if ($user) {
+        if ($user) {                        
+        
             $this->_user = $user;
-        }
+            
+            //set acl callback if failed
+            $this->CloggyAcl->setFailedCallBack('callbackAcl');
         
-        //set acl callback if failed
-        $this->CloggyAcl->setFailedCallBack('callbackAcl');
-        
-        //load acl for requested url
-        $this->__cloggyAclUrl();
+            //load acl for requested url
+            $this->__cloggyAclUrl();
+            
+        }                
                 
     }
     
