@@ -107,6 +107,21 @@ class CloggyMenusHelperTest extends CakeTestCase {
         $this->assertEqual($url, Router::url('dashboard', true));
         $this->assertEqual(htmlentities($link), htmlentities('<a href="' . Router::url('test', true) . '">Test</a>'));
     }
+    
+    public function testRemovedGroups() {
+        
+        $this->__Controller->name = 'TestController';
+        $this->__CloggyModuleMenu->setGroup('testGroup', array(
+            'test1' => 'test1'
+        ));
+
+        $this->__CloggyModuleMenu->removeGroup('testGroup');
+        $helper = $this->__generateHelperObject();                
+        $menus = $helper->groups();
+        
+        $this->assertTrue(empty($menus));
+        
+    }
 
     private function __generateHelperObject() {
         $View = new View($this->__Controller);

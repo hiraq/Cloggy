@@ -169,6 +169,15 @@ class CloggyModuleMenusComponentTest extends CakeTestCase {
         $this->assertInternalType('array', $viewVars['cloggy_menus_group']['test2']);
         $this->assertArrayHasKey('test3', $viewVars['cloggy_menus_group']['test2']);
     }
+    
+    public function testRemoveGroup() {
+        
+        $this->__CloggyModuleMenu->removeGroup('test');
+        $viewVars = $this->__CloggyModuleMenu->getViewVars();
+        
+        $this->assertArrayHasKey('cloggy_removed_group_menus',$viewVars);
+        
+    }
 
     public function testParseModuleMenus() {
 
