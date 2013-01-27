@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 19, 2013 at 08:06 AM
--- Server version: 5.5.28
+-- Generation Time: Jan 27, 2013 at 04:43 PM
+-- Server version: 5.5.29
 -- PHP Version: 5.4.6-1ubuntu1.1
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
@@ -172,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `cloggy_users` (
   PRIMARY KEY (`id`),
   KEY `user_name` (`user_name`),
   KEY `user_email` (`user_email`,`user_status`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='users management' AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='users management' AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -192,7 +192,7 @@ CREATE TABLE IF NOT EXISTS `cloggy_users_perms` (
   KEY `aco_adapter` (`aco_adapter`),
   KEY `aro_object` (`aro_object`),
   KEY `aro_object_id` (`aro_object_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='user permissions list' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='user permissions list' AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -205,7 +205,7 @@ CREATE TABLE IF NOT EXISTS `cloggy_users_roles` (
   `role_name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `role_name` (`role_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='user roles' AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='user roles' AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 
@@ -219,7 +219,7 @@ CREATE TABLE IF NOT EXISTS `cloggy_user_login` (
   `login_datetime` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='a group of user login' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='a group of user login' AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
