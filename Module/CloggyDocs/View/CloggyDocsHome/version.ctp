@@ -21,5 +21,5 @@
     For example: <br />
     <code>
         sudo git checkout v0.3
-    </code>
+    </code>        
 </p>

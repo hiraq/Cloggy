@@ -128,11 +128,29 @@ class CloggyMenusHelper extends AppHelper {
     public function groups() {
 
         $vars = $this->getViewVarValue('cloggy_menus_group');
+        $removed = $this->__getRemovedGroupMenus();
+        
+        /*
+         * delete removed menus
+         */
+        if (isset($vars[$removed])) {
+            unset($vars[$removed]);
+        }
+        
         if (!empty($vars)) {
             return $vars;
         }
 
         return false;
+    }
+    
+    /**
+     * 
+     * @return get removed group menus
+     */
+    private function __getRemovedGroupMenus() {        
+        $vars = $this->getViewVarValue('cloggy_removed_group_menus');   
+        return $vars;
     }
 
 }

@@ -15,7 +15,7 @@
             <strong>app/Plugin/Cloggy/Module/MyModule/Controller/MyModuleHomeController.php</strong>
         </li><br />        
         <li>
-            You module must be have an info file (info.ini), at
+            You module must have an info file (info.ini), at
             <strong>app/Plugin/Cloggy/Module/MyModule/info.ini</strong>
         </li><br />
         <li>

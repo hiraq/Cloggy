@@ -4,7 +4,7 @@
     All Cloggy administration activity separated by modules. So what is module?
     Module is like a "plugin" inside a plugin, or an extension for Cloggy. You 
     can create your own module like for guestbook management, page management, or
-    others, there are no limits.
+    others.
 </p>
 
 <h3>Working With Module</h3>
@@ -29,7 +29,11 @@
         <li>View</li>
         <li>View/Helper</li>
     </ul>
-    
+        
+</p>
+
+<h3>Limitations</h3>
+<p>
     All controller,model,view and their extensions (component,behavior,helper), created
     using CakePHP convention, so you should working like usual. But you must remember,
     that Cloggy module is not a part of CakePHP plugin, so you're <strong>not</strong> 
@@ -54,6 +58,13 @@
         http://your_project/cloggy/module/my_module<br />
         http://your_project/cloggy/module/my_module/my_module_controller/action<br />
     </code>
+    <br /><br />
+    If you are working with helpers inside your module controllers, you should use this in
+    inside your <code>beforeFilter</code> method:<br />
+    <code>
+        $this->helpers[] = 'HelperName';
+    </code>
+    <br /><br />
 </p>
 
-<br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br />

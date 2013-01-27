@@ -71,6 +71,7 @@ class CloggyModuleMenuComponent extends Component {
                 $this->parseModuleMenus($moduleName);
             }
         }
+                
     }
 
     /**
@@ -238,6 +239,14 @@ class CloggyModuleMenuComponent extends Component {
                 && array_key_exists($key, $controllerVars['cloggy_menus'])) {
             unset($this->__Controller->viewVars['cloggy_menus'][$key]);
         }
+    }
+    
+    /**
+     * Set removed menus key
+     * @param string $key
+     */
+    public function removeGroup($key) {        
+        $this->__Controller->set('cloggy_removed_group_menus',$key);        
     }
 
     /**

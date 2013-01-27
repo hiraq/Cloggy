@@ -5,7 +5,7 @@
     at line 11 add your module name. Then your code should be like this : <br /><br />
     <code>
         Configure::write('Cloggy.modules', array(<br />
-            'CloggyBlog', 'CloggyUsers', 'CloggyDocs','ModuleTest','YourModule'<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;'CloggyBlog', 'CloggyUsers', 'CloggyDocs','ModuleTest','YourModule'<br />
         ));
     </code>
     <br /><br />

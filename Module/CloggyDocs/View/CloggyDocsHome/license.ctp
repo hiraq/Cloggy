@@ -36,3 +36,4 @@ POSSIBILITY OF SUCH DAMAGE.
     Before this version, Cloggy using MIT license, so for people working with Cloggy
     before version <strong>0.3</strong>, you are using MIT license not BSD license.
 </p>
+<br /><br /><br />
