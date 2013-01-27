@@ -198,6 +198,23 @@ class CloggyAclComponent extends Component {
     }
     
     /**
+     * Check a module requested by current aro
+     * allowed or not
+     * @param string $module
+     * @return boolean
+     */
+    public function isModuleAllowedByAro($module) {
+                
+        $this->generateAro();
+        
+        $Perm = ClassRegistry::init('Cloggy.CloggyUserPerm');
+        $check = $Perm->checkAroPermission($module,'module',$this->__aroId,$this->__aroType);
+        
+        return $check;
+        
+    }
+    
+    /**
      * Setup rules
      */
     public function setRules() {                
@@ -220,7 +237,7 @@ class CloggyAclComponent extends Component {
      */
     public function setFailedCallBack($action) {        
         $this->__actionFailedCallback = $action;        
-    }
+    }        
     
     /**
      * Reset user data

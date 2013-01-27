@@ -6,7 +6,18 @@ App::uses('CakeResponse', 'Network');
 App::uses('ComponentCollection', 'Controller');
 App::uses('CloggyModuleInfoComponent', 'Cloggy.Controller/Component');
 
+/*
+ * models
+ */
+App::uses('CloggyAppModel', 'Cloggy.Model');
+
 class CloggyModuleInfoComponentTest extends CakeTestCase {
+    
+    public $fixtures = array(
+        'plugin.cloggy.cloggy_user',        
+        'plugin.cloggy.cloggy_user_role',
+        'plugin.cloggy.cloggy_user_perm'
+    );
 
     private $__CloggyModuleInfo;
     private $__Controller;

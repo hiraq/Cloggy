@@ -34,45 +34,45 @@ class CloggyUserPermTest extends CakeTestCase {
         $this->assertArrayHasKey('aco_object',$data['CloggyUserPerm']);
         $this->assertArrayHasKey('aco_adapter',$data['CloggyUserPerm']);
         $this->assertEqual($data['CloggyUserPerm']['aco_object'],'controller/action');        
-        $this->assertEqual($data['CloggyUserPerm']['aco_adapter'],'module');
+        $this->assertEqual($data['CloggyUserPerm']['aco_adapter'],'controller');
         
     }        
     
     public function testAccess() {
         
-        $checkRoles = $this->__CloggyUserPerm->checkAroPermission('controller/action','module',1,'roles');
+        $checkRoles = $this->__CloggyUserPerm->checkAroPermission('controller/action','controller',1,'roles');
         $this->assertTrue($checkRoles);
         
-        $checkUsers = $this->__CloggyUserPerm->checkAroPermission('controller/action','module',1,'users');
+        $checkUsers = $this->__CloggyUserPerm->checkAroPermission('controller/action','controller',1,'users');
         $this->assertFalse($checkUsers);
         
-        $checkUsersDeny = $this->__CloggyUserPerm->checkAroPermission('controller/action','module',1,'users','deny');
+        $checkUsersDeny = $this->__CloggyUserPerm->checkAroPermission('controller/action','controller',1,'users','deny');
         $this->assertTrue($checkUsersDeny);
         
-        $checkUsersNotRegistered = $this->__CloggyUserPerm->checkAroPermission('controller/action','module',2,'users');
+        $checkUsersNotRegistered = $this->__CloggyUserPerm->checkAroPermission('controller/action','controller',2,'users');
         $this->assertFalse($checkUsersNotRegistered);
         
-        $checkAcoNotRegistered = $this->__CloggyUserPerm->checkAroPermission('controller2/action2','module',1,'users');
+        $checkAcoNotRegistered = $this->__CloggyUserPerm->checkAroPermission('controller2/action2','controller',1,'users');
         $this->assertTrue($checkAcoNotRegistered);
         
     }
     
     public function testAccessAll() {
         
-        $checkAllowAll = $this->__CloggyUserPerm->isObjectPermAll('controller/action','module','allow');
+        $checkAllowAll = $this->__CloggyUserPerm->isObjectPermAll('controller/action','controller','allow');
         $this->assertTrue($checkAllowAll);
         
-        $checkDenyAll = $this->__CloggyUserPerm->isObjectPermAll('controller/action','module','deny');
+        $checkDenyAll = $this->__CloggyUserPerm->isObjectPermAll('controller/action','controller','deny');
         $this->assertFalse($checkDenyAll);
         
-        $checkUserDeny = $this->__CloggyUserPerm->checkAroPermission('controller3/action3','module',1,'users');
+        $checkUserDeny = $this->__CloggyUserPerm->checkAroPermission('controller3/action3','controller',1,'users');
         $this->assertTrue($checkUserDeny);
         
     }
     
     public function testCheck() {
         
-        $checkAdapter = $this->__CloggyUserPerm->isAdapterExists('module');
+        $checkAdapter = $this->__CloggyUserPerm->isAdapterExists('controller');
         $this->assertTrue($checkAdapter);
         
         $checkAroObject = $this->__CloggyUserPerm->isRoleObjectExists('roles');

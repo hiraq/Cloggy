@@ -52,6 +52,24 @@ class CloggyUserPermFixture extends CakeTestFixture {
                 'aco_adapter' => 'controller',
                 'allow' => 1,
                 'deny' => 0
+            ),
+            array(
+                'id' => 6,
+                'aro_object_id' => 1,
+                'aro_object' => 'roles',
+                'aco_object' => 'TestModule',
+                'aco_adapter' => 'module',
+                'allow' => 0,
+                'deny' => 1
+            ),
+            array(
+                'id' => 7,
+                'aro_object_id' => 1,
+                'aro_object' => 'roles',
+                'aco_object' => 'TestModule2',
+                'aco_adapter' => 'module',
+                'allow' => 1,
+                'deny' => 0
             )
         );
 

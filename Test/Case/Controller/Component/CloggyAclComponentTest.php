@@ -339,6 +339,29 @@ class CloggyAclComponentTest extends CakeTestCase {
         
     }
     
+    public function testModuleIsAllowed() {
+        
+        $user = $this->__getUser();
+        
+        $this->__Controller->request->url = 'url/controller/action';         
+        $this->__Controller->request->params['plugin'] = 'cloggy';
+        $this->__Controller->request->params['controller'] = 'controller';
+        $this->__Controller->request->params['action'] = 'action';
+        $this->__Controller->request->params['name'] = 'TestModule';
+        $this->__Controller->request->query['url'] = 'url/controller/action';
+        
+        $this->__CloggyAcl->setUserData($user);
+        $this->__CloggyAcl->initialize($this->__Controller);
+        $this->__CloggyAcl->generateAro();
+        
+        $checkModule = $this->__CloggyAcl->isModuleAllowedByAro('TestModule');
+        $this->assertFalse($checkModule);
+        
+        $checkModule = $this->__CloggyAcl->isModuleAllowedByAro('TestModule2');
+        $this->assertTrue($checkModule);
+        
+    }
+    
     private function __getUser($id=1) {
         return $this->__CloggyUser->find('first',array(
             'contain' => array(

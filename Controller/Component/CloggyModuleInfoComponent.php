@@ -11,6 +11,12 @@ App::uses('Component', 'Controller');
  * @subpackage Component
  */
 class CloggyModuleInfoComponent extends Component {
+    
+    /**
+     * Cloggy acl component
+     * @var CloggyAclComponent 
+     */
+    public $components = array('Cloggy.CloggyAcl');
 
     /**
      * Store registered modules
@@ -28,14 +34,24 @@ class CloggyModuleInfoComponent extends Component {
         $modules = Configure::read('Cloggy.modules');
         if (!empty($modules) && is_array($modules)) {
             foreach ($modules as $module) {
-                if (!array_key_exists($module, $this->__modules)) {
-                    $this->_configureModuleInfo($module);
-                    $this->__modules[$module]['name'] = $this->getModuleName();
-                    $this->__modules[$module]['desc'] = $this->getModuleDesc();
-                    $this->__modules[$module]['author'] = $this->getModuleAuthor();
-                    $this->__modules[$module]['url'] = $this->getModuleUrl();
-                    $this->__modules[$module]['dep'] = $this->getModuleDependency();
+                
+                //check if module allowed or not
+                $checkModuleAllowed = $this->CloggyAcl->isModuleAllowedByAro($module);
+                
+                /*
+                 * only list allowed modules
+                 */
+                if($checkModuleAllowed) {
+                    if (!array_key_exists($module, $this->__modules)) {
+                        $this->__configureModuleInfo($module);
+                        $this->__modules[$module]['name'] = $this->getModuleName();
+                        $this->__modules[$module]['desc'] = $this->getModuleDesc();
+                        $this->__modules[$module]['author'] = $this->getModuleAuthor();
+                        $this->__modules[$module]['url'] = $this->getModuleUrl();
+                        $this->__modules[$module]['dep'] = $this->getModuleDependency();
+                    }
                 }
+                
             }
         }
     }
@@ -127,7 +143,7 @@ class CloggyModuleInfoComponent extends Component {
      * @access private
      * @param string $moduleName
      */
-    private function _configureModuleInfo($moduleName) {
+    private function __configureModuleInfo($moduleName) {
         App::uses('IniReader', 'Configure');
         Configure::config('ini', new IniReader(CLOGGY_PATH_MODULE . $moduleName . DS));
         Configure::load('info.ini', 'ini');
