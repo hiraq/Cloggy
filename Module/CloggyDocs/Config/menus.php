@@ -18,8 +18,9 @@ Configure::write('Cloggy.CloggyDocs.menus', array(
             'Activation' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_module/activation'),
         ),
         'Database' => array(
-            'Nodes' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_db'),
-            'Behavior' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_db/behavior'),
+            'Concept' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_db'),
+            'Model' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_db/model'),
+            'Behavior' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_db/behavior')            
         ),
         'Users' => array(
             'User Managements' => CloggyCommon::urlModule('cloggy_docs','cloggy_docs_users'),

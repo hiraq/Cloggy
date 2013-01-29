@@ -19,7 +19,7 @@
 		
         //manipulate dom
         jQuery(document).ready(function() {
-            jQuery('#cloggy-module').css('margin-top','60px');																	
+            jQuery('#cloggy-module').css('margin-top','20px');																	
         });
 		
     });			
