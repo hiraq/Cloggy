@@ -14,7 +14,7 @@ class CloggyDocsDbController extends CloggyAppController {
     }
     
     public function model() {
-        $this->set('title_for_layout', 'CloggyDocs - Model');
+        $this->set('title_for_layout', 'CloggyDocs - Model And Behavior');
     }
     
 }
