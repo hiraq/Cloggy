@@ -19,8 +19,7 @@ Configure::write('Cloggy.CloggyDocs.menus', array(
         ),
         'Database' => array(
             'Concept' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_db'),
-            'Model' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_db/model'),
-            'Behavior' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_db/behavior')            
+            'Model/Behavior' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_db/model'),            
         ),
         'Users' => array(
             'User Managements' => CloggyCommon::urlModule('cloggy_docs','cloggy_docs_users'),
