@@ -8,13 +8,12 @@ Requirements
 
 PHP 5 (recommendation is using at least 5.3) & CakePHP ver2.2.x
 
-Test
-====
+Development Environment
+=======================
 
-1. Components, models, and helpers (100% code coverage) using PHPUnit 3.7.8 & XDebug
-2. Tested at CakePHP 2.2.5
-3. Tested at PHP 5.3
-4. Tested at Ubuntu 12.10
+1. Tested at CakePHP 2.2.5
+2. Tested at PHP 5.3
+3. Tested at Ubuntu 12.10
 
 Status
 ======
