@@ -11,12 +11,15 @@ PHP 5 (recommendation is using at least 5.3) & CakePHP ver2.2.x
 Development Environment
 =======================
 
-1. Tested at CakePHP 2.2.5
-2. Tested at PHP 5.3
-3. Tested at Ubuntu 12.10
+1. CakePHP version: 2.2.5
+2. PHP version: PHP 5.3
+3. OS: Ubuntu 12.10
+4. Web server: nginx
+5. Database: MySQL
+6. Cache: File
 
-Status
-======
+Version Status
+==============
 
 Current Development : [v0.4](https://github.com/hiraq/Cloggy/tree/dev)
 
