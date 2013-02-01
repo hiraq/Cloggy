@@ -26,6 +26,7 @@ Configure::write('Cloggy.CloggyDocs.menus', array(
             'User Access' => CloggyCommon::urlModule('cloggy_docs','cloggy_docs_users/access')
         ),
         'UI' => array(
+            'Management' => CloggyCommon::urlModule('cloggy_docs','cloggy_docs_ui'),
             'Menu config' => CloggyCommon::urlModule('cloggy_docs','cloggy_docs_ui/menus'),
             'Elements' => CloggyCommon::urlModule('cloggy_docs','cloggy_docs_ui/elements'),
             'Javascript' => CloggyCommon::urlModule('cloggy_docs','cloggy_docs_ui/js')

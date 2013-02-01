@@ -57,3 +57,41 @@
     <?php echo $this->Html->link('here',  CloggyCommon::urlModule('cloggy_users', 'cloggy_users_perm')); ?>.    
     <br /><br />
 </p>
+
+<h3>Setup User Access</h3>
+
+<p>
+    I hope you understand about ARO and ACO, and now for your how to setup user access? Ever user access
+    management handled by CloggyUsers. If you want to setup your ARO to some ACO then go to 
+    <?php echo $this->Html->link('here',  CloggyCommon::urlModule('cloggy_users', 'cloggy_users_perm/create')); ?>.
+    On that page, you will be asking what ARO you want to setup, you can use 'All' option and it means, every
+    user role can access your ACO, or just want to setup some ARO let say an administrator.<br /><br />
+    After you choose your ARO, then choose what type of ACO you want to give access. There are three types
+    of aco you can choose (please read above about ACO). Here a example for each ACO:<br />
+    <ol>
+        <li>Controller: controller_name/action, for example is <code>cloggy_docs_users/access</code></li>
+        <li>Module: module name, for example is: <code>CloggyBlog</code></li>
+        <li>
+            Url: requested url (query url not full url). Each time request in CakePHP there is a query url
+            such as http://myhost/cloggy/dashboard then the query url must be: <code>cloggy/dashboard</code>
+        </li>
+    </ol>
+    <br />
+    Then you choose what type of access given to ARO, there are only two options : <strong>allow</strong>
+    and <strong>deny</strong>. After that, just click button 'Create', and now your ARO has a special
+    permission to ACO.
+</p>
+
+<h3>Callback</h3>
+
+<p>
+    Each time your ARO try to access to some ACO that they are doesn't have any permission or maybe
+    your ARO has beny 'denied' from that ACO, then your users will be redirect back to dashboard. This
+    is a default action.<br /><br />
+    You can setup an action as callback when ARO failed to access ACO. In your controller <code>beforeFilter</code>
+    method, just use this: <br />
+    <code>$this->CloggyAcl->setFailedCallBack('callbackAcl');</code>
+    <br /><br />
+    When 'callbackAcl' is a name of your action/method inside your controller.
+    <br /><br /><br /><br />
+</p>
