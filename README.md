@@ -12,16 +12,16 @@ Test
 ====
 
 1. Components, models, and helpers (100% code coverage) using PHPUnit 3.7.8 & XDebug
-2. Tested at CakePHP 2.2.3
+2. Tested at CakePHP 2.2.5
 3. Tested at PHP 5.3
 4. Tested at Ubuntu 12.10
 
 Status
 ======
 
-Current Development : [v0.3](https://github.com/hiraq/Cloggy/tree/v0.3)
+Current Development : [v0.4](https://github.com/hiraq/Cloggy/tree/dev)
 
-Latest Version : [v0.2](https://github.com/hiraq/Cloggy/tree/v0.2)
+Latest Version : [v0.3](https://github.com/hiraq/Cloggy/tree/v0.3)
 
 Wiki
 ====
