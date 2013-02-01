@@ -13,4 +13,12 @@ class CloggyDocsUiController extends CloggyAppController {
         $this->set('title_for_layout', 'CloggyDocs - UI Management');
     }
     
+    public function menus() {
+        $this->set('title_for_layout', 'CloggyDocs - Menus Management');
+    }
+    
+    public function js() {
+        $this->set('title_for_layout', 'CloggyDocs - Javascript Management');
+    }
+    
 }
