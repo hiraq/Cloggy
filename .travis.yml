@@ -69,7 +69,7 @@ before_script:
     }" > ../cakephp/app/Config/database.php
 
 script:
-  - ./app/Console/cake test Cloggy AllComponent --stderr
+  - ./app/Console/cake test Cloggy AllCloggy --stderr
 
 notifications:
   email: false
