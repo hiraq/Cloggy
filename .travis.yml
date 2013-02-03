@@ -56,10 +56,10 @@ before_script:
         \$this->{\$source} = \$config;
       }
     }
-    }" > ../cakephp/app/Config/database.php
+    }" > ./app/Config/database.php
 
 script:
-  - ./app/Console/cake test Cloggy AllComponent --stderr
+  - ./lib/Cake/Console/cake test Cloggy AllComponent --stderr
 
 notifications:
   email: false
