@@ -9,7 +9,7 @@ env:
   - CAKE_VERSION=master DB=pgsql
 
 before_script:
-  - phpunit --version
+  - php -r "var_dump(class_exists('PHPUnit_Util_Skeleton_Test'));"
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'CREATE DATABASE cakephp_test;'; fi"
   - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'CREATE DATABASE cakephp_test;' -U postgres; fi"
   - git clone --depth 1 git://github.com/cakephp/cakephp ../cakephp && cd ../cakephp && git checkout $CAKE_VERSION
