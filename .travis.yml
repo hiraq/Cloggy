@@ -8,7 +8,8 @@ env:
   - CAKE_VERSION=master DB=mysql  
 
 before_script:  
-  - mysql -e 'create database myapp_test;'  
+  - mysql -e 'create database cloggy_main;' 
+  - mysql -e 'create database cloggy_tests;'
   - git clone --depth 1 git://github.com/cakephp/cakephp ../cakephp && cd ../cakephp && git checkout $CAKE_VERSION
   - cp -R ../Cloggy plugins/Cloggy
   - chmod -R 777 ../cakephp/app/tmp
@@ -39,7 +40,7 @@ before_script:
       'host' => '',
       'login' => '',
       'password' => '',
-      'database' => 'cakephp_test',
+      'database' => 'cloggy_main',
       'prefix' => ''
     );
     public \$test = array(
@@ -47,7 +48,7 @@ before_script:
       'host' => '',
       'login' => '',
       'password' => '',
-      'database' => 'cakephp_test',
+      'database' => 'cloggy_tests',
       'prefix' => ''
     );
     public function __construct() {
