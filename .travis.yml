@@ -11,10 +11,12 @@ before_script:
   - mysql -e 'create database cloggy_main;' 
   - mysql -e 'create database cloggy_tests;'
   - git clone --depth 1 git://github.com/cakephp/cakephp ../cakephp && cd ../cakephp && git checkout $CAKE_VERSION
-  - cp -R ../Cloggy plugins/Cloggy
+  - cp -R ../Cloggy app/Plugin/Cloggy
   - chmod -R 777 ../cakephp/app/tmp
-  - ls -l
-  - mysql -u root cloggy_main < plugins/Cloggy/Config/sql/cloggy_main.sql    
+#  - ls -l
+  - mysql -u root cloggy_main < app/Plugin/Cloggy/Config/sql/cloggy_main.sql    
+  - mv app/Config/bootstrap.php app/Config/bootstrap.original.php
+  - cp -R app/Plugin/Cloggy/travis.bootstrap.php ../../../app/Config/bootstrap.php
   - set +H
   - echo "<?php
     class DATABASE_CONFIG {
