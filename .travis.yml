@@ -12,6 +12,7 @@ env:
   - CAKE_VERSION=master DB=mysql
 
 before_script:
+  - bundle exec rake db:migrate
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'CREATE DATABASE cloggy_test;'; fi"
   - cd ..
   - git clone git://github.com/cakephp/cakephp.git cakephp
