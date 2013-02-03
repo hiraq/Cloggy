@@ -16,7 +16,7 @@ before_script:
 #  - ls -l
   - mysql -u root cloggy_main < app/Plugin/Cloggy/Config/sql/cloggy_main.sql    
   - mv app/Config/bootstrap.php app/Config/bootstrap.original.php
-  - cp -R app/Plugin/Cloggy/travis.bootstrap.php ../../../app/Config/bootstrap.php
+  - cp -R app/Plugin/Cloggy/travis.bootstrap.php app/Config/bootstrap.php
   - set +H
   - echo "<?php
     class DATABASE_CONFIG {
