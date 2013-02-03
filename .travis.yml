@@ -1,15 +1,5 @@
 language: php
-
 php:
-  - 5.3
-  - 5.4
-
-branches:
-  only:
-    - dev
-
-env:  
-  - CAKE_VERSION=master DB=mysql
-
-notifications:
-  email: false
+  - "5.5"
+  - "5.4"
+  - "5.3"
