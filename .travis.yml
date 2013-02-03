@@ -5,15 +5,14 @@ php:
   - 5.4
 
 env:
-  - CAKE_VERSION=master DB=mysql
-  - CAKE_VERSION=master DB=pgsql
+  - CAKE_VERSION=master DB=mysql  
 
 before_script:  
-  - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'CREATE DATABASE cakephp_test;'; fi"
-  - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'CREATE DATABASE cakephp_test;' -U postgres; fi"
+  - mysql -e 'create database myapp_test;'  
   - git clone --depth 1 git://github.com/cakephp/cakephp ../cakephp && cd ../cakephp && git checkout $CAKE_VERSION
   - cp -R ../Cloggy plugins/Cloggy
   - chmod -R 777 ../cakephp/app/tmp
+  - mysql -u root cakephp_test < ../cakephp/app/Plugin/Cloggy/Config/sql/cloggy_main.sql
   - set +H
   - echo "<?php
     class DATABASE_CONFIG {
