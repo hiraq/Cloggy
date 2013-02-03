@@ -14,7 +14,7 @@ before_script:
   - cp -R ../Cloggy plugins/Cloggy
   - chmod -R 777 ../cakephp/app/tmp
   - ls -l
-  - mysql -u root cakephp_test < plugins/Cloggy/Config/sql/cloggy_main.sql    
+  - mysql -u root cloggy_main < plugins/Cloggy/Config/sql/cloggy_main.sql    
   - set +H
   - echo "<?php
     class DATABASE_CONFIG {
