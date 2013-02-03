@@ -11,60 +11,8 @@ branches:
 env:  
   - CAKE_VERSION=master DB=mysql
 
-before_script:
-  - bundle exec rake db:migrate
-  - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'CREATE DATABASE cloggy_test;'; fi"
-  - cd ..
-  - git clone git://github.com/cakephp/cakephp.git cakephp
-  - mv Cloggy cakephp/app/Plugin/Cloggy
-  - cd cakephp   
-  - chmod -R 777 ./app/tmp
-  - set +H
-  - echo "<?php
-    class DATABASE_CONFIG {
-    private \$identities = array(
-      'mysql' => array(
-        'datasource' => 'Database/Mysql',
-        'host' => '0.0.0.0',
-        'login' => 'travis'
-      ),      
-    );
-    public \$default = array(
-      'persistent' => false,
-      'host' => '',
-      'login' => '',
-      'password' => '',
-      'database' => 'cloggy_test',
-      'prefix' => ''
-    );
-    public \$test = array(
-      'persistent' => false,
-      'host' => '',
-      'login' => '',
-      'password' => '',
-      'database' => 'cloggy_test',
-      'prefix' => ''
-    );
-    public function __construct() {
-      \$db = 'mysql';
-      if (!empty(\$_SERVER['DB'])) {
-        \$db = \$_SERVER['DB'];
-      }
-      foreach (array('default', 'test') as \$source) {
-        \$config = array_merge(\$this->{\$source}, \$this->identities[\$db]);
-        if (is_array(\$config['database'])) {
-          \$config['database'] = \$config['database'][\$source];
-        }
-        if (!empty(\$config['schema']) && is_array(\$config['schema'])) {
-          \$config['schema'] = \$config['schema'][\$source];
-        }
-        \$this->{\$source} = \$config;
-      }
-    }
-    }" > ./app/Config/database.php
-
-script:
-  - ./lib/Cake/Console/cake test Cloggy AllComponent --stderr
+before_script: bundle exec rake db:migrate
+script: bundle exec rake test
 
 notifications:
   email: false
