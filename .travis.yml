@@ -12,7 +12,8 @@ before_script:
   - git clone --depth 1 git://github.com/cakephp/cakephp ../cakephp && cd ../cakephp && git checkout $CAKE_VERSION
   - cp -R ../Cloggy plugins/Cloggy
   - chmod -R 777 ../cakephp/app/tmp
-  - mysql -u root cakephp_test < ../cakephp/app/Plugin/Cloggy/Config/sql/cloggy_main.sql
+#  - mysql -u root cakephp_test < ../cakephp/app/Plugin/Cloggy/Config/sql/cloggy_main.sql
+  - pwd
   - set +H
   - echo "<?php
     class DATABASE_CONFIG {
