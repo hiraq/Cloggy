@@ -3,7 +3,8 @@
     <filter>
         <blacklist>
             <directory suffix=".php">../../../lib/</directory>                        
-            <directory suffix=".php">Test/Fixture</directory>                        
+            <directory suffix=".php">Test/Fixture</directory>  
+            <directory suffix=".php">Model</directory>  
             <directory suffix=".php">Controller/Component/Acl</directory>            
             <file>Test/Case/AllComponentTest.php</file>
             <file>Test/Case/AllHelperTest.php</file>
@@ -12,3 +13,4 @@
         </blacklist>        
     </filter>
 </phpunit>
+
