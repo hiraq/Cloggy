@@ -19,7 +19,8 @@ Test
 Status
 ======
 
-Travis CI status : [![Build Status](https://travis-ci.org/hiraq/Cloggy.png?branch=dev)](https://travis-ci.org/hiraq/Cloggy)
+[![Build Status](https://travis-ci.org/hiraq/Cloggy.png?branch=dev)](https://travis-ci.org/hiraq/Cloggy)
+
 Current Development : [v0.3](https://github.com/hiraq/Cloggy/tree/v0.3)
 
 Latest Version : [v0.2](https://github.com/hiraq/Cloggy/tree/v0.2)
