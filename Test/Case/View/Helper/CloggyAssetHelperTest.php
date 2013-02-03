@@ -23,10 +23,7 @@ class CloggyAssetHelperTest extends CakeTestCase {
 
         $this->__CloggyAsset = new CloggyAssetHelper($View);
         $this->__base = Router::url('/', true) . Configure::read('Cloggy.url_prefix') . '/' . Configure::read('Cloggy.theme_used');                
-        
-        if (empty($CakeRequest->query)) {
-            $this->skipIf(true);
-        }
+                
     }
 
     public function testVendor() {
@@ -34,11 +31,11 @@ class CloggyAssetHelperTest extends CakeTestCase {
         $vendorUrl = $this->__CloggyAsset->getVendorUrl('test');
         $this->assertEqual($vendorUrl, $this->__base . '/vendor/test');
 
-        $vendorCssLink = $this->__CloggyAsset->getVendorHtmlTag('test', 'css');
-        $this->assertEqual(htmlentities($vendorCssLink), htmlentities('<link rel="stylesheet" type="text/css" href="/cloggy/default/vendor/test.css" />'));
+        $vendorCssLink = $this->__CloggyAsset->getVendorHtmlTag('test', 'css');        
+        $this->assertEqual(htmlentities($this->__replaceConsole($vendorCssLink)), htmlentities('<link rel="stylesheet" type="text/css" href="/cloggy/default/vendor/test.css" />'));
 
         $vendorJsLink = $this->__CloggyAsset->getVendorHtmlTag('test', 'js');
-        $this->assertEqual(htmlentities($vendorJsLink), htmlentities('<script type="text/javascript" src="/cloggy/default/vendor/test.js"></script>'));
+        $this->assertEqual(htmlentities($this->__replaceConsole($vendorJsLink)), htmlentities('<script type="text/javascript" src="/cloggy/default/vendor/test.js"></script>'));
 
         $vendorUnknownType = $this->__CloggyAsset->getVendorHtmlTag('test', 'tst');
         $this->assertFalse($vendorUnknownType);
@@ -50,7 +47,7 @@ class CloggyAssetHelperTest extends CakeTestCase {
         $this->assertEqual($jsUrl, $this->__base . '/app/js/test.js');
 
         $jsTag = $this->__CloggyAsset->getJsHtmlTag('test');
-        $this->assertEqual($jsTag, '<script type="text/javascript" src="/cloggy/default/app/js/test.js"></script>');
+        $this->assertEqual($this->__replaceConsole($jsTag), '<script type="text/javascript" src="/cloggy/default/app/js/test.js"></script>');
     }
 
     public function testCss() {
@@ -59,7 +56,18 @@ class CloggyAssetHelperTest extends CakeTestCase {
         $this->assertEqual($cssUrl, $this->__base . '/app/css/test.css');
 
         $cssTag = $this->__CloggyAsset->getCssHtmlTag('test');
-        $this->assertEqual(htmlentities($cssTag), htmlentities('<link rel="stylesheet" type="text/css" href="/cloggy/default/app/css/test.css" />'));
+        $this->assertEqual(htmlentities($this->__replaceConsole($cssTag)), htmlentities('<link rel="stylesheet" type="text/css" href="/cloggy/default/app/css/test.css" />'));
+    }
+    
+    private function __replaceConsole($link) {
+        
+        $consolePath = APP.'Console';
+        if (strstr($link,$consolePath)) {
+            return str_replace($consolePath,'',$link);
+        }
+        
+        return $link;
+        
     }
 
 }

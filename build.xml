@@ -10,14 +10,9 @@
         </delete>
     </target>
     
-    <target name="clean_reports">
-        <delete verbose="true" failonerror="true">
-            <fileset dir="webroot/test_reports">
-                <include name="${deleted}/*" />                                
-            </fileset>
-        </delete>
-        <delete dir="webroot/test_reports/${deleted}/coverage_ui" verbose="true" />        
-    </target>
+    <target name="clean_reports">        
+        <delete dir="webroot/test_reports/${deleted}" verbose="true" />        
+    </target>        
     
     <target name="chmod_caches">
         <chmod mode="0777" verbose="true">
@@ -47,7 +42,8 @@
             <property name="group" value="components" />
             <property name="phpunit_config" value="phpunit.component.xml" />
         </phingcall>
-        <phingcall target="chmod_caches" />                   
+        <phingcall target="chmod_caches" />  
+        <phingcall target="clean_cache" />  
     </target>
     
     <target name="test_helpers" depends="clean_cache">
@@ -57,9 +53,10 @@
         <phingcall target="run_cake_test">
             <property name="test_name" value="AllHelper" />
             <property name="group" value="helpers" />
-            <property name="phpunit_config" value="phpunit.xml" />
+            <property name="phpunit_config" value="phpunit.helper.xml" />
         </phingcall>    
-        <phingcall target="chmod_caches" />                
+        <phingcall target="chmod_caches" />    
+        <phingcall target="clean_cache" />  
     </target>
     
     <target name="test_libs" depends="clean_cache">
@@ -71,7 +68,8 @@
             <property name="group" value="libs" />
             <property name="phpunit_config" value="phpunit.xml" />
         </phingcall>   
-        <phingcall target="chmod_caches" />                          
+        <phingcall target="chmod_caches" />          
+        <phingcall target="clean_cache" /> 
     </target>
     
     <target name="test_models" depends="clean_cache">
@@ -83,7 +81,8 @@
             <property name="group" value="models" />
             <property name="phpunit_config" value="phpunit.xml" />
         </phingcall>    
-        <phingcall target="chmod_caches" />                      
+        <phingcall target="chmod_caches" />       
+        <phingcall target="clean_cache" />  
     </target>
     
     <target name="test" description="testing">

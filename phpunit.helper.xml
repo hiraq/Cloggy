@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit>
+    <filter>
+        <blacklist>
+            <directory suffix=".php">../../../lib/</directory>                        
+            <directory suffix=".php">Test/Fixture</directory>  
+            <directory suffix=".php">Model</directory>  
+            <directory suffix=".php">Controller</directory>            
+            <file>Test/Case/AllComponentTest.php</file>
+            <file>Test/Case/AllHelperTest.php</file>
+            <file>Test/Case/AllLibTest.php</file>
+            <file>Test/Case/AllModelTest.php</file>
+        </blacklist>        
+    </filter>
+</phpunit>
