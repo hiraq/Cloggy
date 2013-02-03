@@ -11,8 +11,5 @@ branches:
 env:  
   - CAKE_VERSION=master DB=mysql
 
-before_script: bundle exec rake db:migrate
-script: bundle exec rake test
-
 notifications:
   email: false
