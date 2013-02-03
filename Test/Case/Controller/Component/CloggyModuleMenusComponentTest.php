@@ -24,6 +24,7 @@ class CloggyModuleMenusComponentTest extends CakeTestCase {
 
         $this->__Controller = new Controller($CakeRequest, $CakeResponse);
         $this->__CloggyModuleMenu->initialize($this->__Controller);
+                
     }
 
     public function testViewVars() {

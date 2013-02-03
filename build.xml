@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Cloggy" default="test">    
+    
+    <target name="clean_cache">
+        <delete verbose="true" failonerror="true">
+            <fileset dir="../../../app/tmp/cache">
+                <include name="models/*" />
+                <include name="persistent/*" />
+            </fileset>
+        </delete>
+    </target>
+    
+    <target name="clean_reports">
+        <delete verbose="true" failonerror="true">
+            <fileset dir="webroot/test_reports">
+                <include name="${deleted}/*" />                                
+            </fileset>
+        </delete>
+        <delete dir="webroot/test_reports/${deleted}/coverage_ui" verbose="true" />        
+    </target>
+    
+    <target name="chmod_caches">
+        <chmod mode="0777" verbose="true">
+            <fileset dir="../../../app/tmp/cache">
+                <include name="models/*" />
+                <include name="persistent/*" />
+            </fileset>
+        </chmod>           
+    </target>
+    
+    <target name="test_components" depends="clean_cache">
+        <phingcall target="clean_reports">
+            <property name="deleted" value="components" />
+        </phingcall> 
+        <exec command="./../../../app/Console/cake 
+            test Cloggy AllComponent 
+            --stderr 
+            --configuration phpunit.xml
+            --log-junit webroot/test_reports/components/junit.xml
+            --coverage-html webroot/test_reports/components/coverage_ui
+            --coverage-clover webroot/test_reports/components/clover.xml" passthru="true" />                    
+    </target>
+    
+    <target name="test_helpers" depends="clean_cache">
+        <phingcall target="clean_reports">
+            <property name="deleted" value="helpers" />
+        </phingcall>   
+        <exec command="./../../../app/Console/cake 
+            test Cloggy AllHelper
+            --stderr 
+            --configuration phpunit.xml
+            --log-junit webroot/test_reports/helpers/junit.xml
+            --coverage-html webroot/test_reports/helpers/coverage_ui
+            --coverage-clover webroot/test_reports/helpers/clover.xml" passthru="true" />            
+    </target>
+    
+    <target name="test_libs" depends="clean_cache">
+        <phingcall target="clean_reports">
+            <property name="deleted" value="libs" />
+        </phingcall> 
+        <exec command="./../../../app/Console/cake 
+            test Cloggy AllLib
+            --stderr 
+            --configuration phpunit.xml
+            --log-junit webroot/test_reports/libs/junit.xml
+            --coverage-html webroot/test_reports/libs/coverage_ui
+            --coverage-clover webroot/test_reports/libs/clover.xml" passthru="true" />          
+    </target>
+    
+    <target name="test_models" depends="clean_cache">
+        <phingcall target="clean_reports">
+            <property name="deleted" value="models" />
+        </phingcall> 
+        <exec command="./../../../app/Console/cake 
+            test Cloggy AllModel
+            --stderr 
+            --configuration phpunit.xml
+            --log-junit webroot/test_reports/models/junit.xml
+            --coverage-html webroot/test_reports/models/coverage_ui
+            --coverage-clover webroot/test_reports/models/clover.xml" passthru="true" />        
+    </target>
+    
+    <target name="test" description="testing">
+        <echo>Cloggy Automate Build</echo>
+        <phingcall target="test_components" />
+        <phingcall target="test_helpers" />
+        <phingcall target="test_libs" />
+        <phingcall target="test_models" />
+        <phingcall target="chmod_caches" />
+    </target>
+
+</project>

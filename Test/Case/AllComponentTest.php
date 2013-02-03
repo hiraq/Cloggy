@@ -6,7 +6,8 @@ class AllComponentTest extends CakeTestSuite {
         $suite = new CakeTestSuite('All Cloggy component tests');
         $suite->addTestDirectory(APP . 'Plugin' . DS . 'Cloggy' . DS .
                 'Test' . DS . 'Case' . DS . 'Controller' . DS . 'Component');
+                
         return $suite;
-    }
+    }           
 
 }

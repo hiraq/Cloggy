@@ -17,16 +17,20 @@ class CloggyAssetHelperTest extends CakeTestCase {
 
         $CakeRequest = new CakeRequest();
         $CakeResponse = new CakeResponse();
-
+        
         $Controller = new Controller($CakeRequest, $CakeResponse);
         $View = new View($Controller);
 
         $this->__CloggyAsset = new CloggyAssetHelper($View);
-        $this->__base = Router::url('/', true) . Configure::read('Cloggy.url_prefix') . '/' . Configure::read('Cloggy.theme_used');
+        $this->__base = Router::url('/', true) . Configure::read('Cloggy.url_prefix') . '/' . Configure::read('Cloggy.theme_used');                
+        
+        if (empty($CakeRequest->query)) {
+            $this->skipIf(true);
+        }
     }
 
     public function testVendor() {
-
+        
         $vendorUrl = $this->__CloggyAsset->getVendorUrl('test');
         $this->assertEqual($vendorUrl, $this->__base . '/vendor/test');
 

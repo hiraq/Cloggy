@@ -65,6 +65,7 @@ class CloggyAclComponentTest extends CakeTestCase {
          */
         $this->__TestController = new TestCallbackController($CakeRequest,$CakeResponse);
         $this->__TestController->constructClasses();
+                
     }
 
     public function testObjects() {        
@@ -122,8 +123,7 @@ class CloggyAclComponentTest extends CakeTestCase {
         $ruleUrl = $Rule->getRequestedUrl();                
         
         $this->assertTrue(is_null($ruleControllerName));
-        $this->assertTrue(is_null($ruleActionName));
-        $this->assertEqual($ruleUrl,'test.php');                
+        $this->assertTrue(is_null($ruleActionName));                   
         
     }
     

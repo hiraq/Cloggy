@@ -35,6 +35,7 @@ class CloggyModuleInfoComponentTest extends CakeTestCase {
 
         $this->__Controller = new Controller($CakeRequest, $CakeResponse);
         $this->__CloggyModuleInfo->startup($this->__Controller);
+                
     }
 
     public function testRegisteredModules() {
