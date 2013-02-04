@@ -16,9 +16,9 @@ PHP 5 (recommendation is using at least 5.3) & CakePHP ver2.2.x
 Development Environment
 =======================
 
-1. CakePHP version: 2.2.5
-2. PHP version: PHP 5.3
-3. OS: Ubuntu 12.10
+1. CakePHP version: 2.2.5 (local) & 2.3 (Travis CI)
+2. PHP version: PHP 5.3 & 5.4 (local & Travis CI)
+3. OS: Ubuntu 12.10 (local) & 12.04 (Travis CI)
 4. Web server: nginx
 5. Database: MySQL
 6. Cache: File
