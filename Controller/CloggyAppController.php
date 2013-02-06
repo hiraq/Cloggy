@@ -39,6 +39,9 @@ class CloggyAppController extends AppController {
 
         //load requested modules
         $this->__cloggyModuleRequested();
+        
+        //load boostrap.php from module/config
+        $this->__module_bootstrap();
 
         /*
          * check if user has loggedIn
@@ -61,19 +64,36 @@ class CloggyAppController extends AppController {
                 
     }
     
+    /**
+     * ACL callback when failed
+     */
     public function callbackAcl() {
-        $this->Session->setFlash('You do not have permission to access that page.','default',array('class' => 'alert'),'dashNotif');
+        
+        $this->Session->setFlash(
+                'You do not have permission to access that page.',
+                'default',array('class' => 'alert'),'dashNotif');
+        
         $this->redirect($this->_base);
     }
     
+    /**
+     * ACL by url
+     */
     private function __cloggyAclUrl() {        
         $this->__cloggyAcl('url');        
     }
     
+    /**
+     * ACL by module
+     */
     private function __cloggyAclModule() {        
         $this->__cloggyAcl('module');        
     }
     
+    /**
+     * Run CloggyAclComponent check for ARO and ACO
+     * @param string $adapter
+     */
     private function __cloggyAcl($adapter) {
         
         $this->CloggyAcl->generateAro();
@@ -81,12 +101,19 @@ class CloggyAppController extends AppController {
         
         $isAllowed = $this->CloggyAcl->isAroAllowed();
         
+        /*
+         * if requested ACO by ARO denied then 
+         * run callback
+         */
         if (!$isAllowed) {
             $this->CloggyAcl->proceedCallback();
         }
         
     }
 
+    /**
+     *  Setup dashboard menus
+     */
     private function __cloggyMenus() {
 
         /*
@@ -98,6 +125,9 @@ class CloggyAppController extends AppController {
         ));
     }
 
+    /**
+     * Set modules when module url detected
+     */
     private function __cloggyModuleRequested() {                
 
         //generate modules
@@ -137,7 +167,35 @@ class CloggyAppController extends AppController {
             }
         }
     }
+    
+    /**
+     * Load bootstrap.php from module/config
+     */
+    private function __module_bootstrap() {
+        
+        if (!empty($this->_requestedModule)) {
+            
+            /*
+             * setup path
+             */
+            $moduleName = Inflector::camelize($this->_requestedModule);
+            $modulePath = CLOGGY_PATH_MODULE.$moduleName.DS;
+            $moduleBoostrapFile = $modulePath.'Config'.DS.'bootstrap.php';
+            
+            /*
+             * if boostrap file exists then load it
+             */
+            if (file_exists($moduleBoostrapFile)) {
+                require_once $moduleBoostrapFile;
+            }
+            
+        }
+        
+    }
 
+    /**
+     * Auth component settings
+     */
     private function __authSettings() {
 
         $this->Auth->authenticate = array(
