@@ -43,12 +43,14 @@ class CloggyModuleInfoComponent extends Component {
                  */
                 if($checkModuleAllowed) {
                     if (!array_key_exists($module, $this->__modules)) {
+                        
                         $this->__configureModuleInfo($module);
                         $this->__modules[$module]['name'] = $this->getModuleName();
                         $this->__modules[$module]['desc'] = $this->getModuleDesc();
                         $this->__modules[$module]['author'] = $this->getModuleAuthor();
                         $this->__modules[$module]['url'] = $this->getModuleUrl();
                         $this->__modules[$module]['dep'] = $this->getModuleDependency();
+                        
                     }
                 }
                 
@@ -72,7 +74,7 @@ class CloggyModuleInfoComponent extends Component {
      */
     public function isModuleExists($module) {
         return array_key_exists($module, $this->__modules);
-    }
+    }        
 
     /**
      * Get module info

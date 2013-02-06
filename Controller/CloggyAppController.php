@@ -62,7 +62,7 @@ class CloggyAppController extends AppController {
     }
     
     public function callbackAcl() {
-        $this->Session->setFlash('You do not have permission to access that page.','default',array(),'aclNotifSuccess');
+        $this->Session->setFlash('You do not have permission to access that page.','default',array('class' => 'alert'),'dashNotif');
         $this->redirect($this->_base);
     }
     
