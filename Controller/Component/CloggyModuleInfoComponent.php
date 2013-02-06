@@ -25,6 +25,12 @@ class CloggyModuleInfoComponent extends Component {
      * @var array
      */
     private $__modules = array();
+    
+    /**
+     * Store broken dependencies
+     * @var array 
+     */
+    private $__moduleDepsBroken = array();
 
     /**
      * Setup and get all registered modules
@@ -49,7 +55,10 @@ class CloggyModuleInfoComponent extends Component {
                         $this->__modules[$module]['desc'] = $this->getModuleDesc();
                         $this->__modules[$module]['author'] = $this->getModuleAuthor();
                         $this->__modules[$module]['url'] = $this->getModuleUrl();
-                        $this->__modules[$module]['dep'] = $this->getModuleDependency();
+                        $this->__modules[$module]['dep'] = $this->getModuleDependency();      
+                        
+                        //check dependent
+                        $this->__checkDependentModule($module);
                         
                     }
                 }
@@ -64,6 +73,14 @@ class CloggyModuleInfoComponent extends Component {
      */
     public function getModules() {
         return $this->__modules;
+    }
+    
+    /**
+     * Get list of broken modules
+     * @return array
+     */
+    public function getModuleBrokenDeps() {
+        return $this->__moduleDepsBroken;
     }
 
     /**
@@ -138,6 +155,51 @@ class CloggyModuleInfoComponent extends Component {
     public function getModuleDependency() {
         $dep = Configure::read('info.dependency');
         return $dep;
+    }
+    
+    /**
+     * Check for broken module dependencies
+     * @param string $moduleName
+     */
+    private function __checkDependentModule($moduleName) {
+        
+        $deps = $this->getModuleDependency();
+        
+        /*
+         * only if module is has dependency with others
+         */
+        if (!empty($deps) && $deps != '-') {
+            
+            if(strstr($deps,',')) {
+                
+                /*
+                 * parsing modules
+                 */
+                $modules = explode(',',trim($deps));
+                
+                if (!empty($modules)) {
+                    
+                    foreach($modules as $module) {
+                        
+                        $module = trim($module);
+                        $check = $this->isModuleExists($module);
+                        
+                        /*
+                         * if dependencies module not exists
+                         */
+                        if (!$check) {
+                            $this->__moduleDepsBroken[] = $moduleName;
+                        }
+                        
+                    }
+                    
+                }
+                
+                
+            }
+            
+        }
+        
     }
 
     /**

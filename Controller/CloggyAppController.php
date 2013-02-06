@@ -103,9 +103,11 @@ class CloggyAppController extends AppController {
         //generate modules
         $this->CloggyModuleInfo->modules();
         $modules = $this->CloggyModuleInfo->getModules();
-
+        $brokenModules = $this->CloggyModuleInfo->getModuleBrokenDeps();
+        
         //set global variable
         $this->set(compact('modules'));
+        $this->set(compact('brokenModules'));
 
         /*
          * check if requested params is module request

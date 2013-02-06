@@ -46,7 +46,7 @@
                             <th>Module Name</th>
                             <th>Description</th>
                             <th>Author</th>							
-                            <th>Dependency</th>
+                            <th>Dependency</th>                            
                         </tr>
                     </thead>
                     <tbody>
@@ -66,7 +66,14 @@
                                             <?php echo $module['author']; ?>
                                         <?php endif; ?>
                                     </td>
-                                    <td><?php echo $module['dep']; ?></td>
+                                    <td>
+                                        <?php echo $module['dep']; ?> 
+                                        <?php
+                                            if(isset($brokenModules) && in_array($module['name'],$brokenModules)) {
+                                                echo  '<span class="label label-important">Broken</span>';
+                                            }
+                                        ?>
+                                    </td>                                    
                                 </tr>						
                             <?php endforeach; ?>
                         <?php else: ?>

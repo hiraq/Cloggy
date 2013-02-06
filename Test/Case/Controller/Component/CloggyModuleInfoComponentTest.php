@@ -70,5 +70,15 @@ class CloggyModuleInfoComponentTest extends CakeTestCase {
         $data = $this->__CloggyModuleInfo->getModuleInfo('ModuleTestFake');
         $this->assertInternalType('null', $data);
     }
+    
+    public function testGetBrokenDeps() {
+        
+        $this->__CloggyModuleInfo->modules();
+        $brokenModules = $this->__CloggyModuleInfo->getModuleBrokenDeps();
+        
+        $this->assertFalse(empty($brokenModules));
+        $this->assertTrue(in_array('ModuleTest',$brokenModules));
+        
+    }
 
 }
