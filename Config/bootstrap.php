@@ -11,11 +11,14 @@ Configure::write('Cloggy.modules', array(
     'CloggyBlog', 'CloggyUsers', 'CloggyDocs','ModuleTest'
 ));
 
-//SETUP cloggy config path
+//setup cloggy config path
 define('CLOGGY_PATH_CONFIG',APP.'Plugin'.DS.'Cloggy'.DS.'Config'.DS);
 
 //setup cloggy module path
 define('CLOGGY_PATH_MODULE', APP . 'Plugin' . DS . 'Cloggy' . DS . 'Module' . DS);
+
+//setup cloggy webroot uploads
+define('CLOGGY_PATH_UPLOAD',APP.'Plugin'.DS.'Cloggy'.DS.'webroot'.DS.'uploads'.DS);
 
 /*
  * load other bootstrap files
