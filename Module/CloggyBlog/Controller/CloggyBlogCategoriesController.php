@@ -11,11 +11,7 @@ class CloggyBlogCategoriesController extends CloggyAppController {
     );
 
     public function beforeFilter() {
-
-        parent::beforeFilter();
-        $this->Auth->deny('*');
-
-        $this->set('moduleKeyMenus', 'cloggy_blog');
+        parent::beforeFilter();                
         $this->_user = $this->Auth->user();
     }
 

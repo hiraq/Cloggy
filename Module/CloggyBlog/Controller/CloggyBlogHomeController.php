@@ -12,8 +12,7 @@ class CloggyBlogHomeController extends CloggyAppController {
     );
 
     public function beforeFilter() {
-        parent::beforeFilter();
-        $this->Auth->deny('*');        
+        parent::beforeFilter();             
     }
 
     public function index() {

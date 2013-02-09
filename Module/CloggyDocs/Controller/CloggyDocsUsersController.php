@@ -5,8 +5,7 @@ App::uses('CloggyAppController', 'Cloggy.Controller');
 class CloggyDocsUsersController extends CloggyAppController {
     
     public function beforeFilter() {
-        parent::beforeFilter();
-        $this->Auth->deny('*');                                                                                         
+        parent::beforeFilter();                                                                                               
     }   
     
     public function index() {

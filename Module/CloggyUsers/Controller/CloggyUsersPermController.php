@@ -14,8 +14,7 @@ class CloggyUsersPermController extends CloggyAppController {
 
     public function beforeFilter() {
 
-        parent::beforeFilter();
-        $this->Auth->deny('*');
+        parent::beforeFilter();        
 
         //load additional helpers        
         $this->helpers[] = 'Form';

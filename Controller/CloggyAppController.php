@@ -60,7 +60,15 @@ class CloggyAppController extends AppController {
             //load acl for requested module
             $this->__cloggyAclModule();
             
-        }                
+        }   
+        
+        /*
+         * set deny to all controller and actions
+         * except for home controller
+         */
+        if ($this->request->params['controller'] != 'home') {
+            $this->Auth->deny('*');
+        }
                 
     }
     
@@ -147,6 +155,11 @@ class CloggyAppController extends AppController {
         if (isset($this->request->params['isCloggyModule'])
                 && $this->request->params['isCloggyModule'] == 1) {
 
+            /*
+             * > change layout
+             * > set requested module variable
+             * > set module name
+             */
             $this->layout = 'cloggy_module_layout';
             $this->_requestedModule = $this->request->params['name'];
             $this->set('moduleName', $this->request->params['name']);
@@ -166,6 +179,7 @@ class CloggyAppController extends AppController {
                     'Modules' => $modulesMenus
                 ));
             }
+                                    
         }
     }
     

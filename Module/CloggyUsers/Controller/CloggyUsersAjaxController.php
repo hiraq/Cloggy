@@ -12,8 +12,7 @@ class CloggyUsersAjaxController extends CloggyAppController {
 
     public function beforeFilter() {
 
-        parent::beforeFilter();
-        $this->Auth->deny('*');
+        parent::beforeFilter();        
 
         if (!$this->request->is('ajax')) {
             $this->redirect('/');

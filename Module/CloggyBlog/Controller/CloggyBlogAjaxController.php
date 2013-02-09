@@ -12,8 +12,7 @@ class CloggyBlogAjaxController extends CloggyAppController {
 
     public function beforeFilter() {
 
-        parent::beforeFilter();
-        $this->Auth->deny('*');
+        parent::beforeFilter();        
         $this->_user = $this->Auth->user();
 
         if (!$this->request->is('ajax')) {
