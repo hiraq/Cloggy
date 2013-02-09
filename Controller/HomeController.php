@@ -44,12 +44,19 @@ class HomeController extends CloggyAppController {
          */
         if ($this->request->is('post')) {
 
-            if ($this->Auth->login()) {
+            if ($this->Auth->login()) {//if user loggedIn
 
+                /*
+                 * > set user id
+                 * > set user last login time
+                 * > set user login
+                 * > redirect to dashboard
+                 */
                 $this->_userId = $this->Auth->user('id');
                 $this->CloggyUser->setUserLastLogin($this->_userId);
                 $this->CloggyUserLogin->setLogin($this->_userId);
                 $this->redirect($this->Auth->loginRedirect);
+                
             } else {
                 $this->Auth->flash('Wrong username or password');
                 $this->redirect($this->Auth->loginAction);
@@ -61,6 +68,11 @@ class HomeController extends CloggyAppController {
 
     public function logout() {
 
+        /*
+         * > set user last login
+         * > remove user login
+         * > redirect to home controller
+         */
         $this->CloggyUser->setUserLastLogin($this->_userId);
         $this->CloggyUserLogin->removeLogin($this->_userId);
         $this->redirect($this->Auth->logout());

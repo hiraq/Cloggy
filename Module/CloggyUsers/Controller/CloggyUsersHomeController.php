@@ -28,7 +28,7 @@ class CloggyUsersHomeController extends CloggyAppController {
             )
         );
 
-        $this->_mergePaginateSortBy();
+        $this->__mergePaginateSortBy();
     }
 
     public function index() {
@@ -192,6 +192,9 @@ class CloggyUsersHomeController extends CloggyAppController {
             $role = $this->request->data['CloggyUser']['user_role'];
             $stat = $this->request->data['CloggyUser']['user_status'];
 
+            /*
+             * if user name need to updated
+             */
             if (!empty($username) && $username != $user['CloggyUser']['user_name']) {
 
                 $checkUserName = $this->CloggyUser->isUserNameExists($dataValidate['user_name']);
@@ -211,6 +214,9 @@ class CloggyUsersHomeController extends CloggyAppController {
                 );
             }
 
+            /*
+             * if password need to updated
+             */
             if (!empty($password) && AuthComponent::password($pasword) != $user['CloggyUser']['user_password']) {
 
                 $dataValidate['user_password'] = $password;
@@ -228,6 +234,9 @@ class CloggyUsersHomeController extends CloggyAppController {
                 );
             }
 
+            /**
+             * if email need to updated
+             */
             if (!empty($email) && $email != $user['CloggyUser']['user_email']) {
 
                 $checkUserEmail = $this->CloggyUser->isUserEmailExists($dataValidate['user_email']);
@@ -251,6 +260,9 @@ class CloggyUsersHomeController extends CloggyAppController {
                 );
             }
 
+            /*
+             * if role need to updated
+             */
             if (!empty($role) && $role != $user['CloggyUserRole']['id']) {
 
                 $dataValidate['users_roles_id'] = $role;
@@ -264,6 +276,9 @@ class CloggyUsersHomeController extends CloggyAppController {
                 );
             }
             
+            /*
+             * if user status need to updated
+             */
             if ($stat != $user['CloggyUser']['user_status']) {
                 $dataValidate['user_status'] = $stat;
                 $dataValidateRules['user_status'] = array(
@@ -276,8 +291,14 @@ class CloggyUsersHomeController extends CloggyAppController {
                 );
             }
 
+            /*
+             * if need to validate
+             */
             if (!empty($dataValidate)) {
 
+                /*
+                 * setup validation
+                 */
                 $this->CloggyValidation->set($dataValidate);
                 $this->CloggyValidation->validate = $dataValidateRules;
 
@@ -341,7 +362,7 @@ class CloggyUsersHomeController extends CloggyAppController {
         $this->redirect($this->referer());
     }
 
-    private function _mergePaginateSortBy() {
+    private function __mergePaginateSortBy() {
 
         if (isset($this->request->params['named']['sort_index'])
                 && !empty($this->request->params['named']['sort_index'])) {

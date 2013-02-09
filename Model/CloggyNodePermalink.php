@@ -11,6 +11,13 @@ class CloggyNodePermalink extends CloggyAppModel {
         )
     );
 
+    /**
+     * Create and save new permalink data
+     * @param int $nodeId
+     * @param string $subject
+     * @param string $separator
+     * @return int
+     */
     public function createPermalink($nodeId, $subject, $separator = '_') {
 
         $this->create();

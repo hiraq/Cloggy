@@ -11,6 +11,12 @@ class CloggyUserMeta extends CloggyAppModel {
         )
     );
 
+    /**
+     * Check if meta exists or not
+     * @param int $userId
+     * @param string $key
+     * @return boolean
+     */
     public function isMetaExists($userId, $key) {
 
         $check = $this->find('count', array(
@@ -24,6 +30,11 @@ class CloggyUserMeta extends CloggyAppModel {
         return $check < 1 ? false : true;
     }
 
+    /**
+     * Get detail user meta
+     * @param int $userId
+     * @return array
+     */
     public function getUserMeta($userId) {
 
         $data = $this->find('all', array(
@@ -34,6 +45,13 @@ class CloggyUserMeta extends CloggyAppModel {
         return $data;
     }
 
+    /**
+     * Update user meta data
+     * @param int $userId
+     * @param string $key
+     * @param string $value
+     * @return boolean
+     */
     public function updateMeta($userId, $key, $value) {
 
         $check = $this->isMetaExists($userId, $key);
@@ -57,6 +75,12 @@ class CloggyUserMeta extends CloggyAppModel {
         return false;
     }
 
+    /**
+     * Create and save meta data
+     * @param int $userId
+     * @param array $data
+     * @return boolean
+     */
     public function saveMeta($userId, $data) {
 
         $returnIds = array();

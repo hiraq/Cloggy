@@ -18,6 +18,11 @@ class CloggyNodeType extends CloggyAppModel {
         )
     );
 
+    /**
+     * Check if type exists or not
+     * @param string $name
+     * @return boolean
+     */
     public function isTypeExists($name) {
 
         $check = $this->find('count', array(
@@ -28,6 +33,14 @@ class CloggyNodeType extends CloggyAppModel {
         return $check < 1 ? false : true;
     }
 
+    /**
+     * Generate node type
+     * if exists then return node type id
+     * if not exists then create and save it first
+     * @param string $name
+     * @param int $userId
+     * @return int
+     */
     public function generateType($name, $userId) {
 
         $check = $this->isTypeExists($name);
@@ -50,6 +63,11 @@ class CloggyNodeType extends CloggyAppModel {
         }
     }
 
+    /**
+     * Get node type id string
+     * @param string $name
+     * @return boolean
+     */
     public function getTypeIdByName($name) {
 
         $data = $this->find('first', array(

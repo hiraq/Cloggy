@@ -17,6 +17,11 @@ class CloggyUserRole extends CloggyAppModel {
         )
     );
     
+    /**
+     * Check if role exists or not
+     * @param string $role
+     * @return boolean
+     */
     public function isRoleExists($role) {
         
         $check = $this->find('count',array(
@@ -28,6 +33,11 @@ class CloggyUserRole extends CloggyAppModel {
         
     }
     
+    /**
+     * Create and save new role
+     * @param string $role
+     * @return boolean
+     */
     public function createRole($role) {
         
         $check = $this->isRoleExists($role);
@@ -48,6 +58,11 @@ class CloggyUserRole extends CloggyAppModel {
         
     }
     
+    /**
+     * Update role data
+     * @param int $id
+     * @param string $newRole
+     */
     public function updateRole($id,$newRole) {
         
         $this->id = $id;

@@ -37,12 +37,20 @@ class CloggyBlogTagsController extends CloggyAppController {
 
         if ($this->request->is('post')) {
 
+            //sanitize data
             $this->request->data = Sanitize::clean($this->request->data);
 
             $dataToValidate = $this->request->data['CloggyBlogTags'];
+            
+            /*
+             * check if requested tag has exists or not
+             */
             $checkTagExists = $this->CloggyBlogTag->isTagExists(
                     $this->request->data['CloggyBlogTags']['tag_name'], $this->_user['id']);
 
+            /*
+             * setup validation
+             */
             $this->CloggyValidation->set($dataToValidate);
             $this->CloggyValidation->validate = array(
                 'tag_name' => array(
@@ -59,6 +67,9 @@ class CloggyBlogTagsController extends CloggyAppController {
                 )
             );
 
+            /*
+             * validates
+             */
             if ($this->CloggyValidation->validates()) {
 
                 $tag = $this->request->data['CloggyBlogTags']['tag_name'];
@@ -79,24 +90,38 @@ class CloggyBlogTagsController extends CloggyAppController {
             exit();
         }
 
+        //get detail tag
         $tag = $this->CloggyBlogTag->getDetailTag($id);
 
+        /*
+         * form submitted
+         */
         if ($this->request->is('post')) {
 
+            //sanitize data
             $this->request->data = Sanitize::clean($this->request->data);
             $dataToValidate = array();
 
             $tagName = $this->request->data['CloggyBlogTags']['tag_name'];
 
+            /*
+             * if subject need to update
+             */
             if ($tagName != $tag['CloggySubject']['subject']) {
                 $dataToValidate['tag_name'] = $tagName;
             }
 
             if (!empty($dataToValidate)) {
 
+                /*
+                 * check if requested tag has exists or not
+                 */
                 $checkTagExists = $this->CloggyBlogTag->isTagExists(
                         $this->request->data['CloggyBlogTags']['tag_name'], $this->_user['id']);
 
+                /*
+                 * setup validation
+                 */
                 $this->CloggyValidation->set($dataToValidate);
                 $this->CloggyValidation->validate = array(
                     'tag_name' => array(
@@ -113,6 +138,9 @@ class CloggyBlogTagsController extends CloggyAppController {
                     )
                 );
 
+                /*
+                 * validates
+                 */
                 if ($this->CloggyValidation->validates()) {
                     $this->CloggyBlogTag->updateTag($id, $tagName);
                 } else {

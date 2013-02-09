@@ -38,12 +38,18 @@ class CloggyBlogCategoriesController extends CloggyAppController {
 
         if ($this->request->is('post')) {
 
+            //sanitize
             $this->request->data = Sanitize::clean($this->request->data);
 
             $dataToValidate = $this->request->data['CloggyBlogCategories'];
+            
+            //check if category exists or not
             $checkCategoryExists = $this->CloggyBlogCategory->isCategoryExists(
                     $this->request->data['CloggyBlogCategories']['category_name'], $this->_user['id']);
 
+            /*
+             * setup validation
+             */
             $this->CloggyValidation->set($dataToValidate);
             $this->CloggyValidation->validate = array(
                 'category_name' => array(
@@ -60,10 +66,15 @@ class CloggyBlogCategoriesController extends CloggyAppController {
                 )
             );
 
+            /*
+             * validate data
+             */
             if ($this->CloggyValidation->validates()) {
 
+                /*
+                 * save categories
+                 */
                 $category = $this->request->data['CloggyBlogCategories']['category_name'];
-
                 $saved = $this->CloggyBlogCategory->proceedCategories(array($category), $this->_user['id']);
                 $savedId = $saved[0];
 
@@ -98,10 +109,15 @@ class CloggyBlogCategoriesController extends CloggyAppController {
             exit();
         }
 
+        //get detail category
         $category = $this->CloggyBlogCategory->getDetailCategory($id);
 
+        /*
+         * if form submitted
+         */
         if ($this->request->is('post')) {
 
+            //sanitize data
             $this->request->data = Sanitize::clean($this->request->data);
             $dataToValidate = array();
 
@@ -115,15 +131,27 @@ class CloggyBlogCategoriesController extends CloggyAppController {
 
             $parent = $this->CloggyBlogCategory->getParentCategory($id);
 
+            /*
+             * check if category need to update or not
+             */
             if ($categoryName != $category['CloggySubject']['subject']) {
                 $dataToValidate['category_name'] = $categoryName;
             }
 
+            /*
+             * if need to validate
+             */
             if (!empty($dataToValidate)) {
 
+                /*
+                 * check if requested category exists or not
+                 */
                 $checkCategoryExists = $this->CloggyBlogCategory->isCategoryExists(
                         $this->request->data['CloggyBlogCategories']['category_name'], $this->_user['id']);
 
+                /*
+                 * setup validation
+                 */
                 $this->CloggyValidation->set($dataToValidate);
                 $this->CloggyValidation->validate = array(
                     'category_name' => array(
@@ -140,6 +168,9 @@ class CloggyBlogCategoriesController extends CloggyAppController {
                     )
                 );
 
+                /*
+                 * validates
+                 */
                 if ($this->CloggyValidation->validates()) {
 
                     $this->CloggyBlogCategory->updateCategory($id, $categoryName);
@@ -151,6 +182,9 @@ class CloggyBlogCategoriesController extends CloggyAppController {
                 }
             }
 
+            /*
+             * check if parent need to updated or not
+             */
             if ($parent['CloggyNode']['id'] != $categoryParent && $categoryParent > 0) {
                 $this->CloggyBlogCategory->updateCategoryParent($id, $categoryParent);
             }

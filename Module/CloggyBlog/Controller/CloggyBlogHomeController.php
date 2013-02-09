@@ -17,6 +17,12 @@ class CloggyBlogHomeController extends CloggyAppController {
 
     public function index() {
 
+        /*
+         * get latest data for :
+         * > posts
+         * > categories
+         * > tags
+         */
         $posts = $this->CloggyBlogPost->getPosts(5, array('CloggyNode.node_created' => 'desc'));
         $categories = $this->CloggyBlogCategory->getCategories(5, array('CloggyNode.node_created' => 'desc'));
         $tags = $this->CloggyBlogTag->getTags(5, array('CloggyNode.node_created' => 'desc'));

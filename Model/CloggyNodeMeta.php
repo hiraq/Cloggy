@@ -11,6 +11,12 @@ class CloggyNodeMeta extends CloggyAppModel {
         )
     );
 
+    /**
+     * Get node meta data
+     * 
+     * @param int $nodeId
+     * @return array
+     */
     public function getNodeMeta($nodeId) {
 
         $data = $this->find('all', array(
@@ -23,6 +29,14 @@ class CloggyNodeMeta extends CloggyAppModel {
         return $data;
     }
 
+    /**
+     * Update existed node meta
+     * 
+     * @param int $nodeId
+     * @param string $key
+     * @param string|int $value
+     * @return boolean
+     */
     public function updateMeta($nodeId, $key, $value) {
 
         $check = $this->isMetaExists($nodeId, $key);
@@ -47,6 +61,13 @@ class CloggyNodeMeta extends CloggyAppModel {
         return false;
     }
 
+    /**
+     * Create and save new meta data
+     * 
+     * @param int $nodeId
+     * @param array $data
+     * @return boolean
+     */
     public function saveMeta($nodeId, $data) {
 
         $returnIds = array();
@@ -78,6 +99,12 @@ class CloggyNodeMeta extends CloggyAppModel {
         return false;
     }
 
+    /**
+     * Check if meta key has exists or not
+     * @param int $nodeId
+     * @param string $metaKey
+     * @return boolean
+     */
     public function isMetaExists($nodeId, $metaKey) {
 
         $check = $this->find('count', array(

@@ -40,6 +40,11 @@ class CloggyUser extends CloggyAppModel {
         )
     );
 
+    /**
+     * Check if name exists or not
+     * @param string $name
+     * @return boolean
+     */
     public function isUserNameExists($name) {
 
         $check = $this->find('count', array(
@@ -50,6 +55,11 @@ class CloggyUser extends CloggyAppModel {
         return $check < 1 ? false : true;
     }
 
+    /**
+     * Check if email exists or not
+     * @param string $email
+     * @return boolean
+     */
     public function isUserEmailExists($email) {
 
         $check = $this->find('count', array(
@@ -60,6 +70,10 @@ class CloggyUser extends CloggyAppModel {
         return $check < 1 ? false : true;
     }
 
+    /**
+     * Setup user login
+     * @param int $id
+     */
     public function setUserLastLogin($id) {
 
         $this->id = $id;
@@ -70,6 +84,11 @@ class CloggyUser extends CloggyAppModel {
         ));
     }
 
+    /**
+     * Get all user data by user id
+     * @param int $id
+     * @return array
+     */
     public function getUserDetail($id) {
         return $this->find('first', array(
             'contain' => array('CloggyUserRole'),
@@ -79,6 +98,12 @@ class CloggyUser extends CloggyAppModel {
         ));
     }
 
+    /**
+     * Get user status by user id
+     * 
+     * @param int $id
+     * @return array
+     */
     public function getUserStatus($id) {
 
         $data = $this->find('first', array(
@@ -90,6 +115,12 @@ class CloggyUser extends CloggyAppModel {
         return $data;
     }
 
+    /**
+     * Get user last login data by user id
+     * 
+     * @param int $id
+     * @return array
+     */
     public function getUserLastLogin($id) {
 
         $data = $this->find('first', array(
@@ -101,6 +132,11 @@ class CloggyUser extends CloggyAppModel {
         return $data;
     }
 
+    /**
+     * Get user role by user id
+     * @param int $id
+     * @return boolean
+     */
     public function getUserRole($id) {
 
         $data = $this->find('first', array(

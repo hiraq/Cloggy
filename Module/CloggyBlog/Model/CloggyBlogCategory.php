@@ -8,6 +8,14 @@ class CloggyBlogCategory extends CloggyAppModel {
     public $useTable = false;
     public $actsAs = array('Cloggy.CloggyCommon');
 
+    /**
+     * Check if category exists or not
+     * 
+     * @uses node CloggyNode     
+     * @param string $category
+     * @param user $userId
+     * @return boolean
+     */
     public function isCategoryExists($category, $userId) {
 
         $typeCategoryId = $this->get('node_type')->generateType('cloggy_blog_categories', $userId);
@@ -16,6 +24,15 @@ class CloggyBlogCategory extends CloggyAppModel {
         return $checkCategorySubject;
     }
 
+    /**
+     * Get limited categories
+     * 
+     * @uses node CloggyNode
+     * @uses node_type CloggyNodeType
+     * @param int $limit
+     * @param string $order
+     * @return array
+     */
     public function getCategories($limit, $order) {
 
         $typeId = $this->get('node_type')->getTypeIdByName('cloggy_blog_categories');
@@ -43,6 +60,13 @@ class CloggyBlogCategory extends CloggyAppModel {
         return $categories;
     }
 
+    /**
+     * Get all categories
+     * @uses node CloggyNode
+     * @uses node_type CloggyNodeType
+     * @param array $except
+     * @return boolean
+     */
     public function getAllCategories($except = null) {
 
         $categoriesNodeTypeId = $this->get('node_type')->find('first', array(
@@ -56,6 +80,9 @@ class CloggyBlogCategory extends CloggyAppModel {
                 'CloggyNode.node_type_id' => $categoriesNodeTypeId['CloggyNodeType']['id']
             );
 
+            /*
+             * if except has been set
+             */
             if (!is_null($except)) {
 
                 if (!is_array($except)) {
@@ -71,6 +98,9 @@ class CloggyBlogCategory extends CloggyAppModel {
                 }
             }
 
+            /*
+             * get categories
+             */
             $categories = $this->get('node')->find('all', array(
                 'contain' => array(
                     'CloggySubject' => array(
@@ -87,6 +117,12 @@ class CloggyBlogCategory extends CloggyAppModel {
         return false;
     }
 
+    /**
+     * Get detail category
+     * @uses node CloggyNode
+     * @param int $id
+     * @return array
+     */
     public function getDetailCategory($id) {
 
         /*
@@ -126,6 +162,13 @@ class CloggyBlogCategory extends CloggyAppModel {
         return $category;
     }
 
+    /**
+     * Get parent category
+     * 
+     * @uses node CloggyNode
+     * @param int $id
+     * @return array
+     */
     public function getParentCategory($id) {
 
         $data = $this->get('node')->find('first', array(
@@ -148,6 +191,12 @@ class CloggyBlogCategory extends CloggyAppModel {
         return $parent;
     }
 
+    /**
+     * Update category data
+     * @uses node_subject CloggyNodeSubject
+     * @param int $id
+     * @param string $catName
+     */
     public function updateCategory($id, $catName) {
 
         $this->get('node_subject')->updateAll(
@@ -155,6 +204,12 @@ class CloggyBlogCategory extends CloggyAppModel {
         );
     }
 
+    /**
+     * Update category parent
+     * @uses node CloggyNode
+     * @param int $id
+     * @param int $parentId
+     */
     public function updateCategoryParent($id, $parentId) {
 
         $this->get('node')->updateAll(
@@ -162,6 +217,15 @@ class CloggyBlogCategory extends CloggyAppModel {
         );
     }
 
+    /**
+     * Delete category and also their relation
+     * 
+     * @uses node CloggyNode
+     * @uses node_subject CloggyNodeSubject
+     * @uses node_permalink CloggyNodePermalink
+     * @uses node_rel CloggyNodeRel
+     * @param int $id
+     */
     public function deleteCategory($id) {
 
         $this->get('node')->delete($id, false);
@@ -177,10 +241,24 @@ class CloggyBlogCategory extends CloggyAppModel {
         ));
     }
 
+    /**
+     * Save categories
+     * 
+     * @uses node CloggyNode
+     * @uses node_type CloggyNodeType
+     * @uses node_subject CloggyNodeSubject
+     * @uses node_permalink CloggyNodePermalink
+     * @param int $categories
+     * @param int $userId
+     * @return array
+     */
     public function proceedCategories($categories, $userId) {
 
         $cats = array();
 
+        /*
+         * disable cacheQueries
+         */
         $this->get('node')->cacheQueries = false;
         $this->get('node_type')->cacheQueries = false;
 
@@ -208,6 +286,12 @@ class CloggyBlogCategory extends CloggyAppModel {
         return $cats;
     }
 
+    /**
+     * Set category parent
+     * @uses node CloggyNode     
+     * @param int $parentId
+     * @param int $catId
+     */
     public function setCategoryParent($parentId, $catId) {
 
         $this->get('node')->id = $catId;
@@ -218,6 +302,20 @@ class CloggyBlogCategory extends CloggyAppModel {
         ));
     }
 
+    /**
+     * Paginate category
+     * 
+     * @uses node CloggyNode
+     * @uses node_type CloggyNodeType
+     * @param array $conditions
+     * @param array $fields
+     * @param string $order
+     * @param int $limit
+     * @param int $page
+     * @param float|int $recursive
+     * @param array $extra
+     * @return array
+     */
     public function paginate($conditions, $fields, $order, $limit, $page = 1, $recursive = null, $extra = array()) {
 
         $typeId = $this->get('node_type')->getTypeIdByName('cloggy_blog_categories');
@@ -246,6 +344,16 @@ class CloggyBlogCategory extends CloggyAppModel {
                 ));
     }
 
+    /**
+     * Get total paginate data
+     * 
+     * @uses node_type CloggyNodeType
+     * @uses node CloggyNode
+     * @param array $conditions
+     * @param float|int $recursive
+     * @param array $extra
+     * @return array
+     */
     public function paginateCount($conditions = null, $recursive = 0, $extra = array()) {
 
         $typeId = $this->get('node_type')->getTypeIdByName('cloggy_blog_categories');

@@ -87,6 +87,14 @@ class CloggyUserPerm extends CloggyAppModel {
         
     }
     
+    /**
+     * Check aro has permission to aco
+     * @param int $aroId
+     * @param string $aroObject
+     * @param string $object
+     * @param string $adapter
+     * @return boolean
+     */
     public function isAroHasPermAco($aroId,$aroObject,$object,$adapter) {
         
         $check = $this->find('count',array(

@@ -11,6 +11,13 @@ class CloggyNodeMedia extends CloggyAppModel {
         )
     );
 
+    /**
+     * Create and save new media
+     * 
+     * @param int $nodeId
+     * @param string $type
+     * @param string $location
+     */
     public function saveMedia($nodeId, $type, $location) {
 
         $this->create();

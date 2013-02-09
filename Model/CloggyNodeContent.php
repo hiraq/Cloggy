@@ -11,6 +11,12 @@ class CloggyNodeContent extends CloggyAppModel {
         )
     );
 
+    /**
+     * Create new content data
+     * 
+     * @param int $nodeId
+     * @param string $content
+     */
     public function createContent($nodeId, $content) {
         $this->create();
         $this->save(array(

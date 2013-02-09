@@ -15,6 +15,13 @@ class CloggyNodeRel extends CloggyAppModel {
         )
     );
 
+    /**
+     * Check if relation exists or not
+     * @param int $nodeId
+     * @param int $nodeObjectId
+     * @param string $relName
+     * @return boolean
+     */
     public function isRelationExists($nodeId, $nodeObjectId, $relName) {
 
         $check = $this->find('count', array(
@@ -28,6 +35,13 @@ class CloggyNodeRel extends CloggyAppModel {
         return $check < 1 ? false : true;
     }
 
+    /**
+     * Delete all available relation based on node object id
+     * and their relation name
+     * 
+     * @param int $nodeObjectId
+     * @param string $rel
+     */
     public function deleteAllRelations($nodeObjectId, $rel) {
 
         $this->deleteAll(array(
@@ -36,6 +50,13 @@ class CloggyNodeRel extends CloggyAppModel {
         ));
     }
 
+    /**
+     * Create and save new relation
+     * @param int $nodeId
+     * @param int $nodeObjectId
+     * @param string $relName
+     * @return boolean
+     */
     public function saveRelation($nodeId, $nodeObjectId, $relName) {
 
         $check = $this->isRelationExists($nodeId, $nodeObjectId, $relName);

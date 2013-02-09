@@ -11,6 +11,12 @@ class CloggyNodeSubject extends CloggyAppModel {
         )
     );
 
+    /**
+     * Create and save new subject
+     * @param int $nodeId
+     * @param string $subject
+     * @return int
+     */
     public function createSubject($nodeId, $subject) {
 
         $this->create();

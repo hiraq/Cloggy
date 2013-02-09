@@ -8,6 +8,15 @@ class CloggyBlogTag extends CloggyAppModel {
     public $useTable = false;
     public $actsAs = array('Cloggy.CloggyCommon');
 
+    /**
+     * Check if requested tag exists or not
+     * 
+     * @uses node_type CloggyNodeType
+     * @uses node CloggyNode
+     * @param string $tag
+     * @param int $userId
+     * @return boolean
+     */
     public function isTagExists($tag, $userId) {
 
         $typeTagId = $this->get('node_type')->generateType('cloggy_blog_tags', $userId);
@@ -16,6 +25,15 @@ class CloggyBlogTag extends CloggyAppModel {
         return $checkTagSubject;
     }
 
+    /**
+     * Get limited tags
+     * 
+     * @uses node_type CloggyNodeType
+     * @uses node CloggyNode
+     * @param int $limit
+     * @param string $order
+     * @return array
+     */
     public function getTags($limit, $order) {
 
         $typeId = $this->get('node_type')->getTypeIdByName('cloggy_blog_tags');
@@ -43,6 +61,13 @@ class CloggyBlogTag extends CloggyAppModel {
         return $tags;
     }
 
+    /**
+     * Get all tags
+     * 
+     * @uses node_type CloggyNodeType
+     * @uses node CloggyNode
+     * @return boolean|array
+     */
     public function getAllTags() {
 
         $tagsNodeTypeId = $this->get('node_type')->find('first', array(
@@ -68,6 +93,12 @@ class CloggyBlogTag extends CloggyAppModel {
         return false;
     }
 
+    /**
+     * Get detail tag
+     * @uses node CloggyNode
+     * @param int $id
+     * @return array
+     */
     public function getDetailTag($id) {
 
         /*
@@ -87,6 +118,12 @@ class CloggyBlogTag extends CloggyAppModel {
         return $category;
     }
 
+    /**
+     * Update tag
+     * @uses node_subject CloggyNodeSubject
+     * @param int $id
+     * @param string $tagName
+     */
     public function updateTag($id, $tagName) {
 
         $this->get('node_subject')->updateAll(
@@ -94,6 +131,15 @@ class CloggyBlogTag extends CloggyAppModel {
         );
     }
 
+    /**
+     * Generate tags
+     * 
+     * @uses node CloggyNode
+     * @uses node_type CloggyNodeType
+     * @param array $exp
+     * @param int $userId
+     * @return array
+     */
     public function proceedTags($exp, $userId) {
 
         $tags = array();
@@ -106,6 +152,10 @@ class CloggyBlogTag extends CloggyAppModel {
             $typeId = $this->get('node_type')->generateType('cloggy_blog_tags', $userId);
             $checkCatSubject = $this->get('node')->isSubjectExistsByTypeId($typeId, $tag);
 
+            /*
+             * if not exists then create it
+             * if exists then get id
+             */
             if (!$checkCatSubject) {
 
                 $tagNodeId = $this->get('node')->generateEmptyNode($typeId, $userId);
@@ -125,6 +175,15 @@ class CloggyBlogTag extends CloggyAppModel {
         return $tags;
     }
 
+    /**
+     * Delete tags with their relation
+     * 
+     * @uses node CloggyNode
+     * @uses node_subject CloggyNodeSubject
+     * @uses node_permalink CloggyNodePermalink
+     * @uses node_rels CloggyNodeRel
+     * @param int $id
+     */
     public function deleteTag($id) {
 
         $this->get('node')->delete($id, false);
@@ -140,6 +199,20 @@ class CloggyBlogTag extends CloggyAppModel {
         ));
     }
 
+    /**
+     * Get data for pagination
+     * 
+     * @uses node_type CloggyNodeType
+     * @uses node CloggyNode
+     * @param array $conditions
+     * @param array $fields
+     * @param string $order
+     * @param int $limit
+     * @param int $page
+     * @param float|int $recursive
+     * @param array $extra
+     * @return array
+     */
     public function paginate($conditions, $fields, $order, $limit, $page = 1, $recursive = null, $extra = array()) {
 
         $typeId = $this->get('node_type')->getTypeIdByName('cloggy_blog_tags');
@@ -168,6 +241,15 @@ class CloggyBlogTag extends CloggyAppModel {
                 ));
     }
 
+    /**
+     * Get total data for pagination
+     * @uses node_type CloggyNodeType
+     * @uses node CloggyNode
+     * @param array $conditions
+     * @param float|int $recursive
+     * @param array $extra
+     * @return array
+     */
     public function paginateCount($conditions = null, $recursive = 0, $extra = array()) {
 
         $typeId = $this->get('node_type')->getTypeIdByName('cloggy_blog_tags');

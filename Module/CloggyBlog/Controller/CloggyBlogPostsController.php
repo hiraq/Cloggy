@@ -48,6 +48,9 @@ class CloggyBlogPostsController extends CloggyAppController {
              */
             $checkPostSubject = $this->CloggyBlogPost->isTitleExists($this->request->data['CloggyBlogPost']['title'], $this->_user['id']);
 
+            /*
+             * setup validation
+             */
             $this->CloggyValidation->set($dataValidate);
             $this->CloggyValidation->validate = array(
                 'title' => array(
@@ -70,11 +73,18 @@ class CloggyBlogPostsController extends CloggyAppController {
                 )
             );
 
+            /*
+             * validates
+             */
             if ($this->CloggyValidation->validates()) {
 
                 $cats = null;
                 $tags = null;
 
+                /*
+                 * if user need categories
+                 * then setup relation between post with these categories
+                 */
                 if (!empty($this->request->data['CloggyBlogPost']['categories'])) {
 
                     if (!is_array($this->request->data['CloggyBlogPost']['categories'])) {
@@ -88,6 +98,10 @@ class CloggyBlogPostsController extends CloggyAppController {
                     }
                 }
 
+                /*
+                 * if user need tags
+                 * then setup relation between post with these tags
+                 */
                 if (!empty($this->request->data['CloggyBlogPost']['tags'])) {
 
                     $exp = explode(',', $this->request->data['CloggyBlogPost']['tags']);
@@ -96,6 +110,9 @@ class CloggyBlogPostsController extends CloggyAppController {
                     }
                 }
 
+                /*
+                 * save post
+                 */
                 $postId = $this->CloggyBlogPost->generatePost(array(
                     'stat' => $this->request->data['submit'] == 'Draft' ? 0 : 1,
                     'userId' => $this->_user['id'],
@@ -127,8 +144,12 @@ class CloggyBlogPostsController extends CloggyAppController {
             exit();
         }
 
+        //change cacheQueries setting
         $this->CloggyBlogPost->cacheQueries = false;
 
+        /*
+         * setup data
+         */
         $detail = $this->CloggyBlogPost->getSinglePostById($id);
         $categories = $this->CloggyBlogCategory->getAllCategories();
         $tags = $this->CloggyBlogTag->getAllTags();
@@ -143,16 +164,23 @@ class CloggyBlogPostsController extends CloggyAppController {
             $dataValidate = array();
             $dataToSave = array();
 
+            //remove new line
             $this->request->data['CloggyBlogPost']['content'] = str_replace('\n', '', $this->request->data['CloggyBlogPost']['content']);
 
             $title = $this->request->data['CloggyBlogPost']['title'];
             $content = $this->request->data['CloggyBlogPost']['content'];
 
+            /*
+             * if subject need to update
+             */
             if ($detail['CloggySubject']['subject'] != $title) {
                 $dataValidate['title'] = $title;
                 $dataToSave['title'] = $title;
             }
 
+            /*
+             * if content need to update
+             */
             if ($detail['CloggyContent']['content'] != $content) {
                 $dataValidate['content'] = $content;
                 $dataToSave['content'] = $content;

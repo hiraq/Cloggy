@@ -58,6 +58,14 @@ class CloggyNode extends CloggyAppModel {
         )
     );
 
+    /**
+     * Check if given subject is exists or not
+     * based on their node type
+     * 
+     * @param int $typeId
+     * @param string $subject
+     * @return boolean
+     */
     public function isSubjectExistsByTypeId($typeId, $subject) {
 
         $check = $this->CloggySubject->find('first', array(
@@ -72,6 +80,12 @@ class CloggyNode extends CloggyAppModel {
         return empty($check['CloggyNode']['id']) ? false : true;
     }
 
+    /**
+     * Get node id by their subject and node type
+     * @param int $typeId
+     * @param string $subject
+     * @return int|boolean
+     */
     public function getNodeIdBySubjectAndTypeId($typeId, $subject) {
 
         $data = $this->CloggySubject->find('first', array(
@@ -86,6 +100,13 @@ class CloggyNode extends CloggyAppModel {
         return !empty($data) ? $data['CloggyNode']['id'] : false;
     }
 
+    /**
+     * Generate empty node
+     * 
+     * @param int $typeId
+     * @param int $userId
+     * @return int
+     */
     public function generateEmptyNode($typeId, $userId) {
 
         $this->create();
@@ -101,6 +122,11 @@ class CloggyNode extends CloggyAppModel {
         return $nodeId;
     }
 
+    /**
+     * Update existed node
+     * @param int $nodeId
+     * @param array $data
+     */
     public function modifyNode($nodeId, $data) {
 
         $this->id = $nodeId;

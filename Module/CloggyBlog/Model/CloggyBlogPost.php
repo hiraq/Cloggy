@@ -8,6 +8,15 @@ class CloggyBlogPost extends CloggyAppModel {
     public $useTable = false;
     public $actsAs = array('Cloggy.CloggyCommon');
 
+    /**
+     * Check if requested title exists or not
+     * 
+     * @uses node_type CloggyNodeType
+     * @uses node CloggyNode
+     * @param string $title
+     * @param int $userId
+     * @return boolean
+     */
     public function isTitleExists($title, $userId) {
 
         $typePostId = $this->get('node_type')->generateType('cloggy_blog_post', $userId);
@@ -16,6 +25,16 @@ class CloggyBlogPost extends CloggyAppModel {
         return $checkPostSubject;
     }
 
+    /**
+     * Delete post and also with their relation
+     * 
+     * @uses node CloggyNode
+     * @uses node_subject CloggyNodeSubject
+     * @uses node_permalink CloggyNodePermalink
+     * @uses node_content CloggyNodeContent
+     * @uses node_rel CloggyNodeRel
+     * @param int $id
+     */
     public function deletePost($id) {
 
         $this->get('node')->delete($id, false);
@@ -34,6 +53,17 @@ class CloggyBlogPost extends CloggyAppModel {
         ));
     }
 
+    /**
+     * Generate new post data
+     * 
+     * @uses node CloggyNode
+     * @uses node_type CloggyNodeType
+     * @uses node_subject CloggyNodeSubject
+     * @uses node_permalink CloggyNodePermalink
+     * @uses node_content CloggyNodeContent
+     * @param array $options
+     * @return boolean|int
+     */
     public function generatePost($options) {
 
         if (!is_array($options) || empty($options)) {
@@ -60,6 +90,9 @@ class CloggyBlogPost extends CloggyAppModel {
             $this->get('node_permalink')->createPermalink($postNodeId, $title, '-');
             $this->get('node_content')->createContent($postNodeId, $content);
 
+            /*
+             * if need to set relation with categories
+             */
             if (isset($cats) && !empty($cats)) {
 
                 foreach ($cats as $cat) {
@@ -67,6 +100,9 @@ class CloggyBlogPost extends CloggyAppModel {
                 }
             }
 
+            /*
+             * if need to set relation with tags
+             */
             if (isset($tags) && !empty($tags)) {
 
                 foreach ($tags as $tag) {
@@ -80,6 +116,13 @@ class CloggyBlogPost extends CloggyAppModel {
         }
     }
 
+    /**
+     * Update post data
+     * @uses node_subject CloggyNodesubject
+     * @uses node_content CloggyNodeContent
+     * @param int $id
+     * @param array $data
+     */
     public function updatePost($id, $data) {
 
         if (isset($data['title'])) {
@@ -121,6 +164,13 @@ class CloggyBlogPost extends CloggyAppModel {
         }
     }
 
+    /**
+     * Setup post status: publish(1),draft(0)
+     * 
+     * @uses node CloggyNode
+     * @param int $id
+     * @param int $stat
+     */
     public function updatePostStat($id, $stat) {
 
         $this->get('node')->id = $id;
@@ -131,6 +181,14 @@ class CloggyBlogPost extends CloggyAppModel {
         ));
     }
 
+    /**
+     * Update post taxonomies
+     * 
+     * @uses node_type CloggyNodeType
+     * @uses node_rel CloggyNodeRel
+     * @param array $options
+     * @return boolean
+     */
     public function updatePostTaxonomies($options) {
 
         if (!is_array($options) || empty($options)) {
@@ -139,6 +197,9 @@ class CloggyBlogPost extends CloggyAppModel {
             extract($options);
         }
 
+        /*
+         * set taxo name
+         */
         switch ($taxo) {
 
             case 'cloggy_blog_tags':
@@ -171,6 +232,16 @@ class CloggyBlogPost extends CloggyAppModel {
         }
     }
 
+    /**
+     * 
+     * Get post data
+     * 
+     * @uses node_type CloggyNodeType
+     * @uses node CloggyNode
+     * @param int $limit
+     * @param string $order
+     * @return array
+     */
     public function getPosts($limit, $order) {
 
         $typeId = $this->get('node_type')->getTypeIdByName('cloggy_blog_post');
@@ -198,6 +269,14 @@ class CloggyBlogPost extends CloggyAppModel {
         return $posts;
     }
 
+    /**
+     * Get single post detail
+     * 
+     * @uses node_type CloggyNodeType
+     * @uses node CloggyNode
+     * @param int $id
+     * @return array
+     */
     public function getSinglePostById($id) {
 
         $typeId = $this->get('node_type')->getTypeIdByName('cloggy_blog_post');
@@ -220,6 +299,16 @@ class CloggyBlogPost extends CloggyAppModel {
         return $detail;
     }
 
+    /**
+     * 
+     * Get taxonomies from single post
+     * @uses node_rel CloggyNodeRel
+     * @uses node CloggyNode
+     * @param int $id
+     * @param string $taxo
+     * @param string $rel
+     * @return boolean
+     */
     public function getSinglePostTaxonomies($id, $taxo = 'cloggy_blog_categories', $rel = 'cloggy_blog_category_post') {
 
         $categoriesNodeTypeId = $this->get('node_type')->find('first', array(
@@ -269,6 +358,21 @@ class CloggyBlogPost extends CloggyAppModel {
         return false;
     }
 
+    /**
+     * 
+     * Get posts for pagination
+     * 
+     * @uses node_type CloggyNodeType
+     * @uses node CloggyNode
+     * @param array $conditions
+     * @param array $fields
+     * @param string $order
+     * @param int $limit
+     * @param int $page
+     * @param float|int $recursive
+     * @param array $extra
+     * @return array
+     */
     public function paginate($conditions, $fields, $order, $limit, $page = 1, $recursive = null, $extra = array()) {
 
         $typeId = $this->get('node_type')->getTypeIdByName('cloggy_blog_post');
@@ -300,6 +404,16 @@ class CloggyBlogPost extends CloggyAppModel {
                 ));
     }
 
+    /**
+     * Get total post data
+     * 
+     * @uses node_type CloggyNodeType
+     * @uses node CloggyNode
+     * @param array $conditions
+     * @param float|int $recursive
+     * @param array $extra
+     * @return int
+     */
     public function paginateCount($conditions = null, $recursive = 0, $extra = array()) {
 
         $typeId = $this->get('node_type')->getTypeIdByName('cloggy_blog_post');

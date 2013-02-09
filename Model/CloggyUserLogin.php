@@ -11,6 +11,11 @@ class CloggyUserLogin extends CloggyAppModel {
         )
     );
 
+    /**
+     * Check if user login or not
+     * @param int $id
+     * @return boolean
+     */
     public function isLogin($id) {
 
         $check = $this->find('count', array(
@@ -21,10 +26,19 @@ class CloggyUserLogin extends CloggyAppModel {
         return $check < 1 ? false : true;
     }
 
+    /**
+     * Remove user login
+     * @param int $id
+     */
     public function removeLogin($id) {
         $this->deleteAll(array('user_id' => $id), false);
     }
 
+    /**
+     * Set user login
+     * @param int $id
+     * @return boolean
+     */
     public function setLogin($id) {
 
         $check = $this->isLogin($id);
