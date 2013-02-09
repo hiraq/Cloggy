@@ -80,5 +80,16 @@ class CloggyModuleInfoComponentTest extends CakeTestCase {
         $this->assertTrue(in_array('ModuleTest',$brokenModules));
         
     }
+    
+    public function testExcludeModule() {
+        
+        $this->__CloggyModuleInfo->setExcluded('ModuleTest');
+        $this->__CloggyModuleInfo->modules();
+        
+        $data = $this->__CloggyModuleInfo->getModuleInfo('ModuleTest');
+        
+        $this->assertTrue(empty($data));
+        
+    }
 
 }

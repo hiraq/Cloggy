@@ -27,6 +27,12 @@ class CloggyModuleInfoComponent extends Component {
     private $__modules = array();
     
     /**
+     * Exclude modules to listed
+     * @var array 
+     */
+    private $__excludeds = array();
+    
+    /**
      * Store broken dependencies
      * @var array 
      */
@@ -42,29 +48,64 @@ class CloggyModuleInfoComponent extends Component {
             foreach ($modules as $module) {
                 
                 //check if module allowed or not
-                $checkModuleAllowed = $this->CloggyAcl->isModuleAllowedByAro($module);
+                $checkModuleAllowed = $this->CloggyAcl->isModuleAllowedByAro($module);   
+                $checkModuleExcluded = $this->isModuleExcluded($module);
                 
                 /*
-                 * only list allowed modules
+                 * if module not excluded
                  */
-                if($checkModuleAllowed) {
-                    if (!array_key_exists($module, $this->__modules)) {
-                        
-                        $this->__configureModuleInfo($module);
-                        $this->__modules[$module]['name'] = $this->getModuleName();
-                        $this->__modules[$module]['desc'] = $this->getModuleDesc();
-                        $this->__modules[$module]['author'] = $this->getModuleAuthor();
-                        $this->__modules[$module]['url'] = $this->getModuleUrl();
-                        $this->__modules[$module]['dep'] = $this->getModuleDependency();      
-                        
-                        //check dependent
-                        $this->__checkDependentModule($module);
-                        
-                    }
-                }
+                if (!$checkModuleExcluded) {
+                 
+                    /*
+                     * only list allowed modules
+                     */
+                   if($checkModuleAllowed) {
+                       if (!array_key_exists($module, $this->__modules)) {
+
+                           $this->__configureModuleInfo($module);
+                           $this->__modules[$module]['name'] = $this->getModuleName();
+                           $this->__modules[$module]['desc'] = $this->getModuleDesc();
+                           $this->__modules[$module]['author'] = $this->getModuleAuthor();
+                           $this->__modules[$module]['url'] = $this->getModuleUrl();
+                           $this->__modules[$module]['dep'] = $this->getModuleDependency();      
+
+                           //check dependent
+                           $this->__checkDependentModule($module);
+
+                       }
+                   }
+                    
+                }                
                 
             }
         }
+    }
+    
+    /**
+     * Check if module exists or not
+     * @access public
+     * @param string $module
+     * @return boolean
+     */
+    public function isModuleExists($module) {
+        return array_key_exists($module, $this->__modules);
+    }     
+        
+    /**
+     * Check if module excluded or not
+     * @param string $module
+     * @return boolean
+     */
+    public function isModuleExcluded($module) {
+        return in_array($module,$this->__excludeds);
+    }
+    
+    /**
+     * Exclude module
+     * @param string $module
+     */
+    public function setExcluded($module) {        
+        $this->__excludeds[] = $module;
     }
 
     /**
@@ -81,17 +122,7 @@ class CloggyModuleInfoComponent extends Component {
      */
     public function getModuleBrokenDeps() {
         return $this->__moduleDepsBroken;
-    }
-
-    /**
-     * Check if module exists or not
-     * @access public
-     * @param string $module
-     * @return boolean
-     */
-    public function isModuleExists($module) {
-        return array_key_exists($module, $this->__modules);
-    }        
+    }      
 
     /**
      * Get module info

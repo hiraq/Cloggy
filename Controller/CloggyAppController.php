@@ -131,6 +131,7 @@ class CloggyAppController extends AppController {
     private function __cloggyModuleRequested() {                
 
         //generate modules
+        $this->CloggyModuleInfo->setExcluded('ModuleTest');
         $this->CloggyModuleInfo->modules();
         $modules = $this->CloggyModuleInfo->getModules();
         $brokenModules = $this->CloggyModuleInfo->getModuleBrokenDeps();
