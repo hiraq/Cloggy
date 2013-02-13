@@ -256,6 +256,13 @@ class CloggyBlogPostsController extends CloggyAppController {
         $this->set('title_for_layout', 'Cloggy - CloggyBlogPost - Add New Post');
         $this->set(compact('categories', 'tags', 'id', 'detail', 'postCategories', 'postTags'));
     }
+    
+    public function upload_image() {
+        
+        $this->autoRender = false;
+        pr($this->request);
+        
+    }
 
     public function publish($id = null) {
 

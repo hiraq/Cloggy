@@ -12,16 +12,23 @@
         
         <div id="cloggyImageTab" class="tab-content">
             <div id="cloggyImageTabUpload" class="tab-pane fade active in">
-                <a href="#" class="btn" id="upload">Upload Image</a><br />
+                <div>
+                    <label>Resize Image</label>
+                    <input type="text" class="input-small" name="width" placeholder="width" />    
+                    <input type="text" class="input-small" name="height" placeholder="height" />                    
+                </div>                
+                <a href="#" class="btn" id="upload">Select Image</a><br />
                 <div id="filename"></div>
             </div>
-            <div id="cloggyImageTabImages" class="tab-pane fade">images</div>
+            <div id="cloggyImageTabImages" class="tab-pane fade">
+                <div id="imageFile">No Image Uploaded</div>
+            </div>
         </div>                
         
     </div>    
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        <button class="btn btn-primary">Save changes</button>
+        <button class="btn btn-primary" id="uploadButton">Upload Now</button>
     </div>
 </div>
 
@@ -73,6 +80,7 @@
                  * setup ocupload
                  */
                 var cloggyImageUpload = jQuery('#upload').upload({
+                    action: '<?php echo CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_posts/upload_image') ?>',
                     name: 'image',
                     autoSubmit: false,
                     enctype: 'multipart/form-data',
@@ -81,6 +89,11 @@
                         var filename = this.filename();
                         jQuery('#filename').html('');
                         jQuery('#filename').append(filename);
+                        
+                    },
+                    onComplete: function(response) {
+                        
+                        console.log(response);
                         
                     }
                 });                                
@@ -91,7 +104,14 @@
                 jQuery('#upload').on('click',function(e) {
                     jQuery('input[name="image"]').val('');
                     jQuery('input[name="image"]').trigger('click');
-                });                                
+                });           
+                
+                /*
+                 * submit image
+                 */
+                jQuery('#uploadButton').on('click',function(e) {
+                    cloggyImageUpload.submit();
+                });
                 
             });
            
