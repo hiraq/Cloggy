@@ -260,7 +260,7 @@ class CloggyBlogPostsController extends CloggyAppController {
     public function upload_image() {
         
         $this->autoRender = false;
-        pr($this->request);
+        
         
     }
 

@@ -14,6 +14,7 @@ class CloggyAppController extends AppController {
     public $components = array(
         'Session',
         'Auth',
+        'RequestHandler',
         'Cloggy.CloggyModuleInfo',
         'Cloggy.CloggyModuleMenu',
         'Cloggy.CloggyAcl',
