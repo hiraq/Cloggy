@@ -84,6 +84,10 @@
                     name: 'image',
                     autoSubmit: false,
                     enctype: 'multipart/form-data',
+                    params: {
+                        width: jQuery('input[name="width"]').val(),
+                        height: jQuery('input[name="height"]').val()
+                    },
                     onSelect: function() {
                         
                         var filename = this.filename();
@@ -95,9 +99,20 @@
                         
                         if (response == 'failed') {
                             
+                            var notif = '<div class="alert alert-error">\n\
+                                <strong>Upload failed!</strong>\n\
+                                </div>';                                                                                        
+                            
                         } else {
                             
+                            var notif = '<div class="alert alert-success">\n\
+                                <strong>Upload success!</strong>.\n\
+                                </div>';  
+                            
                         }
+                        
+                        jQuery('#filename').html('');                        
+                        jQuery('#filename').append(notif);                        
                         
                     }
                 });                                

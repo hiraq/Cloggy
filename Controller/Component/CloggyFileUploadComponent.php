@@ -46,7 +46,7 @@ class CloggyFileUploadComponent extends Component {
     
     /**
      * Setup $_FILES data
-     * Example:
+     * Example:<br />
      * <pre>
      *  <code>
      *      <?php
@@ -86,6 +86,10 @@ class CloggyFileUploadComponent extends Component {
         $this->__errorMsg = $errorMsg;
     }
     
+    /**
+     * Do upload
+     * @param string|null $field [optional]
+     */
     public function proceedUpload($field=null) {    
         
         //check upload error status

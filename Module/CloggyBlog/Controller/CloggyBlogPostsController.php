@@ -272,12 +272,18 @@ class CloggyBlogPostsController extends CloggyAppController {
         $this->CloggyFileUpload->proceedUpload();
         
         //check error upload
-        $checkError = $this->CloggyFileUpload->isError();        
+        $checkError = $this->CloggyFileUpload->isError();    
+        
+        /*
+         * prepare for resize and cropping images
+         */
+        $width = $this->request->data['width'];
+        $height = $this->request->data['height'];
         
         if ($checkError) {
             echo 'failed';
-        } else {
-            echo 'success';
+        } else { 
+           echo 'success';
         }
         
     }
