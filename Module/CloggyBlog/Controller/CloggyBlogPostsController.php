@@ -10,10 +10,10 @@ class CloggyBlogPostsController extends CloggyAppController {
         'CloggyBlogCategory',
         'CloggyBlogTag',
         'Cloggy.CloggyValidation'
-    );
+    );        
 
     public function beforeFilter() {
-        parent::beforeFilter();                
+        parent::beforeFilter();             
     }
 
     public function index() {
@@ -260,7 +260,25 @@ class CloggyBlogPostsController extends CloggyAppController {
     public function upload_image() {
         
         $this->autoRender = false;
+        $this->CloggyFileUpload = $this->Components->load('Cloggy.CloggyFileUpload');
         
+        $this->CloggyFileUpload->settings(array(
+            'allowed_types' => array('jpg','jpeg','png','gif'),
+            'field' => 'image',
+            'folder_dest_path' => APP.'Plugin'.DS.'Cloggy'.DS.'webroot'.DS.'uploads'.DS.'CloggyBlog'.DS.'images'.DS
+        ));
+        
+        //upload image
+        $this->CloggyFileUpload->proceedUpload();
+        
+        //check error upload
+        $checkError = $this->CloggyFileUpload->isError();        
+        
+        if ($checkError) {
+            echo 'failed';
+        } else {
+            echo 'success';
+        }
         
     }
 

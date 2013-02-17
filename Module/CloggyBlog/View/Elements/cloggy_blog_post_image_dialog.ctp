@@ -93,7 +93,11 @@
                     },
                     onComplete: function(response) {
                         
-                        console.log(response);
+                        if (response == 'failed') {
+                            
+                        } else {
+                            
+                        }
                         
                     }
                 });                                

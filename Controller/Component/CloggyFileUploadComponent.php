@@ -17,7 +17,15 @@ class CloggyFileUploadComponent extends Component {
     private $__uploadData;
     private $__isError = false;
     private $__errorMsg = 'An error has detected';
+    private $__filepath;
+    private $__uploadSuccessData;
     
+    /**
+     * Setup settings
+     * 
+     * @param ComponentCollection $collection
+     * @param array $settings [optional]
+     */
     public function __construct(ComponentCollection $collection, $settings = array()) {
         
         $this->__controller = $collection->getController();
@@ -53,6 +61,23 @@ class CloggyFileUploadComponent extends Component {
     }
     
     /**
+     * Change file permission
+     * @param int $mode
+     */
+    public function setupChmod($mode) {
+        
+        $checkError = $this->isError();
+        
+        if (!$checkError) {
+            
+            //change permission
+            @chmod($this->__filepath,$mode);
+            
+        }
+        
+    }
+    
+    /**
      * Setup error
      * @param string $errorMsg
      */
@@ -61,9 +86,28 @@ class CloggyFileUploadComponent extends Component {
         $this->__errorMsg = $errorMsg;
     }
     
-    public function proceedUpload($field=null) {                
+    public function proceedUpload($field=null) {    
         
+        //check upload error status
+        $this->__proceedUploadErrorStatus();
         
+        //check and proceed field
+        $this->__proceedField($field);
+        
+        //check and proceed upload data
+        $this->__proceedUploadData();
+        
+        //check and proceed file types
+        $this->__proceedFileTypes();  
+        
+        //check and proceed file size
+        $this->__proceedFileSize();
+        
+        //check and proceed file name
+        $this->__proceedFileName();                
+        
+        //do upload
+        $this->__doUpload();
         
     }
     
@@ -74,8 +118,8 @@ class CloggyFileUploadComponent extends Component {
      * @param string $newfile
      * @return boolean
      */
-    public function proceedUploadDirectly($tmp,$newfile) {
-        return move_uploaded_file($tmp,$newfile);
+    public function proceedUploadDirectly($tmp,$newfile) {           
+        return @move_uploaded_file($tmp,$newfile);
     }
     
     /**
@@ -95,6 +139,50 @@ class CloggyFileUploadComponent extends Component {
         
     }
     
+    /**
+     * Get uploaded data
+     * @return array|null
+     */
+    public function getUploadedData() {
+        return $this->__uploadSuccessData;
+    }
+    
+    /**
+     * Get upload data
+     * @return array
+     */
+    public function getUploadData() {
+        return $this->__uploadData;
+    }
+    
+    /**
+     * Get file info
+     * @param string $filepath
+     * @return array
+     */
+    public function getFileInfo($filepath) {
+        
+        $file = new File($filepath);
+        return $file->info();
+        
+    }
+    
+    /**
+     * 
+     * @param string $filepath
+     * @return string
+     */
+    public function getFileExt($filepath) {
+        
+        $file = new File($filepath);
+        return $file->ext();
+        
+    }
+    
+    /**
+     * Get error message
+     * @return string
+     */    
     public function getErrorMsg() {
         return $this->__errorMsg;
     }
@@ -173,6 +261,268 @@ class CloggyFileUploadComponent extends Component {
         return false;
         
     }   
+    
+    /**
+     * Check and proceed $_FILES[$field]
+     * 
+     * @access private
+     * @param string $field
+     */
+    private function __proceedField($field) {
+        
+        //get error status
+        $checkError = $this->isError();
+        
+        if (!$checkError) {
+         
+            /*
+            * reassign $field if null or empty
+            */
+            if (is_null($field) || empty($field)) {
+                $field = $this->getFieldName();
+            }
+
+            /*
+             * if still empty or null then raise an error
+             */
+            if (empty($field)) {
+                $this->setupError('Field name not configured.');
+            } else {
+                $this->__field = $field;
+            }
+        }                          
+        
+    }
+    
+    /**
+     * Check and proceed upload data files
+     */
+    private function __proceedUploadData() {
+        
+        //get error status
+        $checkError = $this->isError();
+        
+        /*
+         * only continue if free from error
+         */
+        if (!$checkError) {
+            
+            if (empty($this->__uploadData)) {
+                
+                $field = $this->getFieldName();
+                
+                /*
+                 * check for upload data
+                 */
+                if (isset($this->__controller->request->params['form'][$field]) 
+                        && !empty($this->__controller->request->params['form'][$field])) {
+
+                    //setup upload data
+                    $this->setupFiles($this->__controller->request->params['form'][$field]);
+
+                } else {
+                    $this->setupError('Upload data not available.');
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    /**
+     * Check allowed file types
+     */
+    private function __proceedFileTypes() {
+        
+        //get error status
+        $checkError = $this->isError();
+        
+        if (!$checkError) {
+            
+            //get file extension
+            $fileTmpExt = $this->getFileExt($this->__uploadData['name']);
+            
+            /*
+             * if file type not allowed
+             */
+            if (is_array($this->__allowedFileTypes)
+                    && !empty($this->__allowedFileTypes)
+                    && !in_array($fileTmpExt, $this->__allowedFileTypes)) {
+
+                //raise an error
+                $this->setupError('File extension not allowed.');
+            }
+            
+        }
+        
+    }        
+    
+    /**
+     * Check filesize
+     */
+    private function __proceedFileSize() {
+        
+        //get error status
+        $checkError = $this->isError();
+        
+        if (!$checkError) {                        
+            
+            if (!empty($this->__maxFileSize) 
+                    && $this->__uploadData['size'] > $this->__maxFileSize) {
+
+                //raise an error
+                $this->setupError('Requested uploaded file exceed maximum filesize.');
+            }
+            
+        }
+        
+    }
+    
+    /**
+     * Check file name and setup filepath
+     */
+    private function __proceedFileName() {
+        
+        //get error status
+        $checkError = $this->isError();
+        
+        if (!$checkError) {
+                        
+            $filename = $this->__uploadData['name'];            
+            
+            if (empty($this->__folderDestPath)) {
+                $this->setupError('Folder destination not configured.');
+            } else {
+                
+                /*
+                 * create folder if not exists
+                 */
+                if (!is_dir($this->__folderDestPath)) {
+                    
+                    /*
+                     * create folder
+                     */
+                    $folder = new Folder();
+                    $folder->create($this->__folderDestPath);    
+                    $folder->chmod($this->__folderDestPath,0755);
+                }
+                
+                $filepath = $this->__folderDestPath.$filename;
+                
+                /*
+                 * check if exists
+                 */
+                if (file_exists($filepath)) {
+                    
+                    /*
+                     * raise an error if forDupFile set to false
+                     * and there is an existed file
+                     */
+                    if ($this->__forceDupFile) {
+                        $filename = $this->__rewriteFile($filename);
+                        $this->__filepath = $this->__folderDestPath.$filename;
+                    } else {
+                        $this->setupError('Cannot upload file due to duplicate file.');
+                    }
+                    
+                } else {
+                    $this->__filepath = $filepath;
+                }                                
+                
+            }
+            
+        }
+        
+    }
+    
+    /**
+     * Check for default php error status
+     * @link http://www.php.net/manual/en/features.file-upload.errors.php 
+     */
+    private function __proceedUploadErrorStatus() {
+        
+        //get error status
+        $checkError = $this->isError();
+        
+        if (!$checkError) {
+            
+            if ($this->__uploadData['error'] > 0) {
+                
+                switch($this->__uploadData['error']) {
+                    
+                    case 1:
+                    case 2:
+                        $errorMsg = 'The uploaded file exceeds the upload_max_filesize';
+                        break;
+                    
+                    case 3:
+                        $errorMsg = 'The uploaded file was only partially uploaded. ';
+                        break;
+                    
+                    case 4:
+                        $errorMsg = 'No file was uploaded. ';
+                        break;
+                    
+                    case 6:
+                        $errorMsg = 'Missing a temporary folder';
+                        break;
+                    
+                    case 7:
+                        $errorMsg = 'Failed to write file to disk';
+                        break;
+                    
+                    case 8:
+                        $errorMsg = 'A PHP extension stopped the file upload.';
+                        break;
+                    
+                    default:
+                        $errorMsg = 'An error has occured.';
+                        break;
+                    
+                }
+                
+                //raise an error
+                $this->setupError($errorMsg);
+                
+            }
+            
+        }
+        
+    }
+    
+    /**
+     * Do upload process
+     */
+    private function __doUpload() {
+        
+        //get error status
+        $checkError = $this->isError();
+        
+        if (!$checkError) {
+            
+            $tmpName = $this->__uploadData['tmp_name'];
+            $uploadFile = $this->proceedUploadDirectly($tmpName, $this->__filepath);
+            
+            if ($uploadFile) {
+                
+                //change permission
+                $this->setupChmod(0755);
+                $file = $this->getFileInfo($this->__filepath);
+                
+                if (empty($file)) {
+                    $this->setupError('Failed to upload file.');
+                } else {
+                    $this->__uploadSuccessData = $file;
+                }
+                
+            } else {
+                $this->setupError('Cannot upload file.');
+            }
+            
+        }
+        
+    }
     
     /**
      * Rewrite filename
