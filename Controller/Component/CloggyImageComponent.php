@@ -32,6 +32,23 @@ class CloggyImageComponent extends Component {
     private $__imageResized;
     
     /**
+     * Where to save resized image
+     * 
+     * @access private
+     * @var string 
+     */
+    private $__imageSavePath;
+    
+    /**
+     *
+     * Image quality
+     * 
+     * @access private
+     * @var int 
+     */
+    private $__imageQuality = 100;
+    
+    /**
      * Original image width
      * 
      * @access private
@@ -124,7 +141,7 @@ class CloggyImageComponent extends Component {
      * @access private
      * @var string 
      */
-    private $__option = 'auto';
+    private $__option = 'auto';        
     
     /**
      * 
@@ -209,13 +226,28 @@ class CloggyImageComponent extends Component {
     
     public function proceed() {
         
+        $checkError = $this->isError();        
+        if (!$checkError) {
+            
+        }
+        
     }
     
     public function proceedResize() {
         
+        $checkError = $this->isError();        
+        if (!$checkError) {
+            
+        }
+        
     }
     
     public function proceedCrop() {
+        
+        $checkError = $this->isError();        
+        if (!$checkError) {
+            
+        }
         
     }
     
@@ -292,7 +324,35 @@ class CloggyImageComponent extends Component {
             if (empty($this->__option)) {
                 $this->setError('Option not available, set your option first.');
             } else {
-                //get optimal width and height by option
+                
+                /*
+                 * get optimal size width and height
+                 */
+                switch($this->__option) {
+                    
+                    case 'exact':
+                        $this->__optimalWidth = $this->__requestedWidth;
+                        $this->__optimalHeight = $this->__requestedHeight;
+                        break;
+                    
+                    case 'portrait':
+                        $this->__setOptimalSizeByPortrait();
+                        break;
+                    
+                    case 'landscape':
+                        $this->__setOptimalSizeByLandscape();
+                        break;
+                    
+                    case 'crop':
+                        $this->__setOptimalSizeByCrop();
+                        break;
+                    
+                    default:
+                        $this->__setOptimalSizeByAuto();
+                        break;
+                    
+                }
+                
             }
             
         }
@@ -306,6 +366,34 @@ class CloggyImageComponent extends Component {
     public function setError($msg) {
         $this->__isError = true;
         $this->__errorMsg = $msg;
+    }
+    
+    /**
+     * Set destination path to save image
+     * @param string $path
+     */
+    public function setPath($path) {
+        
+        /*
+         * if not exists,then create it
+         */
+        if (!is_dir($path)) {
+            
+            $folder = new Folder();
+            $folder->create($path, 0777);
+            
+        }
+        
+        $this->__imageSavePath = $path;
+        
+    }
+    
+    /**
+     * Set image quality
+     * @param int $quality
+     */
+    public function setImageQuality($quality) {
+        $this->__imageQuality = $quality;
     }
     
     /**
@@ -348,15 +436,21 @@ class CloggyImageComponent extends Component {
      */
     public function getImageExt($file) {
         
-        $file = new File($file);
-        $checkExists = $file->exists();
+        $checkError = $this->isError();
         
-        if ($checkExists) {
-            return $file->ext();
-        } else {
-            $this->setError('Image file not found.');
-            return false;
-        }
+        if (!$checkError) {
+         
+            $file = new File($file);
+            $checkExists = $file->exists();
+
+            if ($checkExists) {
+                return $file->ext();
+            } else {
+                $this->setError('Image file not found.');
+                return false;
+            }
+            
+        }        
         
     }
     
@@ -385,6 +479,93 @@ class CloggyImageComponent extends Component {
      */
     public function isExtensionLoaded($ext='gd') {        
         return extension_loaded($ext);        
+    }
+    
+    /**
+     * Finishing process, save resized image to destination folder
+     */
+    private function __saveImage() {
+        
+    }
+    
+    /**
+     * Set image save path based on original image path
+     */
+    private function __setImageAutPath() {
+        
+    }
+    
+    /**
+     * Setup optimal size for 'auto' option
+     */
+    private function __setOptimalSizeByAuto() {
+                
+        if ($this->__originalImageHeight < $this->__originalImageWidth) {
+            $this->__setOptimalSizeByLandscape();
+        }
+        
+        if ($this->__originalImageHeight > $this->__originalImageWidth) {
+            $this->__setOptimalSizeByPortrait();
+        }
+        
+        if ($this->__requestedHeight < $this->__requestedWidth) {
+            $this->__setOptimalSizeByLandscape();
+        }
+        
+        if ($this->__requestedHeight > $this->__requestedWidth) {
+            $this->__setOptimalSizeByPortrait();
+        }
+        
+        if (empty($this->__optimalHeight) && empty($this->__optimalWidth)) {
+            $this->__optimalWidth = $this->__requestedWidth;
+            $this->__optimalHeight = $this->__requestedHeight;
+        }
+        
+    }
+    
+    /**
+     * Setup optimal size if using portrait option
+     */
+    private function __setOptimalSizeByPortrait() {
+        
+        $ratio = $this->__originalImageWidth / $this->__originalImageHeight;
+        $newWidth = $this->__requestedHeight * $ratio;
+        
+        $this->__optimalWidth = $newWidth;        
+        $this->__optimalHeight = $this->__requestedHeight;
+        
+    }
+    
+    /**
+     * Setup optimal size if using landscape option
+     */
+    private function __setOptimalSizeByLandscape() {
+        
+        $ratio = $this->__originalImageHeight / $this->__originalImageWidth;
+        $newHeight = $this->__requestedWidth * $ratio;
+        
+        $this->__optimalWidth = $this->__requestedWidth;
+        $this->__optimalHeight = $newHeight;
+        
+    }
+    
+    /**
+     * Setup optimal size if using crop option
+     */
+    private function __setOptimalSizeByCrop() {
+        
+        $heightRatio = $this->__originalImageHeight / $this->__requestedHeight;
+        $widthRatio = $this->__originalImageWidth / $this->__requestedWidth;
+        
+        if ($heightRatio < $widthRatio) {
+            $optimalRatio = $heightRatio;
+        } else {
+            $optimalRatio = $widthRatio;
+        }
+        
+        $this->__optimalHeight = $this->__originalImageHeight / $optimalRatio;
+        $this->__optimalWidth = $this->__originalImageWidth / $optimalRatio;
+        
     }
     
     /**
@@ -431,6 +612,20 @@ class CloggyImageComponent extends Component {
              */
             if (isset($settings['option']) && !empty($settings['option'])) {
                 $this->setOption($settings['option']);
+            }  
+            
+            /*
+             * setup image path
+             */
+            if (isset($settings['save_path']) && !empty($settings['save_path'])) {
+                $this->setPath($settings['save_path']);
+            }  
+            
+            /*
+             * setup image quality
+             */
+            if (isset($settings['quality']) && !empty($settings['quality'])) {
+                $this->setImageQuality($settings['quality']);
             }  
             
             //load original image width and height
