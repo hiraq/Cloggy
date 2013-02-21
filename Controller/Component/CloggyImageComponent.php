@@ -32,6 +32,13 @@ class CloggyImageComponent extends Component {
     private $__imageResized;
     
     /**
+     * Image path
+     * @access private
+     * @var string 
+     */
+    private $__imagePath;
+    
+    /**
      * Where to save resized image
      * 
      * @access private
@@ -187,7 +194,7 @@ class CloggyImageComponent extends Component {
      * Change settinggs
      * @param array $settings
      */
-    public function settings($settings) {
+    public function settings($settings) {        
         $this->__setupSettings($settings);
     }
     
@@ -219,33 +226,157 @@ class CloggyImageComponent extends Component {
             }
 
             $this->__image = $img;
+            $this->__imagePath = $image;
             
         }                
         
     }
     
+    /**
+     * Run command
+     */
     public function proceed() {
         
         $checkError = $this->isError();        
         if (!$checkError) {
             
-        }
-        
-    }
-    
-    public function proceedResize() {
-        
-        $checkError = $this->isError();        
-        if (!$checkError) {
+            //load original image width and height
+            $this->setOriginalImageWidthHeight();
+            
+            //set optimal image width and height
+            $this->setOptimalImageWidthHeight();
+            
+            switch($this->__command) {
+                
+                /*
+                 * just to resize
+                 */
+                case 'resize':
+                    $this->proceedResize();
+                    break;
+                
+                /*
+                 * resize first, then crop it
+                 */
+                default:
+                    $this->proceedResize();
+                    $this->proceedCrop();
+                    break;
+                
+            }
+            
+            //save image
+            $this->save();
             
         }
         
     }
     
+    /**
+     * Run resize
+     */
+    public function proceedResize() {
+        
+        $checkError = $this->isError();        
+        if (!$checkError) {
+            
+            //resizing
+            $this->__imageResized = imagecreatetruecolor($this->__optimalWidth, $this->__optimalHeight);
+            imagecopyresampled(
+                    $this->__imageResized,
+                    $this->__image,0,0,0,0,
+                    $this->__optimalWidth,$this->__optimalHeight,
+                    $this->__originalImageWidth,$this->__originalImageHeight);
+            
+        }
+        
+    }
+    
+    /**
+     * Run crop
+     */
     public function proceedCrop() {
         
         $checkError = $this->isError();        
         if (!$checkError) {
+            
+            $cropX = ($this->__optimalWidth / 2) - ($this->__requestedWidth / 2);
+            $cropY = ($this->__optimalHeight / 2) - ($this->__requestedHeight / 2);
+            $crop = $this->__imageResized;
+            
+            /*
+             * crop
+             */
+            $this->__imageResized = imagecreatetruecolor($this->__requestedWidth, $this->__requestedHeight);                        
+            imagecopyresampled(
+                    $this->__imageResized,
+                    $crop,0,0,
+                    $cropX,$cropY,
+                    $this->__requestedWidth,$this->__requestedHeight,
+                    $this->__requestedWidth,$this->__requestedHeight);
+            
+        }
+        
+    }
+    
+    /**
+     * Save image to destination path
+     */
+    public function save() {
+        
+        $checkError = $this->isError();
+        if (!$checkError) {
+            
+            $ext = $this->getImageExt();
+            $quality = $this->__imageQuality;
+            
+            if (empty($this->__imageSavePath)) {
+                $this->setError('Image save path not configured.');
+            } else {
+                
+                switch($ext) {
+                
+                    case 'jpg':
+                    case 'jpeg':
+
+                        if (imagetypes() & IMG_JPG) {
+                            imagejpeg($this->__imageResized,$this->__imageSavePath,$quality);
+                        }
+
+                        break;
+
+                    case 'gif':
+
+                        if (imagetypes() & IMG_GIF) {
+                            imagegif($this->__imageResized,$this->__imageSavePath);
+                        }
+
+                        break;
+
+                    case 'png':
+
+                        $scaleQuality = round($this->__imageQuality/100) * 9;
+                        $invertScaleQuality = 9 - $scaleQuality;
+
+                        if (imagetypes() & IMG_PNG) {
+                            imagepng($this->__imageResized,$this->__imageSavePath,$invertScaleQuality);
+                        }
+
+                        break;
+
+                }                
+                
+            }    
+            
+            /*
+             * destroy resized image
+             */
+            if ($this->__imageResized) {
+             
+                //destroy resized image
+                imagedestroy($this->__imageResized);
+                
+            }                        
             
         }
         
@@ -256,9 +387,9 @@ class CloggyImageComponent extends Component {
      * @param string $command
      */
     public function setCommand($command) {
-        
+
         $checkError = $this->isError();
-        if ($checkError) {
+        if (!$checkError) {
             
             if (!in_array($command,$this->__supportedCommand)) {
                 $this->setError('Command not available.');
@@ -305,7 +436,7 @@ class CloggyImageComponent extends Component {
                  * get original width and height
                  */
                 $this->__originalImageWidth = imagesx($this->__image);
-                $this->__originalImageHeigt = imagesy($this->__image);
+                $this->__originalImageHeight = imagesy($this->__image);
                 
             }
             
@@ -372,20 +503,8 @@ class CloggyImageComponent extends Component {
      * Set destination path to save image
      * @param string $path
      */
-    public function setPath($path) {
-        
-        /*
-         * if not exists,then create it
-         */
-        if (!is_dir($path)) {
-            
-            $folder = new Folder();
-            $folder->create($path, 0777);
-            
-        }
-        
-        $this->__imageSavePath = $path;
-        
+    public function setPath($path) {                        
+        $this->__imageSavePath = $path;        
     }
     
     /**
@@ -394,6 +513,22 @@ class CloggyImageComponent extends Component {
      */
     public function setImageQuality($quality) {
         $this->__imageQuality = $quality;
+    }
+    
+    /**
+     * Set image width
+     * @param int $width
+     */
+    public function setImageWidth($width) {
+        $this->__requestedWidth = $width;
+    }
+    
+    /**
+     * Set image height
+     * @param int $height
+     */
+    public function setImageHeight($height) {
+        $this->__requestedHeight = $height;
     }
     
     /**
@@ -431,16 +566,26 @@ class CloggyImageComponent extends Component {
     /**
      * Get image extenstion
      * 
-     * @param File $file
+     * @param string $file [optional]
      * @return string|null|boolean
      */
-    public function getImageExt($file) {
+    public function getImageExt($image=null) {
         
         $checkError = $this->isError();
         
         if (!$checkError) {
          
-            $file = new File($file);
+            /*
+             * check image
+             */
+            if (is_null($image)) {
+                $image = $this->__imagePath;
+            } 
+            
+            /*
+             * check and get extension
+             */
+            $file = new File($image);
             $checkExists = $file->exists();
 
             if ($checkExists) {
@@ -452,6 +597,38 @@ class CloggyImageComponent extends Component {
             
         }        
         
+    }
+    
+    /**
+     * Get used option
+     * @return string
+     */
+    public function getOption() {
+        return $this->__option;
+    }
+    
+    /**
+     * Get used command
+     * @return string
+     */
+    public function getCommand() {
+        return $this->__command;
+    }
+    
+    /**
+     * Get image save path
+     * @return string
+     */
+    public function getSavePath() {
+        return $this->__imageSavePath;
+    }
+    
+    /**
+     * Get image path
+     * @return string
+     */
+    public function getImagePath() {
+        return $this->__imagePath;
     }
     
     /**
@@ -479,21 +656,7 @@ class CloggyImageComponent extends Component {
      */
     public function isExtensionLoaded($ext='gd') {        
         return extension_loaded($ext);        
-    }
-    
-    /**
-     * Finishing process, save resized image to destination folder
-     */
-    private function __saveImage() {
-        
-    }
-    
-    /**
-     * Set image save path based on original image path
-     */
-    private function __setImageAutPath() {
-        
-    }
+    }                
     
     /**
      * Setup optimal size for 'auto' option
@@ -590,27 +753,27 @@ class CloggyImageComponent extends Component {
              * requested width
              */
             if (isset($settings['width']) && is_numeric($settings['width'])) {
-                $this->__requestedWidth = $settings['width'];
+                $this->setImageWidth($settings['width']);
             }
             
             /*
              * requested height
              */
             if (isset($settings['height']) && is_numeric($settings['height'])) {
-                $this->__requestedHeight = $settings['height'];
+                $this->setImageHeight($settings['height']);
             }
             
             /*
              * setup command to proceed
              */
-            if (isset($settings['command']) && !empty($settings['command'])) {
+            if (isset($settings['command']) && !empty($settings['command'])) {                  
                 $this->setCommand($settings['command']);
             }  
             
             /*
              * setup option to used
              */
-            if (isset($settings['option']) && !empty($settings['option'])) {
+            if (isset($settings['option']) && !empty($settings['option'])) {                
                 $this->setOption($settings['option']);
             }  
             
@@ -626,10 +789,7 @@ class CloggyImageComponent extends Component {
              */
             if (isset($settings['quality']) && !empty($settings['quality'])) {
                 $this->setImageQuality($settings['quality']);
-            }  
-            
-            //load original image width and height
-            $this->setOriginalImageWidthHeight();
+            }                          
             
         }                
         
