@@ -16,6 +16,7 @@ class CloggyImageComponentTest extends CakeTestCase {
     private $__Collection;
     private $__Request;
     private $__Response;
+    private $__image;
 
     public function setUp() {
 
@@ -31,9 +32,40 @@ class CloggyImageComponentTest extends CakeTestCase {
                 
     }
     
+    public function tearDown() {
+        
+        parent::tearDown();
+        
+        $testFileCopy = APP.'Plugin'.DS.'Cloggy'.DS.'webroot'.DS.$this->__image;        
+        if (file_exists($testFileCopy)) {
+            @unlink($testFileCopy);
+        }
+        
+    }
+    
     public function testObject() {   
         $this->__createComponentObject();
         $this->assertTrue(is_a($this->__CloggyImage,'CloggyImageComponent'));        
+    }        
+    
+    public function testAvailableOptions() {
+        
+        $this->__createComponentObject();
+        $commands = $this->__CloggyImage->getAvailableCommands();
+        $options = $this->__CloggyImage->getAvailableOptions();
+        $supportedImageExts = $this->__CloggyImage->getSupportedImageExt();
+        $requiredPhpExts = $this->__CloggyImage->getRequiredPhpExtension();
+        
+        $this->assertInternalType('array',$commands);
+        $this->assertInternalType('array',$options);
+        $this->assertInternalType('array',$supportedImageExts);
+        $this->assertInternalType('array',$requiredPhpExts);
+        
+        $this->assertFalse(empty($commands));
+        $this->assertFalse(empty($options));
+        $this->assertFalse(empty($supportedImageExts));
+        $this->assertFalse(empty($requiredPhpExts));
+        
     }
     
     public function testSettings() {
@@ -82,22 +114,156 @@ class CloggyImageComponentTest extends CakeTestCase {
         $this->assertEqual($option2,'auto');
         $this->assertEqual($command2,'resize');
         
-    }        
+    }
     
-    private function __getTestImageSavePath($filename=null) {
+    public function testResizeCropJpg() {
+               
+        $this->__createComponentObject(array(
+            'image' => $this->__getTestImage(),
+            'width' => 100,
+            'height' => 100,
+            'option' => 'auto',
+            'command' => 'resize',
+            'save_path' => $this->__getTestImageSavePath('test.jpg')
+        ));
         
-        $dir = APP.'plugin'.DS.'Cloggy'.DS.'webroot'.DS;
-        if (is_null($filename)) {
-            $filename = 'PHP-icon.jpeg';
-        }
+        //resize image
+        $this->__CloggyImage->proceed();
         
+        /*
+         * check resized image
+         */
+        $checkResizedImage = $this->__getTestImageSavePath('test.jpg');
+        $this->assertTrue(file_exists($checkResizedImage));
+        
+        //delete files        
+        @unlink($checkResizedImage);
+        
+        $this->__createComponentObject(array(
+            'image' => $this->__getTestImage(),
+            'width' => 100,
+            'height' => 100,
+            'option' => 'exact',
+            'command' => 'crop',
+            'save_path' => $this->__getTestImageSavePath('test.jpg')
+        ));
+        
+        //crop image
+        $this->__CloggyImage->proceed();
+        
+        /*
+         * check resized image
+         */
+        $checkResizedImage = $this->__getTestImageSavePath('test.jpg');
+        $this->assertTrue(file_exists($checkResizedImage));
+        
+        //delete after test       
+        $this->__image = $checkResizedImage;
+        
+    }
+    
+    public function testResizeCropGif() {
+        
+        $this->__createComponentObject(array(
+            'image' => $this->__getTestImage('php-icon.gif'),
+            'width' => 100,
+            'height' => 100,
+            'option' => 'auto',
+            'command' => 'resize',
+            'save_path' => $this->__getTestImageSavePath('test.gif')
+        ));
+        
+        //resize image
+        $this->__CloggyImage->proceed();
+        
+        /*
+         * check resized image
+         */
+        $checkResizedImage = $this->__getTestImageSavePath('test.gif');
+        $this->assertTrue(file_exists($checkResizedImage));
+        
+        //delete files        
+        @unlink($checkResizedImage);
+        
+        $this->__createComponentObject(array(
+            'image' => $this->__getTestImage('php-icon.gif'),
+            'width' => 100,
+            'height' => 100,
+            'option' => 'exact',
+            'command' => 'crop',
+            'save_path' => $this->__getTestImageSavePath('test.gif')
+        ));
+        
+        //crop image
+        $this->__CloggyImage->proceed();
+        
+        /*
+         * check resized image
+         */
+        $checkResizedImage = $this->__getTestImageSavePath('test.gif');
+        $this->assertTrue(file_exists($checkResizedImage));
+        
+        //delete after test       
+        $this->__image = $checkResizedImage;
+        
+    }
+    
+    public function testResizeCropPng() {
+        
+        $this->__createComponentObject(array(
+            'image' => $this->__getTestImage('php.png'),
+            'width' => 100,
+            'height' => 100,
+            'option' => 'auto',
+            'command' => 'resize',
+            'save_path' => $this->__getTestImageSavePath('test.png')
+        ));
+        
+        //resize image
+        $this->__CloggyImage->proceed();
+        
+        /*
+         * check resized image
+         */
+        $checkResizedImage = $this->__getTestImageSavePath('test.png');
+        $this->assertTrue(file_exists($checkResizedImage));
+        
+        //delete files        
+        @unlink($checkResizedImage);
+        
+        $this->__createComponentObject(array(
+            'image' => $this->__getTestImage('php.png'),
+            'width' => 100,
+            'height' => 100,
+            'option' => 'exact',
+            'command' => 'crop',
+            'save_path' => $this->__getTestImageSavePath('test.png')
+        ));
+        
+        //crop image
+        $this->__CloggyImage->proceed();
+        
+        /*
+         * check resized image
+         */
+        $checkResizedImage = $this->__getTestImageSavePath('test.png');
+        $this->assertTrue(file_exists($checkResizedImage));
+        
+        //delete after test       
+        $this->__image = $checkResizedImage;
+        
+    }
+    
+    private function __getTestImageSavePath($filename='PHP-icon.jpeg') {
+        
+        $dir = APP.'Plugin'.DS.'Cloggy'.DS.'webroot'.DS;                
         return $dir.$filename;
         
     }
         
     
-    private function __getTestImage() {
-        return APP.'Plugin'.DS.'Cloggy'.DS.'webroot'.DS.'test'.DS.'PHP-icon.jpeg';
+    private function __getTestImage($filename='PHP-icon.jpeg') {
+        return APP.'Plugin'.DS.'Cloggy'.DS.'webroot'.DS.'test'.DS.$filename;
     }
     
     private function __createComponentObject($settings=array()) {

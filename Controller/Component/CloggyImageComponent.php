@@ -332,15 +332,30 @@ class CloggyImageComponent extends Component {
             
             if (empty($this->__imageSavePath)) {
                 $this->setError('Image save path not configured.');
-            } else {
+            } else {                                
                 
+                /*
+                 * create resized image
+                 */
                 switch($ext) {
                 
                     case 'jpg':
                     case 'jpeg':
 
                         if (imagetypes() & IMG_JPG) {
-                            imagejpeg($this->__imageResized,$this->__imageSavePath,$quality);
+                            $createImg = @imagejpeg($this->__imageResized,$this->__imageSavePath,$quality);
+                            
+                            /*
+                             * if php gd failed to create image
+                             * then create it manual
+                             * http://www.php.net/manual/en/function.imagejpeg.php#92597
+                             */
+                            if (!$createImg) {
+                                ob_start();
+                                @imagejpeg($this->__imageResized,null,$quality);
+                                $imgRawBinary = ob_get_clean();  
+                                $this->__writeImageFile($imgRawBinary);
+                            }
                         }
 
                         break;
@@ -348,7 +363,19 @@ class CloggyImageComponent extends Component {
                     case 'gif':
 
                         if (imagetypes() & IMG_GIF) {
-                            imagegif($this->__imageResized,$this->__imageSavePath);
+                            $createImg = @imagegif($this->__imageResized,$this->__imageSavePath);
+                            
+                            /*
+                             * if php gd failed to create image
+                             * then create it manual
+                             * http://www.php.net/manual/en/function.imagejpeg.php#92597
+                             */
+                            if (!$createImg) {
+                                ob_start();
+                                @imagegif($this->__imageResized);
+                                $imgRawBinary = ob_get_clean();  
+                                $this->__writeImageFile($imgRawBinary);
+                            }
                         }
 
                         break;
@@ -359,7 +386,19 @@ class CloggyImageComponent extends Component {
                         $invertScaleQuality = 9 - $scaleQuality;
 
                         if (imagetypes() & IMG_PNG) {
-                            imagepng($this->__imageResized,$this->__imageSavePath,$invertScaleQuality);
+                            $createImg = @imagepng($this->__imageResized,$this->__imageSavePath,$invertScaleQuality);
+                            
+                            /*
+                             * if php gd failed to create image
+                             * then create it manual
+                             * http://www.php.net/manual/en/function.imagejpeg.php#92597
+                             */
+                            if (!$createImg) {
+                                ob_start();
+                                @imagepng($this->__imageResized,null,$invertScaleQuality);
+                                $imgRawBinary = ob_get_clean();  
+                                $this->__writeImageFile($imgRawBinary);
+                            }
                         }
 
                         break;
@@ -728,6 +767,29 @@ class CloggyImageComponent extends Component {
         
         $this->__optimalHeight = $this->__originalImageHeight / $optimalRatio;
         $this->__optimalWidth = $this->__originalImageWidth / $optimalRatio;
+        
+    }
+    
+    /**
+     * Write and create image
+     * @param string $binary
+     */
+    private function __writeImageFile($binary) {
+        
+        //load File utility
+        App::uses('File', 'Utility');
+        
+        /*
+         * create image file
+         */
+        $imgFile = new File($this->__imageSavePath);        
+        
+        $imgFile->open('w+');
+        $imgFile->write($binary);
+        $imgFile->close();
+        
+        //change image permission
+        @chmod($this->__imageSavePath,0775);
         
     }
     
