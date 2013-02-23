@@ -261,7 +261,11 @@ class CloggyBlogPostsController extends CloggyAppController {
         
         $this->autoRender = false;
         $this->CloggyFileUpload = $this->Components->load('Cloggy.CloggyFileUpload');
+        $this->CloggyImage = $this->Components->load('Cloggy.CloggyImage');
         
+        /*
+         * setup upload files
+         */
         $this->CloggyFileUpload->settings(array(
             'allowed_types' => array('jpg','jpeg','png','gif'),
             'field' => 'image',
@@ -281,9 +285,34 @@ class CloggyBlogPostsController extends CloggyAppController {
         $height = $this->request->data['height'];
         
         if ($checkError) {
+            debug($this->CloggyFileUpload->getErrorMsg());
             echo 'failed';
         } else { 
-           echo 'success';
+            
+            /*
+             * crop image
+             */
+            $uploadedData = $this->CloggyFileUpload->getUploadedData();            
+            $this->CloggyImage->settings(array(
+                'image' => $uploadedData['dirname'].DS.$uploadedData['basename'],
+                'width' => $width,
+                'height' => $height,
+                'option' => 'exact',
+                'command' => 'crop',
+                'save_path' => $uploadedData['dirname'].DS.$uploadedData['filename'].'_thumb_'.$width.'_'.$height.'.'.$uploadedData['extension']
+            ));
+            
+            //proceed cropping image
+            $this->CloggyImage->proceed();
+            
+            $checkError = $this->CloggyImage->isError();
+            $errorMsg = $this->CloggyImage->getErrorMsg();
+            
+            if ($checkError) {
+                echo $errorMsg;
+            } else {
+                echo 'Upload success';
+            }
         }
         
     }

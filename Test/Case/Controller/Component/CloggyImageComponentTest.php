@@ -388,6 +388,119 @@ class CloggyImageComponentTest extends CakeTestCase {
         
     }
     
+    public function testErrorRequestedWidthAndHeight() {
+        
+        /*
+         * error command
+         */
+        $this->__createComponentObject(array(
+            'image' => $this->__getTestImage('php.png'),
+            'width' => '',
+            'height' => '',
+            'option' => 'exact',
+            'command' => 'crop',
+            'quality' => 90,
+            'save_path' => APP.'plugin'.DS.'Cloggy'.DS.'webroot'.DS.'test'.DS.'test.png'
+        ));
+        
+        //proceed crop
+        $this->__CloggyImage->proceed();
+        
+        $checkError = $this->__CloggyImage->isError();
+        $errorMsg = $this->__CloggyImage->getErrorMsg();
+        
+        $this->assertTrue($checkError);
+        $this->assertEqual($errorMsg,'Empty requested width and height.');
+        
+    }
+    
+    public function testLandscape() {
+        
+        /*
+         * error command
+         */
+        $this->__createComponentObject(array(
+            'image' => $this->__getTestImage('PHP_Logo.jpg'),
+            'width' => '500',
+            'height' => '300',
+            'option' => 'landscape',
+            'command' => 'crop',
+            'quality' => 100,
+            'save_path' => $this->__getTestImageSavePath('test.jpg')
+        ));
+        
+        //proceed cropping
+        $this->__CloggyImage->proceed();
+        
+        $imagePath = $this->__getTestImageSavePath('test.jpg');
+        $this->assertTrue(file_exists($imagePath));
+        
+        $image = @imagecreatefromjpeg($imagePath);
+        $width = imagesx($image);
+        $height = imagesy($image);
+        
+        $this->assertEqual($width,500);
+        $this->assertEqual($height, 300);
+    }
+    
+    public function testPortrait() {
+        
+        /*
+         * error command
+         */
+        $this->__createComponentObject(array(
+            'image' => $this->__getTestImage(),
+            'width' => '100',
+            'height' => '100',
+            'option' => 'portrait',
+            'command' => 'resize',
+            'quality' => 100,
+            'save_path' => $this->__getTestImageSavePath('test.jpg')
+        ));
+        
+        //proceed cropping
+        $this->__CloggyImage->proceed();
+        
+        $imagePath = $this->__getTestImageSavePath('test.jpg');
+        $this->assertTrue(file_exists($imagePath));
+        
+        $image = @imagecreatefromjpeg($imagePath);        
+        $height = imagesy($image);
+                
+        $this->assertEqual($height, 100);
+        
+    }
+    
+    public function testOptimalCrop() {
+        
+        /*
+         * error command
+         */
+        $this->__createComponentObject(array(
+            'image' => $this->__getTestImage('PHP_Logo.jpg'),
+            'width' => '500',
+            'height' => '500',
+            'option' => 'crop',
+            'command' => 'crop',
+            'quality' => 100,
+            'save_path' => $this->__getTestImageSavePath('test.jpg')
+        ));
+        
+        //proceed cropping
+        $this->__CloggyImage->proceed();
+        
+        $imagePath = $this->__getTestImageSavePath('test.jpg');
+        $this->assertTrue(file_exists($imagePath));
+        
+        $image = @imagecreatefromjpeg($imagePath);    
+        $width = imagesx($image);
+        $height = imagesy($image);
+                
+        $this->assertEqual($width,500);
+        $this->assertEqual($height, 500);
+        
+    }
+    
     private function __getTestImageSavePath($filename='PHP-icon.jpeg') {
         
         $dir = APP.'Plugin'.DS.'Cloggy'.DS.'webroot'.DS;                

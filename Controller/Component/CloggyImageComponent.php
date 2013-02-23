@@ -422,7 +422,15 @@ class CloggyImageComponent extends Component {
         if (!$checkError) {
             
             if (!in_array($option,$this->__supportedImageOptions)) {
+                
+                //unknwon option
                 $this->setError('Option not available.');
+                
+            } elseif (empty($option)) {
+                
+                //empty option
+                $this->setError('Option not configured.');
+                
             } else {
                 $this->__option = $option;
             }
@@ -439,17 +447,11 @@ class CloggyImageComponent extends Component {
         $checkError = $this->isError();
         if (!$checkError) {
             
-            if (empty($this->__image) || !$this->__image) {
-                $this->setError('Your requested image not found or cannot readed properly.');
-            } else {
-                
-                /*
-                 * get original width and height
-                 */
-                $this->__originalImageWidth = imagesx($this->__image);
-                $this->__originalImageHeight = imagesy($this->__image);
-                
-            }
+            /*
+             * get original width and height
+             */
+            $this->__originalImageWidth = imagesx($this->__image);
+            $this->__originalImageHeight = imagesy($this->__image);
             
         }
         
@@ -463,38 +465,36 @@ class CloggyImageComponent extends Component {
         $checkError = $this->isError();
         if (!$checkError) {
             
-            if (empty($this->__option)) {
-                $this->setError('Option not available, set your option first.');
+            if (empty($this->__requestedHeight) || empty($this->__requestedWidth)) {
+                $this->setError('Empty requested width and height.');
             } else {
-                
+
                 /*
                  * get optimal size width and height
                  */
-                switch($this->__option) {
-                    
+                switch ($this->__option) {
+
                     case 'exact':
                         $this->__optimalWidth = $this->__requestedWidth;
                         $this->__optimalHeight = $this->__requestedHeight;
                         break;
-                    
+
                     case 'portrait':
                         $this->__setOptimalSizeByPortrait();
                         break;
-                    
+
                     case 'landscape':
                         $this->__setOptimalSizeByLandscape();
                         break;
-                    
+
                     case 'crop':
                         $this->__setOptimalSizeByCrop();
                         break;
-                    
+
                     default:
                         $this->__setOptimalSizeByAuto();
                         break;
-                    
                 }
-                
             }
             
         }

@@ -14,8 +14,8 @@
             <div id="cloggyImageTabUpload" class="tab-pane fade active in">
                 <div>
                     <label>Resize Image</label>
-                    <input type="text" class="input-small" name="width" placeholder="width" />    
-                    <input type="text" class="input-small" name="height" placeholder="height" />                    
+                    <input type="text" class="input-small" name="width" placeholder="width" id="imageWidth" />    
+                    <input type="text" class="input-small" name="height" placeholder="height" id="imageHeight" />                    
                 </div>                
                 <a href="#" class="btn" id="upload">Select Image</a><br />
                 <div id="filename"></div>
@@ -74,7 +74,10 @@
        load: [host+'vendor/jquery.ocupload.js'],
        complete: function() {
            
-            cloggy.captureJQuery(function() {                                
+            cloggy.captureJQuery(function() {   
+                
+                var imageWidth = jQuery('#imageWidth').val();
+                var imageHeight = jQuery('#imageHeight').val();
                 
                 /*
                  * setup ocupload
@@ -83,10 +86,12 @@
                     action: '<?php echo CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_posts/upload_image') ?>',
                     name: 'image',
                     autoSubmit: false,
-                    enctype: 'multipart/form-data',
-                    params: {
-                        width: jQuery('input[name="width"]').val(),
-                        height: jQuery('input[name="height"]').val()
+                    enctype: 'multipart/form-data',                    
+                    onSubmit: function() {
+                        this.params({
+                            width: jQuery('#imageWidth').val(),
+                            height: jQuery('#imageHeight').val()
+                        });                        
                     },
                     onSelect: function() {
                         
@@ -96,19 +101,21 @@
                         
                     },
                     onComplete: function(response) {
-                        
+                        console.log(response);
                         if (response == 'failed') {
                             
                             var notif = '<div class="alert alert-error">\n\
                                 <strong>Upload failed!</strong>\n\
                                 </div>';                                                                                        
                             
-                        } else {
-                            
+                        } else if(response == 'success') {
                             var notif = '<div class="alert alert-success">\n\
-                                <strong>Upload success!</strong>.\n\
+                                <strong>Upload success</strong>.\n\
                                 </div>';  
-                            
+                        } else {
+                            var notif = '<div class="alert">\n\
+                                <strong>'+response+'</strong>.\n\
+                                </div>';  
                         }
                         
                         jQuery('#filename').html('');                        
