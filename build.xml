@@ -40,7 +40,7 @@
         <phingcall target="run_cake_test">
             <property name="test_name" value="AllComponent" />
             <property name="group" value="components" />
-            <property name="phpunit_config" value="phpunit.component.xml" />
+            <property name="phpunit_config" value="cloggy.phpunit.component.xml" />
         </phingcall>
         <phingcall target="chmod_caches" />  
         <phingcall target="clean_cache" />  
@@ -53,7 +53,7 @@
         <phingcall target="run_cake_test">
             <property name="test_name" value="AllHelper" />
             <property name="group" value="helpers" />
-            <property name="phpunit_config" value="phpunit.helper.xml" />
+            <property name="phpunit_config" value="cloggy.phpunit.helper.xml" />
         </phingcall>    
         <phingcall target="chmod_caches" />    
         <phingcall target="clean_cache" />  
@@ -66,7 +66,7 @@
         <phingcall target="run_cake_test">
             <property name="test_name" value="AllLib" />
             <property name="group" value="libs" />
-            <property name="phpunit_config" value="phpunit.xml" />
+            <property name="phpunit_config" value="cloggy.phpunit.xml" />
         </phingcall>   
         <phingcall target="chmod_caches" />          
         <phingcall target="clean_cache" /> 
@@ -79,7 +79,7 @@
         <phingcall target="run_cake_test">
             <property name="test_name" value="AllModel" />
             <property name="group" value="models" />
-            <property name="phpunit_config" value="phpunit.xml" />
+            <property name="phpunit_config" value="cloggy.phpunit.xml" />
         </phingcall>    
         <phingcall target="chmod_caches" />       
         <phingcall target="clean_cache" />  

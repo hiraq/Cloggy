@@ -36,10 +36,16 @@ class CloggyImageComponentTest extends CakeTestCase {
         
         parent::tearDown();
         
-        $testFileCopy = APP.'Plugin'.DS.'Cloggy'.DS.'webroot'.DS.$this->__image;        
-        if (file_exists($testFileCopy)) {
-            @unlink($testFileCopy);
-        }
+        $fileJpg = APP.'Plugin'.DS.'Cloggy'.DS.'webroot'.DS.'test.jpg';
+        $fileGif = APP.'Plugin'.DS.'Cloggy'.DS.'webroot'.DS.'test.gif';
+        $filePng = APP.'Plugin'.DS.'Cloggy'.DS.'webroot'.DS.'test.png';
+        
+        /*
+         * delete files
+         */
+        @unlink($fileJpg);
+        @unlink($fileGif);
+        @unlink($filePng);
         
     }
     
@@ -124,6 +130,7 @@ class CloggyImageComponentTest extends CakeTestCase {
             'height' => 100,
             'option' => 'auto',
             'command' => 'resize',
+            'quality' => 90,
             'save_path' => $this->__getTestImageSavePath('test.jpg')
         ));
         
@@ -145,6 +152,7 @@ class CloggyImageComponentTest extends CakeTestCase {
             'height' => 100,
             'option' => 'exact',
             'command' => 'crop',
+            'quality' => 90,
             'save_path' => $this->__getTestImageSavePath('test.jpg')
         ));
         
@@ -170,6 +178,7 @@ class CloggyImageComponentTest extends CakeTestCase {
             'height' => 100,
             'option' => 'auto',
             'command' => 'resize',
+            'quality' => 90,
             'save_path' => $this->__getTestImageSavePath('test.gif')
         ));
         
@@ -251,6 +260,131 @@ class CloggyImageComponentTest extends CakeTestCase {
         
         //delete after test       
         $this->__image = $checkResizedImage;
+        
+    }
+    
+    public function testErrorImageFile() {
+        
+        $this->__createComponentObject(array(
+            'image' => $this->__getTestImage('test2.jpg'),
+            'width' => 100,
+            'height' => 100,
+            'option' => 'auto',
+            'command' => 'resize',
+            'quality' => 90,
+            'save_path' => $this->__getTestImageSavePath('test.jpg')
+        ));
+        
+        //proceed
+        $this->__CloggyImage->proceed();
+        
+        $checkError = $this->__CloggyImage->isError();
+        $errorMsg = $this->__CloggyImage->getErrorMsg();
+        
+        $this->assertTrue($checkError);
+        $this->assertEqual($errorMsg,'Image file not found.');
+        
+        $this->__createComponentObject(array(
+            'image' => $this->__getTestImage('php.zip'),
+            'width' => 100,
+            'height' => 100,
+            'option' => 'auto',
+            'command' => 'resize',
+            'quality' => 90,
+            'save_path' => $this->__getTestImageSavePath('test.jpg')
+        ));
+        
+        //proceed
+        $this->__CloggyImage->proceed();
+        
+        $checkError = $this->__CloggyImage->isError();
+        $errorMsg = $this->__CloggyImage->getErrorMsg();
+        
+        $this->assertTrue($checkError);
+        $this->assertEqual($errorMsg,'Cannot open image file.');
+        
+    }
+    
+    public function testErrorCommandAndOption() {
+        
+        /*
+         * error option
+         */
+        $this->__createComponentObject(array(
+            'image' => $this->__getTestImage('php.png'),
+            'width' => 100,
+            'height' => 100,
+            'option' => 'test',
+            'command' => 'resize',
+            'quality' => 90,
+            'save_path' => $this->__getTestImageSavePath('test.png')
+        ));
+        
+        //proceed
+        $this->__CloggyImage->proceed();
+        
+        $checkError = $this->__CloggyImage->isError();
+        $errorMsg = $this->__CloggyImage->getErrorMsg();
+        
+        $this->assertTrue($checkError);
+        $this->assertEqual($errorMsg,'Option not available.');
+        
+        /*
+         * error command
+         */
+        $this->__createComponentObject(array(
+            'image' => $this->__getTestImage('php.png'),
+            'width' => 100,
+            'height' => 100,
+            'option' => 'auto',
+            'command' => 'test',
+            'quality' => 90,
+            'save_path' => $this->__getTestImageSavePath('test.png')
+        ));
+        
+        //proceed
+        $this->__CloggyImage->proceed();
+        
+        $checkError = $this->__CloggyImage->isError();
+        $errorMsg = $this->__CloggyImage->getErrorMsg();
+        
+        $this->assertTrue($checkError);
+        $this->assertEqual($errorMsg,'Command not available.');
+    }
+    
+    public function testErrorDirSavePath() {
+        
+        /*
+         * error command
+         */
+        $this->__createComponentObject(array(
+            'image' => $this->__getTestImage('php.png'),
+            'width' => 100,
+            'height' => 100,
+            'option' => 'auto',
+            'command' => 'crop',
+            'quality' => 90,
+            'save_path' => APP.'plugin'.DS.'Cloggy'.DS.'webroot'.DS.'test'.DS.'test.png'
+        ));
+        
+        //proceed
+        $this->__CloggyImage->proceed();
+        
+        $checkError = $this->__CloggyImage->isError();
+        $errorMsg = $this->__CloggyImage->getErrorMsg();
+        
+        $this->assertTrue($checkError);
+        $this->assertEqual($errorMsg,'Image save path not configured or maybe not exists.');
+        
+    }
+    
+    public function testErrorImageExt() {
+        
+        $this->__createComponentObject();
+        $this->__CloggyImage->setError('test');
+        
+        $ext = $this->__CloggyImage->getImageExt();
+        $this->assertFalse($ext);
         
     }
     

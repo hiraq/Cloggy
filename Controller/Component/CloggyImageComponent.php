@@ -225,8 +225,15 @@ class CloggyImageComponent extends Component {
                     break;
             }
 
-            $this->__image = $img;
-            $this->__imagePath = $image;
+            if ($img) {
+                $this->__image = $img;
+                $this->__imagePath = $image;
+            } else {
+                
+                //raise an error if file cannot be opened
+                $this->setError('Cannot open image file.');
+                
+            }            
             
         }                
         
@@ -329,9 +336,10 @@ class CloggyImageComponent extends Component {
             
             $ext = $this->getImageExt();
             $quality = $this->__imageQuality;
+            $dirSavePath = dirname($this->__imageSavePath);
             
-            if (empty($this->__imageSavePath)) {
-                $this->setError('Image save path not configured.');
+            if (empty($this->__imageSavePath) || !is_dir($dirSavePath)) {
+                $this->setError('Image save path not configured or maybe not exists.');
             } else {                                
                 
                 /*
@@ -343,19 +351,7 @@ class CloggyImageComponent extends Component {
                     case 'jpeg':
 
                         if (imagetypes() & IMG_JPG) {
-                            $createImg = @imagejpeg($this->__imageResized,$this->__imageSavePath,$quality);
-                            
-                            /*
-                             * if php gd failed to create image
-                             * then create it manual
-                             * http://www.php.net/manual/en/function.imagejpeg.php#92597
-                             */
-                            if (!$createImg) {
-                                ob_start();
-                                @imagejpeg($this->__imageResized,null,$quality);
-                                $imgRawBinary = ob_get_clean();  
-                                $this->__writeImageFile($imgRawBinary);
-                            }
+                            @imagejpeg($this->__imageResized,$this->__imageSavePath,$quality);                                                        
                         }
 
                         break;
@@ -363,19 +359,7 @@ class CloggyImageComponent extends Component {
                     case 'gif':
 
                         if (imagetypes() & IMG_GIF) {
-                            $createImg = @imagegif($this->__imageResized,$this->__imageSavePath);
-                            
-                            /*
-                             * if php gd failed to create image
-                             * then create it manual
-                             * http://www.php.net/manual/en/function.imagejpeg.php#92597
-                             */
-                            if (!$createImg) {
-                                ob_start();
-                                @imagegif($this->__imageResized);
-                                $imgRawBinary = ob_get_clean();  
-                                $this->__writeImageFile($imgRawBinary);
-                            }
+                            @imagegif($this->__imageResized,$this->__imageSavePath);                                                        
                         }
 
                         break;
@@ -386,19 +370,7 @@ class CloggyImageComponent extends Component {
                         $invertScaleQuality = 9 - $scaleQuality;
 
                         if (imagetypes() & IMG_PNG) {
-                            $createImg = @imagepng($this->__imageResized,$this->__imageSavePath,$invertScaleQuality);
-                            
-                            /*
-                             * if php gd failed to create image
-                             * then create it manual
-                             * http://www.php.net/manual/en/function.imagejpeg.php#92597
-                             */
-                            if (!$createImg) {
-                                ob_start();
-                                @imagepng($this->__imageResized,null,$invertScaleQuality);
-                                $imgRawBinary = ob_get_clean();  
-                                $this->__writeImageFile($imgRawBinary);
-                            }
+                            @imagepng($this->__imageResized,$this->__imageSavePath,$invertScaleQuality);                                                        
                         }
 
                         break;
@@ -636,6 +608,7 @@ class CloggyImageComponent extends Component {
             
         }        
         
+        return false;
     }
     
     /**
@@ -768,30 +741,7 @@ class CloggyImageComponent extends Component {
         $this->__optimalHeight = $this->__originalImageHeight / $optimalRatio;
         $this->__optimalWidth = $this->__originalImageWidth / $optimalRatio;
         
-    }
-    
-    /**
-     * Write and create image
-     * @param string $binary
-     */
-    private function __writeImageFile($binary) {
-        
-        //load File utility
-        App::uses('File', 'Utility');
-        
-        /*
-         * create image file
-         */
-        $imgFile = new File($this->__imageSavePath);        
-        
-        $imgFile->open('w+');
-        $imgFile->write($binary);
-        $imgFile->close();
-        
-        //change image permission
-        @chmod($this->__imageSavePath,0775);
-        
-    }
+    }        
     
     /**
      * Setup settings
