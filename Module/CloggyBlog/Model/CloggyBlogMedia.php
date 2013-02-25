@@ -36,6 +36,44 @@ class CloggyBlogMedia extends CloggyAppModel {
     }
     
     /**
+     * Get post image
+     * 
+     * @uses node_rel NodeRel
+     * @uses node_media NodeMedia
+     * @param int $postId
+     * @return null|string
+     */
+    public function getImage($postId) {
+        
+        $data = $this->get('node_rel')->find('first',array(
+            'contain' => false,
+            'conditions' => array(
+                'CloggyNodeRel.node_object_id' => $postId,
+                'CloggyNodeRel.relation_name' => 'cloggy_blog_post_image'
+            ),
+            'fields' => array('CloggyNodeRel.node_id')
+        ));
+        
+        /*
+         * if not empty
+         */
+        if (!empty($data)) {
+            
+            $imageId = $data['CloggyNodeRel']['node_id'];
+            $image = $this->get('node_media')->find('first',array(
+                'contain' => false,
+                'conditions' => array('CloggyNodeMedia.node_id' => $imageId)
+            ));
+            
+            return $image['CloggyNodeMedia']['media_file_location'];
+            
+        }        
+        
+        return null;
+        
+    }
+    
+    /**
      * Attach media to some post
      * 
      * @uses node_rel NodeRel
@@ -49,6 +87,14 @@ class CloggyBlogMedia extends CloggyAppModel {
         
     }
     
+    /**
+     * Generate and get node type post id
+     * 
+     * @uses node_type NodeType
+     * @param int $userId
+     * @param string $type
+     * @return int
+     */
     private function __getTypeId($userId,$type) {
         $typePostId = $this->get('node_type')->generateType($type, $userId);
         return $typePostId;

@@ -35,6 +35,15 @@ class CloggyBlogAssetHelper extends AppHelper {
     }
     
     /**
+     * Get image file path
+     * @param string $filepath
+     * @return string
+     */
+    public function getImage($filepath) {
+        return $this->__baseUrl().$filepath;
+    }
+    
+    /**
      * Get base image upload url
      * @return string
      */

@@ -22,7 +22,10 @@
             </div>
             <div id="cloggyImageTabImages" class="tab-pane fade">
                 <div id="imageFile">
-                    No Image Uploaded
+                    <?php if (isset($image)) : echo '<img src="'.$this->CloggyBlogAsset->getImage($image).'" width="530px" height="300px" />'; ?>                    
+                    <?php else: ?>
+                    No image uploaded
+                    <?php endif; ?>
                 </div>
             </div>
         </div>                

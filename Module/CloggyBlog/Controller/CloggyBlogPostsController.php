@@ -165,7 +165,8 @@ class CloggyBlogPostsController extends CloggyAppController {
         $tags = $this->CloggyBlogTag->getAllTags();
         $postCategories = $this->CloggyBlogPost->getSinglePostTaxonomies($id);
         $postTags = $this->CloggyBlogPost->getSinglePostTaxonomies($id, 'cloggy_blog_tags', 'cloggy_blog_tag_post');
-
+        $image = $this->CloggyBlogMedia->getImage($id);        
+        
         /*
          * form submitted
          */
@@ -264,7 +265,7 @@ class CloggyBlogPostsController extends CloggyAppController {
         }
 
         $this->set('title_for_layout', 'Cloggy - CloggyBlogPost - Add New Post');
-        $this->set(compact('categories', 'tags', 'id', 'detail', 'postCategories', 'postTags'));
+        $this->set(compact('categories', 'tags', 'id', 'detail', 'postCategories', 'postTags','image'));
     }
     
     public function upload_image() {
