@@ -70,6 +70,9 @@ class CloggyBlogPost extends CloggyAppModel {
             return false;
         } else {
 
+            /*
+             * extract variables from options
+             */
             if (is_array($options) && !empty($options)) {
                 extract($options);
             }
@@ -78,7 +81,16 @@ class CloggyBlogPost extends CloggyAppModel {
             $this->get('node_type')->cacheQueries = false;
 
             $typePostId = $this->get('node_type')->generateType('cloggy_blog_post', $userId);
-            $postNodeId = $this->get('node')->generateEmptyNode($typePostId, $userId);
+            
+            /*
+             * check created or updated
+             */
+            if (!isset($postNodeId)) {
+                $postNodeId = $this->get('node')->generateEmptyNode($typePostId, $userId);
+            }                                 
+            
+            //setup stat
+            $stat = isset($stat) ? $stat : 0;
 
             $this->get('node')->modifyNode($postNodeId, array(
                 'has_subject' => 1,
@@ -86,9 +98,14 @@ class CloggyBlogPost extends CloggyAppModel {
                 'node_status' => $stat
             ));
 
-            $this->get('node_subject')->createSubject($postNodeId, $title);
-            $this->get('node_permalink')->createPermalink($postNodeId, $title, '-');
-            $this->get('node_content')->createContent($postNodeId, $content);
+            if (isset($title)) {
+                $this->get('node_subject')->createSubject($postNodeId, $title);
+                $this->get('node_permalink')->createPermalink($postNodeId, $title, '-');
+            }                        
+            
+            if (isset($content)) {
+                $this->get('node_content')->createContent($postNodeId, $content);
+            }                                    
 
             /*
              * if need to set relation with categories
@@ -124,43 +141,58 @@ class CloggyBlogPost extends CloggyAppModel {
      * @param array $data
      */
     public function updatePost($id, $data) {
-
+        
         if (isset($data['title'])) {
 
             $subject = $this->get('node_subject')->find('first', array(
                 'contain' => false,
                 'conditions' => array('CloggyNodeSubject.node_id' => $id),
                 'fields' => array('CloggyNodeSubject.id')
-                    ));
-
+            ));
+            
+            $subjectToSave = array(
+                'CloggyNodeSubject' => array(
+                    'subject' => $data['title']
+            ));
+            
             if (!empty($subject)) {
-
-                $this->get('node_subject')->id = $subject['CloggyNodeSubject']['id'];
-                $this->get('node_subject')->save(array(
-                    'CloggyNodeSubject' => array(
-                        'subject' => $data['title']
-                    )
+                $this->get('node_subject')->id = $subject['CloggyNodeSubject']['id'];                
+            } else {
+                $this->get('node_subject')->create();
+                $subjectToSave = array_merge($subjectToSave['CloggyNodeSubject'],array(
+                    'node_id' => $id
                 ));
             }
+            
+            //create or update
+            $this->get('node_subject')->save($subjectToSave);
         }
 
         if (isset($data['content'])) {
 
-            $subject = $this->get('node_content')->find('first', array(
+            $content = $this->get('node_content')->find('first', array(
                 'contain' => false,
                 'conditions' => array('CloggyNodeContent.node_id' => $id),
                 'fields' => array('CloggyNodeContent.id')
-                    ));
+            ));
+            
+            $contentToSave = array(
+                'CloggyNodeContent' => array(
+                    'content' => $data['content']
+                )
+            );
 
-            if (!empty($subject)) {
-
-                $this->get('node_content')->id = $subject['CloggyNodeContent']['id'];
-                $this->get('node_content')->save(array(
-                    'CloggyNodeContent' => array(
-                        'content' => $data['content']
-                    )
+            if (!empty($content)) {
+                $this->get('node_content')->id = $content['CloggyNodeContent']['id'];                
+            } else {
+                $this->get('node_content')->create();
+                $contentToSave = array_merge($contentToSave['CloggyNodeContent'],array(
+                    'node_id' => $id
                 ));
             }
+            
+            $this->get('node_content')->save($contentToSave);
+            
         }
     }
 
@@ -314,21 +346,25 @@ class CloggyBlogPost extends CloggyAppModel {
         $categoriesNodeTypeId = $this->get('node_type')->find('first', array(
             'contain' => false,
             'conditions' => array('CloggyNodeType.node_type_name' => $taxo)
-                ));
-
-        $data = $this->get('node_rel')->find('all', array(
-            'contain' => array(
-                'CloggyNode' => array(
-                    'conditions' => array('CloggyNode.node_type_id' => $categoriesNodeTypeId['CloggyNodeType']['id']),
-                    'fields' => array('CloggyNode.id')
-                )
-            ),
-            'conditions' => array(
-                'CloggyNodeRel.node_object_id' => $id,
-                'CloggyNodeRel.relation_name' => $rel
-            ),
-            'fields' => array('CloggyNodeRel.node_id', 'CloggyNodeRel.node_object_id', 'CloggyNodeRel.relation_name')
-                ));
+        ));
+        
+        if (!empty($categoriesNodeTypeId)) {
+         
+            $data = $this->get('node_rel')->find('all', array(
+                'contain' => array(
+                    'CloggyNode' => array(
+                        'conditions' => array('CloggyNode.node_type_id' => $categoriesNodeTypeId['CloggyNodeType']['id']),
+                        'fields' => array('CloggyNode.id')
+                    )
+                ),
+                'conditions' => array(
+                    'CloggyNodeRel.node_object_id' => $id,
+                    'CloggyNodeRel.relation_name' => $rel
+                ),
+                'fields' => array('CloggyNodeRel.node_id', 'CloggyNodeRel.node_object_id', 'CloggyNodeRel.relation_name')
+            ));
+            
+        }       
 
         if (!empty($data)) {
 

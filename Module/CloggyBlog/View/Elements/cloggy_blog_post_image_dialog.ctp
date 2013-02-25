@@ -7,13 +7,13 @@
         
         <ul id="cloggyImageTab" class="nav nav-tabs">
             <li class="active"><a href="#cloggyImageTabUpload" data-toggle="tab">Upload</a></li>
-            <li><a href="#cloggyImageTabImages" data-toggle="tab">Images</a></li>
+            <li><a href="#cloggyImageTabImages" data-toggle="tab"id="imageTab">Images</a></li>
         </ul>
         
         <div id="cloggyImageTab" class="tab-content">
             <div id="cloggyImageTabUpload" class="tab-pane fade active in">
                 <div>
-                    <label>Resize Image</label>
+                    <label>Crop Image</label>
                     <input type="text" class="input-small" name="width" placeholder="width" id="imageWidth" />    
                     <input type="text" class="input-small" name="height" placeholder="height" id="imageHeight" />                    
                 </div>                
@@ -21,7 +21,9 @@
                 <div id="filename"></div>
             </div>
             <div id="cloggyImageTabImages" class="tab-pane fade">
-                <div id="imageFile">No Image Uploaded</div>
+                <div id="imageFile">
+                    No Image Uploaded
+                </div>
             </div>
         </div>                
         
@@ -90,7 +92,8 @@
                     onSubmit: function() {
                         this.params({
                             width: jQuery('#imageWidth').val(),
-                            height: jQuery('#imageHeight').val()
+                            height: jQuery('#imageHeight').val(),
+                            postId: '<?php echo $postNodeId; ?>'
                         });                        
                     },
                     onSelect: function() {
@@ -101,7 +104,7 @@
                         
                     },
                     onComplete: function(response) {
-                        console.log(response);
+                        
                         if (response == 'failed') {
                             
                             var notif = '<div class="alert alert-error">\n\
@@ -119,7 +122,18 @@
                         }
                         
                         jQuery('#filename').html('');                        
-                        jQuery('#filename').append(notif);                        
+                        jQuery('#filename').append(notif); 
+                        
+                        /*
+                         * set timeout to click image tab
+                         */
+                        window.setTimeout(function() {
+                            jQuery('#imageTab').trigger('click');
+                            if (response == 'success') {
+                                jQuery('#imageFile').html('');
+                                jQuery('#imageFile').append('<img src="" />');
+                            }
+                        },1500);
                         
                     }
                 });                                

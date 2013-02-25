@@ -3,6 +3,7 @@ echo $this->Form->create('CloggyBlogPost', array(
     'url' => '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_posts/add'
 ));
 ?>
+<input type="hidden" name="data[CloggyBlogPost][post_id]" value="<?php echo $postNodeId; ?>" />
 <fieldset>
     <legend>Add New Post</legend>
     <div class="row">
@@ -52,7 +53,7 @@ echo $this->Form->create('CloggyBlogPost', array(
 
 <?php echo $this->Form->end(); ?>
 
-<?php echo $this->element('cloggy_blog_post_image_dialog'); //load image dialog ?>
+<?php echo $this->element('cloggy_blog_post_image_dialog',compact('postNodeId')); //load image dialog ?>
 
 <?php $this->append('cloggy_js_module_page'); ?>
 <script type="text/javascript">

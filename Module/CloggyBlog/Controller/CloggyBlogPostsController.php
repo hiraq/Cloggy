@@ -9,6 +9,7 @@ class CloggyBlogPostsController extends CloggyAppController {
         'CloggyBlogPost',
         'CloggyBlogCategory',
         'CloggyBlogTag',
+        'CloggyBlogMedia',
         'Cloggy.CloggyValidation'
     );        
 
@@ -38,6 +39,13 @@ class CloggyBlogPostsController extends CloggyAppController {
 
         $categories = $this->CloggyBlogCategory->getAllCategories();
         $tags = $this->CloggyBlogTag->getAllTags();
+        
+        /*
+         * only if form not submitted
+         */
+        if (!$this->request->is('post')) {
+            $postNodeId = $this->CloggyBlogPost->generatePost(array('userId' => $this->_user['id']));
+        }        
 
         if ($this->request->is('post')) {
 
@@ -114,13 +122,14 @@ class CloggyBlogPostsController extends CloggyAppController {
                  * save post
                  */
                 $postId = $this->CloggyBlogPost->generatePost(array(
+                    'postNodeId' => $this->request->data['CloggyBlogPost']['post_id'],
                     'stat' => $this->request->data['submit'] == 'Draft' ? 0 : 1,
                     'userId' => $this->_user['id'],
                     'title' => $this->request->data['CloggyBlogPost']['title'],
                     'content' => $this->request->data['CloggyBlogPost']['content'],
                     'cats' => $cats,
                     'tags' => $tags
-                        ));
+                ));
 
                 /*
                  * redirect
@@ -134,7 +143,7 @@ class CloggyBlogPostsController extends CloggyAppController {
         }
 
         $this->set('title_for_layout', 'Cloggy - CloggyBlogPost - Add New Post');
-        $this->set(compact('categories', 'tags'));
+        $this->set(compact('categories', 'tags','postNodeId'));
     }
 
     public function edit($id = null) {
@@ -160,7 +169,7 @@ class CloggyBlogPostsController extends CloggyAppController {
          * form submitted
          */
         if ($this->request->is('post')) {
-
+            
             $dataValidate = array();
             $dataToSave = array();
 
@@ -169,7 +178,7 @@ class CloggyBlogPostsController extends CloggyAppController {
 
             $title = $this->request->data['CloggyBlogPost']['title'];
             $content = $this->request->data['CloggyBlogPost']['content'];
-
+            
             /*
              * if subject need to update
              */
@@ -189,7 +198,7 @@ class CloggyBlogPostsController extends CloggyAppController {
             if (!empty($dataValidate)) {
 
                 if ($this->CloggyValidation->validates()) {
-
+                    
                     //update main data title & content				
                     $this->CloggyBlogPost->updatePost($id, $dataToSave);
                 } else {
@@ -276,43 +285,68 @@ class CloggyBlogPostsController extends CloggyAppController {
         $this->CloggyFileUpload->proceedUpload();
         
         //check error upload
-        $checkError = $this->CloggyFileUpload->isError();    
+        $checkError = $this->CloggyFileUpload->isError();
+        
+        //set post
+        $postId = $this->request->data['postId'];
         
         /*
          * prepare for resize and cropping images
          */
-        $width = $this->request->data['width'];
-        $height = $this->request->data['height'];
+        $width = intval($this->request->data['width']);
+        $height = intval($this->request->data['height']);
         
-        if ($checkError) {
-            debug($this->CloggyFileUpload->getErrorMsg());
+        if ($checkError) {            
             echo 'failed';
         } else { 
             
             /*
-             * crop image
+             * check if width and height is set
              */
-            $uploadedData = $this->CloggyFileUpload->getUploadedData();            
-            $this->CloggyImage->settings(array(
-                'image' => $uploadedData['dirname'].DS.$uploadedData['basename'],
-                'width' => $width,
-                'height' => $height,
-                'option' => 'exact',
-                'command' => 'crop',
-                'save_path' => $uploadedData['dirname'].DS.$uploadedData['filename'].'_thumb_'.$width.'_'.$height.'.'.$uploadedData['extension']
+            if ($width > 0 && $height > 0) {
+                
+                /*
+                 * crop image
+                 */
+               $uploadedData = $this->CloggyFileUpload->getUploadedData();            
+               $this->CloggyImage->settings(array(
+                   'image' => $uploadedData['dirname'].DS.$uploadedData['basename'],
+                   'width' => $width,
+                   'height' => $height,
+                   'option' => 'exact',
+                   'command' => 'crop',
+                   'save_path' => $uploadedData['dirname'].DS.$uploadedData['filename'].'_thumb_'.$width.'_'.$height.'.'.$uploadedData['extension']
+               ));
+
+               //proceed cropping image
+               $this->CloggyImage->proceed();
+
+               $checkError = $this->CloggyImage->isError();
+               $errorMsg = $this->CloggyImage->getErrorMsg();
+
+               if ($checkError) {
+                   echo $errorMsg;
+               }
+                
+            }
+            
+            /*
+             * save image
+             */
+            $mediaId = $this->CloggyBlogMedia->setImage($this->_user['id'],array(
+                'media_file_type' => 'media/image',
+                'media_file_location' => '/uploads/CloggyBlog/images/'.$uploadedData['basename']
             ));
             
-            //proceed cropping image
-            $this->CloggyImage->proceed();
-            
-            $checkError = $this->CloggyImage->isError();
-            $errorMsg = $this->CloggyImage->getErrorMsg();
-            
-            if ($checkError) {
-                echo $errorMsg;
-            } else {
-                echo 'Upload success';
+            /*
+             * attach to post
+             */
+            if ($postId) {
+                $this->CloggyBlogMedia->setPostAttachment($postId,$mediaId);
             }
+            
+            echo 'Upload success';
+                       
         }
         
     }

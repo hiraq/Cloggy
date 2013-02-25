@@ -28,6 +28,7 @@ class CloggyNodeMedia extends CloggyAppModel {
                 'media_file_location' => $location
             )
         ));
+        
     }
 
 }
