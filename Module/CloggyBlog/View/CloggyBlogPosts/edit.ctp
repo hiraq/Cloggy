@@ -61,7 +61,7 @@ echo $this->Form->create('CloggyBlogPost', array(
 </fieldset>
 <?php echo $this->Form->end(); ?>
 
-<?php echo $this->element('cloggy_blog_post_image_dialog',compact('postNodeId','image')); //load image dialog ?>
+<?php $postNodeId = $id; echo $this->element('cloggy_blog_post_image_dialog',compact('postNodeId','image')); //load image dialog ?>
 
 <?php $this->append('cloggy_js_module_page'); ?>
 <script type="text/javascript">

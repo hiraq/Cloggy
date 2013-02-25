@@ -9,6 +9,45 @@ class CloggyBlogMedia extends CloggyAppModel {
     public $actsAs = array('Cloggy.CloggyCommon');
     
     /**
+     * Check if post has image or not
+     * 
+     * @uses node_rel NodeRel
+     * @param int $postId
+     * @return boolean
+     */
+    public function isPostHasImage($postId) {
+        
+        $check = $this->get('node_rel')->find('count',array(
+            'contain' => false,
+            'conditions' => array(
+                'CloggyNodeRel.node_object_id' => $postId,
+                'CloggyNodeRel.relation_name' => 'cloggy_blog_post_media_image'
+            )
+        ));
+        
+        return $check < 1 ? false : true;
+        
+    }
+    
+    /**
+     * Update post image
+     * 
+     * @uses node_rel NodeRel
+     * @param int $imageId
+     * @param int $postId
+     */
+    public function updatePostImage($imageId,$postId) {
+        
+        $this->get('node_rel')->updateAll(array(
+            'CloggyNodeRel.node_id' => '"'.$imageId.'"'
+        ),array(
+            'CloggyNodeRel.node_object_id' => $postId,
+            'CloggyNodeRel.relation_name' => 'cloggy_blog_post_media_image'
+        ));
+        
+    }
+    
+    /**
      * Save image
      * 
      * @uses node_type NodeType
@@ -20,7 +59,7 @@ class CloggyBlogMedia extends CloggyAppModel {
      */
     public function setImage($userId,$data) {
         
-        $typeId = $this->__getTypeId($userId, 'cloggy_blog_media_image');
+        $typeId = $this->__getTypeId($userId, 'cloggy_blog_post_image');
         
         //create node
         $nodeId = $this->get('node')->generateEmptyNode($typeId,$userId);
@@ -49,7 +88,7 @@ class CloggyBlogMedia extends CloggyAppModel {
             'contain' => false,
             'conditions' => array(
                 'CloggyNodeRel.node_object_id' => $postId,
-                'CloggyNodeRel.relation_name' => 'cloggy_blog_post_image'
+                'CloggyNodeRel.relation_name' => 'cloggy_blog_post_media_image'
             ),
             'fields' => array('CloggyNodeRel.node_id')
         ));
@@ -83,7 +122,7 @@ class CloggyBlogMedia extends CloggyAppModel {
     public function setPostAttachment($postId,$mediaId) {
         
         //attach media to post
-        $this->get('node_rel')->saveRelation($mediaId,$postId,'cloggy_blog_post_image');
+        $this->get('node_rel')->saveRelation($mediaId,$postId,'cloggy_blog_post_media_image');
         
     }
     

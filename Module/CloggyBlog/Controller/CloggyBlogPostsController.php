@@ -335,19 +335,28 @@ class CloggyBlogPostsController extends CloggyAppController {
             }
             
             /*
-             * save image
-             */
+            * save image
+            */
             $mediaId = $this->CloggyBlogMedia->setImage($this->_user['id'],array(
                 'media_file_type' => 'media/image',
                 'media_file_location' => '/uploads/CloggyBlog/images/'.$postId.'/'.$uploadedData['basename']
             ));
             
-            /*
-             * attach to post
-             */
-            if ($postId) {
+            $checkPostImage = $this->CloggyBlogMedia->isPostHasImage($postId);
+            
+            if (!$checkPostImage) {
+                
+                //save new image
                 $this->CloggyBlogMedia->setPostAttachment($postId,$mediaId);
-            }
+               
+            } else {
+                
+                /*
+                 * update post image
+                 */
+                $this->CloggyBlogMedia->updatePostImage($mediaId,$postId);
+                
+            }                                                
             
             echo 'Upload success';
                        
