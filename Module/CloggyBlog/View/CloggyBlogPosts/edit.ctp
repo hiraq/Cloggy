@@ -29,8 +29,7 @@ echo $this->Form->create('CloggyBlogPost', array(
                     <input type="text" placeholder="title" class="span6" name="data[CloggyBlogPost][title]" value="<?php echo $detail['CloggySubject']['subject']; ?>" />
                     <span class="help-block"><?php if (isset($errors['title'][0])) echo $errors['title'][0]; ?></span><br  /> 		                    
                     <label>Content</label>
-                    <a href="#" title="upload images" id="cloggy_blog_add_image"><i class="icon-picture"></i></a>
-                    <a href="#" title="upload attachments" id="cloggy_blog_add_files"><i class="icon-upload"></i></a>
+                    <a href="#" title="upload images" id="cloggy_blog_add_image"><i class="icon-picture"></i></a>                    
                     <textarea id="editor" name="data[CloggyBlogPost][content]"><?php echo str_replace('<p>\n</p>', '', $detail['CloggyContent']['content']); ?></textarea>
                     <span class="help-block"><?php if (isset($errors['content'][0])) echo $errors['content'][0]; ?></span>	
                 </div>
