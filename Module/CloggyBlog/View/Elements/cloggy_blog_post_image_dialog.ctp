@@ -137,7 +137,7 @@
                             if (notifResponse == 'Upload success') {
                                 jQuery('#imageFile').html('');
                                 jQuery('#imageFile').append(
-                                '<img src="<?php echo $this->CloggyBlogAsset->getImageUploadPath(); ?>'+filename+'" width="530px" height="300px" />');
+                                '<img src="<?php echo $this->CloggyBlogAsset->getImageUploadPath().$postNodeId.'/'; ?>'+filename+'" width="530px" height="300px" />');
                             }
                             
                         },1500);

@@ -273,21 +273,6 @@ class CloggyBlogPostsController extends CloggyAppController {
         $this->CloggyFileUpload = $this->Components->load('Cloggy.CloggyFileUpload');
         $this->CloggyImage = $this->Components->load('Cloggy.CloggyImage');
         
-        /*
-         * setup upload files
-         */
-        $this->CloggyFileUpload->settings(array(
-            'allowed_types' => array('jpg','jpeg','png','gif'),
-            'field' => 'image',
-            'folder_dest_path' => APP.'Plugin'.DS.'Cloggy'.DS.'webroot'.DS.'uploads'.DS.'CloggyBlog'.DS.'images'.DS
-        ));
-        
-        //upload image
-        $this->CloggyFileUpload->proceedUpload();
-        
-        //check error upload
-        $checkError = $this->CloggyFileUpload->isError();
-        
         //set post
         $postId = $this->request->data['postId'];
         
@@ -296,6 +281,21 @@ class CloggyBlogPostsController extends CloggyAppController {
          */
         $width = intval($this->request->data['width']);
         $height = intval($this->request->data['height']);
+        
+        /*
+         * setup upload files
+         */
+        $this->CloggyFileUpload->settings(array(
+            'allowed_types' => array('jpg','jpeg','png','gif'),
+            'field' => 'image',
+            'folder_dest_path' => APP.'Plugin'.DS.'Cloggy'.DS.'webroot'.DS.'uploads'.DS.'CloggyBlog'.DS.'images'.DS.$postId.DS
+        ));
+        
+        //upload image
+        $this->CloggyFileUpload->proceedUpload();
+        
+        //check error upload
+        $checkError = $this->CloggyFileUpload->isError();                
         
         if ($checkError) {            
             echo 'failed';
@@ -338,7 +338,7 @@ class CloggyBlogPostsController extends CloggyAppController {
              */
             $mediaId = $this->CloggyBlogMedia->setImage($this->_user['id'],array(
                 'media_file_type' => 'media/image',
-                'media_file_location' => '/uploads/CloggyBlog/images/'.$uploadedData['basename']
+                'media_file_location' => '/uploads/CloggyBlog/images/'.$postId.'/'.$uploadedData['basename']
             ));
             
             /*

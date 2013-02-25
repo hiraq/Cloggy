@@ -25,11 +25,11 @@ class CloggyBlogAssetHelper extends AppHelper {
      * Get image url path
      * @param string $filename
      */
-    public function getImageUrl($filename) {
+    public function getImageUrl($postId,$filename) {
         
         $filepath = $this->__dirPath().$filename;
         if (file_exists($filepath)) {            
-            return $this->__baseUrl().$this->__imagePath.$filename;            
+            return $this->__baseUrl().$this->__imagePath.$postId.'/'.$filename;            
         }
         
     }
