@@ -80,6 +80,8 @@
                 
                 var imageWidth = jQuery('#imageWidth').val();
                 var imageHeight = jQuery('#imageHeight').val();
+                var notifResponse;
+                var filename;
                 
                 /*
                  * setup ocupload
@@ -98,7 +100,7 @@
                     },
                     onSelect: function() {
                         
-                        var filename = this.filename();
+                        filename = this.filename();
                         jQuery('#filename').html('');
                         jQuery('#filename').append(filename);
                         
@@ -124,15 +126,20 @@
                         jQuery('#filename').html('');                        
                         jQuery('#filename').append(notif); 
                         
+                        notifResponse = response;                                             
+                        
                         /*
                          * set timeout to click image tab
                          */
                         window.setTimeout(function() {
                             jQuery('#imageTab').trigger('click');
-                            if (response == 'success') {
+                            
+                            if (notifResponse == 'Upload success') {
                                 jQuery('#imageFile').html('');
-                                jQuery('#imageFile').append('<img src="" />');
+                                jQuery('#imageFile').append(
+                                '<img src="<?php echo $this->CloggyBlogAsset->getImageUploadPath(); ?>'+filename+'" width="530px" height="300px" />');
                             }
+                            
                         },1500);
                         
                     }

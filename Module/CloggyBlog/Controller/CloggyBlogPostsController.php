@@ -14,7 +14,8 @@ class CloggyBlogPostsController extends CloggyAppController {
     );        
 
     public function beforeFilter() {
-        parent::beforeFilter();             
+        parent::beforeFilter();  
+        $this->helpers[] = 'CloggyBlogAsset';
     }
 
     public function index() {
@@ -300,6 +301,9 @@ class CloggyBlogPostsController extends CloggyAppController {
             echo 'failed';
         } else { 
             
+            //get uploaded data
+            $uploadedData = $this->CloggyFileUpload->getUploadedData();
+            
             /*
              * check if width and height is set
              */
@@ -307,8 +311,7 @@ class CloggyBlogPostsController extends CloggyAppController {
                 
                 /*
                  * crop image
-                 */
-               $uploadedData = $this->CloggyFileUpload->getUploadedData();            
+                 */                           
                $this->CloggyImage->settings(array(
                    'image' => $uploadedData['dirname'].DS.$uploadedData['basename'],
                    'width' => $width,
