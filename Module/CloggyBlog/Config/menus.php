@@ -16,6 +16,10 @@ Configure::write('Cloggy.CloggyBlog.menus', array(
         'Tags' => array(
             'Manage' => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_tags'),
             'Add' => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_tags/add'),
+        ),
+        'Image' => array(
+            'Manage' => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_images'),
+            'Add' => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_images/add'),
         )
     ),
     'sidebar' => array(

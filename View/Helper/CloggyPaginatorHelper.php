@@ -11,7 +11,7 @@ class CloggyPaginatorHelper extends PaginatorHelper {
     public function paginatorBootstrap($pluginUrl) {
 
         $requestedParams = $this->_View->request->params;
-
+        
         $params = $this->params();
         if ($params['pageCount'] < 2) {
             return false;
@@ -33,9 +33,17 @@ class CloggyPaginatorHelper extends PaginatorHelper {
         }
 
         $modulus = 11;
-        $models = ClassRegistry::keys();
-        $model = Inflector::camelize(current($models));
-
+        
+//        $models = ClassRegistry::keys();        
+//        $model = Inflector::camelize(current($models));
+        
+        $models = $requestedParams['paging'];
+        $model = '';
+        
+        foreach($models as $modelName => $modelOptions) {
+            $model = $modelName;
+        }
+        
         $page = $this->params['paging'][$model]['page'];
         $pageCount = $this->params['paging'][$model]['pageCount'];
         if ($modulus > $pageCount) {
