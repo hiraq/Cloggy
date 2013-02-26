@@ -1,6 +1,6 @@
-<?php echo $this->element('cloggy_blog_home_posts', array('posts' => $posts)); ?>
-<?php echo $this->element('cloggy_blog_home_categories', array('categories' => $categories)); ?>
-<?php echo $this->element('cloggy_blog_home_tags', array('tags' => $tags)); ?>
+<?php if (!empty($posts)) echo $this->element('cloggy_blog_home_posts', array('posts' => $posts)); ?>
+<?php if (!empty($categories)) echo $this->element('cloggy_blog_home_categories', array('categories' => $categories)); ?>
+<?php if (!empty($tags)) echo $this->element('cloggy_blog_home_tags', array('tags' => $tags)); ?>
 
 <?php $this->append('cloggy_js_module_page'); ?>
 <script type="text/javascript">
