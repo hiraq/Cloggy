@@ -42,7 +42,8 @@ echo $this->Form->create('CloggyBlogPost', array(
                         <select multiple="multiple" class="span2" name="data[CloggyBlogPost][categories][]">						
                             <?php foreach ($categories as $category) : ?>
                                 <option value="<?php echo $category['CloggySubject']['subject']; ?>" 
-                                        <?php if (array_key_exists($category['CloggyNode']['id'], $postCategories)) echo 'selected="selected"' ?>>
+                                        <?php if (is_array($postCategories) && 
+                                                array_key_exists($category['CloggyNode']['id'], $postCategories)) echo 'selected="selected"' ?>>
                                             <?php echo $category['CloggySubject']['subject']; ?>
                                 </option>
                             <?php endforeach; ?>
