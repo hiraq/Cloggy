@@ -22,7 +22,8 @@ Configure::write('Cloggy.CloggyBlog.menus', array(
         'Create New' => array(
             'Add Post' => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_posts/add'),
             'Add Category' => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_categories/add'),
-            'Add Tags' => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_tags/add')
+            'Add Tags' => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_tags/add'),
+            'WordPress Importer' => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_import/wordpress')
         )
     )
 ));
