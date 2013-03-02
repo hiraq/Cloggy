@@ -15,11 +15,16 @@ class CloggyBlogImportController extends CloggyAppController {
     );  
     
     private $__CloggyFileUpload;
+    private $__CloggyBlogImport;
     
     public function beforeFilter() {
         
         parent::beforeFilter();   
+        
         $this->__CloggyFileUpload = $this->Components->load('Cloggy.CloggyFileUpload');
+        
+        $this->__CloggyBlogImport = $this->Components->load('CloggyBlogImport');
+        $this->__CloggyBlogImport->buildPath();
         
     }
     
@@ -40,17 +45,70 @@ class CloggyBlogImportController extends CloggyAppController {
                     'ext' => array(
                         'rule' => array('extension',array('xml')),
                         'message' => 'You must upload xml file'
-                    ),
-                    'required' => array(
-                        'rule' => 'notEmpty',
-                        'message' => 'You must fill file field.'
                     )
                 )
             );
             
             if ($this->CloggyValidation->validates()) {
                 
+                /*
+                 * setup import files
+                 */
+                $this->__CloggyFileUpload->settings(array(
+                    'allowed_types' => array('xml'),
+                    'field' => 'wordpress_xml',
+                    'data_model' => 'CloggyBlogImport',
+                    'folder_dest_path' => APP.'Plugin'.DS.'Cloggy'.DS.'webroot'.DS.'uploads'.DS.'CloggyBlog'.DS.'import'.DS
+                ));
                 
+                //upload xml
+                $this->__CloggyFileUpload->proceedUpload();
+                
+                //check error upload
+                $checkUploadError = $this->__CloggyFileUpload->isError();
+                
+                /*
+                 * if error then back to original view
+                 * if not then render new view, continue with download and import
+                 * data and files
+                 */
+                if ($checkUploadError) {
+                    $this->set('error',$this->__CloggyFileUpload->getErrorMsg());
+                } else {
+                    
+                    $xmlUploadedData = $this->__CloggyFileUpload->getUploadedData();
+                    $xmlFile = $xmlUploadedData['dirname'].DS.$xmlUploadedData['basename'];
+                    
+                    //read wordpress xml data
+                    $xml = Xml::toArray(Xml::build($xmlFile));      
+                    
+                    /*
+                     * if option enabled
+                     */
+                    if (isset($this->request->data['CloggyBlogImport']['wordpress_import_options'])) {
+                        $this->__CloggyBlogImport->setupOptions($this->request->data['CloggyBlogImport']['wordpress_import_options']);
+                    }
+                    
+                    //setup imported data
+                    $this->__CloggyBlogImport->setupData($xml);
+                    
+                    //genereate adapter
+                    $this->__CloggyBlogImport->generate();
+                    
+                    /*
+                     * check if given data is valid based on adapter
+                     */
+                    $checkValidData = $this->__CloggyBlogImport->isValidImportedData();
+                    if ($checkValidData) {
+                        
+                        $checkImport = $this->__CloggyBlogImport->import();
+                        
+                        
+                    } else {
+                        $this->set('error','Given data is not valid.');
+                    }
+                    
+                }
                 
             } else {
                 $this->set('errors', $this->CloggyValidation->validationErrors);

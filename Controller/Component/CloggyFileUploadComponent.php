@@ -19,6 +19,7 @@ class CloggyFileUploadComponent extends Component {
     private $__errorMsg = 'An error has detected';
     private $__filepath;
     private $__uploadSuccessData;
+    private $__dataModel;
     
     /**
      * Setup settings
@@ -323,7 +324,13 @@ class CloggyFileUploadComponent extends Component {
 
                     //setup upload data
                     $this->setupFiles($this->__controller->request->params['form'][$field]);
-
+                    
+                } elseif (isset($this->__controller->request->data[$this->__dataModel][$field]) && 
+                        !empty($this->__controller->request->data[$this->__dataModel][$field])) {
+                    
+                    //setup upload data
+                    $this->setupFiles($this->__controller->request->data[$this->__dataModel][$field]);
+                    
                 } else {
                     $this->setupError('Upload data not available.');
                 }
@@ -603,6 +610,10 @@ class CloggyFileUploadComponent extends Component {
              */
             if (isset($settings['callback'])) {
                 $this->__callbackAfterUpload = $settings['callback'];
+            }
+            
+            if (isset($settings['data_model'])) {
+                $this->__dataModel = $settings['data_model'];
             }
             
         }
