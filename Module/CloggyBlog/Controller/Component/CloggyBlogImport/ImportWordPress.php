@@ -93,7 +93,7 @@ class ImportWordPress {
          */
         if ($this->__options['include_custom_post_types'] == 1) {
             $this->__import_posts(true);
-        }                
+        }                    
         
     }
     
@@ -123,7 +123,7 @@ class ImportWordPress {
              * get post categories or tags
              * if disable_categories == 0
              */
-            if (!empty($postCategory) && $this->__options['disable_categories'] == 0) {
+            if (!empty($postCategory)) {
                 
                 foreach($postCategory as $taxIndex => $tax) {
                     
@@ -215,15 +215,81 @@ class ImportWordPress {
         
     }
     
+    /**
+     * Import wordpress categories
+     */
     private function __import_categories() {
         
-    }
-    
-    private function __import_tags() {
+        if (isset($this->__data['rss']['channel']['wp:category'])) {
+            
+            $categories = $this->__data['rss']['channel']['wp:category'];
+            if (!empty($categories)) {
+                
+                foreach($categories as $category) {
+                    
+                    $this->__categories[] = array(
+                        'term_id' => $category['wp:term_id'],
+                        'category_name' => $category['wp:cat_name'],
+                        'category_parent' => $category['wp:category_parent']
+                    );
+                    
+                }
+                
+            }
+            
+        }
         
     }
     
+    /**
+     * Import wordpress tags
+     */
+    private function __import_tags() {
+        
+        if (isset($this->__data['rss']['channel']['wp:tag'])) {
+            
+            $tags = $this->__data['rss']['channel']['wp:tag'];
+            if (!empty($tags)) {
+                
+                foreach($tags as $tag) {
+                    
+                    $this->__tags[] = array(
+                        'term_id' => $tag['wp:term_id'],
+                        'tag_name' => $tag['wp:tag_name'],                        
+                    );
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    /**
+     * Import wordpress featured image
+     */
     private function __import_attachments() {
+        
+        $items = $this->__data['rss']['channel']['item'];
+        
+        for ($i=0;$i < count($items); $i++) {
+            
+            $item = $items[$i];                        
+            $postType = $item['wp:post_type'];
+            
+            if ($postType == 'attachment') {
+                
+                $this->__attachments[] = array(
+                    'attachment_id' => $item['wp:post_id'],
+                    'post_id' => $item['wp:post_parent'],
+                    'title' => $item['title'],
+                    'url' => $item['wp:attachment_url']
+                );
+                
+            }
+            
+        }
         
     }        
     
