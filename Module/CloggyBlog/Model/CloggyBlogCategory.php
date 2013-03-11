@@ -1,6 +1,7 @@
 <?php
 
 App::uses('CloggyAppModel', 'Cloggy.Model');
+App::uses('Sanitize', 'Utility');
 
 class CloggyBlogCategory extends CloggyAppModel {
 
@@ -189,6 +190,24 @@ class CloggyBlogCategory extends CloggyAppModel {
                 ));
 
         return $parent;
+    }
+    
+    /**
+     * Get category id
+     * 
+     * @param string $categoryName
+     * @return int
+     */
+    public function getCategoryIdByName($categoryName) {
+        
+        $data = $this->get('node_subject')->find('first',array(
+            'contain' => false,
+            'conditions' => array('CloggyNodeSubject.subject' => $categoryName),
+            'fields' => array('CloggyNodeSubject.node_id')
+        ));
+        
+        return isset($data['CloggyNodeSubject']['node_id']) ? $data['CloggyNodeSubject']['node_id'] : false;
+        
     }
 
     /**

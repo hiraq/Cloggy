@@ -5,6 +5,9 @@ echo $this->Form->create('CloggyBlogImport', array(
     'type' => 'file'
 ));
 ?>
+
+<?php echo $this->Session->flash('dashNotif'); ?>
+
 <fieldset>
     <legend>Import WordPress Posts</legend>
 

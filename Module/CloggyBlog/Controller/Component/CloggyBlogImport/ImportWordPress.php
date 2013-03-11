@@ -93,8 +93,29 @@ class ImportWordPress {
          */
         if ($this->__options['include_custom_post_types'] == 1) {
             $this->__import_posts(true);
-        }                    
+        }                 
         
+        /////////////////////INSERT INTO DATABASE////////////////////////////////
+        
+        if (!empty($this->__categories)) {
+            $this->__convert_taxonomies();
+        }
+        
+        if (!empty($this->__tags)) {
+            $this->__convert_taxonomies('tag');
+        }
+        
+        if (!empty($this->__posts)) {
+            $this->__convert_posts();
+        }
+        
+        if (!empty($this->__attachments)) {
+            $this->__download_attachments();
+        }
+        
+        /////////////////////END////////////////////////////////
+        
+        return true;
     }
     
     /**
@@ -129,21 +150,25 @@ class ImportWordPress {
                     
                     if (is_numeric($taxIndex)) {
                      
-                        if ($tax['@domain'] == 'post_tag') {
+                        if ($tax['@domain'] == 'post_tag' 
+                                && $this->__options['disable_tags'] == 0) {
                             $tags[] = $tax['@'];
                         }
 
-                        if ($tax['@domain'] == 'category') {
+                        if ($tax['@domain'] == 'category' 
+                                && $this->__options['disable_categories'] == 0) {
                             $categories[] = $tax['@'];
                         }    
                         
                     } else {
                         
-                        if ($taxIndex == '@domain' && $tax == 'post_tag') {
+                        if ($taxIndex == '@domain' && $tax == 'post_tag' 
+                                && $this->__options['disable_tags'] == 0) {
                             $tags[] = $postCategory['@'];
                         }
                         
-                        if ($taxIndex == '@domain' && $tax == 'category') {
+                        if ($taxIndex == '@domain' && $tax == 'category' 
+                                && $this->__options['disable_categories'] == 0) {
                             $categories[] = $postCategory['@'];
                         }
                         
@@ -212,6 +237,78 @@ class ImportWordPress {
             }
             
         }
+        
+    }
+    
+    private function __convert_posts() {
+        
+        
+        
+    }
+    
+    private function __convert_taxonomies($taxo='category') {
+        
+        /*
+         * taxonomies: category
+         */
+        if ($taxo == 'category') {
+            
+            $needParents = array();
+            $categories = array();
+            
+            if (!empty($this->__categories)) {
+
+                foreach($this->__categories as $category) {
+
+                    /*
+                     * setup parents
+                     */
+                    if (!empty($category['category_parent'])) {
+                        $needParents[$category['category_name']] = $category['category_parent'];
+                    }
+
+                    $categories[] = $category['category_name'];
+
+                }
+
+            }
+            
+            $CategoryModel = ClassRegistry::init('CloggyBlogCategory');
+            $user = AuthComponent::user();
+            
+            if (!empty($categories)) {
+                
+                //save categories
+                $CategoryModel->proceedCategories($categories,$user['id']);
+                
+                /*
+                 * save category parent
+                 */
+                if (!empty($needParents)) {
+                    
+                    foreach($needParents as $child => $parent) {
+                        
+                        $childId = $CategoryModel->getCategoryIdByName($child);
+                        $parentId = $CategoryModel->getCategoryIdByName($parent);
+                        
+                        /*
+                         * update category parent
+                         */
+                        if ($childId && $parentId) {
+                            $CategoryModel->updateCategoryParent($childId,$parentId);
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    private function __download_attachments() {
         
     }
     
