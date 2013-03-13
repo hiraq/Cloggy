@@ -146,7 +146,7 @@ class CloggyBlogTag extends CloggyAppModel {
 
         $this->get('node')->cacheQueries = false;
         $this->get('node_type')->cacheQueries = false;
-
+        
         foreach ($exp as $tag) {
 
             $typeId = $this->get('node_type')->generateType('cloggy_blog_tags', $userId);
@@ -169,9 +169,9 @@ class CloggyBlogTag extends CloggyAppModel {
                 $tagNodeId = $this->get('node')->getNodeIdBySubjectAndTypeId($typeId, $tag);
             }
 
-            $tags[] = $tagNodeId;
+            $tags[] = $tagNodeId;            
         }
-
+        
         return $tags;
     }
 

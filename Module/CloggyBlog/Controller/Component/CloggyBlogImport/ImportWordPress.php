@@ -306,6 +306,30 @@ class ImportWordPress {
             
         }
         
+        if ($taxo == 'tag') {
+            
+            if (!empty($this->__tags)) {
+                
+                $tags = array();
+                $TagModel = ClassRegistry::init('CloggyBlogTag');
+                $user = AuthComponent::user();
+                
+                foreach($this->__tags as $tag) {
+                    
+                    $checkTag = $TagModel->isTagExists($tag,$user['id']);
+                    if (!$checkTag) {
+                        $tags[] = $tag['tag_name'];
+                    }
+                    
+                }                                
+                
+                //save tags
+                $TagModel->proceedTags($tags,$user['id']);
+                
+            }
+            
+        }
+        
     }
     
     private function __download_attachments() {
