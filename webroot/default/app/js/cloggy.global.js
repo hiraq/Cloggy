@@ -1,25 +1,21 @@
 /*
  * Cloggygy javascript loaders
  */ 
-function CloggyYepNope() {	
-	this.bootstrapCss;
+function CloggyYepNope() {		
 	this.bootstrapJs;
 	this.jquery;	
 }
 
-CloggyYepNope.prototype.setHost = function(host) {
-	this.bootstrapCss = host.bootstrap;
+CloggyYepNope.prototype.setHost = function(host) {	
 	this.bootstrapJs = host.bootstrapJs;
 	this.jquery = host.jquery;		
 };
 
 CloggyYepNope.prototype.main = function(completeHandler) {
-	
-	var bootstrap = this.bootstrapCss;
+		
 	var bootstrapjs = this.bootstrapJs;
 	var jquery = this.jquery;		
-	
-	yepnope.injectCss(bootstrap);
+		
 	yepnope({
 		load : {
 			'jquery' : jquery,

@@ -94,8 +94,7 @@
 <script type="text/javascript">
     var cloggy = new CloggyYepNope();  
 	
-    cloggy.setHost({
-        bootstrap: '<?php echo $this->CloggyAsset->getVendorUrl('bootstrap/css/bootstrap.min.css'); ?>',
+    cloggy.setHost({        
         bootstrapJs: '<?php echo $this->CloggyAsset->getVendorUrl('bootstrap/js/bootstrap.min.js'); ?>',
         jquery: '<?php echo $this->CloggyAsset->getVendorUrl('jquery-1.8.3.js'); ?>',	
     });
@@ -103,12 +102,7 @@
     cloggy.main(function() {
 		
         //set host
-        var host = '<?php echo Router::url('/' . Configure::read('Cloggy.url_prefix') . '/' . Configure::read('Cloggy.theme_used') . '/', true); ?>';
-		
-        /*
-        inject global + login css
-         */
-        yepnope.injectCss(host+'app/css/style.global.css');							
+        var host = '<?php echo Router::url('/' . Configure::read('Cloggy.url_prefix') . '/' . Configure::read('Cloggy.theme_used') . '/', true); ?>';		        						
 		
         //manipulate dom
         jQuery(document).ready(function() {
