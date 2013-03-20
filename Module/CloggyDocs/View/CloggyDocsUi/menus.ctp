@@ -18,21 +18,20 @@
     Let say you have created <strong>MyModule</strong>, then your menus config should be: <br />
     <code>app/Plugin/Cloggy/Module/MyModule/Config/menus.php</code>. <br /><br />
     and inside your menus.php : <br />
-    <code>
-        Configure::write('Cloggy.MyModule.menus', array(<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;'module' => array(<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'My Menu' => array(<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'About' => CloggyCommon::urlModule('my_module', 'my_module_desc')<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;),<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;'sidebar' => array(<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Sidebar Menu' => array(<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'About' => CloggyCommon::urlModule('my_module', 'my_module_desc')<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;)<br />        
+    <pre>
+        Configure::write('Cloggy.MyModule.menus', array(
+        &nbsp;&nbsp;&nbsp;&nbsp;'module' => array(
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'My Menu' => array(
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'About' => CloggyCommon::urlModule('my_module', 'my_module_desc')
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
+        &nbsp;&nbsp;&nbsp;&nbsp;),
+        &nbsp;&nbsp;&nbsp;&nbsp;'sidebar' => array(
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Sidebar Menu' => array(
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'About' => CloggyCommon::urlModule('my_module', 'my_module_desc')
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
+        &nbsp;&nbsp;&nbsp;&nbsp;)  
         ));
-    </code>
-    <br /><br />
+    </pre>    
     This config will be parsed automatically every request to your module. Each 'module' menus will be placed on top, and 'sidebar' 
     menus will placed on left sidebar.
 </p>

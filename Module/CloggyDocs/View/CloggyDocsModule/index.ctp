@@ -54,11 +54,10 @@
     <br /><br />
     You can't also create your own router for your module, all url request will be formatted
     like this :<br />
-    <code>
-        http://your_project/cloggy/module/my_module<br />
-        http://your_project/cloggy/module/my_module/my_module_controller/action<br />
-    </code>
-    <br /><br />
+    <pre>
+    http://your_project/cloggy/module/my_module</code><br />
+    http://your_project/cloggy/module/my_module/my_module_controller/action
+    </pre>    
     If you are working with helpers inside your module controllers, you should use this in
     inside your <code>beforeFilter</code> method:<br />
     <code>

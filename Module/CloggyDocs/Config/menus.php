@@ -7,8 +7,7 @@ Configure::write('Cloggy.CloggyDocs.menus', array(
     'module' => array(
         'Plugin' => array(
             'About' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_home'),            
-            'Installation' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_home/install'),
-            'Contribute' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_home/contribute'),
+            'Installation' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_home/install'),            
             'License' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_home/license'),
             'Version' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_home/version'),
         ),
