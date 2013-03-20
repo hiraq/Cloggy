@@ -23,7 +23,7 @@
     <blockquote>
          yepnope is an asynchronous conditional resource loader that's super-fast, and allows you to load only the scripts that your users need. 
     </blockquote>
-    Cloggy using YepNope to load asynchronously <strong>all resources</strong> for css and js files, so you should enable your javascript in your
+    Cloggy using YepNope to load asynchronously <strong>all resources</strong> for javascript files, so you should enable your javascript in your
     browser.
 </p>
 
