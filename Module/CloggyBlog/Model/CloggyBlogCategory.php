@@ -285,7 +285,7 @@ class CloggyBlogCategory extends CloggyAppModel {
 
             $typeId = $this->get('node_type')->generateType('cloggy_blog_categories', $userId);
 
-            $checkCatSubject = $this->get('node')->isSubjectExistsByTypeId($typeId, $cat);
+            $checkCatSubject = $this->isCategoryExists($cat, $userId);
             if (!$checkCatSubject) {
 
                 $catNodeId = $this->get('node')->generateEmptyNode($typeId, $userId);

@@ -61,7 +61,7 @@ class ImportWordPress {
         /*
          * if featured image need to import
          */
-        if ($this->__options['import_featured_image'] == 0) {
+        if ($this->__options['import_featured_image'] == 1) {
          
             //import attachments
             $this->__import_attachments();
@@ -109,7 +109,7 @@ class ImportWordPress {
             $this->__convert_posts();
         }
         
-        if (!empty($this->__attachments)) {
+        if (!empty($this->__attachments)) {                
             $this->__download_attachments();
         }
         
@@ -240,9 +240,52 @@ class ImportWordPress {
         
     }
     
-    private function __convert_posts() {
+    private function __convert_posts() {                
         
+        /*
+         * save into cloggy_blog_post
+         */
+        foreach($this->__posts as $post) {
+            
+            $userId = AuthComponent::user('id');        
+            
+            //generate Post model
+            $Post = ClassRegistry::init('CloggyBlogPost');
+            $Category = ClassRegistry::init('CloggyBlogCategory');
+            $Tag = ClassRegistry::init('CloggyBlogTag');
+            
+            $cats = array();
+            $tags = array();
+            
+            if (!empty($post['categories']) && $this->__options['disable_categories'] == 0) {
+                
+                foreach($post['categories'] as $cat) {
+                    $cats[] = $Category->getCategoryIdByName($cat);
+                }
+                
+            }
+            
+            if (!empty($post['tags']) && $this->__options['disable_tags'] == 0) {
+                
+                foreach($post['tags'] as $tag) {
+                    $tags[] = $Tag->getTagIdByName($tag);
+                }
+                
+            }
         
+            /*
+             * save posts
+             */
+            $Post->generatePost(array(
+                'userId' => $userId,
+                'title' => $post['title'],
+                'content' => $post['content'],
+                'cats' => $cats,
+                'tags' => $tags,
+                'stat' => $this->__options['make_draft'] == 0 ? 1 : 0
+            ));
+            
+        }
         
     }
     
@@ -333,6 +376,83 @@ class ImportWordPress {
     }
     
     private function __download_attachments() {
+        
+        //get HttpSocket
+        App::uses('HttpSocket', 'Network/Http');
+        
+        //get Folder
+        App::uses('Folder','Utility');
+        
+        //get user id
+        $userId = AuthComponent::user('id');
+        
+        foreach($this->__attachments as $attachment) {
+        
+            //generate Post model
+            $Post = ClassRegistry::init('CloggyBlogPost');
+            
+            //generate Media model
+            $Media = ClassRegistry::init('CloggyBlogMedia');
+            
+            $postId = '';   
+            foreach($this->__posts as $post) {
+                            
+                if ($attachment['post_id'] == $post['post_id']) {
+                    
+                    $detailPost = $Post->getPostIdByTitle($post['title']);
+                    if ($detailPost) {
+                        $postId = $detailPost['CloggyNodeSubject']['node_id'];
+                        break;
+                    }
+                    
+                }                                
+                
+            }
+            
+            /*
+             * only if post id is not empty
+             */
+            if (!empty($postId)) {
+                
+                /*
+                 * generate data
+                 */
+                $imageUrl = $attachment['url'];                
+                $exp = explode('.',$imageUrl);
+                $ext = end($exp);
+                $filename = $attachment['title'].'.'.$ext;
+                $path = APP.'Plugin'.DS.'Cloggy'.DS.'webroot'.DS.'uploads'.DS.'CloggyBlog'.DS.'images'.DS.$postId.DS;
+                $filepath = $path.$filename;
+                
+                /*
+                 * create folder
+                 */
+                $dir = new Folder();
+                $dir->create($path);
+                
+                /*
+                 * download atttachment
+                 */
+                $http = new HttpSocket();
+                $f = fopen($filepath,'w+');
+                $http->setContentResource($f);  
+                $results = $http->get($imageUrl);
+                fclose($f);
+                
+                /*
+                 * save image
+                 */
+                $mediaId = $Media->setImage($userId,array(
+                    'media_file_type' => $results->getHeader('Content-Type'),
+                    'media_file_location' => DS.'uploads'.DS.'CloggyBlog'.DS.'images'.DS.$postId.DS.$filename
+                ));
+                
+                //save new image
+                $Media->setPostAttachment($postId,$mediaId);                                
+                
+            }
+            
+        }
         
     }
     

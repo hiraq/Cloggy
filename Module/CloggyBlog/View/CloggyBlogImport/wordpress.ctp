@@ -6,7 +6,13 @@ echo $this->Form->create('CloggyBlogImport', array(
 ));
 ?>
 
-<?php echo $this->Session->flash('dashNotif'); ?>
+<?php $flashMessage = $this->Session->flash('success'); ?>
+<?php if (isset($flashMessage) && !empty($flashMessage)) : ?>
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <?php echo $flashMessage; ?>						
+    </div>
+<?php endif; ?>
 
 <fieldset>
     <legend>Import WordPress Posts</legend>

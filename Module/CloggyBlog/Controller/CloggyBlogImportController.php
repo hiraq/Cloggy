@@ -103,7 +103,7 @@ class CloggyBlogImportController extends CloggyAppController {
                         
                         $checkImport = $this->__CloggyBlogImport->import();
                         if ($checkImport) {
-                            $this->Session->setFlash('Data imported','default',array(),'dashNotif');
+                            $this->Session->setFlash('Data imported', 'default', array(), 'success');
                         }
                         
                         

@@ -92,6 +92,18 @@ class CloggyBlogTag extends CloggyAppModel {
 
         return false;
     }
+    
+    public function getTagIdByName($tag) {
+        
+        $data = $this->get('node_subject')->find('first',array(
+            'contain' => false,
+            'conditions' => array('CloggyNodeSubject.subject' => $tag),
+            'fields' => array('CloggyNodeSubject.node_id')
+        ));
+        
+        return isset($data['CloggyNodeSubject']['node_id']) ? $data['CloggyNodeSubject']['node_id'] : false;
+        
+    }
 
     /**
      * Get detail tag
@@ -150,7 +162,7 @@ class CloggyBlogTag extends CloggyAppModel {
         foreach ($exp as $tag) {
 
             $typeId = $this->get('node_type')->generateType('cloggy_blog_tags', $userId);
-            $checkCatSubject = $this->get('node')->isSubjectExistsByTypeId($typeId, $tag);
+            $checkCatSubject = $this->isTagExists($tag, $userId);
 
             /*
              * if not exists then create it

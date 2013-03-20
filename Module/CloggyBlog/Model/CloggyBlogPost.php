@@ -330,6 +330,24 @@ class CloggyBlogPost extends CloggyAppModel {
 
         return $detail;
     }
+    
+    /**
+     * Get post id by title
+     * 
+     * @param string $title
+     * @return int|null
+     */
+    public function getPostIdByTitle($title) {
+        
+        $detail = $this->get('node_subject')->find('first',array(
+            'contain' => false,
+            'conditions' => array('CloggyNodeSubject.subject' => $title),
+            'fields' => array('CloggyNodeSubject.node_id')
+        ));
+        
+        return $detail;
+        
+    }
 
     /**
      * 
