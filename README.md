@@ -42,6 +42,6 @@ Wiki
 How To
 ====
 
-[Installation](https://gist.github.com/4515725)
+[Installation](https://github.com/hiraq/Cloggy/wiki/Installation)
 
 [Module Activation](https://gist.github.com/4515735)
