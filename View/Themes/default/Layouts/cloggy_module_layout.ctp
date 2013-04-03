@@ -111,8 +111,7 @@
         <?php echo $this->element('cloggy_module_main'); ?>
         <?php $this->end(); ?>
 
-        <?php echo $this->CloggyAsset->getVendorHtmlTag('jquery-1.8.3.js', 'js'); ?>        
-        <?php echo $this->CloggyAsset->getVendorHtmlTag('underscore-1.4.2.js', 'js'); ?>    
+        <?php echo $this->CloggyAsset->getVendorHtmlTag('jquery.min.js', 'js'); ?>                      
         <?php echo $this->CloggyAsset->getVendorHtmlTag('bootstrap/js/bootstrap.min.js','js'); ?>
         
         <?php echo $this->fetch('cloggy_js_module_main'); ?>				

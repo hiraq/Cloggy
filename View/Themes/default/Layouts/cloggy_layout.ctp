@@ -14,7 +14,7 @@
         <?php echo $content_for_layout; ?>	    
 
         <!-- js -->
-        <?php echo $this->CloggyAsset->getVendorHtmlTag('jquery-1.8.3.js', 'js'); ?>        
+        <?php echo $this->CloggyAsset->getVendorHtmlTag('jquery.min.js', 'js'); ?>        
         <?php echo $this->fetch('cloggy_js_main'); ?>
         <!-- !js -->
 
