@@ -127,7 +127,7 @@
 
 <?php $this->append('cloggy_js_module_page'); ?>
 <script type="text/javascript">
-    cloggy.captureJQuery(function() {	
+    jQuery(document).ready(function() {
         jQuery('#checker').on('click',function(e) {
             jQuery('tbody').find(':checkbox').attr('checked',this.checked);
             if(this.checked) {

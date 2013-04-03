@@ -58,45 +58,25 @@
 
 <?php echo $this->start('cloggy_js_main'); ?>
 <script type="text/javascript">
-    var cloggygy = new CloggyYepNope();  
-	
-    cloggygy.setHost({
-        bootstrap: '<?php echo $this->CloggyAsset->getVendorUrl('bootstrap/css/bootstrap.min.css'); ?>',
-        bootstrapJs: '<?php echo $this->CloggyAsset->getVendorUrl('bootstrap/js/bootstrap.min.js'); ?>',
-        jquery: '<?php echo $this->CloggyAsset->getVendorUrl('jquery-1.8.3.js'); ?>',	
-    });
-	
-    cloggygy.main(function() {
-		
-        //set host
-        var host = '<?php echo Router::url('/' . Configure::read('Cloggy.url_prefix') . '/' . Configure::read('Cloggy.theme_used') . '/', true); ?>';
-		
-        /*
-        inject global + login css
-         */
-        yepnope.injectCss(host+'app/css/style.global.css');							
-		
-        //manipulate dom
-        jQuery(document).ready(function() {
-            jQuery('#cloggy-form').delay(200).fadeIn(1000).css('margin-top','150px');
+    //manipulate dom
+    jQuery(document).ready(function() {
+        jQuery('#cloggy-form').delay(200).fadeIn(1000).css('margin-top','150px');
 
-<?php if (isset($errors) && !empty($errors)) : ?>
-                var errors = '<?php echo json_encode($errors); ?>';
-                errors = jQuery.parseJSON(errors);
-                jQuery.each(errors,function(k,v) {
-                    jQuery('#'+k).addClass('error');
-                    jQuery('#'+k+'_help').show().html('');
-                    jQuery('#'+k+'_help').html(v.toString());
-                    window.setTimeout(function() {					
-                        jQuery('#'+k+'_help').fadeOut('slow');
-                        jQuery('#'+k+'_help').html('');
-                        jQuery('#'+k).removeClass('error');
-                    },3500);
-                }); 
-<?php endif; ?>
-										
-        });
-		
-    });			
+        <?php if (isset($errors) && !empty($errors)) : ?>
+                        var errors = '<?php echo json_encode($errors); ?>';
+                        errors = jQuery.parseJSON(errors);
+                        jQuery.each(errors,function(k,v) {
+                            jQuery('#'+k).addClass('error');
+                            jQuery('#'+k+'_help').show().html('');
+                            jQuery('#'+k+'_help').html(v.toString());
+                            window.setTimeout(function() {					
+                                jQuery('#'+k+'_help').fadeOut('slow');
+                                jQuery('#'+k+'_help').html('');
+                                jQuery('#'+k).removeClass('error');
+                            },3500);
+                        }); 
+        <?php endif; ?>
+
+    });	
 </script>
 <?php echo $this->end(); ?>

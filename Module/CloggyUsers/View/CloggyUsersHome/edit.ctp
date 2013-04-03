@@ -122,9 +122,9 @@ endif;
 </fieldset>
 <?php echo $this->Form->end(); ?>
 
-<?php $this->append('clog_js_module_page'); ?>
+<?php $this->append('cloggy_js_module_page'); ?>
 <script type="text/javascript">
-    clog.captureJQuery(function() {
+    jQuery(document).ready(function() {
         jQuery('.help-inline').hide();
         <?php if (isset($errors) && !empty($errors)) : ?>
             jQuery('.help-inline').delay(800).fadeIn();			

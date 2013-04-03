@@ -92,36 +92,22 @@
 
 <?php echo $this->start('cloggy_js_main'); ?>
 <script type="text/javascript">
-    var cloggy = new CloggyYepNope();  
-	
-    cloggy.setHost({        
-        bootstrapJs: '<?php echo $this->CloggyAsset->getVendorUrl('bootstrap/js/bootstrap.min.js'); ?>',
-        jquery: '<?php echo $this->CloggyAsset->getVendorUrl('jquery-1.8.3.js'); ?>',	
-    });
-	
-    cloggy.main(function() {
-		
-        //set host
-        var host = '<?php echo Router::url('/' . Configure::read('Cloggy.url_prefix') . '/' . Configure::read('Cloggy.theme_used') . '/', true); ?>';		        						
-		
-        //manipulate dom
-        jQuery(document).ready(function() {
-            jQuery('body').css('margin-top','40px');			
-			
-            /*
-            search on page
-             */
-            jQuery('#form-search').on('submit',function(e) {
-				
-                e.preventDefault();
-                var q = jQuery('#module_q').val();
-                jQuery('td').removeAttr('style');
-                jQuery('td:contains("'+q+'")').css('background-color','#F2F0F0');
-				
-            });		
-											
-        });
-		
-    });			
+    //manipulate dom
+    jQuery(document).ready(function() {
+        jQuery('body').css('margin-top','40px');			
+
+        /*
+        search on page
+         */
+        jQuery('#form-search').on('submit',function(e) {
+
+            e.preventDefault();
+            var q = jQuery('#module_q').val();
+            jQuery('td').removeAttr('style');
+            jQuery('td:contains("'+q+'")').css('background-color','#F2F0F0');
+
+        });		
+
+    });	
 </script>
 <?php echo $this->end(); ?>

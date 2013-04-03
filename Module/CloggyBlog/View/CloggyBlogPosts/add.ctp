@@ -55,30 +55,23 @@ echo $this->Form->create('CloggyBlogPost', array(
 <?php echo $this->element('cloggy_blog_post_image_dialog',compact('postNodeId')); //load image dialog ?>
 
 <?php $this->append('cloggy_js_module_page'); ?>
-<script type="text/javascript">
-    //set host
-    var host = '<?php echo Router::url('/' . Configure::read('Cloggy.url_prefix') . '/' . Configure::read('Cloggy.theme_used') . '/', true); ?>';
+<?php echo $this->CloggyAsset->getVendorHtmlTag('ckeditor/ckeditor.js', 'js'); ?>  
 
-    yepnope({
-        load: [host+'vendor/ckeditor/ckeditor.js'],
-        complete: function() {
-			
-            CKEDITOR.replace('editor',{				
-                toolbar: [
-                    { name: 'document', items: [ 'Source', '-', 'NewPage', 'Preview', '-', 'Templates' ] },
-                    { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },		           
-                    { name: 'basicstyles', items: [ 'Bold', 'Italic','Underline','Strike' ] },
-                    { name: 'insert', items: ['PageBreak'] },
-                    { name: 'links', items: ['Link','Unlink','Anchor'] },
-                    { name: 'paragraph', items: ['NumberedList','BulletedList','Outdent','Indent',
-                            'Blockquote','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock']}
-                ]						
-            });			
-			
-        }
-    });
+<script type="text/javascript">        
     
-    cloggy.captureJQuery(function() {
+    CKEDITOR.replace('editor',{				
+        toolbar: [
+            { name: 'document', items: [ 'Source', '-', 'NewPage', 'Preview', '-', 'Templates' ] },
+            { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },		           
+            { name: 'basicstyles', items: [ 'Bold', 'Italic','Underline','Strike' ] },
+            { name: 'insert', items: ['PageBreak'] },
+            { name: 'links', items: ['Link','Unlink','Anchor'] },
+            { name: 'paragraph', items: ['NumberedList','BulletedList','Outdent','Indent',
+                    'Blockquote','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock']}
+        ]						
+    });		
+            
+    jQuery(document).ready(function() {
         
         jQuery('#cloggy_blog_add_image').on('click',function(e) {
             
@@ -90,6 +83,5 @@ echo $this->Form->create('CloggyBlogPost', array(
         });
         
     });
-
 </script>
 <?php $this->end(); ?>

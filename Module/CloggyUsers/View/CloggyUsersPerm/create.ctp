@@ -89,7 +89,7 @@ echo $this->Form->create('CloggyUserPerm', array(
 
 <?php $this->append('cloggy_js_module_page'); ?>
 <script type="text/javascript">
-    cloggy.captureJQuery(function() {	
+    jQuery(document).ready(function() {
                 
         var formString = jQuery('#aco_object_form').html();
         

@@ -96,7 +96,7 @@ echo $this->Form->create('CloggyUserPerm', array(
 
 <?php $this->append('cloggy_js_module_page'); ?>
 <script type="text/javascript">
-    cloggy.captureJQuery(function() {	
+    jQuery(document).ready(function() {
         
         var formString = '<input type="text" name="data[CloggyUserPerm][aco_object]" id="aco_object" />';        
         

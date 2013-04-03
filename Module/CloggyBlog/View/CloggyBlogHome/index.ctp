@@ -4,7 +4,7 @@
 
 <?php $this->append('cloggy_js_module_page'); ?>
 <script type="text/javascript">
-    cloggy.captureJQuery(function() {
+    jQuery(document).ready(function() {
         jQuery('.post_remove').on('click',function(e) {
             e.preventDefault();
             var href = jQuery(this).attr('href');
