@@ -5,8 +5,8 @@
 
     <div class="container">
         <div class="row">
-            <div class="span3"></div>
-            <div class="span4">
+<!--            <div class="span3"></div>-->
+            <div class="span4 offset2">
 
                 <?php
                 echo $this->Form->create('CloggyUser', array(
@@ -49,7 +49,7 @@
                 <?php echo $this->Form->end(); ?>
 
             </div>
-            <div class="span5"></div>
+<!--            <div class="span6"></div>-->
         </div>
     </div>
 
