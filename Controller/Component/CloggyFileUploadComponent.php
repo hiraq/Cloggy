@@ -16,7 +16,7 @@ class CloggyFileUploadComponent extends Component {
     private $__callbackAfterUpload;
     private $__uploadData;
     private $__isError = false;
-    private $__errorMsg = 'An error has detected';
+    private $__errorMsg;
     private $__filepath;
     private $__uploadSuccessData;
     private $__dataModel;
@@ -34,6 +34,9 @@ class CloggyFileUploadComponent extends Component {
         
         //setup settings        
         $this->__setupSettings($settings);
+        
+        //setup error message
+        $this->__errorMsg = __d('cloggy','An error has detected');
         
     }        
     
@@ -291,7 +294,7 @@ class CloggyFileUploadComponent extends Component {
              * if still empty or null then raise an error
              */
             if (empty($field)) {
-                $this->setupError('Field name not configured.');
+                $this->setupError(__d('cloggy','Field name not configured.'));
             } else {
                 $this->__field = $field;
             }
@@ -332,7 +335,7 @@ class CloggyFileUploadComponent extends Component {
                     $this->setupFiles($this->__controller->request->data[$this->__dataModel][$field]);
                     
                 } else {
-                    $this->setupError('Upload data not available.');
+                    $this->setupError(__d('cloggy','Upload data not available.'));
                 }
                 
             }
@@ -362,7 +365,7 @@ class CloggyFileUploadComponent extends Component {
                     && !in_array($fileTmpExt, $this->__allowedFileTypes)) {
 
                 //raise an error
-                $this->setupError('File extension not allowed.');
+                $this->setupError(__d('cloggy','File extension not allowed.'));
             }
             
         }
@@ -383,7 +386,7 @@ class CloggyFileUploadComponent extends Component {
                     && $this->__uploadData['size'] > $this->__maxFileSize) {
 
                 //raise an error
-                $this->setupError('Requested uploaded file exceed maximum filesize.');
+                $this->setupError(__d('cloggy','Requested uploaded file exceed maximum filesize.'));
             }
             
         }
@@ -403,7 +406,7 @@ class CloggyFileUploadComponent extends Component {
             $filename = $this->__uploadData['name'];            
             
             if (empty($this->__folderDestPath)) {
-                $this->setupError('Folder destination not configured.');
+                $this->setupError(__d('cloggy','Folder destination not configured.'));
             } else {
                 
                 /*
@@ -434,7 +437,7 @@ class CloggyFileUploadComponent extends Component {
                         $filename = $this->__rewriteFile($filename);
                         $this->__filepath = $this->__folderDestPath.$filename;
                     } else {
-                        $this->setupError('Cannot upload file due to duplicate file.');
+                        $this->setupError(__d('cloggy','Cannot upload file due to duplicate file.'));
                     }
                     
                 } else {
@@ -464,31 +467,31 @@ class CloggyFileUploadComponent extends Component {
                     
                     case 1:
                     case 2:
-                        $errorMsg = 'The uploaded file exceeds the upload_max_filesize';
+                        $errorMsg = __d('cloggy','The uploaded file exceeds the upload_max_filesize');
                         break;
                     
                     case 3:
-                        $errorMsg = 'The uploaded file was only partially uploaded. ';
+                        $errorMsg = __d('cloggy','The uploaded file was only partially uploaded. ');
                         break;
                     
                     case 4:
-                        $errorMsg = 'No file was uploaded. ';
+                        $errorMsg = __d('cloggy','No file was uploaded. ');
                         break;
                     
                     case 6:
-                        $errorMsg = 'Missing a temporary folder';
+                        $errorMsg = __d('cloggy','Missing a temporary folder');
                         break;
                     
                     case 7:
-                        $errorMsg = 'Failed to write file to disk';
+                        $errorMsg = __d('cloggy','Failed to write file to disk');
                         break;
                     
                     case 8:
-                        $errorMsg = 'A PHP extension stopped the file upload.';
+                        $errorMsg = __d('cloggy','A PHP extension stopped the file upload.');
                         break;
                     
                     default:
-                        $errorMsg = 'An error has occured.';
+                        $errorMsg = __d('cloggy','An error has occured.');
                         break;
                     
                 }
@@ -522,13 +525,13 @@ class CloggyFileUploadComponent extends Component {
                 $file = $this->getFileInfo($this->__filepath);
                 
                 if (empty($file)) {
-                    $this->setupError('Failed to upload file.');
+                    $this->setupError(__d('cloggy','Failed to upload file.'));
                 } else {
                     $this->__uploadSuccessData = $file;
                 }
                 
             } else {
-                $this->setupError('Cannot upload file.');
+                $this->setupError(__d('cloggy','Cannot upload file.'));
             }
             
         }

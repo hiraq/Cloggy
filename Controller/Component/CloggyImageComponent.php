@@ -182,7 +182,7 @@ class CloggyImageComponent extends Component {
          */
         $checkExtension = $this->isExtensionLoaded();
         if (!$checkExtension) {
-            $this->setError('Required extension not loaded, check your php configuration.');
+            $this->setError(__d('cloggy','Required extension not loaded, check your php configuration.'));
         }
         
         //parse and setup image settings
@@ -231,7 +231,7 @@ class CloggyImageComponent extends Component {
             } else {
                 
                 //raise an error if file cannot be opened
-                $this->setError('Cannot open image file.');
+                $this->setError(__d('cloggy','Cannot open image file.'));
                 
             }            
             
@@ -339,7 +339,7 @@ class CloggyImageComponent extends Component {
             $dirSavePath = dirname($this->__imageSavePath);
             
             if (empty($this->__imageSavePath) || !is_dir($dirSavePath)) {
-                $this->setError('Image save path not configured or maybe not exists.');
+                $this->setError(__d('cloggy','Image save path not configured or maybe not exists.'));
             } else {                                
                 
                 /*
@@ -403,7 +403,7 @@ class CloggyImageComponent extends Component {
         if (!$checkError) {
             
             if (!in_array($command,$this->__supportedCommand)) {
-                $this->setError('Command not available.');
+                $this->setError(__d('cloggy','Command not available.'));
             } else {
                 $this->__command = $command;
             }
@@ -424,12 +424,12 @@ class CloggyImageComponent extends Component {
             if (!in_array($option,$this->__supportedImageOptions)) {
                 
                 //unknwon option
-                $this->setError('Option not available.');
+                $this->setError(__d('cloggy','Option not available.'));
                 
             } elseif (empty($option)) {
                 
                 //empty option
-                $this->setError('Option not configured.');
+                $this->setError(__d('cloggy','Option not configured.'));
                 
             } else {
                 $this->__option = $option;
@@ -466,7 +466,7 @@ class CloggyImageComponent extends Component {
         if (!$checkError) {
             
             if (empty($this->__requestedHeight) || empty($this->__requestedWidth)) {
-                $this->setError('Empty requested width and height.');
+                $this->setError(__d('cloggy','Empty requested width and height.'));
             } else {
 
                 /*
@@ -602,7 +602,7 @@ class CloggyImageComponent extends Component {
             if ($checkExists) {
                 return $file->ext();
             } else {
-                $this->setError('Image file not found.');
+                $this->setError(__d('cloggy','Image file not found.'));
                 return false;
             }
             

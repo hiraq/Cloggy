@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2013-04-06 12:54+0700\n"
-"PO-Revision-Date: 2013-04-06 13:06+0700\n"
+"POT-Creation-Date: 2013-04-06 15:08+0700\n"
+"PO-Revision-Date: 2013-04-06 15:09+0700\n"
 "Last-Translator: hiraq <hrxwan@gmail.com>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: \n"
@@ -61,6 +61,102 @@ msgstr ""
 
 #: Controller/InstallController.php:99
 msgid "Cloggy - Setup User"
+msgstr ""
+
+#: Controller/Component/CloggyFileUploadComponent.php:39
+msgid "An error has detected"
+msgstr ""
+
+#: Controller/Component/CloggyFileUploadComponent.php:297
+msgid "Field name not configured."
+msgstr ""
+
+#: Controller/Component/CloggyFileUploadComponent.php:338
+msgid "Upload data not available."
+msgstr ""
+
+#: Controller/Component/CloggyFileUploadComponent.php:368
+msgid "File extension not allowed."
+msgstr ""
+
+#: Controller/Component/CloggyFileUploadComponent.php:389
+msgid "Requested uploaded file exceed maximum filesize."
+msgstr ""
+
+#: Controller/Component/CloggyFileUploadComponent.php:409
+msgid "Folder destination not configured."
+msgstr ""
+
+#: Controller/Component/CloggyFileUploadComponent.php:440
+msgid "Cannot upload file due to duplicate file."
+msgstr ""
+
+#: Controller/Component/CloggyFileUploadComponent.php:470
+msgid "The uploaded file exceeds the upload_max_filesize"
+msgstr ""
+
+#: Controller/Component/CloggyFileUploadComponent.php:474
+msgid "The uploaded file was only partially uploaded. "
+msgstr ""
+
+#: Controller/Component/CloggyFileUploadComponent.php:478
+msgid "No file was uploaded. "
+msgstr ""
+
+#: Controller/Component/CloggyFileUploadComponent.php:482
+msgid "Missing a temporary folder"
+msgstr ""
+
+#: Controller/Component/CloggyFileUploadComponent.php:486
+msgid "Failed to write file to disk"
+msgstr ""
+
+#: Controller/Component/CloggyFileUploadComponent.php:490
+msgid "A PHP extension stopped the file upload."
+msgstr ""
+
+#: Controller/Component/CloggyFileUploadComponent.php:494
+msgid "An error has occured."
+msgstr ""
+
+#: Controller/Component/CloggyFileUploadComponent.php:528
+msgid "Failed to upload file."
+msgstr ""
+
+#: Controller/Component/CloggyFileUploadComponent.php:534
+msgid "Cannot upload file."
+msgstr ""
+
+#: Controller/Component/CloggyImageComponent.php:185
+msgid "Required extension not loaded, check your php configuration."
+msgstr ""
+
+#: Controller/Component/CloggyImageComponent.php:234
+msgid "Cannot open image file."
+msgstr ""
+
+#: Controller/Component/CloggyImageComponent.php:342
+msgid "Image save path not configured or maybe not exists."
+msgstr ""
+
+#: Controller/Component/CloggyImageComponent.php:406
+msgid "Command not available."
+msgstr ""
+
+#: Controller/Component/CloggyImageComponent.php:427
+msgid "Option not available."
+msgstr ""
+
+#: Controller/Component/CloggyImageComponent.php:432
+msgid "Option not configured."
+msgstr ""
+
+#: Controller/Component/CloggyImageComponent.php:469
+msgid "Empty requested width and height."
+msgstr ""
+
+#: Controller/Component/CloggyImageComponent.php:605
+msgid "Image file not found."
 msgstr ""
 
 #: Module/CloggyBlog/Config/menus.php:8
