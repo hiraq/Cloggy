@@ -1,0 +1,993 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2013-04-06 12:54+0700\n"
+"PO-Revision-Date: 2013-04-06 13:06+0700\n"
+"Last-Translator: hiraq <hrxwan@gmail.com>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: English\n"
+
+#: Controller/CloggyAppController.php:82
+msgid "You do not have permission to access that page."
+msgstr ""
+
+#: Controller/CloggyAppController.php:228
+msgid "Identify yourself!"
+msgstr ""
+
+#: Controller/DashboardController.php:15
+#: Module/CloggyUsers/View/CloggyUsersHome/add.ctp:8
+msgid "Add New User"
+msgstr ""
+
+#: Controller/DashboardController.php:16
+msgid "Edit My Profile"
+msgstr ""
+
+#: Controller/DashboardController.php:19
+msgid "Cloggy - Administration Dashboard"
+msgstr ""
+
+#: Controller/HomeController.php:61
+msgid "Wrong username or password"
+msgstr ""
+
+#: Controller/HomeController.php:66
+msgid "Cloggy - Administrator Login"
+msgstr ""
+
+#: Controller/InstallController.php:51
+msgid "Username field cannot be empty"
+msgstr ""
+
+#: Controller/InstallController.php:57
+msgid "Password field cannot be empty"
+msgstr ""
+
+#: Controller/InstallController.php:63
+msgid "Valid address required"
+msgstr ""
+
+#: Controller/InstallController.php:92
+msgid "Your account has been activated."
+msgstr ""
+
+#: Controller/InstallController.php:99
+msgid "Cloggy - Setup User"
+msgstr ""
+
+#: Module/CloggyBlog/Config/menus.php:8
+msgid "Posts"
+msgstr ""
+
+#: Module/CloggyBlog/Config/menus.php:9;13;14;17
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_categories.ctp:5
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:5
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_tags.ctp:5
+#: Module/CloggyUsers/Config/menus.php:6;10;16
+msgid "Manage"
+msgstr ""
+
+#: Module/CloggyBlog/Config/menus.php:10;18
+msgid "Add"
+msgstr ""
+
+#: Module/CloggyBlog/Config/menus.php:12
+#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:30
+#: Module/CloggyBlog/View/CloggyBlogPosts/edit.ctp:37
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_categories.ctp:5
+msgid "Categories"
+msgstr ""
+
+#: Module/CloggyBlog/Config/menus.php:16
+#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:42
+#: Module/CloggyBlog/View/CloggyBlogPosts/edit.ctp:53
+msgid "Tags"
+msgstr ""
+
+#: Module/CloggyBlog/Config/menus.php:22
+msgid "Create New"
+msgstr ""
+
+#: Module/CloggyBlog/Config/menus.php:23
+msgid "Add Post"
+msgstr ""
+
+#: Module/CloggyBlog/Config/menus.php:24
+msgid "Add Category"
+msgstr ""
+
+#: Module/CloggyBlog/Config/menus.php:25
+msgid "Add Tags"
+msgstr ""
+
+#: Module/CloggyBlog/Config/menus.php:26
+msgid "WordPress Importer"
+msgstr ""
+
+#: Module/CloggyBlog/Controller/CloggyBlogCategoriesController.php:34
+msgid "Cloggy - CloggyBlog Categories"
+msgstr ""
+
+#: Module/CloggyBlog/Controller/CloggyBlogCategoriesController.php:60;162
+msgid "Category field required"
+msgstr ""
+
+#: Module/CloggyBlog/Controller/CloggyBlogCategoriesController.php:64;166
+#: Module/CloggyBlog/Controller/CloggyBlogTagsController.php:65
+msgid "Category has been exists"
+msgstr ""
+
+#: Module/CloggyBlog/Controller/CloggyBlogCategoriesController.php:93
+msgid "Category has been saved."
+msgstr ""
+
+#: Module/CloggyBlog/Controller/CloggyBlogCategoriesController.php:102
+msgid "Cloggy - CloggyBlog Add New Category"
+msgstr ""
+
+#: Module/CloggyBlog/Controller/CloggyBlogCategoriesController.php:192
+msgid "Your category has been updated."
+msgstr ""
+
+#: Module/CloggyBlog/Controller/CloggyBlogCategoriesController.php:198
+msgid "Cloggy - CloggyBlog Edit Category"
+msgstr ""
+
+#: Module/CloggyBlog/Controller/CloggyBlogHomeController.php:30
+msgid "Cloggy - CloggyBlog Dashboard"
+msgstr ""
+
+#: Module/CloggyBlog/Controller/CloggyBlogImportController.php:47
+msgid "You must upload xml file"
+msgstr ""
+
+#: Module/CloggyBlog/Controller/CloggyBlogImportController.php:106
+msgid "Data imported"
+msgstr ""
+
+#: Module/CloggyBlog/Controller/CloggyBlogImportController.php:111
+msgid "Given data is not valid."
+msgstr ""
+
+#: Module/CloggyBlog/Controller/CloggyBlogImportController.php:122
+msgid "Import Post From Wordpress"
+msgstr ""
+
+#: Module/CloggyBlog/Controller/CloggyBlogPostsController.php:70
+msgid "Title field required"
+msgstr ""
+
+#: Module/CloggyBlog/Controller/CloggyBlogPostsController.php:74
+msgid "The title has been exists"
+msgstr ""
+
+#: Module/CloggyBlog/Controller/CloggyBlogPostsController.php:81
+msgid "Content field required"
+msgstr ""
+
+#: Module/CloggyBlog/Controller/CloggyBlogPostsController.php:138
+msgid "Your post has been added"
+msgstr ""
+
+#: Module/CloggyBlog/Controller/CloggyBlogPostsController.php:146;267
+msgid "Cloggy - CloggyBlogPost - Add New Post"
+msgstr ""
+
+#: Module/CloggyBlog/Controller/CloggyBlogPostsController.php:262
+msgid "Your post has been updated"
+msgstr ""
+
+#: Module/CloggyBlog/Controller/CloggyBlogPostsController.php:361
+#: Module/CloggyBlog/View/Elements/cloggy_blog_post_image_dialog.ctp:106
+msgid "Upload success"
+msgstr ""
+
+#: Module/CloggyBlog/Controller/CloggyBlogTagsController.php:33
+msgid "Cloggy - CloggyBlog Tags"
+msgstr ""
+
+#: Module/CloggyBlog/Controller/CloggyBlogTagsController.php:61;132
+msgid "Tag field required"
+msgstr ""
+
+#: Module/CloggyBlog/Controller/CloggyBlogTagsController.php:78
+msgid "Tag has been saved."
+msgstr ""
+
+#: Module/CloggyBlog/Controller/CloggyBlogTagsController.php:83
+msgid "Cloggy - CloggyBlog Add New Tag"
+msgstr ""
+
+#: Module/CloggyBlog/Controller/CloggyBlogTagsController.php:136
+msgid "Tag has been exists"
+msgstr ""
+
+#: Module/CloggyBlog/Controller/CloggyBlogTagsController.php:152
+msgid "Your tag has been updated."
+msgstr ""
+
+#: Module/CloggyBlog/Controller/CloggyBlogTagsController.php:156
+msgid "Cloggy - CloggyBlog Edit Tag"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogCategories/add.ctp:8
+msgid "Add New Category"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogCategories/add.ctp:21
+#: Module/CloggyBlog/View/CloggyBlogCategories/edit.ctp:21
+#: Module/CloggyBlog/View/CloggyBlogCategories/index.ctp:6
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_categories.ctp:9
+msgid "Category Name"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogCategories/add.ctp:23
+#: Module/CloggyBlog/View/CloggyBlogCategories/edit.ctp:26
+msgid "category name"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogCategories/add.ctp:33
+#: Module/CloggyBlog/View/CloggyBlogCategories/edit.ctp:41
+msgid "Category Parent"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogCategories/add.ctp:36
+#: Module/CloggyBlog/View/CloggyBlogCategories/edit.ctp:44
+msgid "Choose Parent Category"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogCategories/edit.ctp:8
+msgid "Edit Category"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogCategories/index.ctp:7
+#: Module/CloggyBlog/View/CloggyBlogTags/index.ctp:7
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_categories.ctp:10
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_tags.ctp:10
+msgid "Total Posts"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogCategories/index.ctp:8
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:10
+#: Module/CloggyBlog/View/CloggyBlogTags/index.ctp:8
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_categories.ctp:11
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:13
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_tags.ctp:11
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:49
+#: Module/CloggyUsers/View/CloggyUsersPerm/index.ctp:10
+#: Module/CloggyUsers/View/CloggyUsersRole/index.ctp:8
+msgid "Actions"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogCategories/index.ctp:24
+#: Module/CloggyBlog/View/CloggyBlogPosts/edit.ctp:7
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:35
+#: Module/CloggyBlog/View/CloggyBlogTags/index.ctp:24
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_categories.ctp:26
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:37
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_tags.ctp:26
+#: Module/CloggyUsers/View/CloggyUsersHome/edit.ctp:8
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:80
+#: Module/CloggyUsers/View/CloggyUsersPerm/index.ctp:45
+#: Module/CloggyUsers/View/CloggyUsersRole/index.ctp:24
+msgid "Edit"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogCategories/index.ctp:27
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:38
+#: Module/CloggyBlog/View/CloggyBlogTags/index.ctp:27
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_categories.ctp:29
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:40
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_tags.ctp:29
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:83
+#: Module/CloggyUsers/View/CloggyUsersPerm/index.ctp:48
+#: Module/CloggyUsers/View/CloggyUsersRole/index.ctp:27
+msgid "Remove"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogCategories/index.ctp:34
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:54
+#: Module/CloggyBlog/View/CloggyBlogTags/index.ctp:34
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_categories.ctp:36
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:56
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_tags.ctp:36
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:99
+#: Module/CloggyUsers/View/CloggyUsersPerm/index.ctp:59
+#: Module/CloggyUsers/View/CloggyUsersRole/index.ctp:38
+msgid "No data available"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogCategories/index.ctp:41
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:61
+#: Module/CloggyBlog/View/CloggyBlogTags/index.ctp:41
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:106
+#: Module/CloggyUsers/View/CloggyUsersPerm/index.ctp:66
+#: Module/CloggyUsers/View/CloggyUsersRole/index.ctp:45
+msgid "With Selected"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogCategories/index.ctp:44
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:64
+#: Module/CloggyBlog/View/CloggyBlogTags/index.ctp:44
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:109
+#: Module/CloggyUsers/View/CloggyUsersPerm/index.ctp:69
+#: Module/CloggyUsers/View/CloggyUsersRole/index.ctp:48
+msgid "Delete All"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogCategories/index.ctp:87
+msgid "Are you sure want to delete all these categories?"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogCategories/index.ctp:117
+msgid "Are you sure to remove this category?"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogHome/index.ctp:11
+msgid "Are you sure want to remove this item?"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogHome/index.ctp:18
+msgid "Are you sure want to disable this item?"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogImport/wordpress.ctp:18
+msgid "Import WordPress Posts"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogImport/wordpress.ctp:36
+msgid "WordPress Xml"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogImport/wordpress.ctp:51
+msgid "Import Options"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogImport/wordpress.ctp:54
+msgid "Download Featured Image"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogImport/wordpress.ctp:57
+msgid "Make Draft"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogImport/wordpress.ctp:60
+msgid "Only Published Posts"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogImport/wordpress.ctp:63
+msgid "Only Drafted Posts"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogImport/wordpress.ctp:66
+msgid "Not Import Categories"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogImport/wordpress.ctp:69
+msgid "Not Import Tags"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogImport/wordpress.ctp:72
+msgid "Not Import Meta"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogImport/wordpress.ctp:75
+msgid "Include Custom Post Types"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:8
+msgid "Add New Post"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:21
+#: Module/CloggyBlog/View/CloggyBlogPosts/edit.ctp:28
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:6
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:9
+msgid "Title"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:22
+#: Module/CloggyBlog/View/CloggyBlogPosts/edit.ctp:29
+msgid "title"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:24
+#: Module/CloggyBlog/View/CloggyBlogPosts/edit.ctp:31
+msgid "Content"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:7
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:10
+#: View/Themes/default/Dashboard/index.ctp:48
+msgid "Author"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:8
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:11
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:46
+msgid "Status"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:9
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:12
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:47
+msgid "Created"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:43
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:45
+msgid "Make a draft"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:46
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:48
+msgid "Publish"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:65
+msgid "Draft All"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:66
+msgid "Publish All"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:107
+msgid "Are you sure want to delete all these posts?"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:112
+msgid "Are you sure want to make draft all these posts?"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:144
+msgid "Are you sure to remove this post?"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:151
+msgid "Are you sure to make draft this post?"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:158
+msgid "Are you sure to publish this post?"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogTags/add.ctp:8
+msgid "Add New Tag"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogTags/add.ctp:21
+#: Module/CloggyBlog/View/CloggyBlogTags/edit.ctp:21
+#: Module/CloggyBlog/View/CloggyBlogTags/index.ctp:6
+msgid "Tag Name"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogTags/add.ctp:23
+#: Module/CloggyBlog/View/CloggyBlogTags/edit.ctp:25
+msgid "tag name"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogTags/edit.ctp:8
+msgid "Edit Tag"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogTags/index.ctp:87
+msgid "Are you sure want to delete all these tags?"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogTags/index.ctp:117
+msgid "Are you sure to remove this tag?"
+msgstr ""
+
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:30
+msgid "Published"
+msgstr ""
+
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:32
+msgid "Draft"
+msgstr ""
+
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_tags.ctp:9
+msgid "Tag"
+msgstr ""
+
+#: Module/CloggyBlog/View/Elements/cloggy_blog_post_image_dialog.ctp:4
+msgid "Image Management"
+msgstr ""
+
+#: Module/CloggyBlog/View/Elements/cloggy_blog_post_image_dialog.ctp:9
+msgid "Upload"
+msgstr ""
+
+#: Module/CloggyBlog/View/Elements/cloggy_blog_post_image_dialog.ctp:10
+msgid "Images"
+msgstr ""
+
+#: Module/CloggyBlog/View/Elements/cloggy_blog_post_image_dialog.ctp:16
+msgid "Crop Image"
+msgstr ""
+
+#: Module/CloggyBlog/View/Elements/cloggy_blog_post_image_dialog.ctp:20
+msgid "Select Image"
+msgstr ""
+
+#: Module/CloggyBlog/View/Elements/cloggy_blog_post_image_dialog.ctp:27
+msgid "No image uploaded"
+msgstr ""
+
+#: Module/CloggyBlog/View/Elements/cloggy_blog_post_image_dialog.ctp:35
+msgid "Close"
+msgstr ""
+
+#: Module/CloggyBlog/View/Elements/cloggy_blog_post_image_dialog.ctp:36
+msgid "Upload Now"
+msgstr ""
+
+#: Module/CloggyBlog/View/Elements/cloggy_blog_post_image_dialog.ctp:101
+msgid "Upload failed!"
+msgstr ""
+
+#: Module/CloggyUsers/Config/menus.php:5;20
+msgid "Roles"
+msgstr ""
+
+#: Module/CloggyUsers/Config/menus.php:7
+msgid "Create"
+msgstr ""
+
+#: Module/CloggyUsers/Config/menus.php:9;21
+msgid "Permissions"
+msgstr ""
+
+#: Module/CloggyUsers/Config/menus.php:11
+msgid "Setup"
+msgstr ""
+
+#: Module/CloggyUsers/Config/menus.php:15
+#: Module/CloggyUsers/View/CloggyUsersRole/index.ctp:7
+msgid "Users"
+msgstr ""
+
+#: Module/CloggyUsers/Config/menus.php:17
+msgid "Add User"
+msgstr ""
+
+#: Module/CloggyUsers/Config/menus.php:19
+msgid "User Access"
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersHomeController.php:38
+msgid "Cloggy - Users Management"
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersHomeController.php:69;208;228
+msgid "Username field required"
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersHomeController.php:73;212
+msgid "This username has exists."
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersHomeController.php:81;97;250
+msgid "Email field required"
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersHomeController.php:85;254
+msgid "Required valid email address"
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersHomeController.php:89;258
+msgid "This email has exists."
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersHomeController.php:101;232
+msgid "Not match with your password confirmation"
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersHomeController.php:108
+msgid "Password confirmation required"
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersHomeController.php:114
+msgid "User role required"
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersHomeController.php:140
+msgid "has been registered."
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersHomeController.php:154
+msgid "Cloggy - Users Management - Add New User"
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersHomeController.php:274
+msgid "User role field required"
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersHomeController.php:289
+msgid "User status field required"
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersHomeController.php:314
+msgid "data has been updated."
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersHomeController.php:324
+msgid "Cloggy - Users Management - Edit User"
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:36
+msgid "Cloggy - Users Permission Management"
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:104
+msgid "Adapter name field required"
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:110;241
+msgid "You must choose adapter."
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:117;215
+msgid "This role and permission has been exists."
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:123;228
+msgid "Object field required"
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:135
+msgid "Permission has been setup"
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:152
+msgid "Cloggy - Users Permission Management - Setup Permission"
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:271
+msgid "Permission field required"
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:294
+msgid "Permission data has been updated."
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:312
+msgid "Cloggy - Users Permission Management - Edit Permission"
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersRoleController.php:36
+msgid "Cloggy - Users Role Management"
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersRoleController.php:67;138
+msgid "Role name field required"
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersRoleController.php:71;142
+msgid "This role name has exists."
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersRoleController.php:88
+msgid "has been created."
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersRoleController.php:96
+msgid "Cloggy - Role Management - Create New Role"
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersRoleController.php:160
+msgid "Role name data has been updated."
+msgstr ""
+
+#: Module/CloggyUsers/Controller/CloggyUsersRoleController.php:171
+msgid "Cloggy - Role Management - Edit Role"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/add.ctp:21
+#: Module/CloggyUsers/View/CloggyUsersHome/edit.ctp:22
+#: View/Themes/default/Home/login.ctp:30
+#: View/Themes/default/Install/index.ctp:26;28
+msgid "Username"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/add.ctp:23
+#: Module/CloggyUsers/View/CloggyUsersHome/edit.ctp:27
+#: View/Themes/default/Home/login.ctp:32
+msgid "username"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/add.ctp:34
+#: Module/CloggyUsers/View/CloggyUsersHome/edit.ctp:43
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:44
+#: View/Themes/default/Install/index.ctp:34
+msgid "Email"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/add.ctp:36
+#: Module/CloggyUsers/View/CloggyUsersHome/edit.ctp:48
+msgid "email address"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/add.ctp:47
+#: View/Themes/default/Home/login.ctp:37
+#: View/Themes/default/Install/index.ctp:42;44
+msgid "Password"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/add.ctp:49
+#: Module/CloggyUsers/View/CloggyUsersHome/edit.ctp:66
+#: View/Themes/default/Home/login.ctp:39
+msgid "password"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/add.ctp:60
+#: Module/CloggyUsers/View/CloggyUsersHome/edit.ctp:77
+msgid "Confirm Password"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/add.ctp:62
+#: Module/CloggyUsers/View/CloggyUsersHome/edit.ctp:79
+msgid "confirm password"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/add.ctp:73
+#: Module/CloggyUsers/View/CloggyUsersHome/edit.ctp:90
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:45
+msgid "Role"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/add.ctp:89
+msgid "Activated Now"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/add.ctp:92
+#: Module/CloggyUsers/View/CloggyUsersHome/edit.ctp:110
+msgid "Yes"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/add.ctp:95
+#: Module/CloggyUsers/View/CloggyUsersHome/edit.ctp:113
+msgid "No"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/edit.ctp:64
+msgid "New Password"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/edit.ctp:107
+msgid "Active Status"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:8
+msgid "Sort By"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:12
+msgid "Status ASC"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:16
+msgid "Status DESC"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:21
+msgid "Role ASC"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:25
+msgid "Role DESC"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:30
+msgid "Name ASC"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:34
+msgid "Name DESC"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:43
+msgid "User Name"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:48
+msgid "Last Login"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:65
+msgid "Activated"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:67
+msgid "Not activated"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:73
+msgid "No activity"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:88
+msgid "Disable"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:91
+msgid "Enable"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:110
+msgid "Disable All"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:111
+msgid "Enable All"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:152
+msgid "Are you sure want to delete all these users?"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:157
+msgid "Are you sure want to disable all these users?"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:189
+msgid "Are you sure to remove this user?"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:196
+msgid "Are you sure to disable this user?"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:8
+msgid "Setup New Permission"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:21
+#: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:22
+#: Module/CloggyUsers/View/CloggyUsersRole/add.ctp:21
+#: Module/CloggyUsers/View/CloggyUsersRole/edit.ctp:22
+#: Module/CloggyUsers/View/CloggyUsersRole/index.ctp:6
+msgid "Role Name"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:41
+#: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:42
+msgid "Permission Type"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:44
+#: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:45
+msgid "Select Types"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:45
+#: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:46
+msgid "Module"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:47
+#: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:48
+msgid "Url"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:59
+#: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:60
+#: Module/CloggyUsers/View/CloggyUsersPerm/index.ctp:7
+msgid "Object"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:63;109
+#: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:66;117
+msgid "ex: controller_name/action"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:72
+#: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:79
+#: Module/CloggyUsers/View/CloggyUsersPerm/index.ctp:9
+msgid "Permission"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:75
+msgid "Allow"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:78
+msgid "Deny"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:104
+#: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:112
+msgid "ex: ModuleName"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:114
+#: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:122
+msgid "ex: query/url"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:8
+msgid "Edit Permission"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:47
+msgid "Controller"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersPerm/index.ctp:6
+msgid "Aro"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersPerm/index.ctp:8
+msgid "Adapter"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersPerm/index.ctp:110
+msgid "Are you sure want to delete all these permissions?"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersPerm/index.ctp:137
+msgid "Are you sure to remove this perm?"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersRole/add.ctp:8
+msgid "Add New Role"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersRole/add.ctp:24
+#: Module/CloggyUsers/View/CloggyUsersRole/edit.ctp:27
+msgid "role name"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersRole/edit.ctp:8
+msgid "Edit Role"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersRole/index.ctp:89
+msgid "Are you sure want to delete all these roles?"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersRole/index.ctp:116
+msgid "Are you sure to remove this role?"
+msgstr ""
+
+#: View/Themes/default/Dashboard/index.ctp:17
+msgid "Search"
+msgstr ""
+
+#: View/Themes/default/Dashboard/index.ctp:46
+msgid "Module Name"
+msgstr ""
+
+#: View/Themes/default/Dashboard/index.ctp:47
+msgid "Description"
+msgstr ""
+
+#: View/Themes/default/Dashboard/index.ctp:49
+msgid "Dependency"
+msgstr ""
+
+#: View/Themes/default/Dashboard/index.ctp:81
+msgid "No modules registered"
+msgstr ""
+
+#: View/Themes/default/Elements/noscript.ctp:2
+msgid "You must enable javascript at your browser."
+msgstr ""
+
+#: View/Themes/default/Home/login.ctp:21
+msgid "Cloggy Administrator"
+msgstr ""
+
+#: View/Themes/default/Install/index.ctp:21
+msgid "Setup Administrator"
+msgstr ""
+
