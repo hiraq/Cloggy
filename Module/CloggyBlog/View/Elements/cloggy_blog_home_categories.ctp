@@ -2,13 +2,13 @@
 <table class="table table-hover table-bordered">
     <thead>	
         <tr>
-            <th colspan="9">Categories - <?php echo $this->Html->link('Manage', '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_categories');
+            <th colspan="9"><?php echo __d('cloggy','Categories'); ?> - <?php echo $this->Html->link(__d('cloggy','Manage'), '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_categories');
 ?></th>
         </tr>	
         <tr>						
-            <th>Category Name</th>			
-            <th>Total Posts</th>							
-            <th>Actions</th>
+            <th><?php echo __d('cloggy','Category Name'); ?></th>			
+            <th><?php echo __d('cloggy','Total Posts'); ?></th>							
+            <th><?php echo __d('cloggy','Actions'); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -23,17 +23,17 @@
                         <?php echo count($category['CloggyRelNode']); ?>
                     </td>																	
                     <td>
-                        <?php echo $this->Html->link('Edit', '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_categories/edit/' . $category['CloggyNode']['id']);
+                        <?php echo $this->Html->link(__d('cloggy','Edit'), '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_categories/edit/' . $category['CloggyNode']['id']);
                         ?>
                         |
-                        <?php echo $this->Html->link('Remove', '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_categories/remove/' . $category['CloggyNode']['id'], array('class' => 'post_remove'));
+                        <?php echo $this->Html->link(__d('cloggy','Remove'), '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_categories/remove/' . $category['CloggyNode']['id'], array('class' => 'post_remove'));
                         ?>																					
                     </td>
                 </tr>
             <?php endforeach; ?>
         <?php else: ?>
             <tr>
-                <td colspan="7">No data available</td>
+                <td colspan="7"><?php echo __d('cloggy','No data available'); ?></td>
             </tr>
         <?php endif; ?>			
     </tbody>

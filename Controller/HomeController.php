@@ -58,12 +58,12 @@ class HomeController extends CloggyAppController {
                 $this->redirect($this->Auth->loginRedirect);
                 
             } else {
-                $this->Auth->flash('Wrong username or password');
+                $this->Auth->flash(__d('cloggy','Wrong username or password'));
                 $this->redirect($this->Auth->loginAction);
             }
         }
 
-        $this->set('title_for_layout', 'Cloggy - Administrator Login');
+        $this->set('title_for_layout', __d('cloggy','Cloggy - Administrator Login'));
     }
 
     public function logout() {

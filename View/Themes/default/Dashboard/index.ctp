@@ -14,7 +14,7 @@
                     <?php endif; ?>
                 </ul>			
                 <form class="navbar-search pull-right" id="form-search">
-                    <input type="text" id="module_q" class="search-query" placeholder="Search">
+                    <input type="text" id="module_q" class="search-query" placeholder="<?php echo __d('cloggy','Search'); ?>">
                 </form>
             </div>			
         </div>	
@@ -43,10 +43,10 @@
                 <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
-                            <th>Module Name</th>
-                            <th>Description</th>
-                            <th>Author</th>							
-                            <th>Dependency</th>                            
+                            <th><?php echo __d('cloggy','Module Name'); ?></th>
+                            <th><?php echo __d('cloggy','Description'); ?></th>
+                            <th><?php echo __d('cloggy','Author'); ?></th>							
+                            <th><?php echo __d('cloggy','Dependency'); ?></th>                            
                         </tr>
                     </thead>
                     <tbody>
@@ -78,7 +78,7 @@
                             <?php endforeach; ?>
                         <?php else: ?>
                             <tr>
-                                <td colspan="5">No modules registered</td>
+                                <td colspan="5"><?php echo __d('cloggy','No modules registered'); ?></td>
                             </tr>
                         <?php endif; ?>
                     </tbody>

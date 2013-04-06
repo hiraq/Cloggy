@@ -5,7 +5,7 @@ echo $this->Form->create('CloggyBlogPost', array(
 ?>
 <input type="hidden" name="data[CloggyBlogPost][post_id]" value="<?php echo $postNodeId; ?>" />
 <fieldset>
-    <legend>Add New Post</legend>
+    <legend><?php echo __d('cloggy','Add New Post'); ?></legend>
     <div class="row">
         <div class="span10">
             <div class="row">
@@ -18,16 +18,16 @@ echo $this->Form->create('CloggyBlogPost', array(
                         </div>
                     <?php endif; ?>
 
-                    <label>Title</label> 
-                    <input type="text" placeholder="title" class="span6" name="data[CloggyBlogPost][title]">
+                    <label><?php echo __d('cloggy','Title'); ?></label> 
+                    <input type="text" placeholder="<?php echo __d('cloggy','title'); ?>" class="span6" name="data[CloggyBlogPost][title]">
                     <span class="help-block"><?php if (isset($errors['title'][0])) echo $errors['title'][0]; ?></span><br  /> 		
-                    <label>Content</label>
+                    <label><?php echo __d('cloggy','Content'); ?></label>
                     <a href="#" title="upload images" id="cloggy_blog_add_image"><i class="icon-picture"></i></a>                    
                     <textarea id="editor" name="data[CloggyBlogPost][content]"></textarea>
                     <span class="help-block"><?php if (isset($errors['content'][0])) echo $errors['content'][0]; ?></span>	
                 </div>
                 <div class="span2">
-                    <label>Categories</label> 
+                    <label><?php echo __d('cloggy','Categories'); ?></label> 
                     <?php if (empty($categories)) : ?>
                         <input type="text" name="data[CloggyBlogPost][categories]" placeholder="categories" class="span2" /><br  />
                     <?php else: ?>
@@ -39,7 +39,7 @@ echo $this->Form->create('CloggyBlogPost', array(
                             <?php endforeach; ?>
                         </select>
                     <?php endif; ?> 
-                    <label>Tags</label> 					
+                    <label><?php echo __d('cloggy','Tags'); ?></label> 					
                     <input type="text" name="data[CloggyBlogPost][tags]" placeholder="tags" class="span2" /><br  />					
                     <hr />
                     <input type="submit" name="submit" value="Publish Now" class="btn btn-primary" />

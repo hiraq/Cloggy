@@ -31,7 +31,7 @@ class CloggyBlogCategoriesController extends CloggyAppController {
 
         $categories = $this->paginate('CloggyBlogCategory');
         $this->set(compact('categories'));
-        $this->set('title_for_layout', 'Cloggy - CloggyBlog Categories');
+        $this->set('title_for_layout', __d('cloggy','Cloggy - CloggyBlog Categories'));
     }
 
     public function add() {
@@ -57,11 +57,11 @@ class CloggyBlogCategoriesController extends CloggyAppController {
                         'rule' => 'notEmpty',
                         'required' => true,
                         'allowEmpty' => false,
-                        'message' => 'Category field required'
+                        'message' => __d('cloggy','Category field required')
                     ),
                     'exists' => array(
                         'rule' => array('isValueEqual', $checkCategoryExists, false),
-                        'message' => 'Category has been exists'
+                        'message' => __d('cloggy','Category has been exists')
                     )
                 )
             );
@@ -90,7 +90,7 @@ class CloggyBlogCategoriesController extends CloggyAppController {
                     }
                 }
 
-                $this->set('success', 'Category has been saved.');
+                $this->set('success', __d('cloggy','Category has been saved.'));
             } else {
                 $this->set('errors', $this->CloggyValidation->validationErrors);
             }
@@ -99,7 +99,7 @@ class CloggyBlogCategoriesController extends CloggyAppController {
         $categories = $this->CloggyBlogCategory->getAllCategories();
 
         $this->set(compact('categories'));
-        $this->set('title_for_layout', 'Cloggy - CloggyBlog Add New Category');
+        $this->set('title_for_layout', __d('cloggy','Cloggy - CloggyBlog Add New Category'));
     }
 
     public function edit($id = null) {
@@ -159,11 +159,11 @@ class CloggyBlogCategoriesController extends CloggyAppController {
                             'rule' => 'notEmpty',
                             'required' => true,
                             'allowEmpty' => false,
-                            'message' => 'Category field required'
+                            'message' => __d('cloggy','Category field required')
                         ),
                         'exists' => array(
                             'rule' => array('isValueEqual', $checkCategoryExists, false),
-                            'message' => 'Category has been exists'
+                            'message' => __d('cloggy','Category has been exists')
                         )
                     )
                 );
@@ -189,13 +189,13 @@ class CloggyBlogCategoriesController extends CloggyAppController {
                 $this->CloggyBlogCategory->updateCategoryParent($id, $categoryParent);
             }
 
-            $this->set('success', 'Your category has been updated.');
+            $this->set('success', __d('cloggy','Your category has been updated.'));
         }
 
         $categories = $this->CloggyBlogCategory->getAllCategories($id);
 
         $this->set(compact('categories', 'category', 'id'));
-        $this->set('title_for_layout', 'Cloggy - CloggyBlog Edit Category');
+        $this->set('title_for_layout', __d('cloggy','Cloggy - CloggyBlog Edit Category'));
     }
 
     public function remove($id = null) {

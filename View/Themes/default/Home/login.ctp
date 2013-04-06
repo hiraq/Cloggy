@@ -18,7 +18,7 @@
                     <div class="control-group">
                         <div class="controls">
                             <legend>
-                                <strong>Cloggy Administrator</strong>
+                                <strong><?php echo __d('cloggy','Cloggy Administrator'); ?></strong>
                             </legend>
                             <span>
                                 <?php echo $this->Session->flash('install_success'); ?>
@@ -27,16 +27,16 @@
                         </div>
                     </div>
                     <div class="control-group" id="user_name">
-                        <label class="control-label" for="inputEmail">Username</label>
+                        <label class="control-label" for="inputEmail"><?php echo __d('cloggy','Username'); ?></label>
                         <div class="controls">								
-                            <?php echo $this->Form->input('user_name', array('type' => 'text', 'label' => false, 'placeholder' => 'username')); ?>
+                            <?php echo $this->Form->input('user_name', array('type' => 'text', 'label' => false, 'placeholder' => __d('cloggy','username'))); ?>
                             <span class="help-inline" id="user_name_help" style="display:none"></span>							
                         </div>
                     </div>						
                     <div class="control-group" id="user_password">
-                        <label class="control-label" for="inputPassword">Password</label>
+                        <label class="control-label" for="inputPassword"><?php echo __d('cloggy','Password'); ?></label>
                         <div class="controls">								
-                            <?php echo $this->Form->input('user_password', array('type' => 'password', 'label' => false, 'placeholder' => 'password')); ?>
+                            <?php echo $this->Form->input('user_password', array('type' => 'password', 'label' => false, 'placeholder' => __d('cloggy','password'))); ?>
                             <span class="help-inline" id="user_password_help" style="display:none"></span>
                         </div>
                     </div>

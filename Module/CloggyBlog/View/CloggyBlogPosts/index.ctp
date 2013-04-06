@@ -3,11 +3,11 @@
     <thead>		
         <tr>
             <th><input type="checkbox" name="checker" id="checker" /></th>
-            <th>Title</th>			
-            <th>Author</th>
-            <th>Status</th>
-            <th>Created</th>			
-            <th>Actions</th>
+            <th><?php echo __d('cloggy','Title'); ?></th>			
+            <th><?php echo __d('cloggy','Author'); ?></th>
+            <th><?php echo __d('cloggy','Status'); ?></th>
+            <th><?php echo __d('cloggy','Created'); ?></th>			
+            <th><?php echo __d('cloggy','Actions'); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -32,18 +32,18 @@
                     </td>
                     <td><?php echo $this->Time->format('M jS, Y, H:i A', $post['CloggyNode']['node_created']); ?></td>					
                     <td>
-                        <?php echo $this->Html->link('Edit', '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_posts/edit/' . $post['CloggyNode']['id']);
+                        <?php echo $this->Html->link(__d('cloggy','Edit'), '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_posts/edit/' . $post['CloggyNode']['id']);
                         ?>
                         |
-                        <?php echo $this->Html->link('Remove', '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_posts/remove/' . $post['CloggyNode']['id'], array('class' => 'post_remove'));
+                        <?php echo $this->Html->link(__d('cloggy','Remove'), '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_posts/remove/' . $post['CloggyNode']['id'], array('class' => 'post_remove'));
                         ?>
                         |
 
                         <?php if ($post['CloggyNode']['node_status'] > 0) : ?>
-                            <?php echo $this->Html->link('Make a draft', '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_posts/draft/' . $post['CloggyNode']['id'], array('class' => 'post_disable'));
+                            <?php echo $this->Html->link(__d('cloggy','Make a draft'), '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_posts/draft/' . $post['CloggyNode']['id'], array('class' => 'post_disable'));
                             ?>
                         <?php else: ?>
-                            <?php echo $this->Html->link('Publish', '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_posts/publish/' . $post['CloggyNode']['id'], array('id' => 'post_enable'));
+                            <?php echo $this->Html->link(__d('cloggy','Publish'), '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_posts/publish/' . $post['CloggyNode']['id'], array('id' => 'post_enable'));
                             ?>
                         <?php endif; ?>
                     </td>
@@ -51,19 +51,19 @@
             <?php endforeach; ?>
         <?php else: ?>
             <tr>
-                <td colspan="7">No data available</td>
+                <td colspan="7"><?php echo __d('cloggy','No data available'); ?></td>
             </tr>
         <?php endif; ?>	
         <tr id="checkbox_all" style="display:none">
             <td colspan="8">
                 <div class="btn-group">
                     <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                        With Selected <span class="caret"></span>
+                        <?php echo __d('cloggy','With Selected'); ?> <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><?php echo $this->Html->link('Delete All', '#', array('id' => 'action_delete_all', 'class' => 'action_js')); ?></li>
-                        <li><?php echo $this->Html->link('Draft All', '#', array('id' => 'action_disable_all', 'class' => 'action_js')); ?></li>
-                        <li><?php echo $this->Html->link('Publish All', '#', array('id' => 'action_enable_all', 'class' => 'action_js')); ?></li>
+                        <li><?php echo $this->Html->link(__d('cloggy','Delete All'), '#', array('id' => 'action_delete_all', 'class' => 'action_js')); ?></li>
+                        <li><?php echo $this->Html->link(__d('cloggy','Draft All'), '#', array('id' => 'action_disable_all', 'class' => 'action_js')); ?></li>
+                        <li><?php echo $this->Html->link(__d('cloggy','Publish All'), '#', array('id' => 'action_enable_all', 'class' => 'action_js')); ?></li>
                     </ul>
                 </div>	
             </td>
@@ -104,12 +104,12 @@
 
                 case 'action_delete_all':
                     urlAjax = '<?php echo Router::url('/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_ajax/delete_all_posts'); ?>';
-                    confirmAction = confirm('Are you sure want to delete all these posts?');		
+                    confirmAction = confirm(<?php echo __d('cloggy','Are you sure want to delete all these posts?') ?>);		
                     break;
 
                 case 'action_disable_all':
                     urlAjax = '<?php echo Router::url('/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_ajax/draft_all_posts'); ?>';
-                    confirmAction = confirm('Are you sure want to make draft all these posts?');
+                    confirmAction = confirm(<?php echo __d('cloggy','Are you sure want to make draft all these posts?') ?>);
                     break;
 
                 case 'action_enable_all':
@@ -141,21 +141,21 @@
             jQuery('.post_remove').on('click',function(e) {
                 e.preventDefault();
                 var href = jQuery(this).attr('href');
-                if(confirm('Are you sure to remove this post?')) {
+                if(confirm(<?php echo __d('cloggy','Are you sure to remove this post?') ?>)) {
                     window.location = href;
                 }	
             });
             jQuery('.post_disable').on('click',function(e) {
                 e.preventDefault();
                 var href = jQuery(this).attr('href');
-                if(confirm('Are you sure to make draft this post?')) {
+                if(confirm(<?php echo __d('cloggy','Are you sure to make draft this post?') ?>)) {
                     window.location = href;
                 }
             });
             jQuery('.post_enable').on('click',function(e) {
                 e.preventDefault();
                 var href = jQuery(this).attr('href');
-                if(confirm('Are you sure to publish this post?')) {
+                if(confirm(<?php echo __d('cloggy','Are you sure to publish this post?') ?>)) {
                     window.location = href;
                 }
             });		

@@ -1,30 +1,30 @@
 <div class="modal hide fade" id="cloggy_modal_image">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>Image Management</h3>
+        <h3><?php echo __d('cloggy','Image Management'); ?></h3>
     </div>
     <div class="modal-body">
 
         <ul id="cloggyImageTab" class="nav nav-tabs">
-            <li class="active"><a href="#cloggyImageTabUpload" data-toggle="tab">Upload</a></li>
-            <li><a href="#cloggyImageTabImages" data-toggle="tab"id="imageTab">Images</a></li>
+            <li class="active"><a href="#cloggyImageTabUpload" data-toggle="tab"><?php echo __d('cloggy','Upload'); ?></a></li>
+            <li><a href="#cloggyImageTabImages" data-toggle="tab"id="imageTab"><?php echo __d('cloggy','Images'); ?></a></li>
         </ul>
 
         <div id="cloggyImageTab" class="tab-content">
             <div id="cloggyImageTabUpload" class="tab-pane fade active in">
                 <div>
-                    <label>Crop Image</label>
+                    <label><?php echo __d('cloggy','Crop Image'); ?></label>
                     <input type="text" class="input-small" name="width" placeholder="width" id="imageWidth" />    
                     <input type="text" class="input-small" name="height" placeholder="height" id="imageHeight" />                    
                 </div>                
-                <a href="#" class="btn" id="upload">Select Image</a><br />
+                <a href="#" class="btn" id="upload"><?php echo __d('cloggy','Select Image'); ?></a><br />
                 <div id="filename"></div>
             </div>
             <div id="cloggyImageTabImages" class="tab-pane fade">
                 <div id="imageFile">
                     <?php if (isset($image)) : echo '<img src="' . $this->CloggyBlogAsset->getImage($image) . '" width="530px" height="300px" />'; ?>                    
                     <?php else: ?>
-                        No image uploaded
+                        <?php echo __d('cloggy','No image uploaded'); ?>
                     <?php endif; ?>
                 </div>
             </div>
@@ -32,8 +32,8 @@
 
     </div>    
     <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        <button class="btn btn-primary" id="uploadButton">Upload Now</button>
+        <button class="btn" data-dismiss="modal" aria-hidden="true"><?php echo __d('cloggy','Close'); ?></button>
+        <button class="btn btn-primary" id="uploadButton"><?php echo __d('cloggy','Upload Now'); ?></button>
     </div>
 </div>
 
@@ -98,12 +98,12 @@
                 if (response == 'failed') {
                             
                     var notif = '<div class="alert alert-error">\n\
-                                <strong>Upload failed!</strong>\n\
+                                <strong><?php echo __d('cloggy','Upload failed!') ?></strong>\n\
                                 </div>';                                                                                        
                             
                                                 } else if(response == 'success') {
                                                     var notif = '<div class="alert alert-success">\n\
-                                <strong>Upload success</strong>.\n\
+                                <strong><?php echo __d('cloggy','Upload success'); ?></strong>.\n\
                                 </div>';  
                                                 } else {
                                                     var notif = '<div class="alert">\n\

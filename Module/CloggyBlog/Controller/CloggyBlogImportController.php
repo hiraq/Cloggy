@@ -44,7 +44,7 @@ class CloggyBlogImportController extends CloggyAppController {
                 'wordpress_xml' => array(
                     'ext' => array(
                         'rule' => array('extension',array('xml')),
-                        'message' => 'You must upload xml file'
+                        'message' => __d('cloggy','You must upload xml file')
                     )
                 )
             );
@@ -103,12 +103,12 @@ class CloggyBlogImportController extends CloggyAppController {
                         
                         $checkImport = $this->__CloggyBlogImport->import();
                         if ($checkImport) {
-                            $this->Session->setFlash('Data imported', 'default', array(), 'success');
+                            $this->Session->setFlash(__d('cloggy','Data imported'), 'default', array(), 'success');
                         }
                         
                         
                     } else {
-                        $this->set('error','Given data is not valid.');
+                        $this->set('error',__d('cloggy','Given data is not valid.'));
                     }
                     
                 }
@@ -119,7 +119,7 @@ class CloggyBlogImportController extends CloggyAppController {
             
         }
         
-        $this->set('title_for_layout','Import Post From Wordpress');
+        $this->set('title_for_layout',__d('cloggy','Import Post From Wordpress'));
         
     }
     

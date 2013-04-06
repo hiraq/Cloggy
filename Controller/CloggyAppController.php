@@ -79,7 +79,7 @@ class CloggyAppController extends AppController {
     public function callbackAcl() {
         
         $this->Session->setFlash(
-                'You do not have permission to access that page.',
+                __d('cloggy','You do not have permission to access that page.'),
                 'default',array('class' => 'alert'),'dashNotif');
         
         $this->redirect($this->_base);
@@ -225,7 +225,7 @@ class CloggyAppController extends AppController {
             )
         );
 
-        $this->Auth->authError = 'Identify yourself!';
+        $this->Auth->authError = __d('cloggy','Identify yourself!');
         $this->Auth->loginAction = array(
             'controller' => 'home',
             'action' => 'login',

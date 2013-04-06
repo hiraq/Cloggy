@@ -33,7 +33,7 @@ class CloggyUsersPermController extends CloggyAppController {
         
         $perms = $this->paginate('CloggyUserPerm');
         
-        $this->set('title_for_layout', 'Cloggy - Users Permission Management');
+        $this->set('title_for_layout', __d('cloggy','Cloggy - Users Permission Management'));
         $this->set(compact('perms'));
         
     }
@@ -101,26 +101,26 @@ class CloggyUsersPermController extends CloggyAppController {
                         'rule' => 'notEmpty',
                         'required' => true,
                         'allowEmpty' => false,
-                        'message' => 'Adapter name field required'
+                        'message' => __d('cloggy','Adapter name field required')
                     ),
                     'comparison' => array(
                         'rule' => array('inList',array('module','model','url')),
                         'required' => true,
                         'allowEmpty' => false,
-                        'message' => 'You must choose adapter.'
+                        'message' => __d('cloggy','You must choose adapter.')
                     )
                 ),
                 'role_id' => array(
                     'rule' => array('isValueEqual', $checkPermExists, false),
                     'required' => true,
                     'allowEmpty' => false,
-                    'message' => 'This role and permission has been exists.'
+                    'message' => __d('cloggy','This role and permission has been exists.')
                 ),
                 'aco_object' => array(
                     'rule' => 'notEmpty',
                     'required' => true,
                     'allowEmpty' => false,
-                    'message' => 'Object field required'
+                    'message' => __d('cloggy','Object field required')
                 )
             );
             
@@ -132,7 +132,7 @@ class CloggyUsersPermController extends CloggyAppController {
                 $this->CloggyUserPerm->create();
                 $this->CloggyUserPerm->save($dataToSave);
                 
-                $this->set('success','Permission has been setup');
+                $this->set('success',__d('cloggy','Permission has been setup'));
                 
             } else {
                 $this->set('errors', $this->CloggyValidation->validationErrors);
@@ -149,7 +149,7 @@ class CloggyUsersPermController extends CloggyAppController {
             'order' => array('CloggyUserRole.role_name' => 'asc')
         ));
         
-        $this->set('title_for_layout', 'Cloggy - Users Permission Management - Setup Permission');
+        $this->set('title_for_layout', __d('cloggy','Cloggy - Users Permission Management - Setup Permission'));
         $this->set(compact('roles'));
         
     }
@@ -212,7 +212,7 @@ class CloggyUsersPermController extends CloggyAppController {
                     'rule' => array('isValueEqual', $checkPermExists, false),
                     'required' => true,
                     'allowEmpty' => false,
-                    'message' => 'This role and permission has been exists.'
+                    'message' => __d('cloggy','This role and permission has been exists.')
                 );
             }
             
@@ -225,7 +225,7 @@ class CloggyUsersPermController extends CloggyAppController {
                     'rule' => 'notEmpty',
                     'required' => true,
                     'allowEmpty' => false,
-                    'message' => 'Object field required'
+                    'message' => __d('cloggy','Object field required')
                 );
             }
             
@@ -238,7 +238,7 @@ class CloggyUsersPermController extends CloggyAppController {
                     'rule' => array('inList',array('module','model','url')),
                     'required' => true,
                     'allowEmpty' => false,
-                    'message' => 'You must choose adapter.'
+                    'message' => __d('cloggy','You must choose adapter.')
                 );
             }
             
@@ -268,7 +268,7 @@ class CloggyUsersPermController extends CloggyAppController {
                 'rule' => 'notEmpty',
                 'required' => true,
                 'allowEmpty' => false,
-                'message' => 'Permission field required'
+                'message' => __d('cloggy','Permission field required')
             );
             
             if (!empty($dataValidate)) {
@@ -291,7 +291,7 @@ class CloggyUsersPermController extends CloggyAppController {
                      /*
                       * set notification and redirect
                       */
-                    $this->Session->setFlash('Permission data has been updated.', 'default', array(), 'success');
+                    $this->Session->setFlash(__d('cloggy','Permission data has been updated.'), 'default', array(), 'success');
                     $this->redirect($this->referer());                          
                     
                 }
@@ -309,7 +309,7 @@ class CloggyUsersPermController extends CloggyAppController {
             'order' => array('CloggyUserRole.role_name' => 'asc')
         ));
         
-        $this->set('title_for_layout', 'Cloggy - Users Permission Management - Edit Permission');
+        $this->set('title_for_layout', __d('cloggy','Cloggy - Users Permission Management - Edit Permission'));
         $this->set(compact('roles','id','perm'));
         
     }

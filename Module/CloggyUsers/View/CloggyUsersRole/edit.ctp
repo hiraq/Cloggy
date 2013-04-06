@@ -5,7 +5,7 @@ echo $this->Form->create('CloggyUserRole', array(
 ));
 ?>
 <fieldset>
-    <legend>Edit Role</legend>
+    <legend><?php echo __d('cloggy','Edit Role'); ?></legend>
 
     <?php $flash = $this->Session->flash('success'); ?>
     <?php if (!empty($flash)) : ?>
@@ -19,12 +19,12 @@ echo $this->Form->create('CloggyUserRole', array(
     if (isset($errors['role_name'])) : echo 'error';
     endif;
     ?>">
-        <label class="control-label">Role Name</label>
+        <label class="control-label"><?php echo __d('cloggy','Role Name'); ?></label>
         <div class="controls">
             <?php echo $this->Form->input('role_name', array(
                 'value' => $role['CloggyUserRole']['role_name'],
                 'label' => false, 
-                'placeholder' => 'role name', 'type' => 'text', 'div' => false)); ?>
+                'placeholder' => __d('cloggy','role name'), 'type' => 'text', 'div' => false)); ?>
             <span class="help-inline"><?php
             if (isset($errors['role_name'])) : echo $errors['role_name'][0];
             endif;

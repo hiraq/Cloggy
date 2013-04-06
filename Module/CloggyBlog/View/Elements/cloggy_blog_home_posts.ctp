@@ -2,15 +2,15 @@
 <table class="table table-hover table-bordered">
     <thead>	
         <tr>
-            <th colspan="8">Posts - <?php echo $this->Html->link('Manage', '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_posts');
+            <th colspan="8">Posts - <?php echo $this->Html->link(__d('cloggy','Manage'), '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_posts');
 ?></th>
         </tr>	
         <tr>						
-            <th>Title</th>			
-            <th>Author</th>
-            <th>Status</th>
-            <th>Created</th>			
-            <th>Actions</th>
+            <th><?php echo __d('cloggy','Title'); ?></th>			
+            <th><?php echo __d('cloggy','Author'); ?></th>
+            <th><?php echo __d('cloggy','Status'); ?></th>
+            <th><?php echo __d('cloggy','Created'); ?></th>			
+            <th><?php echo __d('cloggy','Actions'); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -27,25 +27,25 @@
                     </td>					
                     <td>
                         <?php if ($post['CloggyNode']['node_status'] == 1) : ?>
-                            <span class="label label-success">Published</span>
+                            <span class="label label-success"><?php echo __d('cloggy','Published'); ?></span>
                         <?php else: ?>
-                            <span class="label label-important">Draft</span>
+                            <span class="label label-important"><?php echo __d('cloggy','Draft'); ?></span>
                         <?php endif; ?>
                     </td>
                     <td><?php echo $this->Time->format('M jS, Y, H:i A', $post['CloggyNode']['node_created']); ?></td>					
                     <td>
-                        <?php echo $this->Html->link('Edit', '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_posts/edit/' . $post['CloggyNode']['id']);
+                        <?php echo $this->Html->link(__d('cloggy','Edit'), '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_posts/edit/' . $post['CloggyNode']['id']);
                         ?>
                         |
-                        <?php echo $this->Html->link('Remove', '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_posts/remove/' . $post['CloggyNode']['id'], array('class' => 'post_remove'));
+                        <?php echo $this->Html->link(__d('cloggy','Remove'), '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_posts/remove/' . $post['CloggyNode']['id'], array('class' => 'post_remove'));
                         ?>
                         |
 
                         <?php if ($post['CloggyNode']['node_status'] > 0) : ?>
-                            <?php echo $this->Html->link('Make a draft', '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_posts/draft/' . $post['CloggyNode']['id'], array('class' => 'post_disable'));
+                            <?php echo $this->Html->link(__d('cloggy','Make a draft'), '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_posts/draft/' . $post['CloggyNode']['id'], array('class' => 'post_disable'));
                             ?>
                         <?php else: ?>
-                            <?php echo $this->Html->link('Publish', '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_posts/publish/' . $post['CloggyNode']['id'], array('id' => 'post_enable'));
+                            <?php echo $this->Html->link(__d('cloggy','Publish'), '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_posts/publish/' . $post['CloggyNode']['id'], array('id' => 'post_enable'));
                             ?>
                         <?php endif; ?>
                     </td>
@@ -53,7 +53,7 @@
             <?php endforeach; ?>
         <?php else: ?>
             <tr>
-                <td colspan="7">No data available</td>
+                <td colspan="7"><?php echo __d('cloggy','No data available'); ?></td>
             </tr>
         <?php endif; ?>			
     </tbody>

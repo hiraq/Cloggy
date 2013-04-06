@@ -27,7 +27,7 @@ class CloggyBlogHomeController extends CloggyAppController {
         $categories = $this->CloggyBlogCategory->getCategories(5, array('CloggyNode.node_created' => 'desc'));
         $tags = $this->CloggyBlogTag->getTags(5, array('CloggyNode.node_created' => 'desc'));
 
-        $this->set('title_for_layout', 'Cloggy - CloggyBlog Dashboard');
+        $this->set('title_for_layout', __d('cloggy','Cloggy - CloggyBlog Dashboard'));
         $this->set(compact('posts', 'categories', 'tags'));
     }
 

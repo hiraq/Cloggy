@@ -18,20 +18,20 @@
                     <div class="control-group">
                         <div class="controls">
                             <legend>
-                                <strong>Setup Administrator</strong>
+                                <strong><?php echo __d('cloggy','Setup Administrator'); ?></strong>
                             </legend>
                         </div>
                     </div>
                     <div class="control-group" id="user_name">
-                        <label class="control-label" for="inputEmail">Username</label>
+                        <label class="control-label" for="inputEmail"><?php echo __d('cloggy','Username'); ?></label>
                         <div class="controls">
-                            <input type="text" id="inputEmail" placeholder="Username"
+                            <input type="text" id="inputEmail" placeholder="<?php echo __d('cloggy','Username'); ?>"
                                    name="data[CloggyUser][user_name]">	
                             <span class="help-inline" id="user_name_help" style="display:none"></span>							
                         </div>
                     </div>
                     <div class="control-group" id="user_email">
-                        <label class="control-label" for="inputEmail">Email</label>
+                        <label class="control-label" for="inputEmail"><?php echo __d('cloggy','Email'); ?></label>
                         <div class="controls">
                             <input type="text" id="inputEmail" placeholder="email@address.com"
                                    name="data[CloggyUser][user_email]">
@@ -39,9 +39,9 @@
                         </div>
                     </div>
                     <div class="control-group" id="user_password">
-                        <label class="control-label" for="inputPassword">Password</label>
+                        <label class="control-label" for="inputPassword"><?php echo __d('cloggy','Password'); ?></label>
                         <div class="controls">
-                            <input type="password" id="inputPassword" placeholder="Password"
+                            <input type="password" id="inputPassword" placeholder="<?php echo __d('cloggy','Password'); ?>"
                                    name="data[CloggyUser][user_password]">
                             <span class="help-inline" id="user_password_help" style="display:none"></span>
                         </div>

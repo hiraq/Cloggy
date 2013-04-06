@@ -8,14 +8,14 @@
         jQuery('.post_remove').on('click',function(e) {
             e.preventDefault();
             var href = jQuery(this).attr('href');
-            if(confirm('Are you sure want to remove this item?')) {
+            if(confirm(<?php echo __d('cloggy','Are you sure want to remove this item?') ?>)) {
                 window.location = href;
             }
         });
         jQuery('.post_disable').on('click',function(e) {
             e.preventDefault();
             var href = jQuery(this).attr('href');
-            if(confirm('Are you sure want to disable this item?')) {
+            if(confirm(<?php echo __d('cloggy','Are you sure want to disable this item?') ?>)) {
                 window.location = href;
             }
         });

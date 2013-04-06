@@ -48,19 +48,19 @@ class InstallController extends CloggyAppController {
                         'rule' => 'notEmpty',
                         'required' => true,
                         'allowEmpty' => false,
-                        'message' => 'Username field cannot be empty'
+                        'message' => __d('cloggy','Username field cannot be empty')
                     ),
                     'user_password' => array(
                         'rule' => 'notEmpty',
                         'required' => true,
                         'allowEmpty' => false,
-                        'message' => 'Password field cannot be empty'
+                        'message' => __d('cloggy','Password field cannot be empty')
                     ),
                     'user_email' => array(
                         'rule' => 'email',
                         'required' => true,
                         'allowEmpty' => false,
-                        'message' => 'Valid address required'
+                        'message' => __d('cloggy','Valid address required')
                     )
                 );
 
@@ -89,14 +89,14 @@ class InstallController extends CloggyAppController {
                     /*
                      * install success
                      */
-                    $this->Session->setFlash('Your account has been activated.', 'default', array(), 'install_success');
+                    $this->Session->setFlash(__d('cloggy','Your account has been activated.'), 'default', array(), 'install_success');
                     $this->redirect($this->_base . '/login');
                 } else {
                     $this->set('errors', $this->CloggyValidation->validationErrors);
                 }
             }//end processing form
             //page title
-            $this->set('title_for_layout', 'Cloggy - Setup User');
+            $this->set('title_for_layout', __d('cloggy','Cloggy - Setup User'));
         }
     }
 

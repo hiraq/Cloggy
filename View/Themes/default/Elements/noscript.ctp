@@ -1,3 +1,3 @@
 <!-- javascript disabled -->
-<noscript>You must disable your javascript.</noscript>
+<noscript><?php echo __d('cloggy','You must enable javascript at your browser.'); ?></noscript>
 <!-- !javascript disabled -->

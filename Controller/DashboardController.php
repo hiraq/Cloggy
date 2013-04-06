@@ -12,11 +12,11 @@ class DashboardController extends CloggyAppController {
     public function index() {
         
         $this->CloggyModuleMenu->setGroup('shortcuts', array(
-            'Add New User' => CloggyCommon::urlModule('cloggy_users', 'cloggy_users_home/add'),
-            'Edit My Profile' => CloggyCommon::urlModule('cloggy_users', 'cloggy_users_home/edit/' . $this->Auth->user('id'))
+            __d('cloggy','Add New User') => CloggyCommon::urlModule('cloggy_users', 'cloggy_users_home/add'),
+            __d('cloggy','Edit My Profile') => CloggyCommon::urlModule('cloggy_users', 'cloggy_users_home/edit/' . $this->Auth->user('id'))
         ));
 
-        $this->set('title_for_layout', 'Cloggy - Administration Dashboard');
+        $this->set('title_for_layout', __d('cloggy','Cloggy - Administration Dashboard'));
     }
 
 }

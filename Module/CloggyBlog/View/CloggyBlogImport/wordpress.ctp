@@ -15,7 +15,7 @@ echo $this->Form->create('CloggyBlogImport', array(
 <?php endif; ?>
 
 <fieldset>
-    <legend>Import WordPress Posts</legend>
+    <legend><?php echo __d('cloggy','Import WordPress Posts'); ?></legend>
 
     <?php if (isset($success)) : ?>
         <div class="alert alert-success">
@@ -33,7 +33,7 @@ echo $this->Form->create('CloggyBlogImport', array(
     if (isset($errors['wordpress_xml'])) : echo 'error';
     endif;
     ?>">
-        <label class="control-label">WordPress Xml</label>
+        <label class="control-label"><?php echo __d('cloggy','WordPress Xml'); ?></label>
         <div class="controls">
                 <?php echo $this->Form->input('wordpress_xml', array('label' => false, 'type' => 'file', 'div' => false)); ?>
             <span class="help-inline"><?php
@@ -48,31 +48,31 @@ echo $this->Form->create('CloggyBlogImport', array(
     if (isset($errors['wordpress_import_options'])) : echo 'error';
     endif;
     ?>">
-        <label class="control-label">Import Options</label>
+        <label class="control-label"><?php echo __d('cloggy','Import Options'); ?></label>
         <div class="controls">
             <label class="checkbox">
-                <input type="checkbox" name="data[CloggyBlogImport][wordpress_import_options][import_featured_image]" value="1" /> Download Featured Image                
+                <input type="checkbox" name="data[CloggyBlogImport][wordpress_import_options][import_featured_image]" value="1" /> <?php echo __d('cloggy','Download Featured Image'); ?>
             </label>
             <label class="checkbox">
-                <input type="checkbox" name="data[CloggyBlogImport][wordpress_import_options][make_draft]" value="1" /> Make Draft
+                <input type="checkbox" name="data[CloggyBlogImport][wordpress_import_options][make_draft]" value="1" /> <?php echo __d('cloggy','Make Draft'); ?>
             </label>
             <label class="checkbox">
-                <input type="checkbox" name="data[CloggyBlogImport][wordpress_import_options][only_published_posts]" value="1" /> Only Published Posts
+                <input type="checkbox" name="data[CloggyBlogImport][wordpress_import_options][only_published_posts]" value="1" /> <?php echo __d('cloggy','Only Published Posts'); ?>
             </label>
             <label class="checkbox">
-                <input type="checkbox" name="data[CloggyBlogImport][wordpress_import_options][only_drafted_posts]" value="1" /> Only Drafted Posts
+                <input type="checkbox" name="data[CloggyBlogImport][wordpress_import_options][only_drafted_posts]" value="1" /> <?php echo __d('cloggy','Only Drafted Posts'); ?>
             </label>
             <label class="checkbox">
-                <input type="checkbox" name="data[CloggyBlogImport][wordpress_import_options][disable_categories]" value="1" /> Not Import Categories
+                <input type="checkbox" name="data[CloggyBlogImport][wordpress_import_options][disable_categories]" value="1" /> <?php echo __d('cloggy','Not Import Categories'); ?>
             </label>
             <label class="checkbox">
-                <input type="checkbox" name="data[CloggyBlogImport][wordpress_import_options][disable_tags]" value="1" /> Not Import Tags
+                <input type="checkbox" name="data[CloggyBlogImport][wordpress_import_options][disable_tags]" value="1" /> <?php echo __d('cloggy','Not Import Tags'); ?>
             </label>
             <label class="checkbox">
-                <input type="checkbox" name="data[CloggyBlogImport][wordpress_import_options][disable_metas]" value="1" /> Not Import Meta
+                <input type="checkbox" name="data[CloggyBlogImport][wordpress_import_options][disable_metas]" value="1" /> <?php echo __d('cloggy','Not Import Meta'); ?>
             </label>
             <label class="checkbox">
-                <input type="checkbox" name="data[CloggyBlogImport][wordpress_import_options][include_custom_post_types]" value="1" /> Include Custom Post Types
+                <input type="checkbox" name="data[CloggyBlogImport][wordpress_import_options][include_custom_post_types]" value="1" /> <?php echo __d('cloggy','Include Custom Post Types'); ?>
             </label>
             
             <span class="help-inline">

@@ -5,7 +5,7 @@ echo $this->Form->create('CloggyUserPerm', array(
 ));
 ?>
 <fieldset>
-    <legend>Edit Permission</legend>
+    <legend><?php echo __d('cloggy','Edit Permission'); ?></legend>
 
     <?php $flash = $this->Session->flash('success'); ?>
     <?php if (!empty($flash)) : ?>
@@ -19,7 +19,7 @@ echo $this->Form->create('CloggyUserPerm', array(
     if (isset($errors['role_id'])) : echo 'error';
     endif;
     ?>">
-        <label class="control-label">Role Name</label>
+        <label class="control-label"><?php echo __d('cloggy','Role Name'); ?></label>
         <div class="controls">
             <select name="data[CloggyUserPerm][role_id]">
                 <option value="0" <?php if($perm['CloggyUserPerm']['aro_object'] == '*') echo 'selected="selected"'; ?>>All</option>
@@ -39,13 +39,13 @@ echo $this->Form->create('CloggyUserPerm', array(
     if (isset($errors['aco_adapter'])) : echo 'error';
     endif;
     ?>">
-        <label class="control-label">Permission Type</label>
+        <label class="control-label"><?php echo __d('cloggy','Permission Type'); ?></label>
         <div class="controls">
             <select name="data[CloggyUserPerm][aco_adapter]" id="adapter">
-                <option value="0">Select Types</option>
-                <option value="module" <?php if($perm['CloggyUserPerm']['aco_adapter'] == 'module') echo 'selected="selected"'; ?>>Module</option>                
-                <option value="module" <?php if($perm['CloggyUserPerm']['aco_adapter'] == 'controller') echo 'selected="selected"'; ?>>Controller</option>                
-                <option value="url" <?php if($perm['CloggyUserPerm']['aco_adapter'] == 'url') echo 'selected="selected"'; ?>>Url</option>
+                <option value="0"><?php echo __d('cloggy','Select Types'); ?></option>
+                <option value="module" <?php if($perm['CloggyUserPerm']['aco_adapter'] == 'module') echo 'selected="selected"'; ?>><?php echo __d('cloggy','Module'); ?></option>                
+                <option value="module" <?php if($perm['CloggyUserPerm']['aco_adapter'] == 'controller') echo 'selected="selected"'; ?>><?php echo __d('cloggy','Controller'); ?></option>                
+                <option value="url" <?php if($perm['CloggyUserPerm']['aco_adapter'] == 'url') echo 'selected="selected"'; ?>><?php echo __d('cloggy','Url'); ?></option>
             </select>
             <span class="help-inline"><?php
             if (isset($errors['aco_adapter'])) : echo $errors['aco_adapter'][0];
@@ -57,13 +57,13 @@ echo $this->Form->create('CloggyUserPerm', array(
     if (isset($errors['aco_object'])) : echo 'error';
     endif;
     ?>">
-        <label class="control-label">Object</label>
+        <label class="control-label"><?php echo __d('cloggy','Object'); ?></label>
         <div class="controls">
             <div id="aco_object_form" style="display:inline">
                 
                 <?php echo $this->Form->input('aco_object', array(
                         'label' => false, 
-                        'placeholder' => 'ex: controller_name/action', 
+                        'placeholder' => __d('cloggy','ex: controller_name/action'), 
                         'type' => 'text', 
                         'div' => false,
                         'value' => $perm['CloggyUserPerm']['aco_object'],
@@ -76,7 +76,7 @@ echo $this->Form->create('CloggyUserPerm', array(
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label">Permission</label>
+        <label class="control-label"><?php echo __d('cloggy','Permission'); ?></label>
         <div class="controls">
             <label class="radio inline">
                 <input type="radio" name="data[CloggyUserPerm][perm]" value="1" <?php if($perm['CloggyUserPerm']['allow'] == 1) echo 'checked="checked"'; ?>> Allow
@@ -109,17 +109,17 @@ echo $this->Form->create('CloggyUserPerm', array(
                     
                     case 'module':
                         jQuery('#aco_object_form').html(formString);
-                        jQuery('#aco_object').attr('placeholder','ex: ModuleName');
+                        jQuery('#aco_object').attr('placeholder',<?php echo __d('cloggy','ex: ModuleName') ?>);
                         break;   
                         
                     case 'controller':
                         jQuery('#aco_object_form').html(formString);
-                        jQuery('#aco_object').attr('placeholder','ex: controller_name/action');
+                        jQuery('#aco_object').attr('placeholder',<?php echo __d('cloggy','ex: controller_name/action') ?>);
                         break;                                            
                         
                     case 'url':
                         jQuery('#aco_object_form').html(formString);
-                        jQuery('#aco_object').attr('placeholder','ex: query/url');
+                        jQuery('#aco_object').attr('placeholder',<?php echo __d('cloggy','ex: query/url') ?>);
                         break;
                     
                 }

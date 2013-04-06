@@ -30,7 +30,7 @@ class CloggyBlogTagsController extends CloggyAppController {
 
         $tags = $this->paginate('CloggyBlogTag');
         $this->set(compact('tags'));
-        $this->set('title_for_layout', 'Cloggy - CloggyBlog Tags');
+        $this->set('title_for_layout', __d('cloggy','Cloggy - CloggyBlog Tags'));
     }
 
     public function add() {
@@ -58,11 +58,11 @@ class CloggyBlogTagsController extends CloggyAppController {
                         'rule' => 'notEmpty',
                         'required' => true,
                         'allowEmpty' => false,
-                        'message' => 'Tag field required'
+                        'message' => __d('cloggy','Tag field required')
                     ),
                     'exists' => array(
                         'rule' => array('isValueEqual', $checkTagExists, false),
-                        'message' => 'Category has been exists'
+                        'message' => __d('cloggy','Category has been exists')
                     )
                 )
             );
@@ -75,12 +75,12 @@ class CloggyBlogTagsController extends CloggyAppController {
                 $tag = $this->request->data['CloggyBlogTags']['tag_name'];
 
                 $saved = $this->CloggyBlogTag->proceedTags(array($tag), $this->_user['id']);
-                $this->set('success', 'Tag has been saved.');
+                $this->set('success', __d('cloggy','Tag has been saved.'));
             } else {
                 $this->set('errors', $this->CloggyValidation->validationErrors);
             }
         }
-        $this->set('title_for_layout', 'Cloggy - CloggyBlog Add New Tag');
+        $this->set('title_for_layout', __d('cloggy','Cloggy - CloggyBlog Add New Tag'));
     }
 
     public function edit($id = null) {
@@ -129,11 +129,11 @@ class CloggyBlogTagsController extends CloggyAppController {
                             'rule' => 'notEmpty',
                             'required' => true,
                             'allowEmpty' => false,
-                            'message' => 'Tag field required'
+                            'message' => __d('cloggy','Tag field required')
                         ),
                         'exists' => array(
                             'rule' => array('isValueEqual', $checkTagExists, false),
-                            'message' => 'Tag has been exists'
+                            'message' => __d('cloggy','Tag has been exists')
                         )
                     )
                 );
@@ -149,11 +149,11 @@ class CloggyBlogTagsController extends CloggyAppController {
             }
 
             $tag = $this->CloggyBlogTag->getDetailTag($id);
-            $this->set('success', 'Your tag has been updated.');
+            $this->set('success', __d('cloggy','Your tag has been updated.'));
         }
 
         $this->set(compact('tag', 'id'));
-        $this->set('title_for_layout', 'Cloggy - CloggyBlog Edit Tag');
+        $this->set('title_for_layout', __d('cloggy','Cloggy - CloggyBlog Edit Tag'));
     }
 
     public function remove($id = null) {

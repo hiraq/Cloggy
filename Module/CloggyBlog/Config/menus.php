@@ -5,25 +5,25 @@
  */
 Configure::write('Cloggy.CloggyBlog.menus', array(
     'module' => array(
-        'Posts' => array(
-            'Manage' => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_posts'),
-            'Add' => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_posts/add'),
+        __d('cloggy','Posts') => array(
+            __d('cloggy','Manage') => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_posts'),
+            __d('cloggy','Add') => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_posts/add'),
         ),
-        'Categories' => array(
-            'Manage' => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_categories'),
-            'Add' => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_categories/add'),
+        __d('cloggy','Categories') => array(
+            __d('cloggy','Manage') => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_categories'),
+            __d('cloggy','Manage') => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_categories/add'),
         ),
-        'Tags' => array(
-            'Manage' => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_tags'),
-            'Add' => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_tags/add'),
+        __d('cloggy','Tags') => array(
+            __d('cloggy','Manage') => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_tags'),
+            __d('cloggy','Add') => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_tags/add'),
         )
     ),
     'sidebar' => array(
-        'Create New' => array(
-            'Add Post' => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_posts/add'),
-            'Add Category' => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_categories/add'),
-            'Add Tags' => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_tags/add'),
-            'WordPress Importer' => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_import/wordpress')
+        __d('cloggy','Create New') => array(
+            __d('cloggy','Add Post') => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_posts/add'),
+            __d('cloggy','Add Category') => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_categories/add'),
+            __d('cloggy','Add Tags') => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_tags/add'),
+            __d('cloggy','WordPress Importer') => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_import/wordpress')
         )
     )
 ));

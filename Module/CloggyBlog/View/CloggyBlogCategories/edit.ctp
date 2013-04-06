@@ -5,7 +5,7 @@ echo $this->Form->create('CloggyBlogCategories', array(
 ));
 ?>
 <fieldset>
-    <legend>Edit Category</legend>
+    <legend><?php echo __d('cloggy','Edit Category'); ?></legend>
 
     <?php if (isset($success)) : ?>
         <div class="alert alert-success">
@@ -18,12 +18,12 @@ echo $this->Form->create('CloggyBlogCategories', array(
     if (isset($errors['category_name'])) : echo 'error';
     endif;
     ?>">
-        <label class="control-label">Category Name</label>
+        <label class="control-label"><?php echo __d('cloggy','Category Name'); ?></label>
         <div class="controls">
             <?php
             echo $this->Form->input('category_name', array(
                 'label' => false,
-                'placeholder' => 'category name',
+                'placeholder' => __d('cloggy','category name'),
                 'type' => 'text',
                 'value' => $category['CloggySubject']['subject'],
                 'div' => false)
@@ -38,10 +38,10 @@ echo $this->Form->create('CloggyBlogCategories', array(
 
 <?php if ($categories) : ?>
         <div class="control-group">
-            <label class="control-label">Category Parent</label>
+            <label class="control-label"><?php echo __d('cloggy','Category Parent'); ?></label>
             <div class="controls">
                 <select name="data[CloggyBlogCategories][category_parent]">
-                    <option value="0">Choose Parent Category</option>
+                    <option value="0"><?php echo __d('cloggy','Choose Parent Category'); ?></option>
                     <?php foreach ($categories as $key) : ?>
                         <option value="<?php echo $key['CloggyNode']['id']; ?>" <?php
                 if (

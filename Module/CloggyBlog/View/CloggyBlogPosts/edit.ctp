@@ -4,7 +4,7 @@ echo $this->Form->create('CloggyBlogPost', array(
 ));
 ?>
 <fieldset>
-    <legend>Edit: '<?php echo $detail['CloggySubject']['subject']; ?>'</legend>
+    <legend><?php echo __d('cloggy','Edit'); ?>: '<?php echo $detail['CloggySubject']['subject']; ?>'</legend>
     <div class="row">
         <div class="span10">
             <div class="row">
@@ -25,16 +25,16 @@ echo $this->Form->create('CloggyBlogPost', array(
                         </div>
                     <?php endif; ?>
 
-                    <label>Title</label> 
-                    <input type="text" placeholder="title" class="span6" name="data[CloggyBlogPost][title]" value="<?php echo $detail['CloggySubject']['subject']; ?>" />
+                    <label><?php echo __d('cloggy','Title'); ?></label> 
+                    <input type="text" placeholder="<?php echo __d('cloggy','title'); ?>" class="span6" name="data[CloggyBlogPost][title]" value="<?php echo $detail['CloggySubject']['subject']; ?>" />
                     <span class="help-block"><?php if (isset($errors['title'][0])) echo $errors['title'][0]; ?></span><br  /> 		                    
-                    <label>Content</label>
+                    <label><?php echo __d('cloggy','Content'); ?></label>
                     <a href="#" title="upload images" id="cloggy_blog_add_image"><i class="icon-picture"></i></a>                    
                     <textarea id="editor" name="data[CloggyBlogPost][content]"><?php echo str_replace('<p>\n</p>', '', $detail['CloggyContent']['content']); ?></textarea>
                     <span class="help-block"><?php if (isset($errors['content'][0])) echo $errors['content'][0]; ?></span>	
                 </div>
                 <div class="span2">
-                    <label>Categories</label> 
+                    <label><?php echo __d('cloggy','Categories'); ?></label> 
 
                     <?php if (empty($categories)) : ?>
                         <input type="text" name="data[CloggyBlogPost][categories]" placeholder="categories" class="span2" /><br  />
@@ -50,7 +50,7 @@ echo $this->Form->create('CloggyBlogPost', array(
                         </select>
                     <?php endif; ?>
 
-                    <label>Tags</label> 					
+                    <label><?php echo __d('cloggy','Tags'); ?></label> 					
                     <input type="text" name="data[CloggyBlogPost][tags]" placeholder="tags" class="span2" value="<?php if (!empty($postTags)) echo join(',', $postTags); ?>" /><br  />					
                     <hr />
                     <input type="submit" name="submit" value="Publish Now" class="btn btn-primary" />

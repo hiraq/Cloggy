@@ -5,7 +5,7 @@ echo $this->Form->create('CloggyBlogTags', array(
 ));
 ?>
 <fieldset>
-    <legend>Edit Tag</legend>
+    <legend><?php echo __d('cloggy','Edit Tag'); ?></legend>
 
     <?php if (isset($success)) : ?>
         <div class="alert alert-success">
@@ -18,11 +18,11 @@ echo $this->Form->create('CloggyBlogTags', array(
     if (isset($errors['tag_name'])) : echo 'error';
     endif;
     ?>">
-        <label class="control-label">Tag Name</label>
+        <label class="control-label"><?php echo __d('cloggy','Tag Name'); ?></label>
         <div class="controls">
             <?php
             echo $this->Form->input('tag_name', array('label' => false,
-                'placeholder' => 'tag name',
+                'placeholder' => __d('cloggy','tag name'),
                 'type' => 'text',
                 'value' => $tag['CloggySubject']['subject'],
                 'div' => false));

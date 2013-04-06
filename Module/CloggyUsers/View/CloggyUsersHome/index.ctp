@@ -5,33 +5,33 @@
             <td colspan="7">
                 <div class="btn-group">
                     <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                        Sort By <span class="caret"></span>
+                        <?php echo __d('cloggy','Sort By'); ?> <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <?php echo $this->Html->link('Status ASC', '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_users/cloggy_users_home/index/sort_index:status_asc');
+                            <?php echo $this->Html->link(__d('cloggy','Status ASC'), '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_users/cloggy_users_home/index/sort_index:status_asc');
                             ?>
                         </li>
                         <li>
-                            <?php echo $this->Html->link('Status DESC', '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_users/cloggy_users_home/index/sort_index:status_desc');
-                            ?>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <?php echo $this->Html->link('Role ASC', '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_users/cloggy_users_home/index/sort_index:role_asc');
-                            ?>
-                        </li>
-                        <li>
-                            <?php echo $this->Html->link('Role DESC', '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_users/cloggy_users_home/index/sort_index:role_desc');
+                            <?php echo $this->Html->link(__d('cloggy','Status DESC'), '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_users/cloggy_users_home/index/sort_index:status_desc');
                             ?>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <?php echo $this->Html->link('Name ASC', '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_users/cloggy_users_home/index/sort_index:name_asc');
+                            <?php echo $this->Html->link(__d('cloggy','Role ASC'), '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_users/cloggy_users_home/index/sort_index:role_asc');
                             ?>
                         </li>
                         <li>
-                            <?php echo $this->Html->link('Name DESC', '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_users/cloggy_users_home/index/sort_index:name_desc');
+                            <?php echo $this->Html->link(__d('cloggy','Role DESC'), '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_users/cloggy_users_home/index/sort_index:role_desc');
+                            ?>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <?php echo $this->Html->link(__d('cloggy','Name ASC'), '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_users/cloggy_users_home/index/sort_index:name_asc');
+                            ?>
+                        </li>
+                        <li>
+                            <?php echo $this->Html->link(__d('cloggy','Name DESC'), '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_users/cloggy_users_home/index/sort_index:name_desc');
                             ?>
                         </li>
                     </ul>
@@ -40,13 +40,13 @@
         </tr>
         <tr>
             <th><input type="checkbox" name="checker" id="checker" /></th>
-            <th>User Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Status</th>
-            <th>Created</th>
-            <th>Last Login</th>
-            <th>Actions</th>
+            <th><?php echo __d('cloggy','User Name'); ?></th>
+            <th><?php echo __d('cloggy','Email'); ?></th>
+            <th><?php echo __d('cloggy','Role'); ?></th>
+            <th><?php echo __d('cloggy','Status'); ?></th>
+            <th><?php echo __d('cloggy','Created'); ?></th>
+            <th><?php echo __d('cloggy','Last Login'); ?></th>
+            <th><?php echo __d('cloggy','Actions'); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -62,33 +62,33 @@
                     <td><?php echo $user['CloggyUserRole']['role_name']; ?></td>
                     <td>
                         <?php if ($user['CloggyUser']['user_status'] == 1) : ?>
-                            <span class="label label-success">Activated</span>
+                            <span class="label label-success"><?php echo __d('cloggy','Activated'); ?></span>
                         <?php else: ?>
-                            <span class="label label-important">Not activated</span>
+                            <span class="label label-important"><?php echo __d('cloggy','Not activated'); ?></span>
                         <?php endif; ?>
                     </td>
                     <td><?php echo $this->Time->format('M jS, Y, H:i A', $user['CloggyUser']['user_created']); ?></td>
                     <td>
                         <?php if (intval($user['CloggyUser']['user_last_login']) == 0) : ?>
-                            No activity
+                            <?php echo __d('cloggy','No activity'); ?>
                         <?php else: ?>
                             <?php echo $this->Time->niceShort($user['CloggyUser']['user_last_login']); ?>
                         <?php endif; ?>
 
                     </td>
                     <td>
-                        <?php echo $this->Html->link('Edit', '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_users/cloggy_users_home/edit/' . $user['CloggyUser']['id']);
+                        <?php echo $this->Html->link(__d('cloggy','Edit'), '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_users/cloggy_users_home/edit/' . $user['CloggyUser']['id']);
                         ?>
                         |
-                        <?php echo $this->Html->link('Remove', '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_users/cloggy_users_home/remove/' . $user['CloggyUser']['id'], array('class' => 'users_remove'));
+                        <?php echo $this->Html->link(__d('cloggy','Remove'), '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_users/cloggy_users_home/remove/' . $user['CloggyUser']['id'], array('class' => 'users_remove'));
                         ?>
                         |
 
                         <?php if ($user['CloggyUser']['user_status'] > 0) : ?>
-                            <?php echo $this->Html->link('Disable', '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_users/cloggy_users_home/disable/' . $user['CloggyUser']['id'], array('class' => 'users_disable'));
+                            <?php echo $this->Html->link(__d('cloggy','Disable'), '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_users/cloggy_users_home/disable/' . $user['CloggyUser']['id'], array('class' => 'users_disable'));
                             ?>
                         <?php else: ?>
-                            <?php echo $this->Html->link('Enable', '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_users/cloggy_users_home/enable/' . $user['CloggyUser']['id'], array('id' => 'users_enable'));
+                            <?php echo $this->Html->link(__d('cloggy','Enable'), '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_users/cloggy_users_home/enable/' . $user['CloggyUser']['id'], array('id' => 'users_enable'));
                             ?>
                         <?php endif; ?>
                     </td>
@@ -96,19 +96,19 @@
             <?php endforeach; ?>
         <?php else: ?>
             <tr>
-                <td colspan="7">No data available</td>
+                <td colspan="7"><?php echo __d('cloggy','No data available'); ?></td>
             </tr>
         <?php endif; ?>	
         <tr id="checkbox_all" style="display:none">
             <td colspan="8">
                 <div class="btn-group">
                     <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                        With Selected <span class="caret"></span>
+                        <?php echo __d('cloggy','With Selected'); ?> <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><?php echo $this->Html->link('Delete All', '#', array('id' => 'action_delete_all', 'class' => 'action_js')); ?></li>
-                        <li><?php echo $this->Html->link('Disable All', '#', array('id' => 'action_disable_all', 'class' => 'action_js')); ?></li>
-                        <li><?php echo $this->Html->link('Enable All', '#', array('id' => 'action_enable_all', 'class' => 'action_js')); ?></li>
+                        <li><?php echo $this->Html->link(__d('cloggy','Delete All'), '#', array('id' => 'action_delete_all', 'class' => 'action_js')); ?></li>
+                        <li><?php echo $this->Html->link(__d('cloggy','Disable All'), '#', array('id' => 'action_disable_all', 'class' => 'action_js')); ?></li>
+                        <li><?php echo $this->Html->link(__d('cloggy','Enable All'), '#', array('id' => 'action_enable_all', 'class' => 'action_js')); ?></li>
                     </ul>
                 </div>	
             </td>
@@ -149,12 +149,12 @@
 
                 case 'action_delete_all':
                     urlAjax = '<?php echo Router::url('/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_users/cloggy_users_ajax/delete_all'); ?>';
-                    confirmAction = confirm('Are you sure want to delete all these users?');		
+                    confirmAction = confirm(<?php echo __d('cloggy','Are you sure want to delete all these users?') ?>);		
                     break;
 
                 case 'action_disable_all':
                     urlAjax = '<?php echo Router::url('/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_users/cloggy_users_ajax/disable_all'); ?>';
-                    confirmAction = confirm('Are you sure want to disable all these users?');
+                    confirmAction = confirm(<?php echo __d('cloggy','Are you sure want to disable all these users?') ?>);
                     break;
 
                 case 'action_enable_all':
@@ -186,14 +186,14 @@
             jQuery('.users_remove').on('click',function(e) {
                 e.preventDefault();
                 var href = jQuery(this).attr('href');
-                if(confirm('Are you sure to remove this user?')) {
+                if(confirm(<?php echo __d('cloggy','Are you sure to remove this user?') ?>)) {
                     window.location = href;
                 }	
             });
             jQuery('.users_disable').on('click',function(e) {
                 e.preventDefault();
                 var href = jQuery(this).attr('href');
-                if(confirm('Are you sure to disable this user?')) {
+                if(confirm(<?php echo __d('cloggy','Are you sure to disable this user?') ?>)) {
                     window.location = href;
                 }
             });	

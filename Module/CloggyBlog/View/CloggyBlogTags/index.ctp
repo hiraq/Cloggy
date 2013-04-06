@@ -3,9 +3,9 @@
     <thead>			
         <tr>						
             <th width="2%"><input type="checkbox" name="checker" id="checker" /></th>
-            <th>Tag Name</th>			
-            <th>Total Posts</th>							
-            <th>Actions</th>
+            <th><?php echo __d('cloggy','Tag Name'); ?></th>			
+            <th><?php echo __d('cloggy','Total Posts'); ?></th>							
+            <th><?php echo __d('cloggy','Actions'); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -21,27 +21,27 @@
                         <?php echo count($tag['CloggyRelNode']); ?>
                     </td>																	
                     <td>
-                        <?php echo $this->Html->link('Edit', '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_tags/edit/' . $tag['CloggyNode']['id']);
+                        <?php echo $this->Html->link(__d('cloggy','Edit'), '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_tags/edit/' . $tag['CloggyNode']['id']);
                         ?>
                         |
-                        <?php echo $this->Html->link('Remove', '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_tags/remove/' . $tag['CloggyNode']['id'], array('class' => 'post_remove'));
+                        <?php echo $this->Html->link(__d('cloggy','Remove'), '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_tags/remove/' . $tag['CloggyNode']['id'], array('class' => 'post_remove'));
                         ?>																					
                     </td>
                 </tr>
             <?php endforeach; ?>
         <?php else: ?>
             <tr>
-                <td colspan="7">No data available</td>
+                <td colspan="7"><?php echo __d('cloggy','No data available'); ?></td>
             </tr>
         <?php endif; ?>	
         <tr id="checkbox_all" style="display:none">
             <td colspan="8">
                 <div class="btn-group">
                     <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                        With Selected <span class="caret"></span>
+                        <?php echo __d('cloggy','With Selected'); ?> <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><?php echo $this->Html->link('Delete All', '#', array('id' => 'action_delete_all', 'class' => 'action_js')); ?></li>						
+                        <li><?php echo $this->Html->link(__d('cloggy','Delete All'), '#', array('id' => 'action_delete_all', 'class' => 'action_js')); ?></li>						
                     </ul>
                 </div>	
             </td>
@@ -84,7 +84,7 @@
 
                 case 'action_delete_all':
                     urlAjax = '<?php echo Router::url('/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_ajax/delete_all_tags'); ?>';
-                    confirmAction = confirm('Are you sure want to delete all these tags?');		
+                    confirmAction = confirm(<?php echo __d('cloggy','Are you sure want to delete all these tags?') ?>);		
                     break;			
 		
                 }			
@@ -114,7 +114,7 @@
 		
                 e.preventDefault();
                 var href = jQuery(this).attr('href');
-                if(confirm('Are you sure to remove this tag?')) {
+                if(confirm(<?php echo __d('cloggy','Are you sure to remove this tag?') ?>)) {
                     window.location = href;
                 }
 			

@@ -3,11 +3,11 @@
     <thead>        
         <tr>
             <th width="5%"><input type="checkbox" name="checker" id="checker" /></th>
-            <th>Aro</th>  
-            <th>Object</th>
-            <th>Adapter</th>
-            <th>Permission</th>
-            <th>Actions</th>
+            <th><?php echo __d('cloggy','Aro'); ?></th>  
+            <th><?php echo __d('cloggy','Object'); ?></th>
+            <th><?php echo __d('cloggy','Adapter'); ?></th>
+            <th><?php echo __d('cloggy','Permission'); ?></th>
+            <th><?php echo __d('cloggy','Actions'); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -42,10 +42,10 @@
                         ?>
                     </td>                    
                     <td>
-                        <?php echo $this->Html->link('Edit', CloggyCommon::urlModule('cloggy_users', 'cloggy_users_perm/edit/'.$perm['CloggyUserPerm']['id']));
+                        <?php echo $this->Html->link(__d('cloggy','Edit'), CloggyCommon::urlModule('cloggy_users', 'cloggy_users_perm/edit/'.$perm['CloggyUserPerm']['id']));
                         ?>
                         |
-                        <?php echo $this->Html->link('Remove', 
+                        <?php echo $this->Html->link(__d('cloggy','Remove'), 
                                 CloggyCommon::urlModule('cloggy_users', 'cloggy_users_perm/remove/'.$perm['CloggyUserPerm']['id']),
                                 array(
                                     'class' => 'perm_remove'
@@ -56,17 +56,17 @@
             <?php endforeach; ?>
         <?php else: ?>
             <tr>
-                <td colspan="7">No data available</td>
+                <td colspan="7"><?php echo __d('cloggy','No data available'); ?></td>
             </tr>
         <?php endif; ?>	
         <tr id="checkbox_all" style="display:none">
             <td colspan="8">
                 <div class="btn-group">
                     <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                        With Selected <span class="caret"></span>
+                        <?php echo __d('cloggy','With Selected'); ?> <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><?php echo $this->Html->link('Delete All', '#', array('id' => 'action_delete_all', 'class' => 'action_js')); ?></li>                        
+                        <li><?php echo $this->Html->link(__d('cloggy','Delete All'), '#', array('id' => 'action_delete_all', 'class' => 'action_js')); ?></li>                        
                     </ul>
                 </div>	
             </td>
@@ -107,7 +107,7 @@
 
                 case 'action_delete_all':
                     urlAjax = '<?php echo Router::url(CloggyCommon::urlModule('cloggy_users', 'cloggy_users_ajax/delete_all_perms')); ?>';
-                    confirmAction = confirm('Are you sure want to delete all these permissions?');		
+                    confirmAction = confirm(<?php echo __d('cloggy','Are you sure want to delete all these permissions?') ?>);		
                     break;                		
                 }			
 
@@ -134,7 +134,7 @@
             jQuery('.perm_remove').on('click',function(e) {
                 e.preventDefault();
                 var href = jQuery(this).attr('href');
-                if(confirm('Are you sure to remove this perm?')) {
+                if(confirm(<?php echo __d('cloggy','Are you sure to remove this perm?') ?>)) {
                     window.location = href;
                 }	
             });            

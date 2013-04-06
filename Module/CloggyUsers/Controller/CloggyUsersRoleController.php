@@ -33,7 +33,7 @@ class CloggyUsersRoleController extends CloggyAppController {
         
         $roles = $this->paginate('CloggyUserRole');
         
-        $this->set('title_for_layout', 'Cloggy - Users Role Management');
+        $this->set('title_for_layout', __d('cloggy','Cloggy - Users Role Management'));
         $this->set(compact('roles'));
         
     }
@@ -64,11 +64,11 @@ class CloggyUsersRoleController extends CloggyAppController {
                         'rule' => 'notEmpty',
                         'required' => true,
                         'allowEmpty' => false,
-                        'message' => 'Role name field required'
+                        'message' => __d('cloggy','Role name field required')
                     ),
                     'exists' => array(
                         'rule' => array('isValueEqual', $checkRoleExists, false),
-                        'message' => 'This role name has exists.'
+                        'message' => __d('cloggy','This role name has exists.')
                     )
                 )
             );
@@ -85,7 +85,7 @@ class CloggyUsersRoleController extends CloggyAppController {
                         $this->request->data['CloggyUserRole']['role_name']);
                 
                 //set notification
-                $this->set('success', '<strong>' . $this->request->data['CloggyUserRole']['role_name'] . '</strong> has been created.');
+                $this->set('success', '<strong>' . $this->request->data['CloggyUserRole']['role_name'] . '</strong> '.__d('cloggy','has been created.'));
                 
             } else {
                 $this->set('errors', $this->CloggyValidation->validationErrors);
@@ -93,7 +93,7 @@ class CloggyUsersRoleController extends CloggyAppController {
             
         }
         
-        $this->set('title_for_layout', 'Cloggy - Role Management - Create New Role');
+        $this->set('title_for_layout', __d('cloggy','Cloggy - Role Management - Create New Role'));
     }
     
     public function edit($id = null) {
@@ -135,11 +135,11 @@ class CloggyUsersRoleController extends CloggyAppController {
                         'rule' => 'notEmpty',
                         'required' => true,
                         'allowEmpty' => false,
-                        'message' => 'Role name field required'
+                        'message' => __d('cloggy','Role name field required')
                     ),
                    'exists' => array(
                         'rule' => array('isValueEqual', $checkRoleExists, false),
-                        'message' => 'This role name has exists.'
+                        'message' => __d('cloggy','This role name has exists.')
                     )
                 );
             }
@@ -157,7 +157,7 @@ class CloggyUsersRoleController extends CloggyAppController {
                     /*
                      * set notification and redirect
                      */
-                    $this->Session->setFlash('Role name data has been updated.', 'default', array(), 'success');
+                    $this->Session->setFlash(__d('cloggy','Role name data has been updated.'), 'default', array(), 'success');
                     $this->redirect($this->referer());                                        
                     
                 } else {
@@ -168,7 +168,7 @@ class CloggyUsersRoleController extends CloggyAppController {
             
         }
         
-        $this->set('title_for_layout', 'Cloggy - Role Management - Edit Role');
+        $this->set('title_for_layout', __d('cloggy','Cloggy - Role Management - Edit Role'));
         $this->set(compact('role', 'id'));
         
     }

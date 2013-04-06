@@ -35,7 +35,7 @@ class CloggyUsersHomeController extends CloggyAppController {
 
         $users = $this->paginate('CloggyUser');
         
-        $this->set('title_for_layout', 'Cloggy - Users Management');
+        $this->set('title_for_layout', __d('cloggy','Cloggy - Users Management'));
         $this->set(compact('users'));
     }
 
@@ -66,11 +66,11 @@ class CloggyUsersHomeController extends CloggyAppController {
                         'rule' => 'notEmpty',
                         'required' => true,
                         'allowEmpty' => false,
-                        'message' => 'Username field required'
+                        'message' => __d('cloggy','Username field required')
                     ),
                     'exists' => array(
                         'rule' => array('isValueEqual', $checkUserName, false),
-                        'message' => 'This username has exists.'
+                        'message' => __d('cloggy','This username has exists.')
                     )
                 ),
                 'user_email' => array(
@@ -78,15 +78,15 @@ class CloggyUsersHomeController extends CloggyAppController {
                         'rule' => 'notEmpty',
                         'required' => true,
                         'allowEmpty' => false,
-                        'message' => 'Email field required'
+                        'message' => __d('cloggy','Email field required')
                     ),
                     'email' => array(
                         'rule' => 'email',
-                        'message' => 'Required valid email address'
+                        'message' => __d('cloggy','Required valid email address')
                     ),
                     'exists' => array(
                         'rule' => array('isValueEqual', $checkUserEmail, false),
-                        'message' => 'This email has exists.'
+                        'message' => __d('cloggy','This email has exists.')
                     )
                 ),
                 'user_password' => array(
@@ -94,24 +94,24 @@ class CloggyUsersHomeController extends CloggyAppController {
                         'rule' => 'notEmpty',
                         'required' => true,
                         'allowEmpty' => false,
-                        'message' => 'Email field required'
+                        'message' => __d('cloggy','Email field required')
                     ),
                     'equal' => array(
                         'rule' => array('equalTo', $this->request->data['CloggyUser']['user_password2']),
-                        'message' => 'Not match with your password confirmation'
+                        'message' => __d('cloggy','Not match with your password confirmation')
                     )
                 ),
                 'user_password2' => array(
                     'rule' => 'notEmpty',
                     'required' => true,
                     'allowEmpty' => false,
-                    'message' => 'Password confirmation required'
+                    'message' => __d('cloggy','Password confirmation required')
                 ),
                 'user_role' => array(
                     'rule' => 'notEmpty',
                     'required' => true,
                     'allowEmpty' => false,
-                    'message' => 'User role required'
+                    'message' => __d('cloggy','User role required')
                 )
             );
 
@@ -137,7 +137,7 @@ class CloggyUsersHomeController extends CloggyAppController {
                 $this->CloggyUser->create();
                 $this->CloggyUser->save($data);
 
-                $this->set('success', '<strong>' . $data['user_name'] . '</strong> has been registered.');
+                $this->set('success', '<strong>' . $data['user_name'] . '</strong> '.__d('cloggy','has been registered.'));
             } else {
                 $this->set('errors', $this->CloggyValidation->validationErrors);
             }
@@ -151,7 +151,7 @@ class CloggyUsersHomeController extends CloggyAppController {
             'fields' => array('CloggyUserRole.id','CloggyUserRole.role_name')
         ));
         
-        $this->set('title_for_layout', 'Cloggy - Users Management - Add New User');
+        $this->set('title_for_layout', __d('cloggy','Cloggy - Users Management - Add New User'));
         $this->set(compact('roles'));
         
     }
@@ -205,11 +205,11 @@ class CloggyUsersHomeController extends CloggyAppController {
                         'rule' => 'notEmpty',
                         'required' => true,
                         'allowEmpty' => false,
-                        'message' => 'Username field required'
+                        'message' => __d('cloggy','Username field required')
                     ),
                     'exists' => array(
                         'rule' => array('isValueEqual', $checkUserName, false),
-                        'message' => 'This username has exists.'
+                        'message' => __d('cloggy','This username has exists.')
                     )
                 );
             }
@@ -225,11 +225,11 @@ class CloggyUsersHomeController extends CloggyAppController {
                         'rule' => 'notEmpty',
                         'required' => true,
                         'allowEmpty' => false,
-                        'message' => 'Username field required'
+                        'message' => __d('cloggy','Username field required')
                     ),
                     'equal' => array(
                         'rule' => array('equalTo', $this->request->data['CloggyUser']['user_password2']),
-                        'message' => 'Not match with your password confirmation'
+                        'message' => __d('cloggy','Not match with your password confirmation')
                     )
                 );
             }
@@ -247,15 +247,15 @@ class CloggyUsersHomeController extends CloggyAppController {
                         'rule' => 'notEmpty',
                         'required' => true,
                         'allowEmpty' => false,
-                        'message' => 'Email field required'
+                        'message' => __d('cloggy','Email field required')
                     ),
                     'email' => array(
                         'rule' => 'email',
-                        'message' => 'Required valid email address'
+                        'message' => __d('cloggy','Required valid email address')
                     ),
                     'exists' => array(
                         'rule' => array('isValueEqual', $checkUserEmail, false),
-                        'message' => 'This email has exists.'
+                        'message' => __d('cloggy','This email has exists.')
                     )
                 );
             }
@@ -271,7 +271,7 @@ class CloggyUsersHomeController extends CloggyAppController {
                         'rule' => 'notEmpty',
                         'required' => true,
                         'allowEmpty' => false,
-                        'message' => 'User role field required'
+                        'message' => __d('cloggy','User role field required')
                     )
                 );
             }
@@ -286,7 +286,7 @@ class CloggyUsersHomeController extends CloggyAppController {
                         'rule' => 'notEmpty',
                         'required' => true,
                         'allowEmpty' => false,
-                        'message' => 'User status field required'
+                        'message' => __d('cloggy','User status field required')
                     )
                 );
             }
@@ -311,7 +311,7 @@ class CloggyUsersHomeController extends CloggyAppController {
                     $this->CloggyUser->save(array('CloggyUser' => $dataValidate));
 
                     /* $this->set('success','<strong>'.$username.'</strong> data has been updated.'); */
-                    $this->Session->setFlash('<strong>' . $username . '</strong> data has been updated.', 'default', array(), 'success');
+                    $this->Session->setFlash('<strong>' . $username . '</strong> '.__d('cloggy','data has been updated.'), 'default', array(), 'success');
                     $this->redirect($this->referer());
                     
                 } else {
@@ -321,7 +321,7 @@ class CloggyUsersHomeController extends CloggyAppController {
         }
 
         $user = $this->CloggyUser->getUserDetail($id);        
-        $this->set('title_for_layout', 'Cloggy - Users Management - Edit User');
+        $this->set('title_for_layout', __d('cloggy','Cloggy - Users Management - Edit User'));
         $this->set(compact('user', 'id','roles'));
     }
 

@@ -67,18 +67,18 @@ class CloggyBlogPostsController extends CloggyAppController {
                         'rule' => 'notEmpty',
                         'required' => true,
                         'allowEmpty' => false,
-                        'message' => 'Title field required'
+                        'message' => __d('cloggy','Title field required')
                     ),
                     'exists' => array(
                         'rule' => array('isValueEqual', $checkPostSubject, false),
-                        'message' => 'The title, <strong>"' . $this->request->data['CloggyBlogPost']['title'] . '"</strong> has been exists'
+                        'message' => __d('cloggy','The title has been exists')
                     )
                 ),
                 'content' => array(
                     'rule' => 'notEmpty',
                     'required' => true,
                     'allowEmpty' => false,
-                    'message' => 'Content field required'
+                    'message' => __d('cloggy','Content field required')
                 )
             );
 
@@ -135,7 +135,7 @@ class CloggyBlogPostsController extends CloggyAppController {
                 /*
                  * redirect
                  */
-                $this->Session->setFlash('Your post has been added', 'default', array(), 'success');
+                $this->Session->setFlash(__d('cloggy','Your post has been added'), 'default', array(), 'success');
                 $this->redirect(Router::url('/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_posts/edit/' . $postId));
                 exit();
             } else {
@@ -143,7 +143,7 @@ class CloggyBlogPostsController extends CloggyAppController {
             }
         }
 
-        $this->set('title_for_layout', 'Cloggy - CloggyBlogPost - Add New Post');
+        $this->set('title_for_layout', __d('cloggy','Cloggy - CloggyBlogPost - Add New Post'));
         $this->set(compact('categories', 'tags','postNodeId'));
     }
 
@@ -259,12 +259,12 @@ class CloggyBlogPostsController extends CloggyAppController {
             /*
              * redirect
              */
-            $this->Session->setFlash('Your post has been updated', 'default', array(), 'success');
+            $this->Session->setFlash(__d('cloggy','Your post has been updated'), 'default', array(), 'success');
             $this->redirect($this->request->here);
             exit();
         }
 
-        $this->set('title_for_layout', 'Cloggy - CloggyBlogPost - Add New Post');
+        $this->set('title_for_layout', __d('cloggy','Cloggy - CloggyBlogPost - Add New Post'));
         $this->set(compact('categories', 'tags', 'id', 'detail', 'postCategories', 'postTags','image'));
     }
     
@@ -358,7 +358,7 @@ class CloggyBlogPostsController extends CloggyAppController {
                 
             }                                                
             
-            echo 'Upload success';
+            echo __d('cloggy','Upload success');
                        
         }
         
