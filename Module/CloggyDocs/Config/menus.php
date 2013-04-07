@@ -5,36 +5,36 @@
  */
 Configure::write('Cloggy.CloggyDocs.menus', array(    
     'module' => array(
-        'Plugin' => array(
-            'About' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_home'),            
-            'Installation' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_home/install'),            
-            'License' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_home/license'),
-            'Version' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_home/version'),
+        __d('cloggy','Plugin') => array(
+            __d('cloggy','About') => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_home'),            
+            __d('cloggy','Installation') => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_home/install'),            
+            __d('cloggy','License') => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_home/license'),
+            __d('cloggy','Version') => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_home/version'),
         ),
-        'Module' => array(            
-            'Module MVC' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_module'),
-            'Create' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_module/create'),
-            'Activation' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_module/activation'),
+        __d('cloggy','Module') => array(            
+            __d('cloggy','Module MVC') => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_module'),
+            __d('cloggy','Create') => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_module/create'),
+            __d('cloggy','Activation') => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_module/activation'),
         ),
-        'Database' => array(
-            'Concept' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_db'),
-            'Model/Behavior' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_db/model'),            
+        __d('cloggy','Database') => array(
+            __d('cloggy','Concept') => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_db'),
+            __d('cloggy','Model/Behavior') => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_db/model'),            
         ),
-        'Users' => array(
-            'User Managements' => CloggyCommon::urlModule('cloggy_docs','cloggy_docs_users'),
-            'User Access' => CloggyCommon::urlModule('cloggy_docs','cloggy_docs_users/access')
+        __d('cloggy','Users') => array(
+            __d('cloggy','User Managements') => CloggyCommon::urlModule('cloggy_docs','cloggy_docs_users'),
+            __d('cloggy','User Access') => CloggyCommon::urlModule('cloggy_docs','cloggy_docs_users/access')
         ),
-        'UI' => array(
-            'Management' => CloggyCommon::urlModule('cloggy_docs','cloggy_docs_ui'),
-            'Menu config' => CloggyCommon::urlModule('cloggy_docs','cloggy_docs_ui/menus'),            
-            'Javascript' => CloggyCommon::urlModule('cloggy_docs','cloggy_docs_ui/js')
+        __d('cloggy','UI') => array(
+            __d('cloggy','Management') => CloggyCommon::urlModule('cloggy_docs','cloggy_docs_ui'),
+            __d('cloggy','Menu config') => CloggyCommon::urlModule('cloggy_docs','cloggy_docs_ui/menus'),            
+            __d('cloggy','Javascript') => CloggyCommon::urlModule('cloggy_docs','cloggy_docs_ui/js')
         )        
     ),
     'sidebar' => array(
-        'Basic' => array(
-            'About' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_home'),
-            'Version' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_home/version'),
-            'License' => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_home/license'),
+        __d('cloggy','Basic') => array(
+            __d('cloggy','About') => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_home'),
+            __d('cloggy','Version') => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_home/version'),
+            __d('cloggy','License') => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_home/license'),
         )
     )
 ));
