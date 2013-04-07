@@ -113,6 +113,8 @@
 
         <?php echo $this->CloggyAsset->getVendorHtmlTag('jquery.min.js', 'js'); ?>                      
         <?php echo $this->CloggyAsset->getVendorHtmlTag('bootstrap/js/bootstrap.min.js','js'); ?>
+        <?php echo $this->CloggyAsset->getVendorHtmlTag('handlebars.js','js'); ?>
+        <?php echo $this->CloggyAsset->getVendorHtmlTag('sugar.min.js','js'); ?>
         
         <?php echo $this->fetch('cloggy_js_module_main'); ?>				
         <?php echo $this->fetch('cloggy_js_module_page'); ?>

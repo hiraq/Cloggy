@@ -11,12 +11,20 @@ class CloggyModuleInstallerComponent extends Component {
     private $__requestedModule;    
     private $__base;
     
+    /**
+     * Initialize component
+     * @param Controller $controller
+     */
     public function initialize(Controller $controller) {
         parent::initialize($controller);
         $this->__Controller = $controller;  
         $this->__base = '/' . Configure::read('Cloggy.url_prefix');
     }
     
+    /**
+     * Run after controller beforeFilter method
+     * @param Controller $controller
+     */
     public function startup(Controller $controller) {
         
         parent::startup($controller);        

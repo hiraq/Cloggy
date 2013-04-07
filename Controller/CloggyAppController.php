@@ -9,7 +9,8 @@ class CloggyAppController extends AppController {
         'Session',
         'Paginator' => array(
             'className' => 'Cloggy.CloggyPaginator'
-        )
+        ),
+        'Js'
     );
     public $components = array(
         'Session',
