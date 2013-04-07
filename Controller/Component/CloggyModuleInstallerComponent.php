@@ -34,7 +34,18 @@ class CloggyModuleInstallerComponent extends Component {
             $this->__needInstall();            
         }
                 
-    }        
+    }  
+    
+    /**
+     * Automatically create .installed file
+     * after controller executes requested action
+     * 
+     * @param Controller $controller
+     */
+    public function beforeRender(Controller $controller) {
+        parent::beforeRender($controller);
+        $this->finishInstall($this->__requestedModule);
+    }
     
     /**
      * Finish install, set .installed file on
