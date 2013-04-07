@@ -17,6 +17,7 @@ class CloggyAppController extends AppController {
         'RequestHandler',
         'Cloggy.CloggyModuleInfo',
         'Cloggy.CloggyModuleMenu',
+        'Cloggy.CloggyModuleInstaller',
         'Cloggy.CloggyAcl',
         'Paginator'
     );

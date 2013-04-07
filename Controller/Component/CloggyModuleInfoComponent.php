@@ -67,7 +67,10 @@ class CloggyModuleInfoComponent extends Component {
                            $this->__modules[$module]['desc'] = $this->getModuleDesc();
                            $this->__modules[$module]['author'] = $this->getModuleAuthor();
                            $this->__modules[$module]['url'] = $this->getModuleUrl();
-                           $this->__modules[$module]['dep'] = $this->getModuleDependency();      
+                           $this->__modules[$module]['dep'] = $this->getModuleDependency(); 
+                           $this->__modules[$module]['install'] = $this->isModuleNeedToInstall($module);
+                           $this->__modules[$module]['installed'] = $this->isModuleInstalled($module);
+                           $this->__modules[$module]['install_link'] = $this->getModuleInstallLink($module);
 
                            //check dependent
                            $this->__checkDependentModule($module);
@@ -90,6 +93,42 @@ class CloggyModuleInfoComponent extends Component {
     public function isModuleExists($module) {
         return array_key_exists($module, $this->__modules);
     }     
+    
+    /**
+     * Check if module need to install or not
+     * @param string $module
+     * @return boolean
+     */
+    public function isModuleNeedToInstall($module) {
+        
+        $modulePath = CLOGGY_PATH_MODULE.$module.DS;
+        $moduleInstallerController = $modulePath.'Controller'.DS.Inflector::classify($module).'InstallController.php';
+        
+        if (file_exists($moduleInstallerController)) {
+            
+            if (file_exists($modulePath.'.installed')) {
+                return false;
+            }
+            
+            return true;
+            
+        }
+        
+        return false;
+        
+    }        
+    
+    /**
+     * Check if module installed
+     * @param string $module
+     * @return boolean
+     */
+    public function isModuleInstalled($module) {
+        
+        $modulePath = CLOGGY_PATH_MODULE.$module.DS;
+        return file_exists($modulePath.'.installed');
+        
+    }
         
     /**
      * Check if module excluded or not
@@ -106,6 +145,15 @@ class CloggyModuleInfoComponent extends Component {
      */
     public function setExcluded($module) {        
         $this->__excludeds[] = $module;
+    }
+    
+    /**
+     * Get installer link
+     * @param string $module
+     * @return string
+     */
+    public function getModuleInstallLink($module) {
+        return CloggyCommon::urlModule(strtolower(Inflector::underscore($module)),Inflector::underscore($module).'_install');
     }
 
     /**

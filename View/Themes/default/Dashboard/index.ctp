@@ -47,6 +47,7 @@
                             <th><?php echo __d('cloggy','Description'); ?></th>
                             <th><?php echo __d('cloggy','Author'); ?></th>							
                             <th><?php echo __d('cloggy','Dependency'); ?></th>                            
+                            <th><?php echo __d('cloggy','Install'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -70,10 +71,25 @@
                                         <?php echo $module['dep']; ?> 
                                         <?php
                                             if(isset($brokenModules) && in_array($module['name'],$brokenModules)) {
-                                                echo  '<span class="label label-important">Broken</span>';
+                                                echo  '<span class="label label-important">'.__d('cloggy','Broken').'</span>';
                                             }
                                         ?>
-                                    </td>                                    
+                                    </td>         
+                                    <td>
+                                        <?php
+                                        if ($module['installed']) {
+                                            echo  '<span class="label">'.__d('cloggy','Installed').'</span>';
+                                        } else {
+                                            
+                                            if ($module['install']) {                                            
+                                                echo $this->Html->link(__d('cloggy','Install'),$module['install_link']);                                            
+                                            } else {
+                                                echo '-';
+                                            }
+                                            
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>						
                             <?php endforeach; ?>
                         <?php else: ?>
