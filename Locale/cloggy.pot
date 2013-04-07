@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2013-04-06 15:08+0700\n"
+"POT-Creation-Date: 2013-04-07 16:51+0700\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -14,11 +14,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: Controller/CloggyAppController.php:82
+#: Controller/CloggyAppController.php:84
 msgid "You do not have permission to access that page."
 msgstr ""
 
-#: Controller/CloggyAppController.php:228
+#: Controller/CloggyAppController.php:230
 msgid "Identify yourself!"
 msgstr ""
 
@@ -157,6 +157,10 @@ msgstr ""
 
 #: Controller/Component/CloggyImageComponent.php:605
 msgid "Image file not found."
+msgstr ""
+
+#: Controller/Component/CloggyModuleInstallerComponent.php:71
+msgid "This module need to install."
 msgstr ""
 
 #: Module/CloggyBlog/Config/menus.php:8
@@ -631,12 +635,122 @@ msgstr ""
 msgid "Upload failed!"
 msgstr ""
 
-#: Module/CloggyUsers/Config/menus.php:5;20
-msgid "Roles"
+#: Module/CloggyDocs/Config/menus.php:8
+msgid "Plugin"
 msgstr ""
 
+#: Module/CloggyDocs/Config/menus.php:9;35
+msgid "About"
+msgstr ""
+
+#: Module/CloggyDocs/Config/menus.php:10
+msgid "Installation"
+msgstr ""
+
+#: Module/CloggyDocs/Config/menus.php:11;37
+msgid "License"
+msgstr ""
+
+#: Module/CloggyDocs/Config/menus.php:12;36
+msgid "Version"
+msgstr ""
+
+#: Module/CloggyDocs/Config/menus.php:14
+#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:45
+#: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:46
+msgid "Module"
+msgstr ""
+
+#: Module/CloggyDocs/Config/menus.php:15
+msgid "Module MVC"
+msgstr ""
+
+#: Module/CloggyDocs/Config/menus.php:16
 #: Module/CloggyUsers/Config/menus.php:7
 msgid "Create"
+msgstr ""
+
+#: Module/CloggyDocs/Config/menus.php:17
+msgid "Activation"
+msgstr ""
+
+#: Module/CloggyDocs/Config/menus.php:19
+msgid "Database"
+msgstr ""
+
+#: Module/CloggyDocs/Config/menus.php:20
+msgid "Concept"
+msgstr ""
+
+#: Module/CloggyDocs/Config/menus.php:21
+msgid "Model/Behavior"
+msgstr ""
+
+#: Module/CloggyDocs/Config/menus.php:23
+#: Module/CloggyUsers/Config/menus.php:15
+#: Module/CloggyUsers/View/CloggyUsersRole/index.ctp:7
+msgid "Users"
+msgstr ""
+
+#: Module/CloggyDocs/Config/menus.php:24
+msgid "User Managements"
+msgstr ""
+
+#: Module/CloggyDocs/Config/menus.php:25
+#: Module/CloggyUsers/Config/menus.php:19
+msgid "User Access"
+msgstr ""
+
+#: Module/CloggyDocs/Config/menus.php:27
+msgid "UI"
+msgstr ""
+
+#: Module/CloggyDocs/Config/menus.php:28
+msgid "Management"
+msgstr ""
+
+#: Module/CloggyDocs/Config/menus.php:29
+msgid "Menu config"
+msgstr ""
+
+#: Module/CloggyDocs/Config/menus.php:30
+msgid "Javascript"
+msgstr ""
+
+#: Module/CloggyDocs/Config/menus.php:34
+msgid "Basic"
+msgstr ""
+
+#: Module/CloggySearch/Config/menus.php:5
+msgid "Engines"
+msgstr ""
+
+#: Module/CloggySearch/Config/menus.php:6
+msgid "Mysql"
+msgstr ""
+
+#: Module/CloggySearch/Config/menus.php:7;14
+msgid "Sphinx"
+msgstr ""
+
+#: Module/CloggySearch/Config/menus.php:8;15
+msgid "Solr"
+msgstr ""
+
+#: Module/CloggySearch/Config/menus.php:12
+msgid "Update Index"
+msgstr ""
+
+#: Module/CloggySearch/Config/menus.php:13
+msgid "MySQL"
+msgstr ""
+
+#: Module/CloggySearch/Controller/CloggySearchHomeController.php:12
+msgid "Cloggy - Cloggy Search Management"
+msgstr ""
+
+#: Module/CloggyUsers/Config/menus.php:5;20
+msgid "Roles"
 msgstr ""
 
 #: Module/CloggyUsers/Config/menus.php:9;21
@@ -647,17 +761,8 @@ msgstr ""
 msgid "Setup"
 msgstr ""
 
-#: Module/CloggyUsers/Config/menus.php:15
-#: Module/CloggyUsers/View/CloggyUsersRole/index.ctp:7
-msgid "Users"
-msgstr ""
-
 #: Module/CloggyUsers/Config/menus.php:17
 msgid "Add User"
-msgstr ""
-
-#: Module/CloggyUsers/Config/menus.php:19
-msgid "User Access"
 msgstr ""
 
 #: Module/CloggyUsers/Controller/CloggyUsersHomeController.php:38
@@ -965,11 +1070,6 @@ msgstr ""
 msgid "Select Types"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:45
-#: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:46
-msgid "Module"
-msgstr ""
-
 #: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:47
 #: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:48
 msgid "Url"
@@ -981,7 +1081,7 @@ msgstr ""
 msgid "Object"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:63;109
+#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:63;125;150
 #: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:66;117
 msgid "ex: controller_name/action"
 msgstr ""
@@ -1000,12 +1100,7 @@ msgstr ""
 msgid "Deny"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:104
-#: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:112
-msgid "ex: ModuleName"
-msgstr ""
-
-#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:114
+#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:130;155
 #: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:122
 msgid "ex: query/url"
 msgstr ""
@@ -1016,6 +1111,10 @@ msgstr ""
 
 #: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:47
 msgid "Controller"
+msgstr ""
+
+#: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:112
+msgid "ex: ModuleName"
 msgstr ""
 
 #: Module/CloggyUsers/View/CloggyUsersPerm/index.ctp:6
@@ -1071,7 +1170,19 @@ msgstr ""
 msgid "Dependency"
 msgstr ""
 
+#: View/Themes/default/Dashboard/index.ctp:50;85
+msgid "Install"
+msgstr ""
+
+#: View/Themes/default/Dashboard/index.ctp:74
+msgid "Broken"
+msgstr ""
+
 #: View/Themes/default/Dashboard/index.ctp:81
+msgid "Installed"
+msgstr ""
+
+#: View/Themes/default/Dashboard/index.ctp:97
 msgid "No modules registered"
 msgstr ""
 
