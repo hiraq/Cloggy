@@ -33,6 +33,10 @@
             --coverage-clover webroot/test_reports/${group}/clover.xml" passthru="true" />
     </target>
     
+    <target name="update_language" depends="clean_cache">
+        <exec command="./../../../app/Console/cake i18n extract --plugin Cloggy" passthru="true" />
+    </target>
+    
     <target name="test_components" depends="clean_cache">
         <phingcall target="clean_reports">
             <property name="deleted" value="components" />
@@ -90,7 +94,9 @@
         <phingcall target="test_components" />
         <phingcall target="test_helpers" />
         <phingcall target="test_libs" />
-        <phingcall target="test_models" />        
+        <phingcall target="test_models" />     
+        <phingcall target="update_language" />   
+        <phingcall target="clean_cache" />
     </target>
 
 </project>
