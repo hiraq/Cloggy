@@ -43,8 +43,28 @@ class CloggyModuleInstallerComponent extends Component {
      * @param Controller $controller
      */
     public function beforeRender(Controller $controller) {
+        
         parent::beforeRender($controller);
-        $this->finishInstall($this->__requestedModule);
+        
+        if (!empty($this->__requestedModule)) {
+         
+            $modulePath = CLOGGY_PATH_MODULE.$this->__requestedModule.DS;  
+            $modulePathInstalled = $modulePath.'.installed';
+            $moduleInstallController = $modulePath.'Controller'.DS.$this->__requestedModule.'InstallController.php';
+            $requested = $this->__Controller->request->params['controller'];
+            $moduleInstallControllerUri = Inflector::underscore($this->__requestedModule).'_install';
+            
+            if (!file_exists($modulePathInstalled) 
+                    && file_exists($moduleInstallController) 
+                    && $requested == $moduleInstallControllerUri) {
+                                
+                //install module finish
+                $this->finishInstall($this->__requestedModule);
+                
+            }
+            
+        }        
+        
     }
     
     /**
