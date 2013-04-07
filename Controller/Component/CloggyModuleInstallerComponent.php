@@ -22,7 +22,7 @@ class CloggyModuleInstallerComponent extends Component {
         parent::startup($controller);        
         
         if (isset($controller->request->params['name'])) {
-            $this->__requestedModule = Inflector::classify($controller->request->params['name']);
+            $this->__requestedModule = Inflector::camelize($controller->request->params['name']);
             $this->__needInstall();            
         }
                 
@@ -50,11 +50,14 @@ class CloggyModuleInstallerComponent extends Component {
      */
     private function __needInstall() {
         
-        $modulePath = CLOGGY_PATH_MODULE.$this->__requestedModule.DS;        
+        $modulePath = CLOGGY_PATH_MODULE.$this->__requestedModule.DS;         
         $modulePathInstalled = $modulePath.'.installed';
-        $moduleInstallController = Inflector::underscore($this->__requestedModule).'_install';
+        $moduleInstallController = $modulePath.'Controller'.DS.$this->__requestedModule.'InstallController.php';
+        $moduleInstallControllerUri = Inflector::underscore($this->__requestedModule).'_install';
         
-        if (!file_exists($modulePathInstalled) && $this->__Controller->request->params['controller'] != $moduleInstallController) {
+        if (!file_exists($modulePathInstalled) 
+                && file_exists($moduleInstallController)
+                && $this->__Controller->request->params['controller'] != $moduleInstallControllerUri) {
             
             $this->Session->setFlash(
                 __d('cloggy','This module need to install.'),

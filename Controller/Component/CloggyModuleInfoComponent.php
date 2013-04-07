@@ -102,7 +102,7 @@ class CloggyModuleInfoComponent extends Component {
     public function isModuleNeedToInstall($module) {
         
         $modulePath = CLOGGY_PATH_MODULE.$module.DS;
-        $moduleInstallerController = $modulePath.'Controller'.DS.Inflector::classify($module).'InstallController.php';
+        $moduleInstallerController = $modulePath.'Controller'.DS.Inflector::camelize($module).'InstallController.php';
         
         if (file_exists($moduleInstallerController)) {
             
