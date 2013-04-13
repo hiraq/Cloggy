@@ -1,7 +1,15 @@
-<?php
+<?php if (isset($createdTables)) : ?>
+    <?php foreach($createdTables as $table => $status) : ?>
+        
+        <?php if($status) : ?>
+                <div class="alert alert-success">                
+                    <strong><?php echo $table; ?></strong> <?php echo __d('cloggy','has been installed'); ?>
+                </div>
+        <?php else: ?>
+                <div class="alert alert-error">                
+                    <strong><?php echo $table; ?></strong> <?php echo __d('cloggy','failed to install'); ?>
+                </div>
+        <?php endif; ?>
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
+    <?php endforeach; ?>
+<?php endif; ?>
