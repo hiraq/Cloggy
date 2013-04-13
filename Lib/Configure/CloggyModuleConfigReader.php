@@ -28,9 +28,8 @@ class CloggyModuleConfigReader implements ConfigReaderInterface {
         if (is_dir($this->__path)) {
 
             $filepath = $this->__path . $key . '.php';
-
-            if (file_exists($filepath)) {
-
+            
+            if (file_exists($filepath)) {                
                 require_once $filepath;
                 return Configure::read('Cloggy.' . $this->__moduleName . '.' . $key);
             }

@@ -46,6 +46,34 @@ class CloggyModuleInstallerComponent extends Component {
     public function beforeRender(Controller $controller) {
         
         parent::beforeRender($controller);
+        $this->__afterModuleInstaller();              
+        
+    }        
+    
+    /**
+     * Finish install, set .installed file on
+     * module path
+     * 
+     * @param string $module
+     * @return boolean
+     */
+    public function finishInstall($module) {
+        
+        $modulePath = CLOGGY_PATH_MODULE.$module.DS;
+        $modulePathInstalled = $modulePath.'.installed';
+        
+        $folder = new Folder();
+        $folder->chmod($modulePath,0755,true);
+        
+        $file = new File($modulePathInstalled);
+        return $file->create();
+        
+    }
+    
+    /**
+     * Executed after module installer controller action
+     */
+    private function __afterModuleInstaller() {
         
         if (!empty($this->__requestedModule)) {
          
@@ -77,27 +105,7 @@ class CloggyModuleInstallerComponent extends Component {
                 
             }
             
-        }        
-        
-    }
-    
-    /**
-     * Finish install, set .installed file on
-     * module path
-     * 
-     * @param string $module
-     * @return boolean
-     */
-    public function finishInstall($module) {
-        
-        $modulePath = CLOGGY_PATH_MODULE.$module.DS;
-        $modulePathInstalled = $modulePath.'.installed';
-        
-        $folder = new Folder();
-        $folder->chmod($modulePath,0755,true);
-        
-        $file = new File($modulePathInstalled);
-        return $file->create();
+        }  
         
     }
     

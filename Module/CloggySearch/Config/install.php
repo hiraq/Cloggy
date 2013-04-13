@@ -58,3 +58,7 @@ $config = array(
         KEY `term` (`term`)
       ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;"
 );
+
+Configure::write('Cloggy.CloggySearch.install',array(
+    'tables' => $config
+));

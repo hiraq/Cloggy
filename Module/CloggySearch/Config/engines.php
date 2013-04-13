@@ -1,3 +1,5 @@
 <?php
 
-$config = array('MysqlFulltext','SphinxSearch','ApacheSolr');
+Configure::write('Cloggy.CloggySearch.engines',array(
+    'engines' => array('MysqlFullText','SphinxSearch','ApacheSolr')
+));
