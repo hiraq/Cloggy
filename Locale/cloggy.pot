@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2013-04-07 16:58+0700\n"
+"POT-Creation-Date: 2013-04-13 19:46+0700\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -159,7 +159,11 @@ msgstr ""
 msgid "Image file not found."
 msgstr ""
 
-#: Controller/Component/CloggyModuleInstallerComponent.php:71
+#: Controller/Component/CloggyModuleInstallerComponent.php:99
+msgid "This module cannot be install, please check folder permission for this module."
+msgstr ""
+
+#: Controller/Component/CloggyModuleInstallerComponent.php:127
 msgid "This module need to install."
 msgstr ""
 
@@ -747,6 +751,26 @@ msgstr ""
 
 #: Module/CloggySearch/Controller/CloggySearchHomeController.php:12
 msgid "Cloggy - Cloggy Search Management"
+msgstr ""
+
+#: Module/CloggySearch/Controller/CloggySearchInstallController.php:55
+msgid "Cloggy Search Module - Installation"
+msgstr ""
+
+#: Module/CloggySearch/Controller/CloggySearchInstallController.php:66
+msgid "Cloggy Search Module - Installation - Error"
+msgstr ""
+
+#: Module/CloggySearch/Controller/CloggySearchInstallController.php:68
+msgid "Cloggy main tables not found."
+msgstr ""
+
+#: Module/CloggySearch/View/CloggySearchInstall/index.ctp:6
+msgid "has been installed"
+msgstr ""
+
+#: Module/CloggySearch/View/CloggySearchInstall/index.ctp:10
+msgid "failed to install"
 msgstr ""
 
 #: Module/CloggyUsers/Config/menus.php:5;20
