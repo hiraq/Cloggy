@@ -1,4 +1,4 @@
-<?php if (isset($createdTables)) : ?>
+<?php if (isset($createdTables) && !empty($createdTables)) : ?>
     <?php foreach($createdTables as $table => $status) : ?>
         
         <?php if($status) : ?>
@@ -12,4 +12,8 @@
         <?php endif; ?>
 
     <?php endforeach; ?>
+<?php else: ?>
+<div class="alert">                
+    <?php echo __d('cloggy','This module has been installed.'); ?>
+</div>
 <?php endif; ?>

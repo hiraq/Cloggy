@@ -66,6 +66,9 @@ class CloggySearchInstallController extends CloggyAppController {
             $this->set('title_for_layout',__d('cloggy','Cloggy Search Module - Installation - Error'));
             
             $this->set('install_error',__d('cloggy','Cloggy main tables not found.'));
+            
+            //custom view
+            $this->render('install_failed');
         }                   
         
     }
