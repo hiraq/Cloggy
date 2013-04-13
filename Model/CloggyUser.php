@@ -39,6 +39,17 @@ class CloggyUser extends CloggyAppModel {
             'dependent' => false
         )
     );
+    
+    public function beforeSave($options = array()) {
+        
+        if (isset($this->data['CloggyUser']['user_password']) 
+                && !empty($this->data['CloggyUser']['user_password'])) {
+            
+            $this->data['CloggyUser']['user_password'] = AuthComponent::password($this->data['CloggyUser']['user_password']);
+        }
+        
+        return true;
+    }
 
     /**
      * Check if name exists or not

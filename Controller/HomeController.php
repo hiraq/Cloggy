@@ -38,7 +38,7 @@ class HomeController extends CloggyAppController {
 
         //redirect if user empty
         $this->_redirectIfNoUsers();
-
+        
         /*
          * form submitted
          */

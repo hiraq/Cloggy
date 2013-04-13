@@ -217,7 +217,7 @@ class CloggyUsersHomeController extends CloggyAppController {
             /*
              * if password need to updated
              */
-            if (!empty($password) && AuthComponent::password($pasword) != $user['CloggyUser']['user_password']) {
+            if (!empty($password) && AuthComponent::password($password) != $user['CloggyUser']['user_password']) {
 
                 $dataValidate['user_password'] = $password;
                 $dataValidateRules['user_password'] = array(
@@ -306,7 +306,7 @@ class CloggyUsersHomeController extends CloggyAppController {
                  * form submit
                  */
                 if ($this->CloggyValidation->validates()) {                                                         
-
+                                        
                     $this->CloggyUser->id = $id;
                     $this->CloggyUser->save(array('CloggyUser' => $dataValidate));
 

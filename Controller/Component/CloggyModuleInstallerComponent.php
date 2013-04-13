@@ -2,6 +2,7 @@
 
 App::uses('Component', 'Controller');
 App::uses('File', 'Utility');
+App::uses('Folder', 'Utility');
 
 class CloggyModuleInstallerComponent extends Component {
     
@@ -57,9 +58,22 @@ class CloggyModuleInstallerComponent extends Component {
             if (!file_exists($modulePathInstalled) 
                     && file_exists($moduleInstallController) 
                     && $requested == $moduleInstallControllerUri) {
-                                
+                                              
                 //install module finish
-                $this->finishInstall($this->__requestedModule);
+                $install = $this->finishInstall($this->__requestedModule);                
+                
+                /*
+                 * check if installation completed or not
+                 */
+                if (!$install) {
+                    
+                    $this->Session->setFlash(
+                        __d('cloggy','This module cannot be install, please check folder permission for this module.'),
+                        'default',array('class' => 'alert'),'dashNotif');
+
+                    $this->__Controller->redirect($this->__base);exit();
+                    
+                }
                 
             }
             
@@ -78,6 +92,9 @@ class CloggyModuleInstallerComponent extends Component {
         
         $modulePath = CLOGGY_PATH_MODULE.$module.DS;
         $modulePathInstalled = $modulePath.'.installed';
+        
+        $folder = new Folder();
+        $folder->chmod($modulePath,0755,true);
         
         $file = new File($modulePathInstalled);
         return $file->create();
