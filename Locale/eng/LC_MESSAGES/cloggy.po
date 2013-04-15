@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2013-04-15 22:48+0700\n"
-"PO-Revision-Date: 2013-04-15 22:49+0700\n"
+"POT-Creation-Date: 2013-04-15 23:24+0700\n"
+"PO-Revision-Date: 2013-04-15 23:25+0700\n"
 "Last-Translator: hiraq <hrxwan@gmail.com>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: \n"
@@ -509,6 +509,17 @@ msgstr ""
 msgid "Content"
 msgstr ""
 
+#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:45
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:46
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:48
+msgid "Publish"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:46
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:32
+msgid "Draft"
+msgstr ""
+
 #: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:7
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:10
 #: View/Themes/default/Dashboard/index.ctp:48
@@ -530,11 +541,6 @@ msgstr ""
 #: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:43
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:45
 msgid "Make a draft"
-msgstr ""
-
-#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:46
-#: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:48
-msgid "Publish"
 msgstr ""
 
 #: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:65
@@ -594,10 +600,6 @@ msgstr ""
 
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:30
 msgid "Published"
-msgstr ""
-
-#: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:32
-msgid "Draft"
 msgstr ""
 
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_tags.ctp:9
@@ -761,6 +763,10 @@ msgstr ""
 
 #: Module/CloggySearch/Controller/CloggySearchInstallController.php:68
 msgid "Cloggy main tables not found."
+msgstr ""
+
+#: Module/CloggySearch/Controller/CloggySearchMysqlController.php:22
+msgid "Cloggy Search Management - MysqlFullText Search Engine"
 msgstr ""
 
 #: Module/CloggySearch/View/CloggySearchHome/index.ctp:4
