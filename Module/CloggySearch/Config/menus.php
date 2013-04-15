@@ -9,10 +9,10 @@ Configure::write('Cloggy.CloggySearch.menus', array(
         )
     ),
     'sidebar' => array(
-        __d('cloggy','Update Index') => array(
-            __d('cloggy','MySQL') => CloggyCommon::urlModule('cloggy_search','cloggy_search_mysql/update'),
-            __d('cloggy','Sphinx') => CloggyCommon::urlModule('cloggy_search', 'cloggy_search_sphinx/update'),
-            __d('cloggy','Solr') => CloggyCommon::urlModule('cloggy_search', 'cloggy_search_solr/update'),
+        __d('cloggy','About') => array(
+            __d('cloggy','MySQL') => CloggyCommon::urlModule('cloggy_search','cloggy_search_mysql/help'),
+            __d('cloggy','Sphinx') => CloggyCommon::urlModule('cloggy_search', 'cloggy_search_sphinx/help'),
+            __d('cloggy','Solr') => CloggyCommon::urlModule('cloggy_search', 'cloggy_search_solr/help'),
         )
     )
 ));

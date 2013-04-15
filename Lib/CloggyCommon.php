@@ -41,7 +41,7 @@ class CloggyCommon {
      * @return type
      */
     public static function urlModule($moduleName,$path=null) {
-        $base = self::baseUrl() . 'module/' . $moduleName;
+        $base = self::baseUrl() . 'module/' . Inflector::underscore($moduleName);
         return is_null($path) ? $base : $base . '/' . $path;
     }
     
