@@ -7,7 +7,20 @@ class CloggyAppModel extends AppModel {
     public $tablePrefix = 'cloggy_';
     
     public function getTables() {
-        return $this->query('SHOW TABLES');
+        
+        $queries = $this->query('SHOW TABLES');
+        $tables = array();
+        
+        foreach($queries as $index => $value) {
+            
+            foreach($value['TABLE_NAMES'] as $key => $table) {
+                $tables[] = $table;
+            }
+            
+        }
+        
+        return $tables;
+        
     }
 
 }

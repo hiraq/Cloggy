@@ -15,9 +15,10 @@ class CloggySearchMysqlController extends CloggyAppController {
     }
     
     public function manage() {
-        $tables = $this->CloggySearchFulltext->getTables();
-        pr($tables);
+        
+        $tables = $this->CloggySearchFulltext->getTables();                
         $this->set('title_for_layout',__d('cloggy','Cloggy Search Management - MysqlFullText Search Engine'));
+        
     }
     
 }
