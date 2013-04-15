@@ -110,7 +110,7 @@
 <script type="text/javascript">
     //manipulate dom
     jQuery(document).ready(function() {
-        jQuery('body').css('margin-top','40px');			
+        jQuery('body').css('margin-top','20px');			
 
         /*
         search on page

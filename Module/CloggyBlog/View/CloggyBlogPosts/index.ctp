@@ -104,12 +104,12 @@
 
                 case 'action_delete_all':
                     urlAjax = '<?php echo Router::url('/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_ajax/delete_all_posts'); ?>';
-                    confirmAction = confirm(<?php echo __d('cloggy','Are you sure want to delete all these posts?') ?>);		
+                    confirmAction = confirm('<?php echo __d('cloggy','Are you sure want to delete all these posts?') ?>');		
                     break;
 
                 case 'action_disable_all':
                     urlAjax = '<?php echo Router::url('/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_ajax/draft_all_posts'); ?>';
-                    confirmAction = confirm(<?php echo __d('cloggy','Are you sure want to make draft all these posts?') ?>);
+                    confirmAction = confirm('<?php echo __d('cloggy','Are you sure want to make draft all these posts?') ?>');
                     break;
 
                 case 'action_enable_all':
@@ -141,21 +141,21 @@
             jQuery('.post_remove').on('click',function(e) {
                 e.preventDefault();
                 var href = jQuery(this).attr('href');
-                if(confirm(<?php echo __d('cloggy','Are you sure to remove this post?') ?>)) {
+                if(confirm('<?php echo __d('cloggy','Are you sure to remove this post?') ?>')) {
                     window.location = href;
                 }	
             });
             jQuery('.post_disable').on('click',function(e) {
                 e.preventDefault();
                 var href = jQuery(this).attr('href');
-                if(confirm(<?php echo __d('cloggy','Are you sure to make draft this post?') ?>)) {
+                if(confirm('<?php echo __d('cloggy','Are you sure to make draft this post?') ?>')) {
                     window.location = href;
                 }
             });
             jQuery('.post_enable').on('click',function(e) {
                 e.preventDefault();
                 var href = jQuery(this).attr('href');
-                if(confirm(<?php echo __d('cloggy','Are you sure to publish this post?') ?>)) {
+                if(confirm('<?php echo __d('cloggy','Are you sure to publish this post?') ?>')) {
                     window.location = href;
                 }
             });		
