@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2013-04-13 21:13+0700\n"
+"POT-Creation-Date: 2013-04-15 22:30+0700\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -175,6 +175,7 @@ msgstr ""
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_categories.ctp:5
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:5
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_tags.ctp:5
+#: Module/CloggySearch/View/CloggySearchHome/index.ctp:16
 #: Module/CloggyUsers/Config/menus.php:6;10;16
 msgid "Manage"
 msgstr ""
@@ -644,6 +645,7 @@ msgid "Plugin"
 msgstr ""
 
 #: Module/CloggyDocs/Config/menus.php:9;35
+#: Module/CloggySearch/Config/menus.php:12
 msgid "About"
 msgstr ""
 
@@ -741,15 +743,11 @@ msgstr ""
 msgid "Solr"
 msgstr ""
 
-#: Module/CloggySearch/Config/menus.php:12
-msgid "Update Index"
-msgstr ""
-
 #: Module/CloggySearch/Config/menus.php:13
 msgid "MySQL"
 msgstr ""
 
-#: Module/CloggySearch/Controller/CloggySearchHomeController.php:12
+#: Module/CloggySearch/Controller/CloggySearchHomeController.php:23
 msgid "Cloggy - Cloggy Search Management"
 msgstr ""
 
@@ -763,6 +761,26 @@ msgstr ""
 
 #: Module/CloggySearch/Controller/CloggySearchInstallController.php:68
 msgid "Cloggy main tables not found."
+msgstr ""
+
+#: Module/CloggySearch/View/CloggySearchHome/index.ctp:4
+msgid "Supported Engines"
+msgstr ""
+
+#: Module/CloggySearch/View/CloggySearchHome/index.ctp:5
+msgid "Action"
+msgstr ""
+
+#: Module/CloggySearch/View/CloggySearchHome/index.ctp:17
+msgid "Update"
+msgstr ""
+
+#: Module/CloggySearch/View/CloggySearchHome/index.ctp:18
+msgid "Test"
+msgstr ""
+
+#: Module/CloggySearch/View/CloggySearchHome/index.ctp:19
+msgid "Help"
 msgstr ""
 
 #: Module/CloggySearch/View/CloggySearchInstall/index.ctp:6
