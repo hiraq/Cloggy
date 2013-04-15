@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2013-04-15 22:30+0700\n"
+"POT-Creation-Date: 2013-04-15 22:34+0700\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -761,14 +761,6 @@ msgstr ""
 
 #: Module/CloggySearch/Controller/CloggySearchInstallController.php:68
 msgid "Cloggy main tables not found."
-msgstr ""
-
-#: Module/CloggySearch/View/CloggySearchHome/index.ctp:4
-msgid "Supported Engines"
-msgstr ""
-
-#: Module/CloggySearch/View/CloggySearchHome/index.ctp:5
-msgid "Action"
 msgstr ""
 
 #: Module/CloggySearch/View/CloggySearchHome/index.ctp:17
