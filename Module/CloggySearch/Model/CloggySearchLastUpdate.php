@@ -1,7 +1,10 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
+App::uses('CloggyAppModel', 'Cloggy.Model');
+
+class CloggySearchLastUpdate extends CloggyAppModel {
+    
+    public $name = 'CloggySearchLastUpdate';
+    public $useTable = 'cloggy_search_last_update';
+    
+}
