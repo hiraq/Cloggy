@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2013-04-15 23:24+0700\n"
-"PO-Revision-Date: 2013-04-15 23:25+0700\n"
+"POT-Creation-Date: 2013-04-17 23:47+0700\n"
+"PO-Revision-Date: 2013-04-17 23:48+0700\n"
 "Last-Translator: hiraq <hrxwan@gmail.com>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: \n"
@@ -366,6 +366,7 @@ msgstr ""
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_categories.ctp:11
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:13
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_tags.ctp:11
+#: Module/CloggySearch/View/CloggySearchMysql/manage.ctp:17
 #: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:49
 #: Module/CloggyUsers/View/CloggyUsersPerm/index.ctp:10
 #: Module/CloggyUsers/View/CloggyUsersRole/index.ctp:8
@@ -392,6 +393,7 @@ msgstr ""
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_categories.ctp:29
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:40
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_tags.ctp:29
+#: Module/CloggySearch/View/CloggySearchMysql/manage.ctp:35
 #: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:83
 #: Module/CloggyUsers/View/CloggyUsersPerm/index.ctp:48
 #: Module/CloggyUsers/View/CloggyUsersRole/index.ctp:27
@@ -404,6 +406,7 @@ msgstr ""
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_categories.ctp:36
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:56
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_tags.ctp:36
+#: Module/CloggySearch/View/CloggySearchMysql/manage.ctp:42
 #: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:99
 #: Module/CloggyUsers/View/CloggyUsersPerm/index.ctp:59
 #: Module/CloggyUsers/View/CloggyUsersRole/index.ctp:38
@@ -413,6 +416,7 @@ msgstr ""
 #: Module/CloggyBlog/View/CloggyBlogCategories/index.ctp:41
 #: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:61
 #: Module/CloggyBlog/View/CloggyBlogTags/index.ctp:41
+#: Module/CloggySearch/View/CloggySearchMysql/manage.ctp:49
 #: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:106
 #: Module/CloggyUsers/View/CloggyUsersPerm/index.ctp:66
 #: Module/CloggyUsers/View/CloggyUsersRole/index.ctp:45
@@ -422,6 +426,7 @@ msgstr ""
 #: Module/CloggyBlog/View/CloggyBlogCategories/index.ctp:44
 #: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:64
 #: Module/CloggyBlog/View/CloggyBlogTags/index.ctp:44
+#: Module/CloggySearch/View/CloggySearchMysql/manage.ctp:52
 #: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:109
 #: Module/CloggyUsers/View/CloggyUsersPerm/index.ctp:69
 #: Module/CloggyUsers/View/CloggyUsersRole/index.ctp:48
@@ -765,8 +770,12 @@ msgstr ""
 msgid "Cloggy main tables not found."
 msgstr ""
 
-#: Module/CloggySearch/Controller/CloggySearchMysqlController.php:22
+#: Module/CloggySearch/Controller/CloggySearchMysqlController.php:30
 msgid "Cloggy Search Management - MysqlFullText Search Engine"
+msgstr ""
+
+#: Module/CloggySearch/Model/CloggySearchLastUpdate.php:17
+msgid "None"
 msgstr ""
 
 #: Module/CloggySearch/View/CloggySearchHome/index.ctp:4
@@ -799,6 +808,34 @@ msgstr ""
 
 #: Module/CloggySearch/View/CloggySearchInstall/index.ctp:17
 msgid "This module has been installed."
+msgstr ""
+
+#: Module/CloggySearch/View/CloggySearchMysql/manage.ctp:4
+msgid "Total indexed data : "
+msgstr ""
+
+#: Module/CloggySearch/View/CloggySearchMysql/manage.ctp:7
+msgid "Last updated data : "
+msgstr ""
+
+#: Module/CloggySearch/View/CloggySearchMysql/manage.ctp:14
+msgid "Table Name"
+msgstr ""
+
+#: Module/CloggySearch/View/CloggySearchMysql/manage.ctp:15
+msgid "Table Key"
+msgstr ""
+
+#: Module/CloggySearch/View/CloggySearchMysql/manage.ctp:16
+msgid "Table Field"
+msgstr ""
+
+#: Module/CloggySearch/View/CloggySearchMysql/manage.ctp:95
+msgid "Are you sure want to delete all selected indexed tables?"
+msgstr ""
+
+#: Module/CloggySearch/View/CloggySearchMysql/manage.ctp:125
+msgid "Are you sure to remove this indexed table?"
 msgstr ""
 
 #: Module/CloggyUsers/Config/menus.php:5;20
