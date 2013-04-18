@@ -14,6 +14,7 @@ class CloggySearchMysqlController extends CloggyAppController {
     
     public function beforeFilter() {
         parent::beforeFilter();
+        $this->CloggySearchSchema = $this->Components->load('CloggySearchSchema');
     }    
     
     public function index() {  
@@ -24,6 +25,13 @@ class CloggySearchMysqlController extends CloggyAppController {
                 
         $this->set(compact('indexedTables','latestUpdate','totalIndexed'));
         $this->set('title_for_layout',__d('cloggy','Cloggy Search Management - MysqlFullText Search Engine'));
+        
+    }
+    
+    public function update() {
+        
+        //setup model
+        $this->CloggySearchSchema->setModel($this->CloggySearchFullText);                
         
     }
     
