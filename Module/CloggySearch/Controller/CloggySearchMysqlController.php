@@ -14,13 +14,9 @@ class CloggySearchMysqlController extends CloggyAppController {
     
     public function beforeFilter() {
         parent::beforeFilter();
-    }
+    }    
     
-    public function index() {
-        //pass
-    }
-    
-    public function manage() {  
+    public function index() {  
         
         $indexedTables = $this->paginate('CloggySearchFullText');
         $totalIndexed = $this->CloggySearchFullText->getTotal();

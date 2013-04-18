@@ -12,8 +12,8 @@
                 <td><?php echo $engine; ?></td>
                 <td>
                     <?php $url = CloggyCommon::urlModule('CloggySearch', 
-                            strtolower(Inflector::underscore($engines['controllers'][$engine])).'/'); ?>
-                    <a href="<?php echo $url.'manage'; ?>"><?php echo __d('cloggy','Manage'); ?></a> |
+                            strtolower(Inflector::underscore($engines['controllers'][$engine]))); ?>
+                    <a href="<?php echo $url; ?>"><?php echo __d('cloggy','Manage'); ?></a> |
                     <a href="<?php echo $url.'update'; ?>"><?php echo __d('cloggy','Update'); ?></a> |
                     <a href="<?php echo $url.'test'; ?>"><?php echo __d('cloggy','Test'); ?></a> | 
                     <a href="<?php echo $url.'help'; ?>"><?php echo __d('cloggy','Help'); ?></a>
