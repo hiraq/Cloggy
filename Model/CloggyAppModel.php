@@ -6,6 +6,9 @@ class CloggyAppModel extends AppModel {
     public $cacheQueries = true;      
     public $tablePrefix = 'cloggy_';
     
+    /*
+     * get all tables listed
+     */
     public function getTables() {
         
         $queries = $this->query('SHOW TABLES');

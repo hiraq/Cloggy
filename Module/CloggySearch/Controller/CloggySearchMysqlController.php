@@ -30,9 +30,14 @@ class CloggySearchMysqlController extends CloggyAppController {
     
     public function update() {
         
-        //setup model
-        $this->CloggySearchSchema->setModel($this->CloggySearchFullText);                
+        //setup engine
+        $this->CloggySearchSchema->engine('schema_mysqlfull_text');
         
+        //get schema
+        $schema = $this->CloggySearchSchema->getSchema();                
+        
+        //indexing data
+        $this->CloggySearchFullText->updateIndex($schema);
     }
     
 }
