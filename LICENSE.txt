@@ -1,6 +1,3 @@
-BSD-LICENSE 3 CLAUSE
-===================
-
 Copyright (c) 2012-2013, Cloggy - https://github.com/hiraq/Cloggy
 All rights reserved.
 
