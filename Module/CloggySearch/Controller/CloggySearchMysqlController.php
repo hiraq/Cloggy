@@ -4,13 +4,7 @@ App::uses('CloggyAppController', 'Cloggy.Controller');
 
 class CloggySearchMysqlController extends CloggyAppController {
     
-    public $uses = array('CloggySearchFullText','CloggySearchLastUpdate');
-    public $paginate = array(
-        'CloggySearchFullText' => array(
-            'limit' => 10,
-            'order' => array('CloggySearchFullText.id' => 'desc')
-        )
-    );
+    public $uses = array('CloggySearchFullText','CloggySearchLastUpdate');    
     
     public function beforeFilter() {
         parent::beforeFilter();
@@ -18,6 +12,14 @@ class CloggySearchMysqlController extends CloggyAppController {
     }    
     
     public function index() {  
+        
+        /*
+         * setup pagination
+         */
+        $this->paginate = array(
+            'limit' => 5,
+            'order' => array('CloggySearchFullText.id' => 'desc')
+        );
         
         $indexedTables = $this->paginate('CloggySearchFullText');
         $totalIndexed = $this->CloggySearchFullText->getTotal();
@@ -38,6 +40,7 @@ class CloggySearchMysqlController extends CloggyAppController {
         
         //indexing data
         $this->CloggySearchFullText->updateIndex($schema);
+        
     }
     
 }

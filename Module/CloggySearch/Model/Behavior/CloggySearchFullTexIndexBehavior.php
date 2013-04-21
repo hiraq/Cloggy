@@ -1,6 +1,7 @@
 <?php
 
 App::uses('ModelBehavior','Model');
+App::uses('Sanitize', 'Utility');
 
 class CloggySearchFullTexIndexBehavior extends ModelBehavior {
     
@@ -38,7 +39,6 @@ class CloggySearchFullTexIndexBehavior extends ModelBehavior {
             
             //run indexer
             $this->__runIndex();
-            
         }
         
     }
@@ -63,8 +63,7 @@ class CloggySearchFullTexIndexBehavior extends ModelBehavior {
                     }
                     
                     //index tables
-                    $this->__indexingTables();
-                    
+                    $this->__indexingTables();                    
                 }
                 
             }                        
@@ -102,7 +101,28 @@ class CloggySearchFullTexIndexBehavior extends ModelBehavior {
                  */
                 if ($data) {
                     
-                    
+                    foreach($data as $index => $tableNameSource) {
+                        
+                        //sanitize data
+                        $fieldToIndex = Sanitize::clean($tableNameSource[$tableName][$fieldName],array('encode' => false));                        
+                        
+                        /*
+                         * build source data to index
+                         */
+                        $source = array(
+                            'source_table_name' => '"'.$tableName.'"',
+                            'source_table_key' => '"'.$tableNameSource[$tableName][$primaryKey].'"',
+                            'source_table_field' => '"'.$fieldName.'"',
+                            'source_sentences' => $fieldFormat == 'sentences' ? '"'.$fieldToIndex.'"' : 'NULL',
+                            'source_text' => $fieldFormat == 'text' ? '"'.$fieldToIndex.'"' : 'NULL',
+                            'source_created' => '"'.date('c').'"'
+                        );            
+                        
+                        //save source
+                        $query = $this->__queryInsertSource($source);                        
+                        $this->__model->query($query);
+                        
+                    }
                     
                 }
                 
@@ -117,13 +137,32 @@ class CloggySearchFullTexIndexBehavior extends ModelBehavior {
      * @param array $params
      * @return string
      */
-    private function __querySelect($params) {
-               
-        if (is_array($params) && !empty($params)) {
+    private function __querySelect($params) {                       
+                
+        if (is_array($params) && extract($params)) {
             extract($params);
+            return 'SELECT '.$fieldName.','.$primaryKey.' FROM '.$tableName.' ORDER BY '.$primaryKey.' DESC LIMIT '.$limit;
+        }                        
+        
+        return null;
+        
+    }
+    
+    private function __queryInsertSource($source) {
+        
+        if (is_array($source) && !empty($source)) {
+            
+            $keys = array_keys($source);
+            $values = array_values($source);
+            
+            $fields = join(',',$keys);
+            $valueToInsert = join(',',$values);
+            
+            return 'INSERT INTO cloggy_search_fulltext ('.$fields.') VALUES ('.$valueToInsert.')';
+            
         }
         
-        return 'SELECT '.$fieldName.','.$primaryKey.' FROM '.$tableName.' ORDER BY '.$primaryKey.' DESC LIMIT '.$limit;
+        return null;
         
     }
     

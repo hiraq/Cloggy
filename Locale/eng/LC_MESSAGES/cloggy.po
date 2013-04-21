@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2013-04-18 23:58+0700\n"
-"PO-Revision-Date: 2013-04-18 23:59+0700\n"
+"POT-Creation-Date: 2013-04-21 21:56+0700\n"
+"PO-Revision-Date: 2013-04-21 21:57+0700\n"
 "Last-Translator: hiraq <hrxwan@gmail.com>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: \n"
@@ -770,7 +770,7 @@ msgstr ""
 msgid "Cloggy main tables not found."
 msgstr ""
 
-#: Module/CloggySearch/Controller/CloggySearchMysqlController.php:27
+#: Module/CloggySearch/Controller/CloggySearchMysqlController.php:29
 msgid "Cloggy Search Management - MysqlFullText Search Engine"
 msgstr ""
 
@@ -836,6 +836,10 @@ msgstr ""
 
 #: Module/CloggySearch/View/CloggySearchMysql/index.ctp:125
 msgid "Are you sure to remove this indexed table?"
+msgstr ""
+
+#: Module/CloggySearch/View/CloggySearchMysql/update.ctp:2
+msgid "MysqlFullText index has been updated"
 msgstr ""
 
 #: Module/CloggyUsers/Config/menus.php:5;20

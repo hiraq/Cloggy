@@ -61,7 +61,7 @@
 <div class="pagination pagination-centered">
     <ul>
         <?php
-        $this->CloggyPaginator->paginatorBootstrap('/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_search/cloggy_search_mysql/manage');
+        $this->CloggyPaginator->paginatorBootstrap('/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_search/');
         ?>		
     </ul>
 </div>
