@@ -43,4 +43,35 @@ class CloggySearchMysqlController extends CloggyAppController {
         
     }
     
+    public function test() {
+        
+        if ($this->request->is('post')) {
+            
+            //use Sanitize utility
+            App::uses('Sanitize', 'Utility');
+            
+            //use TextHelper & NumberHelper
+            $this->helpers[] = 'Text';
+            $this->helpers[] = 'Number';
+            
+            /*
+             * sanitize query input
+             */
+            $query = Sanitize::clean($this->request->data['CloggySearch']['query'],array(
+                'remove_html' => true,
+                'encode' => true,
+                'escape' => true
+            ));     
+            
+            $results = $this->CloggySearchFullText->search($query);
+            
+            $this->set(compact('results','query'));
+            $this->set('title_for_layout',__d('cloggy','Test MysqlFullText - Query: ').$query);
+            
+        } else {
+            $this->set('title_for_layout',__d('cloggy','Test MysqlFullText'));
+        }                
+        
+    }
+    
 }
