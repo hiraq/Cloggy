@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2013-04-21 21:56+0700\n"
+"POT-Creation-Date: 2013-04-22 23:25+0700\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -774,6 +774,22 @@ msgstr ""
 msgid "Cloggy Search Management - MysqlFullText Search Engine"
 msgstr ""
 
+#: Module/CloggySearch/Controller/CloggySearchMysqlController.php:69
+msgid "Test MysqlFullText - Query: "
+msgstr ""
+
+#: Module/CloggySearch/Controller/CloggySearchMysqlController.php:72
+msgid "Test MysqlFullText"
+msgstr ""
+
+#: Module/CloggySearch/Model/CloggySearchFullText.php:27
+msgid "Natural Search"
+msgstr ""
+
+#: Module/CloggySearch/Model/CloggySearchFullText.php:62
+msgid "Boolean Mode"
+msgstr ""
+
 #: Module/CloggySearch/Model/CloggySearchLastUpdate.php:17
 msgid "None"
 msgstr ""
@@ -819,6 +835,7 @@ msgid "Last updated data : "
 msgstr ""
 
 #: Module/CloggySearch/View/CloggySearchMysql/index.ctp:14
+#: Module/CloggySearch/View/CloggySearchMysql/test.ctp:32
 msgid "Table Name"
 msgstr ""
 
@@ -836,6 +853,43 @@ msgstr ""
 
 #: Module/CloggySearch/View/CloggySearchMysql/index.ctp:125
 msgid "Are you sure to remove this indexed table?"
+msgstr ""
+
+#: Module/CloggySearch/View/CloggySearchMysql/test.ctp:11
+msgid "your query"
+msgstr ""
+
+#: Module/CloggySearch/View/CloggySearchMysql/test.ctp:16
+#: View/Themes/default/Dashboard/index.ctp:17
+msgid "Search"
+msgstr ""
+
+#: Module/CloggySearch/View/CloggySearchMysql/test.ctp:23
+msgid "Search term : "
+msgstr ""
+
+#: Module/CloggySearch/View/CloggySearchMysql/test.ctp:26
+msgid "Search mode : "
+msgstr ""
+
+#: Module/CloggySearch/View/CloggySearchMysql/test.ctp:33
+msgid "Field"
+msgstr ""
+
+#: Module/CloggySearch/View/CloggySearchMysql/test.ctp:34
+msgid "Snippet"
+msgstr ""
+
+#: Module/CloggySearch/View/CloggySearchMysql/test.ctp:35
+msgid "Rating"
+msgstr ""
+
+#: Module/CloggySearch/View/CloggySearchMysql/test.ctp:51
+msgid "no snippet"
+msgstr ""
+
+#: Module/CloggySearch/View/CloggySearchMysql/test.ctp:60
+msgid "No results found, maybe you can try to disable \"mysqlFullText stopwords\" in your mysql config file. "
 msgstr ""
 
 #: Module/CloggySearch/View/CloggySearchMysql/update.ctp:2
@@ -1245,10 +1299,6 @@ msgstr ""
 
 #: Module/CloggyUsers/View/CloggyUsersRole/index.ctp:116
 msgid "Are you sure to remove this role?"
-msgstr ""
-
-#: View/Themes/default/Dashboard/index.ctp:17
-msgid "Search"
 msgstr ""
 
 #: View/Themes/default/Dashboard/index.ctp:46
