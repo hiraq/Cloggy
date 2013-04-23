@@ -74,4 +74,8 @@ class CloggySearchMysqlController extends CloggyAppController {
         
     }
     
+    public function help() {        
+        $this->set('title_for_layout',__d('cloggy','Cloggy Search - MysqlFullText Documentation'));        
+    }
+    
 }

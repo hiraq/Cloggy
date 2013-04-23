@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2013-04-22 23:25+0700\n"
+"POT-Creation-Date: 2013-04-23 22:51+0700\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -780,6 +780,10 @@ msgstr ""
 
 #: Module/CloggySearch/Controller/CloggySearchMysqlController.php:72
 msgid "Test MysqlFullText"
+msgstr ""
+
+#: Module/CloggySearch/Controller/CloggySearchMysqlController.php:78
+msgid "Cloggy Search - MysqlFullText Documentation"
 msgstr ""
 
 #: Module/CloggySearch/Model/CloggySearchFullText.php:27
