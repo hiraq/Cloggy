@@ -11,7 +11,8 @@ class CloggySearchLastUpdate extends CloggyAppModel {
         
         $data = $this->find('first',array(
             'conditions' => array('CloggySearchLastUpdate.engine' => $engine),
-            'field' => array('CloggySearchLastUpdate.'.$field)
+            'field' => array('CloggySearchLastUpdate.'.$field),
+            'order' => array('CloggySearchLastUpdate.updated' => 'desc')
         ));
         
         return !empty($data) ? $data['CloggySearchLastUpdate'][$field] : __d('cloggy','None');

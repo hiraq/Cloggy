@@ -1,7 +1,6 @@
 <?php
 
 App::uses('CloggyAppModel', 'Cloggy.Model');
-App::uses('CloggySearchFullTextIndex','Model/Behavior');
 
 class CloggySearchFullText extends CloggyAppModel {       
     

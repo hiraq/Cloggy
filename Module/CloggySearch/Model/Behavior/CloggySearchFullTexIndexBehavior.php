@@ -11,10 +11,22 @@ class CloggySearchFullTexIndexBehavior extends ModelBehavior {
     private $__updateGroups = array();
     private $__indexedSchema;
     private $__tablesToIndex;
+    private $__tablesToUpdate;
     private $__prefixToIndex;
     
     //used model
     private $__model;
+    private $__modelLastUpdate;
+    
+    /**
+     * Setup last update model
+     * 
+     * @param Model $model
+     * @param array $settings
+     */
+    public function setup(Model $model,$settings=array()) {
+        $this->__modelLastUpdate = ClassRegistry::init('CloggySearchLastUpdate');
+    }
     
      /**
      * Update MysqlFullText data index
@@ -39,6 +51,9 @@ class CloggySearchFullTexIndexBehavior extends ModelBehavior {
             
             //run indexer
             $this->__runIndex();
+            
+            //update last update table
+            $this->__lastUpdate();
         }
         
     }
@@ -119,8 +134,31 @@ class CloggySearchFullTexIndexBehavior extends ModelBehavior {
                         );            
                         
                         //save source
-                        $query = $this->__queryInsertSource($source);                        
-                        $this->__model->query($query);
+                        $query = $this->__queryInsertSource($source);   
+                        
+                        /*
+                         * check if data has been indexed or not
+                         */
+                        $checkData = $this->__model->find('count',array(
+                            'conditions' => array(
+                                'CloggySearchFullText.source_table_name' => $tableName,
+                                'CloggySearchFullText.source_table_key' => $tableNameSource[$tableName][$primaryKey]
+                            )
+                        ));
+                        
+                        /*
+                         * only if data not indexed
+                         */
+                        if ($checkData < 1) {
+                            
+                            if ($query) {
+                                
+                                $this->__model->query($query);      
+                                $this->__tablesToUpdate[$tableName][] = $tableNameSource[$tableName][$primaryKey];                                
+                                
+                            }
+                            
+                        }                                                                        
                         
                     }
                     
@@ -140,14 +178,38 @@ class CloggySearchFullTexIndexBehavior extends ModelBehavior {
     private function __querySelect($params) {                       
                 
         if (is_array($params) && extract($params)) {
+            
             extract($params);
-            return 'SELECT '.$fieldName.','.$primaryKey.' FROM '.$tableName.' ORDER BY '.$primaryKey.' DESC LIMIT '.$limit;
+            
+            $dataLastUpdate = $this->__modelLastUpdate->find('first',array(
+                'conditions' => array(
+                    'CloggySearchLastUpdate.engine' => 'mysqlfulltext',
+                    'CloggySearchLastUpdate.object_name' => $tableName                    
+                ),
+                'fields' => array('CloggySearchLastUpdate.object_id')
+            ));
+            
+            /*
+             * get data based on latest update (if available)
+             */
+            if (!empty($dataLastUpdate) && isset($dataLastUpdate['CloggySearchLastUpdate'])) {
+                return 'SELECT '.$fieldName.','.$primaryKey.' FROM '.$tableName.' WHERE '.$primaryKey.
+                        ' > '.$dataLastUpdate['CloggySearchLastUpdate']['object_id'].' ORDER BY '.$primaryKey.' DESC LIMIT '.$limit;
+            } else {
+                return 'SELECT '.$fieldName.','.$primaryKey.' FROM '.$tableName.' ORDER BY '.$primaryKey.' DESC LIMIT '.$limit;
+            }
+                        
         }                        
         
         return null;
         
     }
     
+    /**
+     * Index and save data
+     * @param array $source
+     * @return null  | array
+     */
     private function __queryInsertSource($source) {
         
         if (is_array($source) && !empty($source)) {
@@ -163,6 +225,64 @@ class CloggySearchFullTexIndexBehavior extends ModelBehavior {
         }
         
         return null;
+        
+    }     
+    
+    /**
+     * Setup last update
+     */
+    private function __lastUpdate() {
+        
+        if (!empty($this->__tablesToUpdate)) {
+            
+            foreach($this->__tablesToUpdate as $table => $value) {
+                
+                //id to update
+                $maxId = max($value);
+                
+                /*
+                 * check data if table has been indexed or not
+                 */
+                $checkData = $this->__modelLastUpdate->find('first',array(
+                    'conditions' => array(
+                        'CloggySearchLastUpdate.engine' => 'mysqlfulltext',
+                        'CloggySearchLastUpdate.object_name' => $table,
+                        'CloggySearchLastUpdate.object_type' => 'table'
+                    ),
+                    'fields' => array('CloggySearchLastUpdate.id')
+                ));
+                
+                /*
+                 * if exists then update
+                 * otherwise then create new record
+                 */
+                if (!empty($checkData) && isset($checkData['CloggySearchLastUpdate'])) {//update
+                    
+                    $this->__modelLastUpdate->id = $checkData['CloggySearchLastUpdate']['id'];
+                    $this->__modelLastUpdate->save(array(
+                        'CloggySearchLastUpdate' => array(
+                            'object_id' => $maxId
+                        )
+                    ));
+                    
+                } else {//create
+                    
+                    $this->__modelLastUpdate->create();
+                    $this->__modelLastUpdate->save(array(
+                        'CloggySearchLastUpdate' => array(
+                            'engine' => 'mysqlfulltext',
+                            'object_name' => $table,
+                            'object_type' => 'table',
+                            'object_id' => $maxId,
+                            'created' => date('c')
+                        )
+                    ));
+                    
+                }
+                
+            }
+            
+        }
         
     }
     
