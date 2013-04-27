@@ -2,19 +2,18 @@
 
 $config = array(
     'cloggy_search_fulltext' => "CREATE TABLE IF NOT EXISTS `cloggy_search_fulltext` (
-        `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-        `source_table_name` varchar(255) NOT NULL,
-        `source_table_key` bigint(150) unsigned NOT NULL,
-        `source_table_field` varchar(255) NOT NULL,
-        `source_sentences` varchar(255) DEFAULT NULL,
-        `source_text` text,
-        `source_created` datetime NOT NULL,
-        `source_updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-        PRIMARY KEY (`id`),
-        KEY `source_table_name` (`source_table_name`,`source_table_key`,`source_table_field`),
-        FULLTEXT KEY `source_sentences` (`source_sentences`),
-        FULLTEXT KEY `source_text` (`source_text`)
-      ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;",
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `source_table_name` varchar(255) NOT NULL,
+  `source_table_key` bigint(150) unsigned NOT NULL,
+  `source_table_field` varchar(255) NOT NULL,
+  `source_sentences` varchar(255) DEFAULT NULL,
+  `source_text` text,
+  `source_created` datetime NOT NULL,
+  `source_updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `source_table_name` (`source_table_name`,`source_table_key`,`source_table_field`),
+  FULLTEXT KEY `source_fields` (`source_sentences`,`source_text`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;",
     'cloggy_search_last_update' => "CREATE TABLE IF NOT EXISTS `cloggy_search_last_update` (
         `id` int(11) NOT NULL AUTO_INCREMENT,
         `engine` varchar(255) NOT NULL,

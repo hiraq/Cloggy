@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 13, 2013 at 12:45 PM
--- Server version: 5.5.29
+-- Generation Time: Apr 27, 2013 at 12:13 AM
+-- Server version: 5.5.31
 -- PHP Version: 5.4.6-1ubuntu1.2
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
@@ -37,9 +37,29 @@ CREATE TABLE IF NOT EXISTS `cloggy_search_fulltext` (
   `source_updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `source_table_name` (`source_table_name`,`source_table_key`,`source_table_field`),
-  FULLTEXT KEY `source_sentences` (`source_sentences`),
-  FULLTEXT KEY `source_text` (`source_text`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  FULLTEXT KEY `source_fields` (`source_sentences`,`source_text`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+
+--
+-- Dumping data for table `cloggy_search_fulltext`
+--
+
+INSERT INTO `cloggy_search_fulltext` (`id`, `source_table_name`, `source_table_key`, `source_table_field`, `source_sentences`, `source_text`, `source_created`, `source_updated`) VALUES
+(1, 'cloggy_node_contents', 41, 'content', NULL, '<p>dfdfdf</p>\n', '2013-04-24 22:58:15', '0000-00-00 00:00:00'),
+(2, 'cloggy_node_contents', 40, 'content', NULL, 'dfdfdff', '2013-04-24 22:58:15', '0000-00-00 00:00:00'),
+(3, 'cloggy_node_contents', 39, 'content', NULL, 'Welcome to WordPress. This is your first post. Edit or delete it, then start blogging!', '2013-04-24 22:58:15', '0000-00-00 00:00:00'),
+(4, 'cloggy_node_subjects', 236, 'subject', 'test', NULL, '2013-04-24 22:58:15', '0000-00-00 00:00:00'),
+(5, 'cloggy_node_subjects', 235, 'subject', 'test featured image', NULL, '2013-04-24 22:58:15', '0000-00-00 00:00:00'),
+(6, 'cloggy_node_subjects', 234, 'subject', 'Hello world!', NULL, '2013-04-24 22:58:15', '0000-00-00 00:00:00'),
+(7, 'cloggy_node_subjects', 233, 'subject', 'tes3', NULL, '2013-04-24 22:58:15', '0000-00-00 00:00:00'),
+(8, 'cloggy_node_subjects', 232, 'subject', 'tes2', NULL, '2013-04-24 22:58:15', '0000-00-00 00:00:00'),
+(9, 'cloggy_node_subjects', 231, 'subject', 'tes1', NULL, '2013-04-24 22:58:15', '0000-00-00 00:00:00'),
+(10, 'cloggy_node_subjects', 230, 'subject', 'Uncategorized', NULL, '2013-04-24 22:58:15', '0000-00-00 00:00:00'),
+(11, 'cloggy_node_subjects', 229, 'subject', 'testchildren', NULL, '2013-04-24 22:58:15', '0000-00-00 00:00:00'),
+(12, 'cloggy_node_subjects', 228, 'subject', 'testcat2', NULL, '2013-04-24 22:58:15', '0000-00-00 00:00:00'),
+(13, 'cloggy_node_subjects', 227, 'subject', 'testcat1', NULL, '2013-04-24 22:58:15', '0000-00-00 00:00:00'),
+(14, 'cloggy_node_subjects', 226, 'subject', 'testc3', NULL, '2013-04-24 22:58:15', '0000-00-00 00:00:00'),
+(15, 'cloggy_node_subjects', 237, 'subject', 'test category to index', NULL, '2013-04-24 22:59:07', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -59,7 +79,15 @@ CREATE TABLE IF NOT EXISTS `cloggy_search_last_update` (
   KEY `engine` (`engine`,`object_name`),
   KEY `object_id` (`object_id`),
   KEY `object_type` (`object_type`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `cloggy_search_last_update`
+--
+
+INSERT INTO `cloggy_search_last_update` (`id`, `engine`, `object_name`, `object_type`, `object_id`, `created`, `updated`) VALUES
+(1, 'mysqlfulltext', 'cloggy_node_contents', 'table', 41, '2013-04-24 22:58:15', '0000-00-00 00:00:00'),
+(2, 'mysqlfulltext', 'cloggy_node_subjects', 'table', 237, '2013-04-24 22:58:15', '2013-04-24 15:59:07');
 
 -- --------------------------------------------------------
 
