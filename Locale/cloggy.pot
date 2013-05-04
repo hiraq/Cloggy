@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2013-04-27 08:22+0700\n"
+"POT-Creation-Date: 2013-05-05 01:48+0700\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -14,11 +14,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: Controller/CloggyAppController.php:84
+#: Controller/CloggyAppController.php:88
+msgid "Security Auth error. Request has been black holed."
+msgstr ""
+
+#: Controller/CloggyAppController.php:92
+msgid "Security CSRF error."
+msgstr ""
+
+#: Controller/CloggyAppController.php:99
+msgid "HTTP method restriction failure"
+msgstr ""
+
+#: Controller/CloggyAppController.php:103
+msgid "SSL method restriction failure"
+msgstr ""
+
+#: Controller/CloggyAppController.php:122
 msgid "You do not have permission to access that page."
 msgstr ""
 
-#: Controller/CloggyAppController.php:230
+#: Controller/CloggyAppController.php:268
 msgid "Identify yourself!"
 msgstr ""
 
@@ -171,7 +187,7 @@ msgstr ""
 msgid "Posts"
 msgstr ""
 
-#: Module/CloggyBlog/Config/menus.php:9;13;14;17
+#: Module/CloggyBlog/Config/menus.php:9;13;17
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_categories.ctp:5
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:5
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_tags.ctp:5
@@ -180,20 +196,22 @@ msgstr ""
 msgid "Manage"
 msgstr ""
 
-#: Module/CloggyBlog/Config/menus.php:10;18
+#: Module/CloggyBlog/Config/menus.php:10;14;18
+#: Module/CloggyBlog/View/CloggyBlogCategories/add.ctp:42
+#: Module/CloggyBlog/View/CloggyBlogTags/add.ctp:33
 msgid "Add"
 msgstr ""
 
 #: Module/CloggyBlog/Config/menus.php:12
-#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:30
-#: Module/CloggyBlog/View/CloggyBlogPosts/edit.ctp:37
+#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:48;54
+#: Module/CloggyBlog/View/CloggyBlogPosts/edit.ctp:51;55;61
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_categories.ctp:5
 msgid "Categories"
 msgstr ""
 
-#: Module/CloggyBlog/Config/menus.php:16
-#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:42
-#: Module/CloggyBlog/View/CloggyBlogPosts/edit.ctp:53
+#: Module/CloggyBlog/Config/menus.php:16;25
+#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:63
+#: Module/CloggyBlog/View/CloggyBlogPosts/edit.ctp:73
 msgid "Tags"
 msgstr ""
 
@@ -202,30 +220,30 @@ msgid "Create New"
 msgstr ""
 
 #: Module/CloggyBlog/Config/menus.php:23
-msgid "Add Post"
+msgid "Post"
 msgstr ""
 
 #: Module/CloggyBlog/Config/menus.php:24
-msgid "Add Category"
+msgid "Category"
 msgstr ""
 
-#: Module/CloggyBlog/Config/menus.php:25
-msgid "Add Tags"
+#: Module/CloggyBlog/Config/menus.php:27
+msgid "Importer"
 msgstr ""
 
-#: Module/CloggyBlog/Config/menus.php:26
-msgid "WordPress Importer"
+#: Module/CloggyBlog/Config/menus.php:28
+msgid "WordPress"
 msgstr ""
 
 #: Module/CloggyBlog/Controller/CloggyBlogCategoriesController.php:34
 msgid "Cloggy - CloggyBlog Categories"
 msgstr ""
 
-#: Module/CloggyBlog/Controller/CloggyBlogCategoriesController.php:60;162
+#: Module/CloggyBlog/Controller/CloggyBlogCategoriesController.php:60;171
 msgid "Category field required"
 msgstr ""
 
-#: Module/CloggyBlog/Controller/CloggyBlogCategoriesController.php:64;166
+#: Module/CloggyBlog/Controller/CloggyBlogCategoriesController.php:64;175
 #: Module/CloggyBlog/Controller/CloggyBlogTagsController.php:65
 msgid "Category has been exists"
 msgstr ""
@@ -234,15 +252,15 @@ msgstr ""
 msgid "Category has been saved."
 msgstr ""
 
-#: Module/CloggyBlog/Controller/CloggyBlogCategoriesController.php:102
+#: Module/CloggyBlog/Controller/CloggyBlogCategoriesController.php:111
 msgid "Cloggy - CloggyBlog Add New Category"
 msgstr ""
 
-#: Module/CloggyBlog/Controller/CloggyBlogCategoriesController.php:192
+#: Module/CloggyBlog/Controller/CloggyBlogCategoriesController.php:201
 msgid "Your category has been updated."
 msgstr ""
 
-#: Module/CloggyBlog/Controller/CloggyBlogCategoriesController.php:198
+#: Module/CloggyBlog/Controller/CloggyBlogCategoriesController.php:216
 msgid "Cloggy - CloggyBlog Edit Category"
 msgstr ""
 
@@ -266,31 +284,31 @@ msgstr ""
 msgid "Import Post From Wordpress"
 msgstr ""
 
-#: Module/CloggyBlog/Controller/CloggyBlogPostsController.php:70
+#: Module/CloggyBlog/Controller/CloggyBlogPostsController.php:78
 msgid "Title field required"
 msgstr ""
 
-#: Module/CloggyBlog/Controller/CloggyBlogPostsController.php:74
+#: Module/CloggyBlog/Controller/CloggyBlogPostsController.php:82
 msgid "The title has been exists"
 msgstr ""
 
-#: Module/CloggyBlog/Controller/CloggyBlogPostsController.php:81
+#: Module/CloggyBlog/Controller/CloggyBlogPostsController.php:89
 msgid "Content field required"
 msgstr ""
 
-#: Module/CloggyBlog/Controller/CloggyBlogPostsController.php:138
+#: Module/CloggyBlog/Controller/CloggyBlogPostsController.php:146
 msgid "Your post has been added"
 msgstr ""
 
-#: Module/CloggyBlog/Controller/CloggyBlogPostsController.php:146;267
+#: Module/CloggyBlog/Controller/CloggyBlogPostsController.php:166;297
 msgid "Cloggy - CloggyBlogPost - Add New Post"
 msgstr ""
 
-#: Module/CloggyBlog/Controller/CloggyBlogPostsController.php:262
+#: Module/CloggyBlog/Controller/CloggyBlogPostsController.php:282
 msgid "Your post has been updated"
 msgstr ""
 
-#: Module/CloggyBlog/Controller/CloggyBlogPostsController.php:361
+#: Module/CloggyBlog/Controller/CloggyBlogPostsController.php:391
 #: Module/CloggyBlog/View/Elements/cloggy_blog_post_image_dialog.ctp:106
 msgid "Upload success"
 msgstr ""
@@ -344,13 +362,15 @@ msgstr ""
 msgid "Category Parent"
 msgstr ""
 
-#: Module/CloggyBlog/View/CloggyBlogCategories/add.ctp:36
-#: Module/CloggyBlog/View/CloggyBlogCategories/edit.ctp:44
-msgid "Choose Parent Category"
-msgstr ""
-
 #: Module/CloggyBlog/View/CloggyBlogCategories/edit.ctp:8
 msgid "Edit Category"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogCategories/edit.ctp:52
+#: Module/CloggyBlog/View/CloggyBlogPosts/edit.ctp:87
+#: Module/CloggyBlog/View/CloggyBlogTags/edit.ctp:39
+#: Module/CloggySearch/View/CloggySearchHome/index.ctp:17
+msgid "Update"
 msgstr ""
 
 #: Module/CloggyBlog/View/CloggyBlogCategories/index.ctp:7
@@ -374,8 +394,8 @@ msgid "Actions"
 msgstr ""
 
 #: Module/CloggyBlog/View/CloggyBlogCategories/index.ctp:24
-#: Module/CloggyBlog/View/CloggyBlogPosts/edit.ctp:7
-#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:35
+#: Module/CloggyBlog/View/CloggyBlogPosts/edit.ctp:8
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:37
 #: Module/CloggyBlog/View/CloggyBlogTags/index.ctp:24
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_categories.ctp:26
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:37
@@ -388,7 +408,7 @@ msgid "Edit"
 msgstr ""
 
 #: Module/CloggyBlog/View/CloggyBlogCategories/index.ctp:27
-#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:38
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:40
 #: Module/CloggyBlog/View/CloggyBlogTags/index.ctp:27
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_categories.ctp:29
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:40
@@ -401,7 +421,7 @@ msgid "Remove"
 msgstr ""
 
 #: Module/CloggyBlog/View/CloggyBlogCategories/index.ctp:34
-#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:54
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:56
 #: Module/CloggyBlog/View/CloggyBlogTags/index.ctp:34
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_categories.ctp:36
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:56
@@ -414,7 +434,7 @@ msgid "No data available"
 msgstr ""
 
 #: Module/CloggyBlog/View/CloggyBlogCategories/index.ctp:41
-#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:61
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:63
 #: Module/CloggyBlog/View/CloggyBlogTags/index.ctp:41
 #: Module/CloggySearch/View/CloggySearchMysql/index.ctp:49
 #: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:106
@@ -424,7 +444,7 @@ msgid "With Selected"
 msgstr ""
 
 #: Module/CloggyBlog/View/CloggyBlogCategories/index.ctp:44
-#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:64
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:66
 #: Module/CloggyBlog/View/CloggyBlogTags/index.ctp:44
 #: Module/CloggySearch/View/CloggySearchMysql/index.ctp:52
 #: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:109
@@ -486,43 +506,61 @@ msgid "Not Import Tags"
 msgstr ""
 
 #: Module/CloggyBlog/View/CloggyBlogImport/wordpress.ctp:72
-msgid "Not Import Meta"
-msgstr ""
-
-#: Module/CloggyBlog/View/CloggyBlogImport/wordpress.ctp:75
 msgid "Include Custom Post Types"
 msgstr ""
 
-#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:8
+#: Module/CloggyBlog/View/CloggyBlogImport/wordpress.ctp:87
+msgid "Import"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:14
 msgid "Add New Post"
 msgstr ""
 
-#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:21
-#: Module/CloggyBlog/View/CloggyBlogPosts/edit.ctp:28
+#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:28
+#: Module/CloggyBlog/View/CloggyBlogPosts/edit.ctp:30
 #: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:6
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:9
 msgid "Title"
 msgstr ""
 
-#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:22
-#: Module/CloggyBlog/View/CloggyBlogPosts/edit.ctp:29
+#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:31
+#: Module/CloggyBlog/View/CloggyBlogPosts/edit.ctp:33
 msgid "title"
 msgstr ""
 
-#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:24
-#: Module/CloggyBlog/View/CloggyBlogPosts/edit.ctp:31
+#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:35
+#: Module/CloggyBlog/View/CloggyBlogPosts/edit.ctp:39
 msgid "Content"
 msgstr ""
 
-#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:45
-#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:46
+#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:65
+#: Module/CloggyBlog/View/CloggyBlogPosts/edit.ctp:75
+msgid "tags"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:67
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:8
+#: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:11
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:46
+msgid "Status"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:69
+#: Module/CloggyBlog/View/CloggyBlogPosts/edit.ctp:80
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:48
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:48
 msgid "Publish"
 msgstr ""
 
-#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:46
+#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:70
+#: Module/CloggyBlog/View/CloggyBlogPosts/edit.ctp:81
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:32
 msgid "Draft"
+msgstr ""
+
+#: Module/CloggyBlog/View/CloggyBlogPosts/add.ctp:75
+msgid "Save"
 msgstr ""
 
 #: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:7
@@ -531,48 +569,42 @@ msgstr ""
 msgid "Author"
 msgstr ""
 
-#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:8
-#: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:11
-#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:46
-msgid "Status"
-msgstr ""
-
 #: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:9
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:12
 #: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:47
 msgid "Created"
 msgstr ""
 
-#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:43
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:45
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:45
 msgid "Make a draft"
 msgstr ""
 
-#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:65
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:67
 msgid "Draft All"
 msgstr ""
 
-#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:66
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:68
 msgid "Publish All"
 msgstr ""
 
-#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:107
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:109
 msgid "Are you sure want to delete all these posts?"
 msgstr ""
 
-#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:112
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:114
 msgid "Are you sure want to make draft all these posts?"
 msgstr ""
 
-#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:144
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:146
 msgid "Are you sure to remove this post?"
 msgstr ""
 
-#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:151
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:153
 msgid "Are you sure to make draft this post?"
 msgstr ""
 
-#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:158
+#: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:160
 msgid "Are you sure to publish this post?"
 msgstr ""
 
@@ -652,7 +684,7 @@ msgid "Plugin"
 msgstr ""
 
 #: Module/CloggyDocs/Config/menus.php:9;35
-#: Module/CloggySearch/Config/menus.php:12
+#: Module/CloggySearch/Config/menus.php:10
 msgid "About"
 msgstr ""
 
@@ -742,15 +774,7 @@ msgstr ""
 msgid "Mysql"
 msgstr ""
 
-#: Module/CloggySearch/Config/menus.php:7;14
-msgid "Sphinx"
-msgstr ""
-
-#: Module/CloggySearch/Config/menus.php:8;15
-msgid "Solr"
-msgstr ""
-
-#: Module/CloggySearch/Config/menus.php:13
+#: Module/CloggySearch/Config/menus.php:11
 msgid "MySQL"
 msgstr ""
 
@@ -774,15 +798,15 @@ msgstr ""
 msgid "Cloggy Search Management - MysqlFullText Search Engine"
 msgstr ""
 
-#: Module/CloggySearch/Controller/CloggySearchMysqlController.php:69
+#: Module/CloggySearch/Controller/CloggySearchMysqlController.php:75
 msgid "Test MysqlFullText - Query: "
 msgstr ""
 
-#: Module/CloggySearch/Controller/CloggySearchMysqlController.php:72
+#: Module/CloggySearch/Controller/CloggySearchMysqlController.php:78
 msgid "Test MysqlFullText"
 msgstr ""
 
-#: Module/CloggySearch/Controller/CloggySearchMysqlController.php:78
+#: Module/CloggySearch/Controller/CloggySearchMysqlController.php:84
 msgid "Cloggy Search - MysqlFullText Documentation"
 msgstr ""
 
@@ -804,10 +828,6 @@ msgstr ""
 
 #: Module/CloggySearch/View/CloggySearchHome/index.ctp:5
 msgid "Action"
-msgstr ""
-
-#: Module/CloggySearch/View/CloggySearchHome/index.ctp:17
-msgid "Update"
 msgstr ""
 
 #: Module/CloggySearch/View/CloggySearchHome/index.ctp:18
@@ -898,6 +918,10 @@ msgstr ""
 
 #: Module/CloggySearch/View/CloggySearchMysql/update.ctp:2
 msgid "MysqlFullText index has been updated"
+msgstr ""
+
+#: Module/CloggySearch/View/CloggySearchMysql/update_failed.ctp:2
+msgid "MysqlFullText failed to update, schema not found."
 msgstr ""
 
 #: Module/CloggyUsers/Config/menus.php:5;20
@@ -1333,6 +1357,10 @@ msgstr ""
 msgid "No modules registered"
 msgstr ""
 
+#: View/Themes/default/Elements/cloggy_blackhole.ctp:4
+msgid "Warning!"
+msgstr ""
+
 #: View/Themes/default/Elements/noscript.ctp:2
 msgid "You must enable javascript at your browser."
 msgstr ""
@@ -1341,7 +1369,15 @@ msgstr ""
 msgid "Cloggy Administrator"
 msgstr ""
 
+#: View/Themes/default/Home/login.ctp:45
+msgid "Submit"
+msgstr ""
+
 #: View/Themes/default/Install/index.ctp:21
 msgid "Setup Administrator"
+msgstr ""
+
+#: View/Themes/default/Layouts/cloggy_blackhole_layout.ctp:17
+msgid "Security Breach"
 msgstr ""
 
