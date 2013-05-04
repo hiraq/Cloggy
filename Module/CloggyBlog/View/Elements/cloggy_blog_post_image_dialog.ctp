@@ -87,8 +87,8 @@
                 });                        
             },
             onSelect: function() {
-                        
-                filename = this.filename();
+                
+                filename = this.filename();                
                 jQuery('#filename').html('');
                 jQuery('#filename').append(filename);
                         

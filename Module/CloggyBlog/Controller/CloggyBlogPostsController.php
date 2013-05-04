@@ -15,7 +15,15 @@ class CloggyBlogPostsController extends CloggyAppController {
 
     public function beforeFilter() {
         parent::beforeFilter();  
-        $this->helpers[] = 'CloggyBlogAsset';
+        $this->helpers[] = 'CloggyBlogAsset';       
+        
+        /*
+         * disable security check for upload image
+         */
+        if ($this->request->params['action'] == 'upload_image') {
+            $this->Components->disable('Security');
+        }
+        
     }
 
     public function index() {
@@ -49,7 +57,7 @@ class CloggyBlogPostsController extends CloggyAppController {
         }        
 
         if ($this->request->is('post')) {
-
+            
             $dataValidate = $this->request->data['CloggyBlogPost'];
 
             /*
@@ -124,7 +132,7 @@ class CloggyBlogPostsController extends CloggyAppController {
                  */
                 $postId = $this->CloggyBlogPost->generatePost(array(
                     'postNodeId' => $this->request->data['CloggyBlogPost']['post_id'],
-                    'stat' => $this->request->data['submit'] == 'Draft' ? 0 : 1,
+                    'stat' => $this->request->data['CloggyBlogPost']['status'] == 'draft' ? 0 : 1,
                     'userId' => $this->_user['id'],
                     'title' => $this->request->data['CloggyBlogPost']['title'],
                     'content' => $this->request->data['CloggyBlogPost']['content'],
@@ -141,10 +149,22 @@ class CloggyBlogPostsController extends CloggyAppController {
             } else {
                 $this->set('errors', $this->CloggyValidation->validationErrors);
             }
+            
+            $postNodeId = $this->request->data['CloggyBlogPost']['post_id'];
+        }
+        
+        $listCategories = array();
+        
+        if ($categories) {
+            
+            foreach($categories as $category) {
+                $listCategories[$category['CloggyNode']['id']] = $category['CloggySubject']['subject'];
+            }
+            
         }
 
         $this->set('title_for_layout', __d('cloggy','Cloggy - CloggyBlogPost - Add New Post'));
-        $this->set(compact('categories', 'tags','postNodeId'));
+        $this->set(compact('categories', 'tags','postNodeId','listCategories'));
     }
 
     public function edit($id = null) {
@@ -253,7 +273,7 @@ class CloggyBlogPostsController extends CloggyAppController {
             /*
              * update stat
              */
-            $stat = $this->request->data['submit'] == 'Draft' ? 0 : 1;
+            $stat = $this->request->data['CloggyBlogPost']['status'] == 'draft' ? 0 : 1;
             $this->CloggyBlogPost->updatePostStat($id, $stat);
 
             /*
@@ -263,9 +283,19 @@ class CloggyBlogPostsController extends CloggyAppController {
             $this->redirect($this->request->here);
             exit();
         }
-
+        
+        $listCategories = array();
+        
+        if ($categories) {
+            
+            foreach($categories as $category) {
+                $listCategories[$category['CloggyNode']['id']] = $category['CloggySubject']['subject'];
+            }
+            
+        }
+        
         $this->set('title_for_layout', __d('cloggy','Cloggy - CloggyBlogPost - Add New Post'));
-        $this->set(compact('categories', 'tags', 'id', 'detail', 'postCategories', 'postTags','image'));
+        $this->set(compact('categories', 'tags', 'id', 'detail', 'postCategories', 'postTags','image','listCategories'));
     }
     
     public function upload_image() {

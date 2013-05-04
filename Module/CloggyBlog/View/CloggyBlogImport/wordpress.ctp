@@ -50,29 +50,26 @@ echo $this->Form->create('CloggyBlogImport', array(
     ?>">
         <label class="control-label"><?php echo __d('cloggy','Import Options'); ?></label>
         <div class="controls">
-            <label class="checkbox">
-                <input type="checkbox" name="data[CloggyBlogImport][wordpress_import_options][import_featured_image]" value="1" /> <?php echo __d('cloggy','Download Featured Image'); ?>
+            <label class="checkbox">                
+                <?php echo $this->Form->checkbox('CloggyBlogImport.wordpress_import_options.import_featured_image',array('value' => 1)); ?> <?php echo __d('cloggy','Download Featured Image'); ?>
             </label>
-            <label class="checkbox">
-                <input type="checkbox" name="data[CloggyBlogImport][wordpress_import_options][make_draft]" value="1" /> <?php echo __d('cloggy','Make Draft'); ?>
+            <label class="checkbox">                
+                <?php echo $this->Form->checkbox('CloggyBlogImport.wordpress_import_options.make_draft',array('value' => 1)); ?> <?php echo __d('cloggy','Make Draft'); ?>
             </label>
-            <label class="checkbox">
-                <input type="checkbox" name="data[CloggyBlogImport][wordpress_import_options][only_published_posts]" value="1" /> <?php echo __d('cloggy','Only Published Posts'); ?>
+            <label class="checkbox">                
+                <?php echo $this->Form->checkbox('CloggyBlogImport.wordpress_import_options.only_published_posts',array('value' => 1)); ?> <?php echo __d('cloggy','Only Published Posts'); ?>
             </label>
-            <label class="checkbox">
-                <input type="checkbox" name="data[CloggyBlogImport][wordpress_import_options][only_drafted_posts]" value="1" /> <?php echo __d('cloggy','Only Drafted Posts'); ?>
+            <label class="checkbox">                
+                <?php echo $this->Form->checkbox('CloggyBlogImport.wordpress_import_options.only_drafted_posts',array('value' => 1)); ?> <?php echo __d('cloggy','Only Drafted Posts'); ?>                
             </label>
-            <label class="checkbox">
-                <input type="checkbox" name="data[CloggyBlogImport][wordpress_import_options][disable_categories]" value="1" /> <?php echo __d('cloggy','Not Import Categories'); ?>
+            <label class="checkbox">                
+                <?php echo $this->Form->checkbox('CloggyBlogImport.wordpress_import_options.disable_categories',array('value' => 1)); ?> <?php echo __d('cloggy','Not Import Categories'); ?>
             </label>
-            <label class="checkbox">
-                <input type="checkbox" name="data[CloggyBlogImport][wordpress_import_options][disable_tags]" value="1" /> <?php echo __d('cloggy','Not Import Tags'); ?>
+            <label class="checkbox">                
+                <?php echo $this->Form->checkbox('CloggyBlogImport.wordpress_import_options.disable_tags',array('value' => 1)); ?> <?php echo __d('cloggy','Not Import Tags'); ?>
             </label>
-            <label class="checkbox">
-                <input type="checkbox" name="data[CloggyBlogImport][wordpress_import_options][disable_metas]" value="1" /> <?php echo __d('cloggy','Not Import Meta'); ?>
-            </label>
-            <label class="checkbox">
-                <input type="checkbox" name="data[CloggyBlogImport][wordpress_import_options][include_custom_post_types]" value="1" /> <?php echo __d('cloggy','Include Custom Post Types'); ?>
+            <label class="checkbox">                
+                <?php echo $this->Form->checkbox('CloggyBlogImport.wordpress_import_options.include_custom_post_types',array('value' => 1)); ?> <?php echo __d('cloggy','Include Custom Post Types'); ?>
             </label>
             
             <span class="help-inline">
@@ -86,8 +83,11 @@ echo $this->Form->create('CloggyBlogImport', array(
     </div>
 
     <div class="control-group">
-        <div class="controls">				
-            <input type="submit" name="submit" value="Import" class="btn btn-primary" />
+        <div class="controls">				            
+            <?php echo $this->Form->submit(__d('cloggy','Import'),array(
+                'div' => false,
+                'class' => 'btn btn-primary'
+            )); ?>
         </div>
     </div>
 </fieldset>

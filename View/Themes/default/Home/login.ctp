@@ -42,7 +42,10 @@
                     </div>
                     <div class="control-group">
                         <div class="controls">								
-                            <input type="submit" class="btn btn-primary" value="Sign In" name="submit" />
+                            <?php echo $this->Form->submit(__d('cloggy','Submit'),array(
+                                'div' => false,
+                                'class' => 'btn btn-primary'
+                            )); ?>
                         </div>
                     </div>
                 </fieldset>

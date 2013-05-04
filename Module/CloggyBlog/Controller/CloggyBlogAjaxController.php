@@ -20,6 +20,12 @@ class CloggyBlogAjaxController extends CloggyAppController {
         }
 
         $this->autoRender = false;
+        
+        /*
+         * disable SecurityComponent
+         */
+        $this->Components->disable('Security');
+        
     }
 
     public function delete_all_posts() {

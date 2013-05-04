@@ -73,7 +73,7 @@ class CloggyBlogCategory extends CloggyAppModel {
         $categoriesNodeTypeId = $this->get('node_type')->find('first', array(
             'contain' => false,
             'conditions' => array('CloggyNodeType.node_type_name' => 'cloggy_blog_categories')
-                ));
+        ));
 
         if (!empty($categoriesNodeTypeId)) {
 
@@ -90,12 +90,12 @@ class CloggyBlogCategory extends CloggyAppModel {
 
                     $conditions = array_merge($conditions, array(
                         'CloggyNode.id !=' => $except
-                            ));
+                    ));
                 } else {
 
                     $conditions = array_merge($conditions, array(
                         'NOT' => array('CloggyNode.id' => $except)
-                            ));
+                    ));
                 }
             }
 
@@ -110,7 +110,7 @@ class CloggyBlogCategory extends CloggyAppModel {
                 ),
                 'conditions' => $conditions,
                 'fields' => array('CloggyNode.id')
-                    ));
+            ));
 
             return $categories;
         }

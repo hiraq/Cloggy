@@ -97,8 +97,17 @@ class CloggyBlogCategoriesController extends CloggyAppController {
         }
 
         $categories = $this->CloggyBlogCategory->getAllCategories();
-
-        $this->set(compact('categories'));
+        $listCategories = array();
+        
+        if ($categories) {
+            
+            foreach($categories as $category) {
+                $listCategories[$category['CloggyNode']['id']] = $category['CloggySubject']['subject'];
+            }
+            
+        }
+        
+        $this->set(compact('listCategories'));
         $this->set('title_for_layout', __d('cloggy','Cloggy - CloggyBlog Add New Category'));
     }
 
@@ -110,7 +119,7 @@ class CloggyBlogCategoriesController extends CloggyAppController {
         }
 
         //get detail category
-        $category = $this->CloggyBlogCategory->getDetailCategory($id);
+        $detail = $this->CloggyBlogCategory->getDetailCategory($id);
 
         /*
          * if form submitted
@@ -134,7 +143,7 @@ class CloggyBlogCategoriesController extends CloggyAppController {
             /*
              * check if category need to update or not
              */
-            if ($categoryName != $category['CloggySubject']['subject']) {
+            if ($categoryName != $detail['CloggySubject']['subject']) {
                 $dataToValidate['category_name'] = $categoryName;
             }
 
@@ -188,13 +197,22 @@ class CloggyBlogCategoriesController extends CloggyAppController {
             if ($parent['CloggyNode']['id'] != $categoryParent && $categoryParent > 0) {
                 $this->CloggyBlogCategory->updateCategoryParent($id, $categoryParent);
             }
-
+            
             $this->set('success', __d('cloggy','Your category has been updated.'));
         }
 
         $categories = $this->CloggyBlogCategory->getAllCategories($id);
-
-        $this->set(compact('categories', 'category', 'id'));
+        $listCategories = array();
+        
+        if ($categories) {
+            
+            foreach($categories as $category) {
+                $listCategories[$category['CloggyNode']['id']] = $category['CloggySubject']['subject'];
+            }
+            
+        }
+        
+        $this->set(compact('listCategories', 'detail', 'id'));
         $this->set('title_for_layout', __d('cloggy','Cloggy - CloggyBlog Edit Category'));
     }
 

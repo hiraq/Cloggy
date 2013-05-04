@@ -142,8 +142,8 @@
       onSelect: options.onSelect,
 
       /** get filename */
-      filename: function () {
-        return input.attr('value');
+      filename: function () {        
+        return input.val();
       },
 
       /** get/set params */

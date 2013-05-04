@@ -25,7 +25,7 @@ echo $this->Form->create('CloggyBlogCategories', array(
                 'label' => false,
                 'placeholder' => __d('cloggy','category name'),
                 'type' => 'text',
-                'value' => $category['CloggySubject']['subject'],
+                'value' => $detail['CloggySubject']['subject'],
                 'div' => false)
             );
             ?>
@@ -36,29 +36,23 @@ echo $this->Form->create('CloggyBlogCategories', array(
         </div>
     </div>
 
-<?php if ($categories) : ?>
+<?php if ($listCategories) : ?>
         <div class="control-group">
             <label class="control-label"><?php echo __d('cloggy','Category Parent'); ?></label>
             <div class="controls">
-                <select name="data[CloggyBlogCategories][category_parent]">
-                    <option value="0"><?php echo __d('cloggy','Choose Parent Category'); ?></option>
-                    <?php foreach ($categories as $key) : ?>
-                        <option value="<?php echo $key['CloggyNode']['id']; ?>" <?php
-                if (
-                        $key['CloggyNode']['id'] == $category['CloggyParentNode']['CloggyNode']['id'])
-                    echo 'selected="selected"'
-                    ?>>
-                        <?php echo $key['CloggySubject']['subject']; ?>
-                        </option>
-    <?php endforeach; ?>
-                </select>
+                <?php echo $this->Form->select('category_parent',$listCategories,array(
+                    'value' => $detail['CloggyParentNode']['CloggyNode']['id']
+                )); ?>
             </div>
         </div>
 <?php endif; ?>
 
     <div class="control-group">
         <div class="controls">				
-            <input type="submit" name="submit" value="Add" class="btn btn-primary" />
+            <?php echo $this->Form->submit(__d('cloggy','Update'),array(
+                'div' => false,
+                'class' => 'btn btn-primary'
+            )); ?>
         </div>
     </div>
 </fieldset>

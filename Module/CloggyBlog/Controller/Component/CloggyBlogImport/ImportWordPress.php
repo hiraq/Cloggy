@@ -15,8 +15,7 @@ class ImportWordPress {
         'only_published_posts' => 0,
         'only_drafted_posts' => 0,
         'disable_categories' => 0,
-        'disable_tags' => 0,
-        'disable_metas' => 0,
+        'disable_tags' => 0,        
         'include_custom_post_types' => 0
     );
     

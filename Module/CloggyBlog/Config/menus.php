@@ -11,7 +11,7 @@ Configure::write('Cloggy.CloggyBlog.menus', array(
         ),
         __d('cloggy','Categories') => array(
             __d('cloggy','Manage') => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_categories'),
-            __d('cloggy','Manage') => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_categories/add'),
+            __d('cloggy','Add') => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_categories/add'),
         ),
         __d('cloggy','Tags') => array(
             __d('cloggy','Manage') => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_tags'),

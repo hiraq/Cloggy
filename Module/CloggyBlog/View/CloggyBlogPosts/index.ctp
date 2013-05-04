@@ -14,7 +14,9 @@
         <?php if (!empty($posts)) : ?>
             <?php foreach ($posts as $post) : ?>
                 <tr>
-                    <td><input type="checkbox" name="post[]" value="<?php echo $post['CloggyNode']['id']; ?>" /></td>
+                    <td>
+                        <input type="checkbox" name="post[]" value="<?php echo $post['CloggyNode']['id']; ?>" />                        
+                    </td>
                     <td>
                         <?php echo $this->Html->link($post['CloggySubject']['subject'], '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_posts/edit/' . $post['CloggyNode']['id']);
                         ?>

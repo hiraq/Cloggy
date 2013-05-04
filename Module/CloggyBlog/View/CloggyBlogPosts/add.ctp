@@ -3,7 +3,13 @@ echo $this->Form->create('CloggyBlogPost', array(
     'url' => '/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_posts/add'
 ));
 ?>
-<input type="hidden" name="data[CloggyBlogPost][post_id]" value="<?php echo $postNodeId; ?>" />
+
+<?php echo $this->Form->input('post_id',array(
+    'type' => 'hidden',
+    'value' => $postNodeId,
+    'div' =>false
+)); ?>
+
 <fieldset>
     <legend><?php echo __d('cloggy','Add New Post'); ?></legend>
     <div class="row">
@@ -18,32 +24,59 @@ echo $this->Form->create('CloggyBlogPost', array(
                         </div>
                     <?php endif; ?>
 
-                    <label><?php echo __d('cloggy','Title'); ?></label> 
-                    <input type="text" placeholder="<?php echo __d('cloggy','title'); ?>" class="span6" name="data[CloggyBlogPost][title]">
+                    <?php echo $this->Form->input('title',array(
+                        'label' => __d('cloggy','Title'),
+                        'div' => false,
+                        'class' => 'span6',
+                        'placeholder' => __d('cloggy','title'),
+                        'type' => 'text'
+                    )); ?>
                     <span class="help-block"><?php if (isset($errors['title'][0])) echo $errors['title'][0]; ?></span><br  /> 		
                     <label><?php echo __d('cloggy','Content'); ?></label>
                     <a href="#" title="upload images" id="cloggy_blog_add_image"><i class="icon-picture"></i></a>                    
-                    <textarea id="editor" name="data[CloggyBlogPost][content]"></textarea>
+                    <?php echo $this->Form->input('content',array(
+                        'label' => false,
+                        'div' => false,
+                        'type' => 'textarea',
+                        'id' => 'editor'
+                    )); ?>
                     <span class="help-block"><?php if (isset($errors['content'][0])) echo $errors['content'][0]; ?></span>	
                 </div>
-                <div class="span2">
-                    <label><?php echo __d('cloggy','Categories'); ?></label> 
+                <div class="span2">                    
                     <?php if (empty($categories)) : ?>
-                        <input type="text" name="data[CloggyBlogPost][categories]" placeholder="categories" class="span2" /><br  />
+                        <?php echo $this->Form->input('categories',array(
+                            'label' => __d('cloggy','Categories'),
+                            'div' => false,
+                            'type' => 'text',
+                            'class' => 'span2'
+                        )); ?>
                     <?php else: ?>
-                        <select multiple="multiple" class="span2" name="data[CloggyBlogPost][categories][]">						
-                            <?php foreach ($categories as $category) : ?>
-                                <option value="<?php echo $category['CloggySubject']['subject']; ?>">
-                                    <?php echo $category['CloggySubject']['subject']; ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                    <?php endif; ?> 
-                    <label><?php echo __d('cloggy','Tags'); ?></label> 					
-                    <input type="text" name="data[CloggyBlogPost][tags]" placeholder="tags" class="span2" /><br  />					
+                        <label><?php echo __d('cloggy','Categories'); ?></label>
+                        <?php echo $this->Form->select('categories',$listCategories,array(
+                            'multiple' => 'true',
+                            'style' => 'width: 140px'                            
+                        )); ?>
+                    <?php endif; ?>                     
+                    <?php echo $this->Form->input('tags',array(
+                        'type' => 'text',
+                        'div' => false,
+                        'label' => __d('cloggy','Tags'),
+                        'class' => 'span2',
+                        'placeholder' => __d('cloggy','tags')
+                    )); ?>
+                    <label><?php echo __d('cloggy','Status'); ?></label>
+                    <?php echo $this->Form->select('status',array(
+                        'publish' => __d('cloggy','Publish'),
+                        'draft' => __d('cloggy','Draft')),array(
+                        'style' => 'width: 140px',
+                        'value' => 'publish',                        
+                    )); ?>
                     <hr />
-                    <input type="submit" name="submit" value="<?php echo __d('cloggy','Publish'); ?>" class="btn btn-primary" />
-                    <input type="submit" name="submit" value="<?php echo __d('cloggy','Draft'); ?>" class="btn" /> 
+                    <?php echo $this->Form->submit(__d('cloggy','Save'),array(
+                        'class' => 'btn btn-primary',
+                        'div' => false,                        
+                    )); ?>                                        
+                    
                 </div>
             </div>
         </div>
@@ -80,7 +113,7 @@ echo $this->Form->create('CloggyBlogPost', array(
             //toggle modal image
             jQuery('#cloggy_modal_image').modal('toggle');                        
             
-        });
+        });                
         
     });
 </script>

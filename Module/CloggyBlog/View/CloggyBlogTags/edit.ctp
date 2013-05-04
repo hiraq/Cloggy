@@ -36,7 +36,10 @@ echo $this->Form->create('CloggyBlogTags', array(
 
     <div class="control-group">
         <div class="controls">				
-            <input type="submit" name="submit" value="Update" class="btn btn-primary" />
+            <?php echo $this->Form->submit(__d('cloggy','Update'),array(
+                'div' => false,
+                'class' => 'btn btn-primary'
+            )); ?>
         </div>
     </div>
 </fieldset>

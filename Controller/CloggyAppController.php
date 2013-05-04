@@ -13,6 +13,7 @@ class CloggyAppController extends AppController {
         'Js'
     );
     public $components = array(
+        'Security',
         'Session',
         'Auth',
         'RequestHandler',
@@ -72,7 +73,44 @@ class CloggyAppController extends AppController {
         if ($this->request->params['controller'] != 'home') {
             $this->Auth->deny('*');
         }
-                
+        
+        //custom security black hole callback
+        $this->Security->blackHoleCallback = 'callbackBlackHole';       
+    }
+    
+    public function callbackBlackHole($type) {
+        $this->autoRender = false;    
+        $this->layout = 'Cloggy.cloggy_blackhole_layout';
+        
+        switch($type) {
+            
+            case 'auth':
+                $message = __d('cloggy','Security Auth error. Request has been black holed.');
+                break;
+            
+            case 'csrf':
+                $message = __d('cloggy','Security CSRF error.');
+                break;
+            
+            case 'get':
+            case 'post':
+            case 'put':
+            case 'delete':
+                $message = __d('cloggy','HTTP method restriction failure');
+                break;
+            
+            case 'secure':
+                $message = __d('cloggy','SSL method restriction failure');
+                break;
+            
+            default:
+                $message = $type;
+                break;
+            
+        }
+        
+        $this->set(compact('message'));        
+        $this->render('Cloggy.Elements/cloggy_blackhole');
     }
     
     /**

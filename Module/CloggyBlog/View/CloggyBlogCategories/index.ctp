@@ -84,7 +84,7 @@
 
                 case 'action_delete_all':
                     urlAjax = '<?php echo Router::url('/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_blog/cloggy_blog_ajax/delete_all_categories'); ?>';
-                    confirmAction = confirm(<?php echo __d('cloggy','Are you sure want to delete all these categories?'); ?>);		
+                    confirmAction = confirm('<?php echo __d('cloggy','Are you sure want to delete all these categories?'); ?>');		
                     break;			
 		
                 }			
@@ -114,7 +114,7 @@
 		
                 e.preventDefault();
                 var href = jQuery(this).attr('href');
-                if(confirm(<?php echo __d('cloggy','Are you sure to remove this category?') ?>)) {
+                if(confirm('<?php echo __d('cloggy','Are you sure to remove this category?') ?>')) {
                     window.location = href;
                 }
 			

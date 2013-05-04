@@ -28,23 +28,21 @@ echo $this->Form->create('CloggyBlogCategories', array(
         </div>
     </div>
 
-<?php if ($categories) : ?>
+<?php if ($listCategories) : ?>
         <div class="control-group">
             <label class="control-label"><?php echo __d('cloggy','Category Parent'); ?></label>
             <div class="controls">
-                <select name="data[CloggyBlogCategories][category_parent]">
-                    <option value="0"><?php echo __d('cloggy','Choose Parent Category'); ?></option>
-                    <?php foreach ($categories as $category) : ?>
-                        <option value="<?php echo $category['CloggyNode']['id']; ?>"><?php echo $category['CloggySubject']['subject']; ?></option>
-    <?php endforeach; ?>
-                </select>
+                <?php echo $this->Form->select('category_parent',$listCategories); ?>
             </div>
         </div>
 <?php endif; ?>
 
     <div class="control-group">
         <div class="controls">				
-            <input type="submit" name="submit" value="Add" class="btn btn-primary" />
+            <?php echo $this->Form->submit(__d('cloggy','Add'),array(
+                'div' => false,
+                'class' => 'btn btn-primary'
+            )); ?>
         </div>
     </div>
 </fieldset>
