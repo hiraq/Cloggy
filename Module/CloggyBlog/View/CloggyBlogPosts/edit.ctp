@@ -53,8 +53,8 @@ echo $this->Form->create('CloggyBlogPost', array(
                     <label><?php echo __d('cloggy','Tags'); ?></label> 					
                     <input type="text" name="data[CloggyBlogPost][tags]" placeholder="tags" class="span2" value="<?php if (!empty($postTags)) echo join(',', $postTags); ?>" /><br  />					
                     <hr />
-                    <input type="submit" name="submit" value="Publish Now" class="btn btn-primary" />
-                    <input type="submit" name="submit" value="Draft" class="btn" /> 
+                    <input type="submit" name="submit" value="<?php echo __d('cloggy','Publish'); ?>" class="btn btn-primary" />
+                    <input type="submit" name="submit" value="<?php echo __d('cloggy','Draft'); ?>" class="btn" /> 
                 </div>
             </div>
         </div>

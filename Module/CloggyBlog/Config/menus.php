@@ -20,10 +20,12 @@ Configure::write('Cloggy.CloggyBlog.menus', array(
     ),
     'sidebar' => array(
         __d('cloggy','Create New') => array(
-            __d('cloggy','Add Post') => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_posts/add'),
-            __d('cloggy','Add Category') => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_categories/add'),
-            __d('cloggy','Add Tags') => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_tags/add'),
-            __d('cloggy','WordPress Importer') => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_import/wordpress')
+            __d('cloggy','Post') => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_posts/add'),
+            __d('cloggy','Category') => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_categories/add'),
+            __d('cloggy','Tags') => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_tags/add'),            
+        ),
+        __d('cloggy','Importer') => array(
+            __d('cloggy','WordPress') => CloggyCommon::urlModule('cloggy_blog', 'cloggy_blog_import/wordpress')
         )
     )
 ));
