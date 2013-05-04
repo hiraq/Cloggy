@@ -18,15 +18,22 @@ class CloggySearchSchemaComponent extends Component {
     
     public function engine($engine) {
         
-        //load schema
-        Configure::load($engine,'cloggy');
+        App::uses('CloggySearchSchema'.$engine,'CloggySearchSchema');
         
-        //get schema
-        $schema = Configure::read('Cloggy.CloggySearch.'.$engine);        
+        $className = 'CloggySearchSchema'.$engine;
         
-        if ($schema) {
-            $this->__schema = $schema;
-        }
+        if (class_exists($className)) {
+          
+            $classObject = new $className;
+        
+            /*
+             * only if object is an instance of CloggySearchSchemaBase
+             */
+            if (is_a($classObject,'CloggySearchSchemaBase')) {
+                $this->__schema = $classObject->getSchema();
+            }
+            
+        }        
         
     }
     

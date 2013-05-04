@@ -33,13 +33,19 @@ class CloggySearchMysqlController extends CloggyAppController {
     public function update() {
         
         //setup engine
-        $this->CloggySearchSchema->engine('schema_mysqlfull_text');
+        $this->CloggySearchSchema->engine('Mysql');
         
         //get schema
         $schema = $this->CloggySearchSchema->getSchema();                
         
-        //indexing data
-        $this->CloggySearchFullText->updateIndex($schema);
+        if ($schema) {
+          
+            //indexing data
+            $this->CloggySearchFullText->updateIndex($schema);
+            
+        } else {
+            $this->render('update_failed');
+        }       
         
     }
     

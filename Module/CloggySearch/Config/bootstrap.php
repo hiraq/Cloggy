@@ -1,7 +1,12 @@
 <?php
 
+//setup component main path
+$componentMainPath = APP . 'Plugin' . DS . 'Cloggy' . DS . 'Module' . DS.'CloggySearch'.DS.'Controller'.DS.'Component'.DS;
+
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * built path
  */
-?>
+App::build(array(
+    'CloggySearchSchema' => array($componentMainPath.'CloggySearchSchema'.DS),
+    'CloggySearchEngine' => array($componentMainPath.'CloggySearchEngine'.DS)
+),APP::REGISTER);

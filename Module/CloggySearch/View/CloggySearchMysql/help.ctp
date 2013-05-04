@@ -16,52 +16,44 @@
 <h4>Schema</h4>
 
 <p>
-    Edit CloggySearch module schema for mysql full text at <strong>CloggySearch/Config/schema_mysqlfull_text.php</strong>.
-    Assume your table that want to index named with <strong>'my_table'</strong>. Then schema created inside shema_mysqlfull_text should be: <br />
+    Edit CloggySearch module schema for mysql full text at <strong>CloggySearch/Controller/Component/CloggySearchSchema/CloggySearchSchemaMysql.php</strong>.
+    Assume your table that want to index named with <strong>'my_table_1'</strong>. Then schema created inside shema_mysqlfull_text should be: <br />
     <pre>
-    /*
-    * cloggy schema configurations
-    */
-   $config = array(
-       'table_prefix' => 'cloggy_',
-       'tables' => array(
-           'node_contents' => array(
-               'primary_key' => 'id',
-               'field' => array(
-                   'name' => 'content',
-                   'format' => 'text'
-               ),
-               'limit' => 100
-           ),
-           'node_subjects' => array(
-               'primary_key' => 'id',
-               'field' => array(
-                   'name' => 'subject',
-                   'format' => 'sentences'
-               ),
-               'limit' => 100
-           )
-       )
-   );
-
-    $myconfig = array(
-        'tables' => array(
-            'my_table' => array(
-                'primary_key' => 'id',
-                'field' => array(
-                    'name' => 'my_table_field_to_indexed',
-                    'format' => 'text'
+    $this->_schema = array(
+        'cloggy' => array(
+            'table_prefix' => 'cloggy_',
+            'tables' => array(
+                'node_contents' => array(
+                    'primary_key' => 'id',
+                    'field' => array(
+                        'name' => 'content',
+                        'format' => 'text'
+                    ),
+                    'limit' => 100
                 ),
-                'limit' => 50
+                'node_subjects' => array(
+                    'primary_key' => 'id',
+                    'field' => array(
+                        'name' => 'subject',
+                        'format' => 'sentences'
+                    ),
+                    'limit' => 100
+                )
+            )
+        ),
+        'my_tables' => array(
+            'tables' => array(
+                'my_table_1' => array(
+                    'primary_key' => 'id',
+                    'field' => array(
+                        'name' => 'field_1',
+                        'format' => 'sentences',                        
+                    ),
+                    'limit' => 20
+                )
             )
         )
     );
-
-    //write config
-    Configure::write('Cloggy.CloggySearch.schema_mysqlfull_text',array(
-        'cloggy' => $config,
-        'my_group' => $myconfig
-    ));
     </pre>
     <br />
     Required options: <br />
