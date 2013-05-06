@@ -14,6 +14,7 @@ Configure::write('Cloggy.CloggyDocs.menus', array(
         __d('cloggy','Module') => array(            
             __d('cloggy','Module MVC') => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_module'),
             __d('cloggy','Create') => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_module/create'),
+            __d('cloggy','Installation') => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_module/install'),
             __d('cloggy','Activation') => CloggyCommon::urlModule('cloggy_docs', 'cloggy_docs_module/activation'),
         ),
         __d('cloggy','Database') => array(

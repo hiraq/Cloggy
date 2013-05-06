@@ -16,6 +16,10 @@ class CloggyDocsModuleController extends CloggyAppController {
         $this->set('title_for_layout', 'CloggyDocs - Create A Module');
     }
     
+    public function install() {
+        $this->set('title_for_layout', 'CloggyDocs - Module Installation');
+    }
+    
     public function activation() {
         $this->set('title_for_layout', 'CloggyDocs - Activate Module');
     }
