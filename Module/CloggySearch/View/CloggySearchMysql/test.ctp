@@ -13,7 +13,10 @@ echo $this->Form->create('CloggySearch', array(
     'class' => 'input-big'
 )); ?>
 
-<input type="submit" name="submit" value="<?php echo __d('cloggy','Search'); ?>" class="btn" />
+<?php echo $this->Form->submit(__d('cloggy','Search'),array(
+    'class' => 'btn',
+    'div' => false,                        
+)); ?>  
 
 <?php echo $this->Form->end(); ?>
 

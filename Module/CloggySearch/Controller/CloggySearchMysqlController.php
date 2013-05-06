@@ -9,6 +9,13 @@ class CloggySearchMysqlController extends CloggyAppController {
     public function beforeFilter() {
         parent::beforeFilter();
         $this->CloggySearchSchema = $this->Components->load('CloggySearchSchema');
+        
+        /*
+         * disable security check for upload image
+         */
+        if ($this->request->params['action'] == 'delete_all_table') {
+            $this->Components->disable('Security');
+        }
     }    
     
     public function index() {  
