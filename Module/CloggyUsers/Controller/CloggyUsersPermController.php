@@ -27,6 +27,13 @@ class CloggyUsersPermController extends CloggyAppController {
             )
         );
         
+        /*
+         * disable security check when create new permission
+         */
+        if ($this->request->params['action'] == 'create') {
+            $this->Components->disable('Security');
+        }
+        
     }
     
     public function index() {

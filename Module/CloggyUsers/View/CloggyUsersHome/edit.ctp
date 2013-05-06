@@ -89,14 +89,7 @@ endif;
     ?>">
         <label class="control-label"><?php echo __d('cloggy','Role'); ?></label>
         <div class="controls">
-            <select name="data[CloggyUser][user_role]">
-                <?php foreach($roles as $roleId => $roleName) : ?>
-                <option value="<?php echo $roleId; ?>" 
-                    <?php if($user['CloggyUserRole']['id'] == $roleId) echo 'selected="selected"'; ?>>
-                        <?php echo $roleName; ?>
-                </option>                
-                <?php endforeach; ?>
-            </select>
+            <?php echo $this->Form->select('user_role',$roles,array('hiddenField' => false)); ?>
             <span class="help-inline"><?php
                 if (isset($errors['user_role'])) : echo $errors['user_role'][0];
                 endif;
@@ -107,16 +100,19 @@ endif;
         <label class="control-label"><?php echo __d('cloggy','Active Status'); ?></label>
         <div class="controls">
             <label class="radio inline">
-                <input type="radio" name="data[CloggyUser][user_status]" value="1" <?php if ($user['CloggyUser']['user_status'] == '1') echo 'checked="checked"' ?>> <?php echo __d('cloggy','Yes'); ?>
+                <?php echo $this->Form->radio('user_status',array(1 => __d('cloggy','Yes')),array('label' => false,'value' => 1,'legend' => false)); ?>
             </label>
             <label class="radio inline">					
-                <input type="radio" name="data[CloggyUser][user_status]" value="0" <?php if ($user['CloggyUser']['user_status'] == '0') echo 'checked="checked"' ?>> <?php echo __d('cloggy','No'); ?>
+                <?php echo $this->Form->radio('user_status',array(0 => __d('cloggy','No')),array('label' => false,'value' => 1,'legend' => false)); ?>
             </label>
         </div>
     </div>
     <div class="control-group">
         <div class="controls">				
-            <input type="submit" name="submit" value="Save" class="btn btn-primary" />
+            <?php echo $this->Form->submit(__d('cloggy','Update'),array(
+                'class' => 'btn btn-primary',
+                'div' => false,                        
+            )); ?>  
         </div>
     </div>
 </fieldset>

@@ -86,7 +86,7 @@
 
                 case 'action_delete_all':
                     urlAjax = '<?php echo Router::url(CloggyCommon::urlModule('cloggy_users', 'cloggy_users_ajax/delete_all_roles')); ?>';
-                    confirmAction = confirm(<?php echo __d('cloggy','Are you sure want to delete all these roles?') ?>);		
+                    confirmAction = confirm('<?php echo __d('cloggy','Are you sure want to delete all these roles?') ?>');		
                     break;                		
                 }			
 
@@ -113,7 +113,7 @@
             jQuery('.role_remove').on('click',function(e) {
                 e.preventDefault();
                 var href = jQuery(this).attr('href');
-                if(confirm(<?php echo __d('cloggy','Are you sure to remove this role?') ?>)) {
+                if(confirm('<?php echo __d('cloggy','Are you sure to remove this role?') ?>')) {
                     window.location = href;
                 }	
             });            

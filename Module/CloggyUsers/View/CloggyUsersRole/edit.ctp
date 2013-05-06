@@ -33,7 +33,10 @@ echo $this->Form->create('CloggyUserRole', array(
     </div>    
     <div class="control-group">
         <div class="controls">				
-            <input type="submit" name="submit" value="Add" class="btn btn-primary" />
+            <?php echo $this->Form->submit(__d('cloggy','Add'),array(
+                'class' => 'btn btn-primary',
+                'div' => false,                        
+            )); ?>  
         </div>
     </div>
 </fieldset>

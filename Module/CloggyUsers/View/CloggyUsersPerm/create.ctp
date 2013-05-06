@@ -20,14 +20,7 @@ echo $this->Form->create('CloggyUserPerm', array(
     ?>">
         <label class="control-label"><?php echo __d('cloggy','Role Name'); ?></label>
         <div class="controls">
-            <select name="data[CloggyUserPerm][role_id]">
-                <option value="0">All</option>
-                <?php foreach($roles as $roleId => $roleName) : ?>
-                <option value="<?php echo $roleId; ?>">                     
-                    <?php echo $roleName; ?>
-                </option>                
-                <?php endforeach; ?>
-            </select>
+            <?php echo $this->Form->select('role_id',$roles,array('hiddenField' => false)); ?>
             <span class="help-inline"><?php
             if (isset($errors['role_id'])) : echo $errors['role_id'][0];
             endif;

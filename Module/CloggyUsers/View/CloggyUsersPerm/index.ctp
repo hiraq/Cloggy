@@ -107,7 +107,7 @@
 
                 case 'action_delete_all':
                     urlAjax = '<?php echo Router::url(CloggyCommon::urlModule('cloggy_users', 'cloggy_users_ajax/delete_all_perms')); ?>';
-                    confirmAction = confirm(<?php echo __d('cloggy','Are you sure want to delete all these permissions?') ?>);		
+                    confirmAction = confirm('<?php echo __d('cloggy','Are you sure want to delete all these permissions?') ?>');		
                     break;                		
                 }			
 
@@ -134,7 +134,7 @@
             jQuery('.perm_remove').on('click',function(e) {
                 e.preventDefault();
                 var href = jQuery(this).attr('href');
-                if(confirm(<?php echo __d('cloggy','Are you sure to remove this perm?') ?>)) {
+                if(confirm('<?php echo __d('cloggy','Are you sure to remove this perm?') ?>')) {
                     window.location = href;
                 }	
             });            

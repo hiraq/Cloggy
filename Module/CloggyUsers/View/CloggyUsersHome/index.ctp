@@ -40,7 +40,7 @@
         </tr>
         <tr>
             <th><input type="checkbox" name="checker" id="checker" /></th>
-            <th><?php echo __d('cloggy','User Name'); ?></th>
+            <th><?php echo __d('cloggy','Name'); ?></th>
             <th><?php echo __d('cloggy','Email'); ?></th>
             <th><?php echo __d('cloggy','Role'); ?></th>
             <th><?php echo __d('cloggy','Status'); ?></th>
@@ -59,7 +59,9 @@
                         ?>
                     </td>
                     <td><?php echo $user['CloggyUser']['user_email']; ?></td>
-                    <td><?php echo $user['CloggyUserRole']['role_name']; ?></td>
+                    <td title="<?php echo $user['CloggyUserRole']['role_name']; ?>">
+                        <?php echo $this->Text->truncate($user['CloggyUserRole']['role_name'],10); ?>
+                    </td>
                     <td>
                         <?php if ($user['CloggyUser']['user_status'] == 1) : ?>
                             <span class="label label-success"><?php echo __d('cloggy','Activated'); ?></span>
@@ -67,7 +69,7 @@
                             <span class="label label-important"><?php echo __d('cloggy','Not activated'); ?></span>
                         <?php endif; ?>
                     </td>
-                    <td><?php echo $this->Time->format('M jS, Y, H:i A', $user['CloggyUser']['user_created']); ?></td>
+                    <td><?php echo $this->Time->format('m jS Y', $user['CloggyUser']['user_created']); ?></td>
                     <td>
                         <?php if (intval($user['CloggyUser']['user_last_login']) == 0) : ?>
                             <?php echo __d('cloggy','No activity'); ?>
@@ -149,12 +151,12 @@
 
                 case 'action_delete_all':
                     urlAjax = '<?php echo Router::url('/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_users/cloggy_users_ajax/delete_all'); ?>';
-                    confirmAction = confirm(<?php echo __d('cloggy','Are you sure want to delete all these users?') ?>);		
+                    confirmAction = confirm('<?php echo __d('cloggy','Are you sure want to delete all these users?') ?>');		
                     break;
 
                 case 'action_disable_all':
                     urlAjax = '<?php echo Router::url('/' . Configure::read('Cloggy.url_prefix') . '/module/cloggy_users/cloggy_users_ajax/disable_all'); ?>';
-                    confirmAction = confirm(<?php echo __d('cloggy','Are you sure want to disable all these users?') ?>);
+                    confirmAction = confirm('<?php echo __d('cloggy','Are you sure want to disable all these users?') ?>');
                     break;
 
                 case 'action_enable_all':
@@ -186,14 +188,14 @@
             jQuery('.users_remove').on('click',function(e) {
                 e.preventDefault();
                 var href = jQuery(this).attr('href');
-                if(confirm(<?php echo __d('cloggy','Are you sure to remove this user?') ?>)) {
+                if(confirm('<?php echo __d('cloggy','Are you sure to remove this user?') ?>')) {
                     window.location = href;
                 }	
             });
             jQuery('.users_disable').on('click',function(e) {
                 e.preventDefault();
                 var href = jQuery(this).attr('href');
-                if(confirm(<?php echo __d('cloggy','Are you sure to disable this user?') ?>)) {
+                if(confirm('<?php echo __d('cloggy','Are you sure to disable this user?') ?>')) {
                     window.location = href;
                 }
             });	

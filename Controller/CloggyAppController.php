@@ -4,6 +4,7 @@ class CloggyAppController extends AppController {
 
     public $helpers = array(
         'Html',
+        'Form',
         'Cloggy.CloggyAsset',
         'Cloggy.CloggyMenus',
         'Session',

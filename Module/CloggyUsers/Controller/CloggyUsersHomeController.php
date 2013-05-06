@@ -17,7 +17,7 @@ class CloggyUsersHomeController extends CloggyAppController {
 
         //load additional helpers
         $this->helpers[] = 'Time';
-        $this->helpers[] = 'Form';
+        $this->helpers[] = 'Text';
 
         //setup pagination
         $this->paginate = array(
