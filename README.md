@@ -11,7 +11,7 @@ About
 Requirements
 ============
 
-PHP 5 (recommendation is using at least 5.3) & CakePHP ver2.2.x
+PHP Version >=5.3 & CakePHP ver2.2.x
 
 Development Environment
 =======================
