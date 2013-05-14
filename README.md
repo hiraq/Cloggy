@@ -43,5 +43,3 @@ How To
 ====
 
 [Installation](https://github.com/hiraq/Cloggy/wiki/Installation)
-
-[Module Activation](https://gist.github.com/4515735)

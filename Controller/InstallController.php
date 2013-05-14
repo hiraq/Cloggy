@@ -8,8 +8,7 @@ class InstallController extends CloggyAppController {
         'Cloggy.CloggyUser', 
         'Cloggy.CloggyUserRole',
         'Cloggy.CloggyValidation'
-    );
-    public $helpers = array('Form');
+    );    
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -20,7 +19,7 @@ class InstallController extends CloggyAppController {
 
         $users = $this->CloggyUser->find('count', array(
             'contain' => false
-                ));
+        ));
 
         if ($users < 1) {
 

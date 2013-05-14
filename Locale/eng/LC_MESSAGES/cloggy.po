@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2013-05-05 01:48+0700\n"
-"PO-Revision-Date: 2013-05-05 01:48+0700\n"
+"POT-Creation-Date: 2013-05-14 23:25+0700\n"
+"PO-Revision-Date: 2013-05-14 23:27+0700\n"
 "Last-Translator: hiraq <hrxwan@gmail.com>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: \n"
@@ -14,27 +14,123 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: English\n"
 
-#: Controller/CloggyAppController.php:88
+#: Console/Command/InstallShell.php:15
+msgid "<header>Cloggy Shell - Installation</header>"
+msgstr ""
+
+#: Console/Command/InstallShell.php:29
+msgid "Check your operating system..."
+msgstr ""
+
+#: Console/Command/InstallShell.php:32
+msgid "Your current OS : "
+msgstr ""
+
+#: Console/Command/InstallShell.php:39
+msgid "Check your php version..."
+msgstr ""
+
+#: Console/Command/InstallShell.php:43
+msgid "<error>You need at least php 5.3 version</error>"
+msgstr ""
+
+#: Console/Command/InstallShell.php:45
+msgid "Your current PHP Version :"
+msgstr ""
+
+#: Console/Command/InstallShell.php:60
+msgid "<bold>PHPUnit ready</bold>"
+msgstr ""
+
+#: Console/Command/InstallShell.php:61
+msgid "<bold>Phing ready to use</bold>"
+msgstr ""
+
+#: Console/Command/InstallShell.php:62
+msgid "Running automate build now..."
+msgstr ""
+
+#: Console/Command/InstallShell.php:71
+msgid "<warning>You need to install phpunit to run unit test</warning>"
+msgstr ""
+
+#: Console/Command/InstallShell.php:81
+msgid "<error>Cloggy's tables not installed</error>"
+msgstr ""
+
+#: Console/Command/InstallShell.php:82
+msgid "Install now ? [Y]es, [N]o"
+msgstr ""
+
+#: Console/Command/InstallShell.php:87
+msgid "<warning>You need to install Cloggy's tables before use it</warning>"
+msgstr ""
+
+#: Console/Command/InstallShell.php:92
+msgid "<info>Please wait...</info>"
+msgstr ""
+
+#: Console/Command/InstallShell.php:98
+msgid "<bold>Tables has been installed</bold>"
+msgstr ""
+
+#: Console/Command/InstallShell.php:99
+msgid "Reset..."
+msgstr ""
+
+#: Console/Command/InstallShell.php:112
+msgid "<bold>Cloggy tables has been installed</bold>"
+msgstr ""
+
+#: Console/Command/InstallShell.php:119
+msgid "Dont forget to clear caches at app/tmp directory"
+msgstr ""
+
+#: Console/Command/InstallShell.php:136
+msgid "Phing not installed, i recommend you to install phing"
+msgstr ""
+
+#: Console/Command/InstallShell.php:145
+msgid "Please input your project host, example: http://localhost/myproject"
+msgstr ""
+
+#: Console/Command/InstallShell.php:150
+msgid "To use Cloggy point your browser to: "
+msgstr ""
+
+#: Console/Command/InstallShell.php:153
+msgid "Not valid url"
+msgstr ""
+
+#: Console/Command/InstallShell.php:158
+msgid "Dont forget to clear your caches at app/tmp/cache each time after you have done with cakephp shell."
+msgstr ""
+
+#: Console/Command/InstallShell.php:159
+msgid "Or simply run \"phing -f build.xml clean_cache\" at app/Plugin/Cloggy from your terminal"
+msgstr ""
+
+#: Controller/CloggyAppController.php:89
 msgid "Security Auth error. Request has been black holed."
 msgstr ""
 
-#: Controller/CloggyAppController.php:92
+#: Controller/CloggyAppController.php:93
 msgid "Security CSRF error."
 msgstr ""
 
-#: Controller/CloggyAppController.php:99
+#: Controller/CloggyAppController.php:100
 msgid "HTTP method restriction failure"
 msgstr ""
 
-#: Controller/CloggyAppController.php:103
+#: Controller/CloggyAppController.php:104
 msgid "SSL method restriction failure"
 msgstr ""
 
-#: Controller/CloggyAppController.php:122
+#: Controller/CloggyAppController.php:123
 msgid "You do not have permission to access that page."
 msgstr ""
 
-#: Controller/CloggyAppController.php:268
+#: Controller/CloggyAppController.php:269
 msgid "Identify yourself!"
 msgstr ""
 
@@ -59,23 +155,23 @@ msgstr ""
 msgid "Cloggy - Administrator Login"
 msgstr ""
 
-#: Controller/InstallController.php:51
+#: Controller/InstallController.php:50
 msgid "Username field cannot be empty"
 msgstr ""
 
-#: Controller/InstallController.php:57
+#: Controller/InstallController.php:56
 msgid "Password field cannot be empty"
 msgstr ""
 
-#: Controller/InstallController.php:63
+#: Controller/InstallController.php:62
 msgid "Valid address required"
 msgstr ""
 
-#: Controller/InstallController.php:92
+#: Controller/InstallController.php:91
 msgid "Your account has been activated."
 msgstr ""
 
-#: Controller/InstallController.php:99
+#: Controller/InstallController.php:98
 msgid "Cloggy - Setup User"
 msgstr ""
 
@@ -199,6 +295,9 @@ msgstr ""
 #: Module/CloggyBlog/Config/menus.php:10;14;18
 #: Module/CloggyBlog/View/CloggyBlogCategories/add.ctp:42
 #: Module/CloggyBlog/View/CloggyBlogTags/add.ctp:33
+#: Module/CloggyUsers/View/CloggyUsersHome/add.ctp:95
+#: Module/CloggyUsers/View/CloggyUsersRole/add.ctp:33
+#: Module/CloggyUsers/View/CloggyUsersRole/edit.ctp:36
 msgid "Add"
 msgstr ""
 
@@ -370,6 +469,7 @@ msgstr ""
 #: Module/CloggyBlog/View/CloggyBlogPosts/edit.ctp:87
 #: Module/CloggyBlog/View/CloggyBlogTags/edit.ctp:39
 #: Module/CloggySearch/View/CloggySearchHome/index.ctp:17
+#: Module/CloggyUsers/View/CloggyUsersHome/edit.ctp:112
 msgid "Update"
 msgstr ""
 
@@ -401,7 +501,7 @@ msgstr ""
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:37
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_tags.ctp:26
 #: Module/CloggyUsers/View/CloggyUsersHome/edit.ctp:8
-#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:80
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:82
 #: Module/CloggyUsers/View/CloggyUsersPerm/index.ctp:45
 #: Module/CloggyUsers/View/CloggyUsersRole/index.ctp:24
 msgid "Edit"
@@ -414,7 +514,7 @@ msgstr ""
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:40
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_tags.ctp:29
 #: Module/CloggySearch/View/CloggySearchMysql/index.ctp:35
-#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:83
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:85
 #: Module/CloggyUsers/View/CloggyUsersPerm/index.ctp:48
 #: Module/CloggyUsers/View/CloggyUsersRole/index.ctp:27
 msgid "Remove"
@@ -427,7 +527,7 @@ msgstr ""
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_posts.ctp:56
 #: Module/CloggyBlog/View/Elements/cloggy_blog_home_tags.ctp:36
 #: Module/CloggySearch/View/CloggySearchMysql/index.ctp:42
-#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:99
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:101
 #: Module/CloggyUsers/View/CloggyUsersPerm/index.ctp:59
 #: Module/CloggyUsers/View/CloggyUsersRole/index.ctp:38
 msgid "No data available"
@@ -437,7 +537,7 @@ msgstr ""
 #: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:63
 #: Module/CloggyBlog/View/CloggyBlogTags/index.ctp:41
 #: Module/CloggySearch/View/CloggySearchMysql/index.ctp:49
-#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:106
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:108
 #: Module/CloggyUsers/View/CloggyUsersPerm/index.ctp:66
 #: Module/CloggyUsers/View/CloggyUsersRole/index.ctp:45
 msgid "With Selected"
@@ -447,7 +547,7 @@ msgstr ""
 #: Module/CloggyBlog/View/CloggyBlogPosts/index.ctp:66
 #: Module/CloggyBlog/View/CloggyBlogTags/index.ctp:44
 #: Module/CloggySearch/View/CloggySearchMysql/index.ctp:52
-#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:109
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:111
 #: Module/CloggyUsers/View/CloggyUsersPerm/index.ctp:69
 #: Module/CloggyUsers/View/CloggyUsersRole/index.ctp:48
 msgid "Delete All"
@@ -683,25 +783,25 @@ msgstr ""
 msgid "Plugin"
 msgstr ""
 
-#: Module/CloggyDocs/Config/menus.php:9;35
+#: Module/CloggyDocs/Config/menus.php:9;36
 #: Module/CloggySearch/Config/menus.php:10
 msgid "About"
 msgstr ""
 
-#: Module/CloggyDocs/Config/menus.php:10
+#: Module/CloggyDocs/Config/menus.php:10;17
 msgid "Installation"
 msgstr ""
 
-#: Module/CloggyDocs/Config/menus.php:11;37
+#: Module/CloggyDocs/Config/menus.php:11;38
 msgid "License"
 msgstr ""
 
-#: Module/CloggyDocs/Config/menus.php:12;36
+#: Module/CloggyDocs/Config/menus.php:12;37
 msgid "Version"
 msgstr ""
 
 #: Module/CloggyDocs/Config/menus.php:14
-#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:45
+#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:38
 #: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:46
 msgid "Module"
 msgstr ""
@@ -715,54 +815,54 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
-#: Module/CloggyDocs/Config/menus.php:17
+#: Module/CloggyDocs/Config/menus.php:18
 msgid "Activation"
 msgstr ""
 
-#: Module/CloggyDocs/Config/menus.php:19
+#: Module/CloggyDocs/Config/menus.php:20
 msgid "Database"
 msgstr ""
 
-#: Module/CloggyDocs/Config/menus.php:20
+#: Module/CloggyDocs/Config/menus.php:21
 msgid "Concept"
 msgstr ""
 
-#: Module/CloggyDocs/Config/menus.php:21
+#: Module/CloggyDocs/Config/menus.php:22
 msgid "Model/Behavior"
 msgstr ""
 
-#: Module/CloggyDocs/Config/menus.php:23
+#: Module/CloggyDocs/Config/menus.php:24
 #: Module/CloggyUsers/Config/menus.php:15
 #: Module/CloggyUsers/View/CloggyUsersRole/index.ctp:7
 msgid "Users"
 msgstr ""
 
-#: Module/CloggyDocs/Config/menus.php:24
+#: Module/CloggyDocs/Config/menus.php:25
 msgid "User Managements"
 msgstr ""
 
-#: Module/CloggyDocs/Config/menus.php:25
+#: Module/CloggyDocs/Config/menus.php:26
 #: Module/CloggyUsers/Config/menus.php:19
 msgid "User Access"
 msgstr ""
 
-#: Module/CloggyDocs/Config/menus.php:27
+#: Module/CloggyDocs/Config/menus.php:28
 msgid "UI"
 msgstr ""
 
-#: Module/CloggyDocs/Config/menus.php:28
+#: Module/CloggyDocs/Config/menus.php:29
 msgid "Management"
 msgstr ""
 
-#: Module/CloggyDocs/Config/menus.php:29
+#: Module/CloggyDocs/Config/menus.php:30
 msgid "Menu config"
 msgstr ""
 
-#: Module/CloggyDocs/Config/menus.php:30
+#: Module/CloggyDocs/Config/menus.php:31
 msgid "Javascript"
 msgstr ""
 
-#: Module/CloggyDocs/Config/menus.php:34
+#: Module/CloggyDocs/Config/menus.php:35
 msgid "Basic"
 msgstr ""
 
@@ -794,19 +894,19 @@ msgstr ""
 msgid "Cloggy main tables not found."
 msgstr ""
 
-#: Module/CloggySearch/Controller/CloggySearchMysqlController.php:29
+#: Module/CloggySearch/Controller/CloggySearchMysqlController.php:36
 msgid "Cloggy Search Management - MysqlFullText Search Engine"
 msgstr ""
 
-#: Module/CloggySearch/Controller/CloggySearchMysqlController.php:75
+#: Module/CloggySearch/Controller/CloggySearchMysqlController.php:82
 msgid "Test MysqlFullText - Query: "
 msgstr ""
 
-#: Module/CloggySearch/Controller/CloggySearchMysqlController.php:78
+#: Module/CloggySearch/Controller/CloggySearchMysqlController.php:85
 msgid "Test MysqlFullText"
 msgstr ""
 
-#: Module/CloggySearch/Controller/CloggySearchMysqlController.php:84
+#: Module/CloggySearch/Controller/CloggySearchMysqlController.php:91
 msgid "Cloggy Search - MysqlFullText Documentation"
 msgstr ""
 
@@ -859,7 +959,7 @@ msgid "Last updated data : "
 msgstr ""
 
 #: Module/CloggySearch/View/CloggySearchMysql/index.ctp:14
-#: Module/CloggySearch/View/CloggySearchMysql/test.ctp:32
+#: Module/CloggySearch/View/CloggySearchMysql/test.ctp:35
 msgid "Table Name"
 msgstr ""
 
@@ -888,31 +988,31 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: Module/CloggySearch/View/CloggySearchMysql/test.ctp:23
+#: Module/CloggySearch/View/CloggySearchMysql/test.ctp:26
 msgid "Search term : "
 msgstr ""
 
-#: Module/CloggySearch/View/CloggySearchMysql/test.ctp:26
+#: Module/CloggySearch/View/CloggySearchMysql/test.ctp:29
 msgid "Search mode : "
 msgstr ""
 
-#: Module/CloggySearch/View/CloggySearchMysql/test.ctp:33
+#: Module/CloggySearch/View/CloggySearchMysql/test.ctp:36
 msgid "Field"
 msgstr ""
 
-#: Module/CloggySearch/View/CloggySearchMysql/test.ctp:34
+#: Module/CloggySearch/View/CloggySearchMysql/test.ctp:37
 msgid "Snippet"
 msgstr ""
 
-#: Module/CloggySearch/View/CloggySearchMysql/test.ctp:35
+#: Module/CloggySearch/View/CloggySearchMysql/test.ctp:38
 msgid "Rating"
 msgstr ""
 
-#: Module/CloggySearch/View/CloggySearchMysql/test.ctp:51
+#: Module/CloggySearch/View/CloggySearchMysql/test.ctp:54
 msgid "no snippet"
 msgstr ""
 
-#: Module/CloggySearch/View/CloggySearchMysql/test.ctp:60
+#: Module/CloggySearch/View/CloggySearchMysql/test.ctp:63
 msgid "No results found, maybe you can try to disable \"mysqlFullText stopwords\" in your mysql config file. "
 msgstr ""
 
@@ -1000,43 +1100,43 @@ msgstr ""
 msgid "Cloggy - Users Management - Edit User"
 msgstr ""
 
-#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:36
+#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:43
 msgid "Cloggy - Users Permission Management"
 msgstr ""
 
-#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:104
+#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:111
 msgid "Adapter name field required"
 msgstr ""
 
-#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:110;241
+#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:117;248
 msgid "You must choose adapter."
 msgstr ""
 
-#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:117;215
+#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:124;222
 msgid "This role and permission has been exists."
 msgstr ""
 
-#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:123;228
+#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:130;235
 msgid "Object field required"
 msgstr ""
 
-#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:135
+#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:142
 msgid "Permission has been setup"
 msgstr ""
 
-#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:152
+#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:159
 msgid "Cloggy - Users Permission Management - Setup Permission"
 msgstr ""
 
-#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:271
+#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:278
 msgid "Permission field required"
 msgstr ""
 
-#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:294
+#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:301
 msgid "Permission data has been updated."
 msgstr ""
 
-#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:312
+#: Module/CloggyUsers/Controller/CloggyUsersPermController.php:319
 msgid "Cloggy - Users Permission Management - Edit Permission"
 msgstr ""
 
@@ -1121,17 +1221,17 @@ msgstr ""
 msgid "Role"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersHome/add.ctp:89
+#: Module/CloggyUsers/View/CloggyUsersHome/add.ctp:83
 msgid "Activated Now"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersHome/add.ctp:92
-#: Module/CloggyUsers/View/CloggyUsersHome/edit.ctp:110
+#: Module/CloggyUsers/View/CloggyUsersHome/add.ctp:86
+#: Module/CloggyUsers/View/CloggyUsersHome/edit.ctp:103
 msgid "Yes"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersHome/add.ctp:95
-#: Module/CloggyUsers/View/CloggyUsersHome/edit.ctp:113
+#: Module/CloggyUsers/View/CloggyUsersHome/add.ctp:89
+#: Module/CloggyUsers/View/CloggyUsersHome/edit.ctp:106
 msgid "No"
 msgstr ""
 
@@ -1139,7 +1239,7 @@ msgstr ""
 msgid "New Password"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersHome/edit.ctp:107
+#: Module/CloggyUsers/View/CloggyUsersHome/edit.ctp:100
 msgid "Active Status"
 msgstr ""
 
@@ -1172,54 +1272,54 @@ msgid "Name DESC"
 msgstr ""
 
 #: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:43
-msgid "User Name"
+msgid "Name"
 msgstr ""
 
 #: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:48
 msgid "Last Login"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:65
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:67
 msgid "Activated"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:67
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:69
 msgid "Not activated"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:73
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:75
 msgid "No activity"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:88
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:90
 msgid "Disable"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:91
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:93
 msgid "Enable"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:110
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:112
 msgid "Disable All"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:111
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:113
 msgid "Enable All"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:152
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:154
 msgid "Are you sure want to delete all these users?"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:157
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:159
 msgid "Are you sure want to disable all these users?"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:189
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:191
 msgid "Are you sure to remove this user?"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:196
+#: Module/CloggyUsers/View/CloggyUsersHome/index.ctp:198
 msgid "Are you sure to disable this user?"
 msgstr ""
 
@@ -1235,48 +1335,48 @@ msgstr ""
 msgid "Role Name"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:41
+#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:34
 #: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:42
 msgid "Permission Type"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:44
+#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:37
 #: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:45
 msgid "Select Types"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:47
+#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:40
 #: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:48
 msgid "Url"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:59
+#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:52
 #: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:60
 #: Module/CloggyUsers/View/CloggyUsersPerm/index.ctp:7
 msgid "Object"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:63;125;150
-#: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:66;117
+#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:56;118;143
+#: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:66;133;159
 msgid "ex: controller_name/action"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:72
+#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:65
 #: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:79
 #: Module/CloggyUsers/View/CloggyUsersPerm/index.ctp:9
 msgid "Permission"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:75
+#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:68
 msgid "Allow"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:78
+#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:71
 msgid "Deny"
 msgstr ""
 
-#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:130;155
-#: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:122
+#: Module/CloggyUsers/View/CloggyUsersPerm/create.ctp:123;148
+#: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:138;164
 msgid "ex: query/url"
 msgstr ""
 
@@ -1286,10 +1386,6 @@ msgstr ""
 
 #: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:47
 msgid "Controller"
-msgstr ""
-
-#: Module/CloggyUsers/View/CloggyUsersPerm/edit.ctp:112
-msgid "ex: ModuleName"
 msgstr ""
 
 #: Module/CloggyUsers/View/CloggyUsersPerm/index.ctp:6
