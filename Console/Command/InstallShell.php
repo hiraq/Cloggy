@@ -75,8 +75,12 @@ class InstallShell extends AppShell {
     
     public function check_tables() {
         
-        $tables = $this->CloggyInstall->getTables();
-        if (empty($tables)) {
+        $tables = $this->CloggyInstall->isTableInstalled();
+        
+        /*
+         * table not installed
+         */
+        if (!$tables) {
             
             $this->out(__d('cloggy','<error>Cloggy\'s tables not installed</error>'));
             $install = $this->in(__d('cloggy','Install now ? [Y]es, [N]o'),array('Y','N'),'Y');
@@ -107,21 +111,9 @@ class InstallShell extends AppShell {
                 
             }
             
-        } elseif (in_array('cloggy_nodes',$tables)) {
-            
-            $this->out(__d('cloggy','<bold>Cloggy tables has been installed</bold>'));
-            
-            $this->hr();
-            
-            if (substr(PHP_OS,0,3) == 'Lin') {
-                $this->check_phing();
-            } else {
-                $this->out(__d('cloggy','Dont forget to clear caches at app/tmp directory'));
-            }
-            
+        } else {
+            $this->check_phing();
         }
-        
-        $this->hr();
         
     }
     

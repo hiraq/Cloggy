@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2013-05-14 23:51+0700\n"
+"POT-Creation-Date: 2013-05-18 08:57+0700\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -54,59 +54,51 @@ msgstr ""
 msgid "<warning>You need to install phpunit to run unit test</warning>"
 msgstr ""
 
-#: Console/Command/InstallShell.php:81
+#: Console/Command/InstallShell.php:85
 msgid "<error>Cloggy's tables not installed</error>"
 msgstr ""
 
-#: Console/Command/InstallShell.php:82
+#: Console/Command/InstallShell.php:86
 msgid "Install now ? [Y]es, [N]o"
 msgstr ""
 
-#: Console/Command/InstallShell.php:87
+#: Console/Command/InstallShell.php:91
 msgid "<warning>You need to install Cloggy's tables before use it</warning>"
 msgstr ""
 
-#: Console/Command/InstallShell.php:92
+#: Console/Command/InstallShell.php:96
 msgid "<info>Please wait...</info>"
 msgstr ""
 
-#: Console/Command/InstallShell.php:98
+#: Console/Command/InstallShell.php:102
 msgid "<bold>Tables has been installed</bold>"
 msgstr ""
 
-#: Console/Command/InstallShell.php:99
+#: Console/Command/InstallShell.php:103
 msgid "Reset..."
 msgstr ""
 
-#: Console/Command/InstallShell.php:112
-msgid "<bold>Cloggy tables has been installed</bold>"
-msgstr ""
-
-#: Console/Command/InstallShell.php:119
-msgid "Dont forget to clear caches at app/tmp directory"
-msgstr ""
-
-#: Console/Command/InstallShell.php:136
+#: Console/Command/InstallShell.php:128
 msgid "Phing not installed, i recommend you to install phing"
 msgstr ""
 
-#: Console/Command/InstallShell.php:145
+#: Console/Command/InstallShell.php:137
 msgid "Please input your project host, example: http://localhost/myproject"
 msgstr ""
 
-#: Console/Command/InstallShell.php:150
+#: Console/Command/InstallShell.php:142
 msgid "To use Cloggy point your browser to: "
 msgstr ""
 
-#: Console/Command/InstallShell.php:153
+#: Console/Command/InstallShell.php:145
 msgid "Not valid url"
 msgstr ""
 
-#: Console/Command/InstallShell.php:158
+#: Console/Command/InstallShell.php:150
 msgid "Dont forget to clear your caches at app/tmp/cache each time after you have done with cakephp shell."
 msgstr ""
 
-#: Console/Command/InstallShell.php:159
+#: Console/Command/InstallShell.php:151
 msgid "Or simply run \"phing -f build.xml clean_cache\" at app/Plugin/Cloggy from your terminal"
 msgstr ""
 
