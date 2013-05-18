@@ -28,9 +28,9 @@ Version Status
 
 [![Build Status](https://travis-ci.org/hiraq/Cloggy.png?branch=dev)](https://travis-ci.org/hiraq/Cloggy)
 
-Current Development : [v0.5](https://github.com/hiraq/Cloggy/tree/dev)
+Current Development : [v0.6](https://github.com/hiraq/Cloggy/tree/dev)
 
-Latest Version : [v0.4](https://github.com/hiraq/Cloggy/tree/v0.3)
+Latest Version : [v0.5](https://github.com/hiraq/Cloggy/tree/v0.3)
 
 Wiki
 ====
