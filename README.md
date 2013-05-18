@@ -39,6 +39,8 @@ Wiki
 
 [Versions](https://github.com/hiraq/Cloggy/wiki/Versions)
 
+[Issues](https://github.com/hiraq/Cloggy/wiki/Issues)
+
 How To
 ====
 
