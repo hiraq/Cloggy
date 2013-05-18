@@ -43,3 +43,21 @@ CHANGELOG
 15. update module docs (v0.4.5)
 16. CloggyAppModel -> tableprefix : https://www.facebook.com/isman.firmansyah (v0.4.1)
 17. update changelog
+
+### v0.5
+1. improve acl, select module (v0.5.1)
+2. multi language (v0.5.1)
+3. implement module install (v0.5.1)
+4. disable javascript async loader (v0.5.1)
+5. clear unnecessary js files (v0.5.1)
+6. improve layout fetch script & styles (v0.5.1)
+7. update vendor css & js files (v0.5.1)
+8. search module - mysqlFullText (v0.5.2) 
+9. fix  bug layouting > cloggy blog > add (v0.5.2)
+10. fix bug edit user > cloggy users (v0.5.2)
+11. fix bug layouting > cloggy blog > edit (v0.5.2)
+12. implement security component (v0.5.3)
+13. imrove cloggy blog > security -> form (v0.5.3)
+14. improve cloggy users > security -> form (v0.5.3)
+15. improve cloggy search -> security -> form (v0.5.3)
+16. improve installer (v0.5.4) : https://www.facebook.com/mul14
