@@ -77,6 +77,14 @@ class CloggyAppController extends AppController {
         
         //custom security black hole callback
         $this->Security->blackHoleCallback = 'callbackBlackHole';       
+        
+        /*
+         * fix redirect because proxy server
+         */
+        if (isset($_SERVER['HTTP_X_FORWARDED_HOST']) && !empty($_SERVER['HTTP_X_FORWARDED_HOST'])) {
+            $_SERVER['HTTP_X_FORWARDED_HOST'] = isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
+        }
+        
     }
     
     public function callbackBlackHole($type) {
