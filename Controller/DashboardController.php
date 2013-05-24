@@ -11,8 +11,7 @@ class DashboardController extends CloggyAppController {
 
     public function index() {
         
-        $this->CloggyModuleMenu->setGroup('shortcuts', array(
-            __d('cloggy','Add New User') => CloggyCommon::urlModule('cloggy_users', 'cloggy_users_home/add'),
+        $this->CloggyModuleMenu->setGroup('shortcuts', array(            
             __d('cloggy','Edit My Profile') => CloggyCommon::urlModule('cloggy_users', 'cloggy_users_home/edit/' . $this->Auth->user('id'))
         ));
 
