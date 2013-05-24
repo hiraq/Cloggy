@@ -309,7 +309,7 @@ class CloggyUsersHomeController extends CloggyAppController {
                                         
                     $this->CloggyUser->id = $id;
                     $this->CloggyUser->save(array('CloggyUser' => $dataValidate));
-
+                    
                     /* $this->set('success','<strong>'.$username.'</strong> data has been updated.'); */
                     $this->Session->setFlash('<strong>' . $username . '</strong> '.__d('cloggy','data has been updated.'), 'default', array(), 'success');
                     $this->redirect($this->referer());
@@ -319,7 +319,7 @@ class CloggyUsersHomeController extends CloggyAppController {
                 }
             }
         }
-
+        
         $user = $this->CloggyUser->getUserDetail($id);        
         $this->set('title_for_layout', __d('cloggy','Cloggy - Users Management - Edit User'));
         $this->set(compact('user', 'id','roles'));
