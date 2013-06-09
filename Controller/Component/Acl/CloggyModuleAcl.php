@@ -24,16 +24,26 @@ class CloggyModuleAcl extends Object implements AclInterface {
             $aroType = $aro['type'];
             
             $allowed = false;
+            $aroIds = array();
             
             foreach($rules as $rule) {
-                
-                if($rule['CloggyUserPerm']['aro_object_id'] == $aroId 
+
+                $aroIds[] = $rule['CloggyUserPerm']['aro_object_id'];
+
+                /*
+                check if requester aro has connection with requested aco
+                 */
+                if (!in_array($aroId,$aroIds)) {
+                    $allowed = true;
+                } else {
+                    if($rule['CloggyUserPerm']['aro_object_id'] == $aroId 
                         && $rule['CloggyUserPerm']['aro_object'] == $aroType
                         && $rule['CloggyUserPerm']['aco_object'] == $aco) {
                     
-                    $allowed = $rule['CloggyUserPerm']['allow'] == 1 ? true : false;
-                    
-                }
+                        $allowed = $rule['CloggyUserPerm']['allow'] == 1 ? true : false;
+                        
+                    }
+                }                            
                 
             }
             

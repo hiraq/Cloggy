@@ -366,7 +366,7 @@ class CloggyAclComponent extends Component {
      */
     public function getRuleObject() {
         return $this->__Rule;
-    }    
+    }       
     
     /**
      * Get requested aco object

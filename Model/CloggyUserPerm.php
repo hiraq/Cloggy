@@ -70,6 +70,29 @@ class CloggyUserPerm extends CloggyAppModel {
         return $check < 1 ? false : true;
         
     }
+
+    /**
+     * Check if requested aro has been connected with aco or not
+     * 
+     * @param  int      $aroId   
+     * @param  string   $aroObjec
+     * @param  string   $acoObject
+     * @return boolean   
+     */
+    public function isAroConnectedWithAco($aroId,$aroObject,$acoObject) {
+
+        $check = $this->find('count',array(
+            'contain' => false,
+            'conditions' => array(
+                'CloggyUserPerm.aro_object_id' => $aroId,
+                'CloggyUserPerm.aro_object' => $aroObject,
+                'CloggyUserPerm.aco_object' => $acoObject
+            )
+        ));
+
+        return $check < 1 ? false : true;
+
+    }
     
     /**
      * Check if adapter registered or not
@@ -97,17 +120,36 @@ class CloggyUserPerm extends CloggyAppModel {
      */
     public function isAroHasPermAco($aroId,$aroObject,$object,$adapter) {
         
-        $check = $this->find('count',array(
-            'contain' => false,
-            'conditions' => array(
-                'CloggyUserPerm.aro_object_id' => $aroId,
-                'CloggyUserPerm.aro_object' => $aroObject,
-                'CloggyUserPerm.aco_object' => $object,
-                'CloggyUserPerm.aco_adapter' => $adapter,
-            )
-        ));
-        
-        return $check < 1 ? false : true;
+        $check = $this->isAroConnectedWithAco($aroId,$aroObject,$object);
+
+        /*
+        if aro doesn't registered, it means
+        can access aco
+        if aro registered with aco, check for
+        'allow' or 'deny' status
+         */
+        if (!$check) {
+            return true;
+        } else {
+
+            $data = $this->find('first',array(
+                'contain' => false,
+                'conditions' => array(
+                    'CloggyUserPerm.aro_object_id' => $aroId,
+                    'CloggyUserPerm.aro_object' => $aroObject,
+                    'CloggyUserPerm.aco_object' => $object,
+                    'CloggyUserPerm.aco_adapter' => $adapter,       
+                ),
+                'fields' => array('CloggyUserPerm.allow','CloggyUserPerm.deny')
+            ));
+
+            if (!empty($data)) {
+                return $data['CloggyUserPerm']['allow'] == 1 ? true : false;
+            } else {
+                return true;
+            }
+
+        }            
         
     }
     
@@ -141,23 +183,30 @@ class CloggyUserPerm extends CloggyAppModel {
             if(!$checkAroAco) {
                 return false;
             }else{
-                
-                /*
-                 * check for single aro
-                 */
-               $checkPerm = $this->find('count',array(
-                   'contain' => false,
-                   'conditions' => array(
-                       'CloggyUserPerm.aro_object_id' => $aroId,
-                       'CloggyUserPerm.aro_object' => $aroObject,
-                       'CloggyUserPerm.aco_object' => $object,
-                       'CloggyUserPerm.aco_adapter' => $adapter,
-                       'CloggyUserPerm.allow' => $perms == 'allow' ? 1 :0,
-                       'CloggyUserPerm.deny' => $perms == 'deny' ? 1 :0,
-                   )
-               ));
 
-               return $checkPerm < 1 ? false : true;
+                $checkConnected = $this->isAroConnectedWithAco($aroId,$aroObject,$object);
+                if (!$checkConnected) {
+                    return true;
+                } else {
+
+                    /*
+                     * check for single aro
+                     */
+                    $checkPerm = $this->find('count',array(
+                       'contain' => false,
+                       'conditions' => array(
+                           'CloggyUserPerm.aro_object_id' => $aroId,
+                           'CloggyUserPerm.aro_object' => $aroObject,
+                           'CloggyUserPerm.aco_object' => $object,
+                           'CloggyUserPerm.aco_adapter' => $adapter,
+                           'CloggyUserPerm.allow' => $perms == 'allow' ? 1 :0,
+                           'CloggyUserPerm.deny' => $perms == 'deny' ? 1 :0,
+                       )
+                    ));
+
+                    return $checkPerm < 1 ? false : true;
+
+                }                            
                 
             }                        
             
