@@ -46,11 +46,11 @@ class CloggyUserPermTest extends CakeTestCase {
         $checkUsers = $this->__CloggyUserPerm->checkAroPermission('controller/action','controller',1,'users');
         $this->assertFalse($checkUsers);
         
-        $checkUsersDeny = $this->__CloggyUserPerm->checkAroPermission('controller/action','controller',1,'users','deny');
-        $this->assertTrue($checkUsersDeny);
+        $checkUsersDeny = $this->__CloggyUserPerm->checkAroPermission('controller/action','controller',1,'users','deny');        
+        $this->assertFalse($checkUsersDeny);
         
         $checkUsersNotRegistered = $this->__CloggyUserPerm->checkAroPermission('controller/action','controller',2,'users');
-        $this->assertFalse($checkUsersNotRegistered);
+        $this->assertTrue($checkUsersNotRegistered);
         
         $checkAcoNotRegistered = $this->__CloggyUserPerm->checkAroPermission('controller2/action2','controller',1,'users');
         $this->assertTrue($checkAcoNotRegistered);

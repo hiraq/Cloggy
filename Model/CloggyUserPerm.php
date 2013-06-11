@@ -119,7 +119,7 @@ class CloggyUserPerm extends CloggyAppModel {
      * @return boolean
      */
     public function isAroHasPermAco($aroId,$aroObject,$object,$adapter) {
-        
+
         $check = $this->isAroConnectedWithAco($aroId,$aroObject,$object);
 
         /*
@@ -169,7 +169,7 @@ class CloggyUserPerm extends CloggyAppModel {
             $aroId,
             $aroObject,
             $perms='allow') {
-   
+
         /*
          * check if registered aco registered or not
          * if not, it means all aro objects can access it
@@ -177,18 +177,19 @@ class CloggyUserPerm extends CloggyAppModel {
          */
         $checkAcoObject = $this->isAcoObjectExists($object, $adapter);        
         if($checkAcoObject) {
-            
+                     
             $checkAroAco = $this->isAroHasPermAco($aroId, $aroObject, $object, $adapter);            
             
-            if(!$checkAroAco) {
+            if(!$checkAroAco) {                              
                 return false;
-            }else{
+            }else{                
 
-                $checkConnected = $this->isAroConnectedWithAco($aroId,$aroObject,$object);
+                $checkConnected = $this->isAroConnectedWithAco($aroId,$aroObject,$object);                
+
                 if (!$checkConnected) {
                     return true;
                 } else {
-
+                    
                     /*
                      * check for single aro
                      */
