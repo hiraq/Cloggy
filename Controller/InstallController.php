@@ -70,8 +70,7 @@ class InstallController extends CloggyAppController {
 
                     /*
                      * setup user data
-                     */
-                    $this->request->data['CloggyUser']['user_password'] = AuthComponent::password($this->request->data['CloggyUser']['user_password']);
+                     */                    
                     $this->request->data['CloggyUser'] = array_merge($this->request->data['CloggyUser'], array(
                         'user_last_login' => date('c'),
                         'users_roles_id' => $roleId,
