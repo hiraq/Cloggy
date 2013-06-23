@@ -127,8 +127,7 @@ class CloggyUsersHomeController extends CloggyAppController {
                 /*
                  * setup data
                  */
-                $data = $this->request->data['CloggyUser'];
-                $data['user_password'] = AuthComponent::password($data['user_password']);
+                $data = $this->request->data['CloggyUser'];                
                 $data['users_roles_id'] = $roleId;                
                 $data = array_merge($data, array(
                     'user_created' => date('c')
