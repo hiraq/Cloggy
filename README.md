@@ -32,6 +32,8 @@ Current Development : [v0.6](https://github.com/hiraq/Cloggy/tree/dev)
 
 Latest Version : [v0.5](https://github.com/hiraq/Cloggy/tree/v0.3)
 
+Latest Patch Version : [v0.5.4.4](https://github.com/hiraq/Cloggy/tree/v0.5.4.4)
+
 Wiki
 ====
 
