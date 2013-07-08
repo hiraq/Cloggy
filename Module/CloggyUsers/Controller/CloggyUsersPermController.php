@@ -91,11 +91,10 @@ class CloggyUsersPermController extends CloggyAppController {
             /*
              * check if aro has permission to aco
              */
-            $checkPermExists = $this->CloggyUserPerm->isAroHasPermAco(
+            $checkPermExists = $this->CloggyUserPerm->isAroConnectedWithAco(
                 $dataToSave['CloggyUserPerm']['aro_object_id'],
                 $dataToSave['CloggyUserPerm']['aro_object'],
-                $dataToSave['CloggyUserPerm']['aco_object'],
-                $dataToSave['CloggyUserPerm']['aco_adapter']
+                $dataToSave['CloggyUserPerm']['aco_object']                
             );
             
             /*

@@ -89,7 +89,7 @@ class CloggyUserPerm extends CloggyAppModel {
                 'CloggyUserPerm.aco_object' => $acoObject
             )
         ));
-
+        
         return $check < 1 ? false : true;
 
     }
